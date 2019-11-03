@@ -115,10 +115,7 @@ public class Game : MonoBehaviour
             if (tile != null)
             {
                 // Temp
-                mTileActions.Add(new TileActionWalk(tile));
-                mTileActions.Add(new TileActionWalk(tile));
-                mTileActions.Add(new TileActionWalk(tile));
-                mTileActions.Add(new TileActionWalk(tile));
+                mTileActions.Add(new TileActionWalk(tile, mMap,mCharacter));
 
                 /*List<EnvironmentTile> route = mMap.Solve(mCharacter.CurrentPosition, tile);
                 mCharacter.GoTo(route);*/
