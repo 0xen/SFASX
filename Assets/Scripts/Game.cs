@@ -6,33 +6,31 @@ using UnityEngine.UIElements;
 
 public class Game : MonoBehaviour
 {
-    [SerializeField] private Camera MainCamera;
-    [SerializeField] private Character Character;
-    [SerializeField] private Canvas Menu;
-    [SerializeField] private Canvas Hud;
-    [SerializeField] private Canvas ActionSelector;
-    [SerializeField] private TextMeshProUGUI[] ActionSelectorLables;
-    [SerializeField] private Transform CharacterStart;
+    [SerializeField] private Camera MainCamera = null;
+    [SerializeField] private Character Character = null;
+    [SerializeField] private Canvas Menu = null;
+    [SerializeField] private Canvas Hud = null;
+    [SerializeField] private Canvas ActionSelectorCanvas = null;
+    [SerializeField] private UIActionSelector ActionSelector = null;
+    [SerializeField] private Transform CharacterStart = null;
     // How long a mouse button needs to be held before a click menu should open
-    [SerializeField] private float MinMenuOpenTime;
+    [SerializeField] private float MinMenuOpenTime = 0.6f;
 
 
-    [SerializeField] private Light DirectionalLight;
-    [SerializeField] private float DayLength;
+    [SerializeField] private Light DirectionalLight = null;
+    [SerializeField] private float DayLength = 120;
     private float mDayTime;
-    [SerializeField] private float SunsetSunriseBrightness;
-    [SerializeField] private float MidDayBrightness;
-    [SerializeField] private Color MorningLightColor;
-    [SerializeField] private Color MidDayLightColor;
-    [SerializeField] private Color EveningLightColor;
+    [SerializeField] private float SunsetSunriseBrightness = 0.4f;
+    [SerializeField] private float MidDayBrightness = 0.8f;
+    [SerializeField] private Color MorningLightColor = Color.black;
+    [SerializeField] private Color MidDayLightColor = Color.black;
+    [SerializeField] private Color EveningLightColor = Color.black;
 
     private RaycastHit[] mRaycastHits;
     private Character mCharacter;
     private Environment mMap;
     private GameStates mGameState;
     private int mInterfaceState;
-    private int mButtonSelection;
-    private List<TileActions> mTileActions;
 
     // Time how long between the mouse has been held and released to decide if a quick action will be used or a menu select
     private float mMouseHoldTime;
@@ -42,12 +40,10 @@ public class Game : MonoBehaviour
     void Start()
     {
         mRaycastHits = new RaycastHit[NumberOfRaycastHits];
-        mTileActions = new List<TileActions>();
         mMap = GetComponentInChildren<Environment>();
         mCharacter = Instantiate(Character, transform);
         mMouseHoldTime = 0.0f;
         mInterfaceState = 0;
-        mButtonSelection = -1;
         ChangeState(GameStates.MainMenu);
     }
 
@@ -68,17 +64,21 @@ public class Game : MonoBehaviour
             DirectionalLight.transform.eulerAngles = new Vector3(lightDelta, 90.0f, 0.0f);
 
             // If we are in the morning, lerp between morning -> Mid day color
-            if (timeRed < 0.225f)
+            if (timeRed < 0.125f)
             {
-                float lerp = timeRed / 0.225f;
-                DirectionalLight.color = Color.Lerp(MorningLightColor, MidDayLightColor, lerp);
+                float lerp = timeRed / 0.125f;
+                Color lightColor = Color.Lerp(MorningLightColor, MidDayLightColor, lerp);
+                DirectionalLight.color = lightColor;
+                Camera.main.backgroundColor = lightColor;
                 DirectionalLight.intensity = Mathf.Lerp(SunsetSunriseBrightness, MidDayBrightness, lerp);
             }
             else // If we are going into evening, lerp between mid day and evening color
-            if (timeRed > 0.275f)
+            if (timeRed > 0.35f)
             {
-                float lerp = (timeRed - 0.275f) / 0.225f;
-                DirectionalLight.color = Color.Lerp(MidDayLightColor, EveningLightColor, lerp);
+                float lerp = (timeRed - 0.35f) / 0.225f;
+                Color lightColor = Color.Lerp(MidDayLightColor, EveningLightColor, lerp);
+                DirectionalLight.color = lightColor;
+                Camera.main.backgroundColor = lightColor;
                 DirectionalLight.intensity = Mathf.Lerp(MidDayBrightness, SunsetSunriseBrightness, lerp);
             }
 
@@ -103,23 +103,12 @@ public class Game : MonoBehaviour
                     }
                     if (Input.GetMouseButtonUp(0))
                     {
-                        if (mTileActions.Count == 0) break;
-                        // If the mouse hold duration was too small, then we chose a quick selection from the action list
-                        if (mMouseHoldTime < MinMenuOpenTime)
+                        ActionSelector.Select();
+                        if (HasBit(mInterfaceState, (int)InterfaceState.ActionSelector))
                         {
-                            mTileActions[0].Run();
-                        }
-                        else
-                        {
-                            // If the button selection is valid, continue
-                            if (mButtonSelection >= 0)
-                                mTileActions[mButtonSelection].Run();
-                        }
-                        // Reset the action selector and the mouse variables
-                        mMouseHoldTime = 0.0f;
-                        mButtonSelection = -1;
-                        if (ActionSelector.enabled)
                             ToggleState(InterfaceState.ActionSelector);
+                        }
+                        mMouseHoldTime = 0;
                     }
 
                     if (Input.GetMouseButton(0))
@@ -129,7 +118,6 @@ public class Game : MonoBehaviour
                         // If we have passed the time required for the popup menu and the flag for the menu being open is not set, open it
                         if (!HasBit(mInterfaceState, (int)InterfaceState.ActionSelector) && mMouseHoldTime > MinMenuOpenTime)
                         {
-                            RenderActionLables();
                             ToggleState(InterfaceState.ActionSelector);
                         }
                     }
@@ -149,7 +137,7 @@ public class Game : MonoBehaviour
 
     void GatherActionList()
     {
-        mTileActions.Clear();
+        ActionSelector.actions.Clear();
 
         Ray screenClick = MainCamera.ScreenPointToRay(Input.mousePosition);
         int hits = Physics.RaycastNonAlloc(screenClick, mRaycastHits);
@@ -159,7 +147,9 @@ public class Game : MonoBehaviour
             if (tile != null)
             {
                 // Temp
-                mTileActions.Add(new TileActionWalk(tile, mMap,mCharacter));
+                ActionSelector.actions.Add(new TileActionWalk(tile, mMap, mCharacter));
+                ActionSelector.actions.Add(new TileActionWalk(tile, mMap, mCharacter));
+                ActionSelector.actions.Add(new TileActionWalk(tile, mMap, mCharacter));
 
                 /*List<EnvironmentTile> route = mMap.Solve(mCharacter.CurrentPosition, tile);
                 mCharacter.GoTo(route);*/
@@ -172,21 +162,6 @@ public class Game : MonoBehaviour
 
 
         }
-    }
-
-    void RenderActionLables()
-    {
-        for(int i = 0; i < ActionSelectorLables.Length; i ++)
-        {
-            if (mTileActions.Count <= i)
-                ActionSelectorLables[i].gameObject.transform.parent.gameObject.SetActive(false);
-            else
-            {
-                ActionSelectorLables[i].text = mTileActions[i].name;
-                ActionSelectorLables[i].gameObject.transform.parent.gameObject.SetActive(true);
-            }
-        }
-        
     }
 
     bool HasBit(int data, int bit)
@@ -209,11 +184,6 @@ public class Game : MonoBehaviour
         data ^= (1 << bit);
     }
 
-    public void ActionSelection(int button)
-    {
-        mButtonSelection = button;
-    }
-
     public void ToggleState(InterfaceState state)
     {
         // Dose the state flags already contain the state?
@@ -226,7 +196,7 @@ public class Game : MonoBehaviour
             case InterfaceState.ActionSelector:
                 {
                     // Toggle the active/inactive state of the action selector
-                    ActionSelector.enabled = !isActive;
+                    ActionSelectorCanvas.enabled = !isActive;
                 }
                 break;
         }
@@ -250,7 +220,7 @@ public class Game : MonoBehaviour
             case GameStates.MainMenu: // ID 0
             case GameStates.InGame: // ID 1
                 {
-                    ActionSelector.enabled = false;
+                    ActionSelectorCanvas.enabled = false;
                     ShowMainMenu(state == GameStates.MainMenu);
                 }
                 break;
