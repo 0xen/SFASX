@@ -16,6 +16,16 @@ public class Game : MonoBehaviour
     // How long a mouse button needs to be held before a click menu should open
     [SerializeField] private float MinMenuOpenTime;
 
+
+    [SerializeField] private Light DirectionalLight;
+    [SerializeField] private float DayLength;
+    private float mDayTime;
+    [SerializeField] private float SunsetSunriseBrightness;
+    [SerializeField] private float MidDayBrightness;
+    [SerializeField] private Color MorningLightColor;
+    [SerializeField] private Color MidDayLightColor;
+    [SerializeField] private Color EveningLightColor;
+
     private RaycastHit[] mRaycastHits;
     private Character mCharacter;
     private Environment mMap;
@@ -43,6 +53,40 @@ public class Game : MonoBehaviour
 
     private void Update()
     {
+        // DayNight Cycle
+        mDayTime += Time.deltaTime;
+        if (mDayTime > DayLength) 
+        {
+            mDayTime = 0.0f;
+        }
+
+        {
+            // Calculate the time of day in a range of 0-1
+            float timeRed = mDayTime / DayLength;
+            float lightDelta = Mathf.Lerp(0, 360.0f, timeRed);
+            // Rotate the light from 0-360
+            DirectionalLight.transform.eulerAngles = new Vector3(lightDelta, 90.0f, 0.0f);
+
+            // If we are in the morning, lerp between morning -> Mid day color
+            if (timeRed < 0.225f)
+            {
+                float lerp = timeRed / 0.225f;
+                DirectionalLight.color = Color.Lerp(MorningLightColor, MidDayLightColor, lerp);
+                DirectionalLight.intensity = Mathf.Lerp(SunsetSunriseBrightness, MidDayBrightness, lerp);
+            }
+            else // If we are going into evening, lerp between mid day and evening color
+            if (timeRed > 0.275f)
+            {
+                float lerp = (timeRed - 0.275f) / 0.225f;
+                DirectionalLight.color = Color.Lerp(MidDayLightColor, EveningLightColor, lerp);
+                DirectionalLight.intensity = Mathf.Lerp(MidDayBrightness, SunsetSunriseBrightness, lerp);
+            }
+
+
+
+        }
+
+
         // Depending on what game state we are in, process its branch
         switch (mGameState)
         {
