@@ -19,8 +19,15 @@ public class UIActionSelector : Graphic
     // The current canvas the selector is in
     public Canvas selectorCanvas;
 
+    // How far the button should move when it bounces
+    public float hoverBounceDistance = 5.0f;
+    // How fast the button should bounce
+    public float hoverBounceSpeedModifier = 4.0f;
+    // Store how far the button has bounced for rendering
+    private float mBounceOffset;
+
     // All actions that are avalaibe to the selector wheel
-    public List<TileActions> actions;
+    public List<Action> actions;
 
     // The current active selection
     private int mSelection;
@@ -30,7 +37,7 @@ public class UIActionSelector : Graphic
 
     protected override void Start()
     {
-        actions = new List<TileActions>();
+        actions = new List<Action>();
         mSelection = -1;
     }
 
@@ -43,6 +50,11 @@ public class UIActionSelector : Graphic
     {
         // Since Unity trys to run UI elements in the editor mode before it has called start, we need to add this as a error check
         if (actions == null) return;
+
+        // Update the bounce speed & distance
+        mBounceOffset = hoverBounceDistance * Mathf.Sin(Time.time * hoverBounceSpeedModifier);
+
+
         // Calculate the mouse position reletive to the center of the screen
         Vector3 mousePos = Input.mousePosition;
         mousePos.x -= Screen.width / 2;
@@ -126,30 +138,41 @@ public class UIActionSelector : Graphic
         int optionOffset = mSelection * segmentsPerOption;
         for (int i = 0; i < segments + 1; i++)
         {
+            float dynamicOuter = outer;
+            float dynamicInner= inner;
+
+            // See if the current segment is selected or not
+            bool selected = mSelection >= 0 && i >= optionOffset && i <= optionOffset + segmentsPerOption;
+            // Are we on the border of a segment
+            bool border = (i % segmentsPerOption) == 0;
+
+            if (selected && !border)
+            {
+                dynamicOuter += mBounceOffset;
+                dynamicInner += mBounceOffset;
+            }
+
             // Generate the rad, sin and cos for the circle
             float rad = Mathf.Deg2Rad * (i * degrees);
             float c = Mathf.Cos(rad);
             float s = Mathf.Sin(rad);
-            float x = outer * s;
-            float y = inner * s;
+            float x = dynamicOuter * s;
+            float y = dynamicOuter * s;
             // Reset the UV data
             uv0 = new Vector2(0, 1);
             uv1 = new Vector2(1, 1);
             uv2 = new Vector2(1, 0);
             uv3 = new Vector2(0, 0);
             pos0 = prevX;
-            pos1 = new Vector2(outer * s, outer * c);
+            pos1 = new Vector2(dynamicOuter * s, dynamicOuter * c);
 
             // Draw inner ring further out
-            pos2 = new Vector2(inner * s, inner * c);
+            pos2 = new Vector2(dynamicInner * s, dynamicInner * c);
             pos3 = prevY;
             // Define what the previous x and y where so we can use it in the next loop
             prevX = pos1;
             prevY = pos2;
-            // See if the current segment is selected or not
-            bool selected = mSelection >= 0 && i >= optionOffset && i <= optionOffset + segmentsPerOption;
-            // Are we on the border of a segment
-            bool border = (i % segmentsPerOption) == 0;
+
             Color col = color;
             // Modify the segment color based on if its selected or on a border
             if (selected) col = selectionColor;

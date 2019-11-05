@@ -2,20 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class TileActions
+public abstract class TileAction : Action
 {
-
-    public string name;
 
     protected EnvironmentTile mTile;
     protected Environment mMap;
 
-    public TileActions(string _name, EnvironmentTile tile, Environment map)
+    public TileAction(string name, EnvironmentTile tile, Environment map) : base(name)
     {
-        name = _name;
         mTile = tile;
         mMap = map;
     }
-
-    public abstract void Run();
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TileActionWalk : TileActions
+public class TileActionWalk : TileAction
 {
     private Character mCharacter;
 
