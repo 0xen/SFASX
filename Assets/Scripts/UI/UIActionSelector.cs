@@ -15,9 +15,16 @@ public class UIActionSelector : Graphic
     public int segments = 360;
     // What color will selected elements be
     public Color selectionColor;
+
+    // The current canvas the selector is in
+    public Canvas selectorCanvas;
+
+    // All actions that are avalaibe to the selector wheel
+    public List<TileActions> actions;
+
     // The current active selection
     private int mSelection;
-    public List<TileActions> actions;
+
 
     public TextMeshProUGUI ActionSelectorLable;
 
@@ -25,6 +32,11 @@ public class UIActionSelector : Graphic
     {
         actions = new List<TileActions>();
         mSelection = -1;
+    }
+
+    public void SetEnabled(bool enabled)
+    {
+        selectorCanvas.enabled = enabled;
     }
 
     public void Update()

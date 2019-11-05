@@ -10,7 +10,6 @@ public class Game : MonoBehaviour
     [SerializeField] private Character Character = null;
     [SerializeField] private Canvas Menu = null;
     [SerializeField] private Canvas Hud = null;
-    [SerializeField] private Canvas ActionSelectorCanvas = null;
     [SerializeField] private UIActionSelector ActionSelector = null;
     [SerializeField] private Transform CharacterStart = null;
     // How long a mouse button needs to be held before a click menu should open
@@ -196,7 +195,7 @@ public class Game : MonoBehaviour
             case InterfaceState.ActionSelector:
                 {
                     // Toggle the active/inactive state of the action selector
-                    ActionSelectorCanvas.enabled = !isActive;
+                    ActionSelector.SetEnabled(!isActive);
                 }
                 break;
         }
@@ -220,7 +219,7 @@ public class Game : MonoBehaviour
             case GameStates.MainMenu: // ID 0
             case GameStates.InGame: // ID 1
                 {
-                    ActionSelectorCanvas.enabled = false;
+                    ActionSelector.SetEnabled(false);
                     ShowMainMenu(state == GameStates.MainMenu);
                 }
                 break;
