@@ -91,6 +91,7 @@ public class Environment : MonoBehaviour
 
     private void GenerateWaterMap()
     {
+        // Generate a water map that represents what tiles of the map should be water and what ones wont be
         mWaterMap = new bool[Size.x][];
         for (int x = 0; x < Size.x; ++x)
         {
@@ -102,17 +103,47 @@ public class Environment : MonoBehaviour
             }
         }
 
-
-        for (int y = 0; y < Size.y; ++y)
+        // Generate a basic Sea
+        for(int i = 0; i < Size.y; i++)
         {
-            mWaterMap[6][y] = true; // River (1 block thick)
-
-            mWaterMap[10][y] = true; // River 
-            mWaterMap[11][y] = true; // River 
-
-            mWaterMap[y][Size.y - 1] = true; // Sea
+            mWaterMap[i][Size.y - 1] = true; // Sea
+        }
+        for (int y = 0; y < Size.y / 2; ++y)
+        {
+            mWaterMap[y][Size.y - 2] = true; // Sea
         }
 
+
+
+
+        int lastX = Size.y / 2;
+        int lastChange = 0;
+        // Generate a basic winding river
+        for (int y = 0; y < Size.y - 1; ++y)
+        {
+            int newChange = Random.Range(-1, 2);
+            int newX = lastX;
+            if (newChange + lastChange == 0) 
+            {
+                lastChange = 0;
+            }
+            else
+            {
+                lastChange = newChange;
+                newX += newChange;
+            }
+            if (lastX != newX)
+            {
+                mWaterMap[lastX][y] = true;
+            }
+            mWaterMap[newX][y] = true;
+             
+            lastX = newX;
+        }
+        // Land point test
+        mWaterMap[4][Size.y - 2] = false;
+
+        /*
         // River inlet test
         mWaterMap[12][7] = true;
         mWaterMap[13][7] = true;
@@ -143,32 +174,35 @@ public class Environment : MonoBehaviour
         mWaterMap[1][16] = true;
         mWaterMap[2][15] = true;
         mWaterMap[2][16] = true;
+        */
     }
 
+    // check to see if we can find any tiles that match the current dataset and append them to the search results
     private void FindWaterTileMatch(ref List<WaterTileSearchResult> results, bool[] dataset, int currentRotation)
     {
-
-
+        // Loop through all avaliable tiles
         foreach (WaterTile waterTilePrefab in WaterTiles)
         {
+            // check to see if the dataset matches the water connectors
             if (MatchingDataset(dataset, waterTilePrefab.Connectors))
             {
+                // Add the tile to the results
                 WaterTileSearchResult result = new WaterTileSearchResult();
                 result.tile = waterTilePrefab.tile;
                 result.rotation = currentRotation;
                 results.Add(result);
             }
         }
-
-
-        
     }
+    // rotate the datasets 2 places to the right
 
     private void RotateWaterDataset(ref bool[] dataset)
     {
+        // Loop through twise
         for(int i = 0; i < 2; i ++)
         {
             bool last = dataset[0];
+            // Rotate the data one place
             for (int j = 0; j < 7; j++)
             {
                 dataset[j] = dataset[j + 1];
@@ -177,6 +211,7 @@ public class Environment : MonoBehaviour
         }
     }
 
+    // Check to see if the two bool arrays match
     private bool MatchingDataset(bool[] d1, bool[] d2)
     {
         for (int i = 0; i < (d1.Length >= d2.Length ? d2.Length : d1.Length); i++) 
@@ -186,45 +221,52 @@ public class Environment : MonoBehaviour
         return true;
     }
 
+    // Return a single water tile that matches the enviroment requirments
     private bool GetWaterTile(int x, int y, ref EnvironmentTile tile, ref int rotation)
     {
+        // By default, set all the values to true. This is incase any of the tiles are of the map, they should be by default water
         bool[] dataset = new bool[8] { true, true, true, true, true, true, true, true };
+        // Check each axis to see if they are in range or not
         bool xMin = x > 0;
         bool yMin = y > 0;
         bool xMax = x < Size.x - 1;
         bool yMax = y < Size.y - 1;
-        
+
+        // If each NWEW tile is in the map, check to see if they are water
         if (yMax) dataset[0] = mWaterMap[x][y + 1]; // N
         if (xMax) dataset[2] = mWaterMap[x + 1][y]; // E
         if (yMin) dataset[4] = mWaterMap[x][y - 1]; // S
         if (xMin) dataset[6] = mWaterMap[x - 1][y]; // W
 
-
+        // Check to see if the corner blocks ar ein the scene, if thye are load there data
         if (xMax && yMax) dataset[1] = mWaterMap[x + 1][y + 1]; // NE
         if (xMax && yMin) dataset[3] = mWaterMap[x + 1][y - 1]; // SE
         if (xMin && yMin) dataset[5] = mWaterMap[x - 1][y - 1]; // SW
         if (xMin && yMax) dataset[7] = mWaterMap[x - 1][y + 1]; // NW
 
+        // We loop through 4 times for each corner block, if the side blocks surrounding the corner blocks are not water, then the corner cant be water
         for(int i = 0; i < 8; i+=2)
         {
-            if (dataset[i] != dataset[(i + 2) % 8]) dataset[(i + 1) % 8] = false;
+            if (!dataset[i] || !dataset[(i + 2) % 8]) dataset[(i + 1) % 8] = false;
         }
 
-
+        // Create a results array to sample from
         List<WaterTileSearchResult> results = new List<WaterTileSearchResult>();
 
-
+        // Check to see if we can find some tiles that match the dataset/rotation
         FindWaterTileMatch(ref results, dataset, 0);
 
         for(int i = 0; i < 3; i ++)
         {
+            // Rotate the map 90 degrees
             RotateWaterDataset(ref dataset);
+            // Check to see if we can find some tiles that match the dataset/rotation
             FindWaterTileMatch(ref results, dataset, i + 1);
         }
 
+        // If we had no results, return
         if (results.Count == 0) return false;
-
-
+        
         WaterTileSearchResult responce = results[Random.Range(0, results.Count)];
         tile = responce.tile;
         rotation = responce.rotation;
@@ -271,7 +313,7 @@ public class Environment : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log("cant find sry");
+                        Debug.LogError("Could not find water tile to fit senario");
                     }
                 }
                 else

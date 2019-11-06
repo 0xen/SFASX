@@ -143,6 +143,7 @@ public class Game : MonoBehaviour
         if (hits > 0)
         {
             EnvironmentTile tile = mRaycastHits[0].transform.GetComponent<EnvironmentTile>();
+            Debug.Log("Hit " + tile.name);
             if (tile != null)
             {
                 // Temp
