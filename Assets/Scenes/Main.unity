@@ -765,7 +765,6 @@ MonoBehaviour:
     type: 3}
   Menu: {fileID: 2099476870}
   Hud: {fileID: 1579498796}
-  ActionSelectorCanvas: {fileID: 1572163961}
   ActionSelector: {fileID: 1892298627}
   CharacterStart: {fileID: 561634765}
   MinMenuOpenTime: 0.45
@@ -1597,6 +1596,9 @@ MonoBehaviour:
   size: 160
   segments: 360
   selectionColor: {r: 0.4339623, g: 0.4339623, b: 0.4339623, a: 1}
+  selectorCanvas: {fileID: 1572163961}
+  hoverBounceDistance: 5
+  hoverBounceSpeedModifier: 4
   ActionSelectorLable: {fileID: 1080548547}
 --- !u!222 &1892298628
 CanvasRenderer:
@@ -1635,6 +1637,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3d4e0f73bc020942b92e7fc8a67f565, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WaterTiles:
+  - tile: {fileID: 814809362170723094, guid: 8ffd1398f8889994880046e6688ed649, type: 3}
+    Connectors: 0100000001000000
+  - tile: {fileID: 1690508762120623729, guid: 477d725d57041744fb4bbffc8e3bd466, type: 3}
+    Connectors: 0100000001000000
+  - tile: {fileID: 2814158842673065194, guid: ed2cb0fbd91395a489935b83e25cd218, type: 3}
+    Connectors: 0100010101010100
+  - tile: {fileID: 1955362247561919950, guid: aa975c75f596b474eb25b93ebf7d1c0c, type: 3}
+    Connectors: 0101010101010100
+  - tile: {fileID: 6133284071746411624, guid: ba7d46a957daacb4f8dab0eeaef4dfe9, type: 3}
+    Connectors: 0100000001010101
+  - tile: {fileID: 730942481994215935, guid: dc452d60e4a35c94d82b44d412899f52, type: 3}
+    Connectors: 0100000000000000
+  - tile: {fileID: 2224245384864377562, guid: 633ad4391a0ccd8479b6444925b2c60e, type: 3}
+    Connectors: 0000000000000000
+  - tile: {fileID: 3620649049392730412, guid: cf51477c093763743a7b48152d8ba92a, type: 3}
+    Connectors: 0101010101010101
+  - tile: {fileID: 839158528352808233, guid: 1cfd232f3efd5c9439f8e4667c2a7320, type: 3}
+    Connectors: 0100010001000100
+  - tile: {fileID: 8589128322820517455, guid: d45645948b50b704ca18168489a47e97, type: 3}
+    Connectors: 0100010000000100
+  - tile: {fileID: 3488676241730454469, guid: eea448622b1ff8740b69652ced425c18, type: 3}
+    Connectors: 0000000001000100
+  - tile: {fileID: 7842607630946242566, guid: af15f42876ca16f408ca62f0af972a88, type: 3}
+    Connectors: 0000000001000100
+  - tile: {fileID: 4246960745192002325, guid: 3192fa8bac1d9c74db53930d60b5f4f4, type: 3}
+    Connectors: 0000000001010100
+  - tile: {fileID: 6138711201056351777, guid: 5943eb40745c6e7418eb30bb7e6e98d2, type: 3}
+    Connectors: 0100000001000000
   AccessibleTiles:
   - {fileID: 5225831561217036612, guid: 068b00b1b45e14e49a33d5ab4dc954a2, type: 3}
   InaccessibleTiles:
@@ -1654,7 +1685,7 @@ MonoBehaviour:
   - {fileID: 10103160160458647, guid: aa373cc3cd8cfa7418126bd0b9a47880, type: 3}
   - {fileID: 8392035395846825301, guid: 4c0f70225ccee9c4eb8b566b0124f754, type: 3}
   - {fileID: 428312736237616533, guid: b2937a6c300c0624a8fb7c65bf8b21b3, type: 3}
-  Size: {x: 20, y: 15}
+  Size: {x: 20, y: 20}
   AccessiblePercentage: 0.85
 --- !u!4 &2083344931
 Transform:

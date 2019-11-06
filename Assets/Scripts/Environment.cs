@@ -4,12 +4,30 @@ using UnityEngine;
 
 public class Environment : MonoBehaviour
 {
+    [System.Serializable]
+    public struct WaterTile
+    {
+        public EnvironmentTile tile;
+
+        // A array of 8 elements, starting from the North position of the model. it represents if at that position the tile
+        // touches water and rotates in a clock wise order
+        public bool[] Connectors;
+    }
+    [SerializeField] private List<WaterTile> WaterTiles;
+
+    public struct WaterTileSearchResult
+    {
+        public EnvironmentTile tile;
+        public int rotation;
+    }
+
     [SerializeField] private List<EnvironmentTile> AccessibleTiles;
     [SerializeField] private List<EnvironmentTile> InaccessibleTiles;
     [SerializeField] private Vector2Int Size;
     [SerializeField] private float AccessiblePercentage;
 
     private EnvironmentTile[][] mMap;
+    private bool[][] mWaterMap;
     private List<EnvironmentTile> mAll;
     private List<EnvironmentTile> mToBeTested;
     private List<EnvironmentTile> mLastSolution;
@@ -25,6 +43,8 @@ public class Environment : MonoBehaviour
         mAll = new List<EnvironmentTile>();
         mToBeTested = new List<EnvironmentTile>();
     }
+
+
 
     private void OnDrawGizmos()
     {
@@ -69,6 +89,149 @@ public class Environment : MonoBehaviour
         }
     }
 
+    private void GenerateWaterMap()
+    {
+        mWaterMap = new bool[Size.x][];
+        for (int x = 0; x < Size.x; ++x)
+        {
+            mWaterMap[x] = new bool[Size.y];
+
+            for (int y = 0; y < Size.y; ++y)
+            {
+                mWaterMap[x][y] = false;
+            }
+        }
+
+
+        for (int y = 0; y < Size.y; ++y)
+        {
+            mWaterMap[6][y] = true; // River (1 block thick)
+
+            mWaterMap[10][y] = true; // River 
+            mWaterMap[11][y] = true; // River 
+
+            mWaterMap[y][Size.y - 1] = true; // Sea
+        }
+
+        // River inlet test
+        mWaterMap[12][7] = true;
+        mWaterMap[13][7] = true;
+
+
+        mWaterMap[15][7] = true;
+        mWaterMap[15][8] = true;
+        mWaterMap[15][3] = true;
+
+        // Water 4 way test
+        mWaterMap[15][14] = true;
+        mWaterMap[15][15] = true;
+        mWaterMap[15][16] = true;
+        mWaterMap[14][15] = true;
+        mWaterMap[16][15] = true;
+
+        // Water T Junction way test
+        mWaterMap[15][10] = true;
+        mWaterMap[15][11] = true;
+        mWaterMap[14][11] = true;
+        mWaterMap[16][11] = true;
+
+        // River bend test
+        mWaterMap[16][12] = true;
+        mWaterMap[16][11] = true;
+
+        mWaterMap[1][15] = true;
+        mWaterMap[1][16] = true;
+        mWaterMap[2][15] = true;
+        mWaterMap[2][16] = true;
+    }
+
+    private void FindWaterTileMatch(ref List<WaterTileSearchResult> results, bool[] dataset, int currentRotation)
+    {
+
+
+        foreach (WaterTile waterTilePrefab in WaterTiles)
+        {
+            if (MatchingDataset(dataset, waterTilePrefab.Connectors))
+            {
+                WaterTileSearchResult result = new WaterTileSearchResult();
+                result.tile = waterTilePrefab.tile;
+                result.rotation = currentRotation;
+                results.Add(result);
+            }
+        }
+
+
+        
+    }
+
+    private void RotateWaterDataset(ref bool[] dataset)
+    {
+        for(int i = 0; i < 2; i ++)
+        {
+            bool last = dataset[0];
+            for (int j = 0; j < 7; j++)
+            {
+                dataset[j] = dataset[j + 1];
+            }
+            dataset[dataset.Length - 1] = last;
+        }
+    }
+
+    private bool MatchingDataset(bool[] d1, bool[] d2)
+    {
+        for (int i = 0; i < (d1.Length >= d2.Length ? d2.Length : d1.Length); i++) 
+        {
+            if (d1[i] != d2[i]) return false;
+        }
+        return true;
+    }
+
+    private bool GetWaterTile(int x, int y, ref EnvironmentTile tile, ref int rotation)
+    {
+        bool[] dataset = new bool[8] { true, true, true, true, true, true, true, true };
+        bool xMin = x > 0;
+        bool yMin = y > 0;
+        bool xMax = x < Size.x - 1;
+        bool yMax = y < Size.y - 1;
+        
+        if (yMax) dataset[0] = mWaterMap[x][y + 1]; // N
+        if (xMax) dataset[2] = mWaterMap[x + 1][y]; // E
+        if (yMin) dataset[4] = mWaterMap[x][y - 1]; // S
+        if (xMin) dataset[6] = mWaterMap[x - 1][y]; // W
+
+
+        if (xMax && yMax) dataset[1] = mWaterMap[x + 1][y + 1]; // NE
+        if (xMax && yMin) dataset[3] = mWaterMap[x + 1][y - 1]; // SE
+        if (xMin && yMin) dataset[5] = mWaterMap[x - 1][y - 1]; // SW
+        if (xMin && yMax) dataset[7] = mWaterMap[x - 1][y + 1]; // NW
+
+        for(int i = 0; i < 8; i+=2)
+        {
+            if (dataset[i] != dataset[(i + 2) % 8]) dataset[(i + 1) % 8] = false;
+        }
+
+
+        List<WaterTileSearchResult> results = new List<WaterTileSearchResult>();
+
+
+        FindWaterTileMatch(ref results, dataset, 0);
+
+        for(int i = 0; i < 3; i ++)
+        {
+            RotateWaterDataset(ref dataset);
+            FindWaterTileMatch(ref results, dataset, i + 1);
+        }
+
+        if (results.Count == 0) return false;
+
+
+        WaterTileSearchResult responce = results[Random.Range(0, results.Count)];
+        tile = responce.tile;
+        rotation = responce.rotation;
+
+        return true;
+    }
+
     private void Generate()
     {
         // Setup the map of the environment tiles according to the specified width and height
@@ -86,10 +249,39 @@ public class Environment : MonoBehaviour
             mMap[x] = new EnvironmentTile[Size.y];
             for ( int y = 0; y < Size.y; ++y)
             {
-                bool isAccessible = start || Random.value < AccessiblePercentage;
-                List<EnvironmentTile> tiles = isAccessible ? AccessibleTiles : InaccessibleTiles;
-                EnvironmentTile prefab = tiles[Random.Range(0, tiles.Count)];
-                EnvironmentTile tile = Instantiate(prefab, position, Quaternion.identity, transform);
+                bool isWater = mWaterMap[x][y];
+                bool isAccessible = (start || Random.value < AccessiblePercentage) && !isWater;
+                //List<EnvironmentTile> tiles = isAccessible ? AccessibleTiles : InaccessibleTiles;
+
+                EnvironmentTile tile = null;
+                if(isWater)
+                {
+                    List<EnvironmentTile> tiles = AccessibleTiles;
+                    int rotation = 0;
+                    EnvironmentTile prefab = null;
+                    if (GetWaterTile(x, y, ref prefab, ref rotation)) 
+                    {
+                        Quaternion q = Quaternion.Euler(0, 90 * rotation, 0);
+                        Vector3 positionOffset = new Vector3();
+
+                        positionOffset.x += (rotation > 1 ? 10.0f : 0);
+                        positionOffset.z += (rotation >= 1 && rotation < 3 ? 10.0f : 0);
+
+                        tile = Instantiate(prefab, position + positionOffset, q, transform);
+                    }
+                    else
+                    {
+                        Debug.Log("cant find sry");
+                    }
+                }
+                else
+                {
+                    List<EnvironmentTile> tiles = isAccessible ? AccessibleTiles : InaccessibleTiles; ;
+                    EnvironmentTile prefab = tiles[Random.Range(0, tiles.Count)];
+                    tile = Instantiate(prefab, position, Quaternion.identity, transform);
+                }
+
+
                 tile.Position = new Vector3( position.x + (TileSize / 2), TileHeight, position.z + (TileSize / 2));
                 tile.IsAccessible = isAccessible;
                 tile.gameObject.name = string.Format("Tile({0},{1})", x, y);
@@ -165,6 +357,7 @@ public class Environment : MonoBehaviour
 
     public void GenerateWorld()
     {
+        GenerateWaterMap();
         Generate();
         SetupConnections();
     }
