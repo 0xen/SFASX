@@ -71,7 +71,7 @@ public class UIActionSelector : Graphic
 
             if (mSelection < actions.Count)
             {
-                ActionSelectorLable.text = actions[mSelection].name;
+                ActionSelectorLable.text = actions[mSelection].tileName;
             }
 
         }

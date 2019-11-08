@@ -5,12 +5,12 @@ using UnityEngine;
 public abstract class TileAction : Action
 {
 
-    protected EnvironmentTile mTile;
-    protected Environment mMap;
+    // Made public so it is accessible by the game controller
+    public Environment Map;
+    public Character Character;
 
-    public TileAction(string name, EnvironmentTile tile, Environment map) : base(name)
+    public TileAction(string name) : base(name)
     {
-        mTile = tile;
-        mMap = map;
+
     }
 }

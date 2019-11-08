@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class TileActionWalk : TileAction
 {
-    private Character mCharacter;
 
-    public TileActionWalk(EnvironmentTile tile, Environment map, Character character) : base("Walk", tile, map)
+    public TileActionWalk() : base("Walk")
     {
-        mCharacter = character;
+
     }
 
     public override void Run()
     {
-        Debug.Log("#Walking");
-        List<EnvironmentTile> route = mMap.Solve(mCharacter.CurrentPosition, mTile);
-        mCharacter.GoTo(route);
+        EnvironmentTile tile = this.GetComponent<EnvironmentTile>();
+        if (tile == null) return;
+        List<EnvironmentTile> route = Map.Solve(Character.CurrentPosition, tile);
+        Character.GoTo(route);
     }
 }

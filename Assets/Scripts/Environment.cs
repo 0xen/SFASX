@@ -265,7 +265,7 @@ public class Environment : MonoBehaviour
         return true;
     }
 
-    private void Generate()
+    private void Generate(Character Character)
     {
         // Setup the map of the environment tiles according to the specified width and height
         // Generate tiles from the list of accessible and inaccessible prefabs using a random
@@ -314,6 +314,11 @@ public class Environment : MonoBehaviour
                     tile = Instantiate(prefab, position, Quaternion.identity, transform);
                 }
 
+                foreach (var component in tile.GetComponents<TileAction>())
+                {
+                    component.Character = Character;
+                    component.Map = this;
+                }
 
                 tile.Position = new Vector3( position.x + (TileSize / 2), TileHeight, position.z + (TileSize / 2));
                 tile.IsAccessible = isAccessible;
@@ -395,10 +400,10 @@ public class Environment : MonoBehaviour
         return Vector3.Distance(a.Position, b.Position);
     }
 
-    public void GenerateWorld()
+    public void GenerateWorld(Character Character)
     {
         GenerateWaterMap();
-        Generate();
+        Generate(Character);
         SetupConnections();
     }
 

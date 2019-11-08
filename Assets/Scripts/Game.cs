@@ -147,9 +147,13 @@ public class Game : MonoBehaviour
             if (tile != null)
             {
                 // Temp
-                ActionSelector.actions.Add(new TileActionWalk(tile, mMap, mCharacter));
-                ActionSelector.actions.Add(new TileActionWalk(tile, mMap, mCharacter));
-                ActionSelector.actions.Add(new TileActionWalk(tile, mMap, mCharacter));
+                //ActionSelector.actions.Add(new TileActionWalk(mMap, mCharacter));
+
+
+                foreach (var component in tile.GetComponents<TileAction>())
+                {
+                    ActionSelector.actions.Add(component);
+                }
 
                 /*List<EnvironmentTile> route = mMap.Solve(mCharacter.CurrentPosition, tile);
                 mCharacter.GoTo(route);*/
@@ -251,7 +255,7 @@ public class Game : MonoBehaviour
 
     public void Generate()
     {
-        mMap.GenerateWorld();
+        mMap.GenerateWorld(mCharacter);
     }
 
     public void Exit()
