@@ -138,9 +138,9 @@ public class Environment : MonoBehaviour
             }
         }
 
-        /*int lastX = Size.y / 2;
+        int lastX = Size.y / 2;
         int lastChange = 0;
-        // Generate a basic winding river
+        // Generate a basic winding river in the center of the map
         for (int y = 0; y < Size.y - 1; ++y)
         {
             int newChange = Random.Range(-1, 2);
@@ -161,7 +161,7 @@ public class Environment : MonoBehaviour
             mWaterMap[newX][y] = true;
              
             lastX = newX;
-        }*/
+        }
 
 
 

@@ -129,6 +129,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 197478642}
+  - component: {fileID: 197478643}
   m_Layer: 0
   m_Name: CameraController
   m_TagString: Untagged
@@ -144,13 +145,28 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 197478641}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 189, z: -302}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 963194228}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &197478643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 197478641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea3013ec272893e4c8697ca54acd0734, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Character: {fileID: 0}
+  ScreenBounds: {x: 0.5, y: 0.5}
+  CameraScrollSpeed: {x: 0.2, y: 0.2}
 --- !u!1 &250153949
 GameObject:
   m_ObjectHideFlags: 0
@@ -797,6 +813,7 @@ MonoBehaviour:
   Menu: {fileID: 2099476870}
   Hud: {fileID: 1579498796}
   ActionSelector: {fileID: 1892298627}
+  CameraController: {fileID: 197478643}
   CharacterStart: {fileID: 561634765}
   MinMenuOpenTime: 0.45
   DirectionalLight: {fileID: 705507994}
@@ -902,7 +919,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.287084, y: -0, z: -0, w: 0.9579054}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 189, z: -302}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 197478642}
@@ -1688,7 +1705,7 @@ MonoBehaviour:
   - {fileID: 10103160160458647, guid: aa373cc3cd8cfa7418126bd0b9a47880, type: 3}
   - {fileID: 8392035395846825301, guid: 4c0f70225ccee9c4eb8b566b0124f754, type: 3}
   - {fileID: 428312736237616533, guid: b2937a6c300c0624a8fb7c65bf8b21b3, type: 3}
-  Size: {x: 20, y: 20}
+  Size: {x: 100, y: 50}
   AccessiblePercentage: 0.85
   WaterTiles:
   - tile: {fileID: 814809362170723094, guid: 8ffd1398f8889994880046e6688ed649, type: 3}

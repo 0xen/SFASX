@@ -11,6 +11,7 @@ public class Game : MonoBehaviour
     [SerializeField] private Canvas Menu = null;
     [SerializeField] private Canvas Hud = null;
     [SerializeField] private UIActionSelector ActionSelector = null;
+    [SerializeField] private CameraController CameraController = null;
     [SerializeField] private Transform CharacterStart = null;
     // How long a mouse button needs to be held before a click menu should open
     [SerializeField] private float MinMenuOpenTime = 0.6f;
@@ -41,6 +42,8 @@ public class Game : MonoBehaviour
         mRaycastHits = new RaycastHit[NumberOfRaycastHits];
         mMap = GetComponentInChildren<Environment>();
         mCharacter = Instantiate(Character, transform);
+        CameraController.Character = mCharacter;
+        CameraController.SetFollowing(false);
         mMouseHoldTime = 0.0f;
         mInterfaceState = 0;
         ChangeState(GameStates.MainMenu);
@@ -123,15 +126,6 @@ public class Game : MonoBehaviour
                 }
                 break;
         }
-        
-
-        /*if(Input.GetMouseButtonDown(0))
-        {
-        
-        // Check to see if the player has clicked a tile and if they have, try to find a path to that 
-        // tile. If we find a path then the character will move along it to the clicked tile. 
-            
-        }*/
     }
 
     void GatherActionList()
@@ -146,25 +140,11 @@ public class Game : MonoBehaviour
             Debug.Log("Hit " + tile.name);
             if (tile != null)
             {
-                // Temp
-                //ActionSelector.actions.Add(new TileActionWalk(mMap, mCharacter));
-
-
                 foreach (var component in tile.GetComponents<TileAction>())
                 {
                     ActionSelector.actions.Add(component);
                 }
-
-                /*List<EnvironmentTile> route = mMap.Solve(mCharacter.CurrentPosition, tile);
-                mCharacter.GoTo(route);*/
             }
-
-
-
-
-
-
-
         }
     }
 
@@ -240,6 +220,7 @@ public class Game : MonoBehaviour
 
             if( show )
             {
+                CameraController.SetFollowing(false);
                 mCharacter.transform.position = CharacterStart.position;
                 mCharacter.transform.rotation = CharacterStart.rotation;
                 mMap.CleanUpWorld();
@@ -249,6 +230,7 @@ public class Game : MonoBehaviour
                 mCharacter.transform.position = mMap.Start.Position;
                 mCharacter.transform.rotation = Quaternion.identity;
                 mCharacter.CurrentPosition = mMap.Start;
+                CameraController.SetFollowing(true);
             }
         }
     }
