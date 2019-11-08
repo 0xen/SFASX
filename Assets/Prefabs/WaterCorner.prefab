@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5564731181959417694}
   - component: {fileID: 1955362247561919950}
   - component: {fileID: 3203437823363240361}
+  - component: {fileID: 3208718480610603195}
   m_Layer: 0
   m_Name: WaterCorner
   m_TagString: Untagged
@@ -107,3 +108,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 2.5, z: 10}
   m_Center: {x: 5, y: 1.25, z: 5}
+--- !u!114 &3208718480610603195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6126359537762515842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff4924cada33025418d896c1cccdd683, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Map: {fileID: 0}
+  Character: {fileID: 0}
+  tileName: Fish

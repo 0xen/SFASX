@@ -27,7 +27,7 @@ public class UIActionSelector : Graphic
     private float mBounceOffset;
 
     // All actions that are avalaibe to the selector wheel
-    public List<Action> actions;
+    public List<TileAction> actions;
 
     // The current active selection
     private int mSelection;
@@ -37,7 +37,7 @@ public class UIActionSelector : Graphic
 
     protected override void Start()
     {
-        actions = new List<Action>();
+        actions = new List<TileAction>();
         mSelection = -1;
     }
 

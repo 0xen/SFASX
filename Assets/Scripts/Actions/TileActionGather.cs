@@ -1,0 +1,33 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class TileActionGather : TileAction
+{
+
+    public TileActionGather() : base("Gather")
+    {
+
+    }
+
+    public override void Run()
+    {
+        EnvironmentTile tile = this.GetComponent<EnvironmentTile>();
+        if (tile == null) return;
+
+        // Sort the connections array so that the closest one to the player will be first
+        tile.Connections.Sort(((x, y) => (x.Position - Character.transform.position).magnitude.CompareTo((y.Position - Character.transform.position).magnitude))); 
+
+        // Loop through the connections, if we find one that we can path to, go to it
+        foreach (EnvironmentTile childTile in tile.Connections)
+        {
+            List<EnvironmentTile> route = Map.Solve(Character.CurrentPosition, childTile);
+            if(route.Count>0)
+            {
+                Character.GoTo(route);
+                break;
+            }
+        }
+
+    }
+}

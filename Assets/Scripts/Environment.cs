@@ -349,8 +349,6 @@ public class Environment : MonoBehaviour
             for (int y = 0; y < Size.y; ++y)
             {
                 EnvironmentTile tile = mMap[x][y];
-                // If the tile is not navigable, then there is no need to record what tiles it can reach
-                if (!tile.IsAccessible) continue;
                 tile.Connections = new List<EnvironmentTile>();
                 if (x > 0)
                 {

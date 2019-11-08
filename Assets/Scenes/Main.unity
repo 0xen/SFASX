@@ -1630,6 +1630,7 @@ MonoBehaviour:
   selectorCanvas: {fileID: 1572163961}
   hoverBounceDistance: 5
   hoverBounceSpeedModifier: 4
+  actions: []
   ActionSelectorLable: {fileID: 1080548547}
 --- !u!222 &1892298628
 CanvasRenderer:
@@ -1718,9 +1719,9 @@ MonoBehaviour:
     Connectors: 0000000001010100
   - tile: {fileID: 6138711201056351777, guid: 5943eb40745c6e7418eb30bb7e6e98d2, type: 3}
     Connectors: 0100000001000000
-  - tile: {fileID: 8589128322820517455, guid: d45645948b50b704ca18168489a47e97, type: 3}
+  - tile: {fileID: 9140796303258385749, guid: 2bc7c4f985572864f928d97d3fe5bb46, type: 3}
     Connectors: 0100010000000101
-  - tile: {fileID: 8589128322820517455, guid: d45645948b50b704ca18168489a47e97, type: 3}
+  - tile: {fileID: 942330804839682718, guid: 32bd2df60c5a40641a24a6f4a1792759, type: 3}
     Connectors: 0101010000000100
   SeaInletDistanceBetween: 8
   SeaInletMaxInletSize: 6
