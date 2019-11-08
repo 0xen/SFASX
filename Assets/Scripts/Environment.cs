@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class Environment : MonoBehaviour
 {
+
+    [Header("World Tiles")]
+    [SerializeField] private List<EnvironmentTile> AccessibleTiles;
+    [SerializeField] private List<EnvironmentTile> InaccessibleTiles;
+    [Header("World Generation")]
+    [SerializeField] private Vector2Int Size;
+    [SerializeField] private float AccessiblePercentage;
     [System.Serializable]
     public struct WaterTile
     {
@@ -13,6 +20,7 @@ public class Environment : MonoBehaviour
         // touches water and rotates in a clock wise order
         public bool[] Connectors;
     }
+    [Header("Water Tile Configuration")]
     [SerializeField] private List<WaterTile> WaterTiles;
 
     public struct WaterTileSearchResult
@@ -20,11 +28,12 @@ public class Environment : MonoBehaviour
         public EnvironmentTile tile;
         public int rotation;
     }
-
-    [SerializeField] private List<EnvironmentTile> AccessibleTiles;
-    [SerializeField] private List<EnvironmentTile> InaccessibleTiles;
-    [SerializeField] private Vector2Int Size;
-    [SerializeField] private float AccessiblePercentage;
+    
+    [Header("Sea Settings")]
+    // How far can each inlet be between each other
+    [SerializeField] private int SeaInletDistanceBetween;
+    // How big can each sea inlet be
+    [SerializeField] private int SeaInletMaxInletSize;
 
     private EnvironmentTile[][] mMap;
     private bool[][] mWaterMap;
@@ -35,6 +44,7 @@ public class Environment : MonoBehaviour
     private readonly Vector3 NodeSize = Vector3.one * 9.0f; 
     private const float TileSize = 10.0f;
     private const float TileHeight = 2.5f;
+
 
     public EnvironmentTile Start { get; private set; }
 
@@ -104,19 +114,31 @@ public class Environment : MonoBehaviour
         }
 
         // Generate a basic Sea
-        for(int i = 0; i < Size.y; i++)
         {
-            mWaterMap[i][Size.y - 1] = true; // Sea
+            // Create the base layer that is the lower portion of the map and that should always be water, after that, there can be between 1-3 extra layers of sea
+            // 1 + (1 -> 3 extra layers)
+            int seaDepth = Random.Range(2, 5);
+            for (int y = 0; y < seaDepth; y++)
+            {
+                for (int x = 0; x < Size.x; x++)
+                {
+                    mWaterMap[x][y] = true; // Set tile to be a part of the sea
+                }
+            }
+            // Generate sea inlet
+            {
+                int r = 0;
+                for (int xa = Random.Range(0, SeaInletDistanceBetween); xa < Size.x; xa += Random.Range(2, SeaInletDistanceBetween))
+                {
+                    r = Random.Range(2, SeaInletMaxInletSize);
+                    for (int xb = xa; ((xb < xa + r) && (xb < Size.x)); xb++)
+                        mWaterMap[xb][seaDepth] = true; // Set tile to be a part of the sea
+                    xa += r;
+                }
+            }
         }
-        for (int y = 0; y < Size.y / 2; ++y)
-        {
-            mWaterMap[y][Size.y - 2] = true; // Sea
-        }
 
-
-
-
-        int lastX = Size.y / 2;
+        /*int lastX = Size.y / 2;
         int lastChange = 0;
         // Generate a basic winding river
         for (int y = 0; y < Size.y - 1; ++y)
@@ -139,42 +161,11 @@ public class Environment : MonoBehaviour
             mWaterMap[newX][y] = true;
              
             lastX = newX;
-        }
-        // Land point test
-        mWaterMap[4][Size.y - 2] = false;
-
-        /*
-        // River inlet test
-        mWaterMap[12][7] = true;
-        mWaterMap[13][7] = true;
+        }*/
 
 
-        mWaterMap[15][7] = true;
-        mWaterMap[15][8] = true;
-        mWaterMap[15][3] = true;
 
-        // Water 4 way test
-        mWaterMap[15][14] = true;
-        mWaterMap[15][15] = true;
-        mWaterMap[15][16] = true;
-        mWaterMap[14][15] = true;
-        mWaterMap[16][15] = true;
 
-        // Water T Junction way test
-        mWaterMap[15][10] = true;
-        mWaterMap[15][11] = true;
-        mWaterMap[14][11] = true;
-        mWaterMap[16][11] = true;
-
-        // River bend test
-        mWaterMap[16][12] = true;
-        mWaterMap[16][11] = true;
-
-        mWaterMap[1][15] = true;
-        mWaterMap[1][16] = true;
-        mWaterMap[2][15] = true;
-        mWaterMap[2][16] = true;
-        */
     }
 
     // check to see if we can find any tiles that match the current dataset and append them to the search results
@@ -330,13 +321,14 @@ public class Environment : MonoBehaviour
                 mMap[x][y] = tile;
                 mAll.Add(tile);
 
-                if(start)
+                // Choose the first, most south available tile that is accessible to the user to walk on
+                if(start && isAccessible)
                 {
                     Start = tile;
+                    start = false;
                 }
 
                 position.z += TileSize;
-                start = false;
             }
 
             position.x += TileSize;
@@ -352,25 +344,31 @@ public class Environment : MonoBehaviour
             for (int y = 0; y < Size.y; ++y)
             {
                 EnvironmentTile tile = mMap[x][y];
+                // If the tile is not navigable, then there is no need to record what tiles it can reach
+                if (!tile.IsAccessible) continue;
                 tile.Connections = new List<EnvironmentTile>();
                 if (x > 0)
                 {
-                    tile.Connections.Add(mMap[x - 1][y]);
+                    if(mMap[x - 1][y].IsAccessible)
+                        tile.Connections.Add(mMap[x - 1][y]);
                 }
 
                 if (x < Size.x - 1)
                 {
-                    tile.Connections.Add(mMap[x + 1][y]);
+                    if (mMap[x + 1][y].IsAccessible)
+                        tile.Connections.Add(mMap[x + 1][y]);
                 }
 
                 if (y > 0)
                 {
-                    tile.Connections.Add(mMap[x][y - 1]);
+                    if (mMap[x][y - 1].IsAccessible)
+                        tile.Connections.Add(mMap[x][y - 1]);
                 }
 
                 if (y < Size.y - 1)
                 {
-                    tile.Connections.Add(mMap[x][y + 1]);
+                    if (mMap[x][y + 1].IsAccessible)
+                        tile.Connections.Add(mMap[x][y + 1]);
                 }
             }
         }
