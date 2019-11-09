@@ -316,7 +316,6 @@ public class Environment : MonoBehaviour
 
                 foreach (var component in tile.GetComponents<TileAction>())
                 {
-                    component.Character = Character;
                     component.Map = this;
                 }
 

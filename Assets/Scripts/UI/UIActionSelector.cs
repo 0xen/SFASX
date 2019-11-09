@@ -85,10 +85,10 @@ public class UIActionSelector : Graphic
     }
 
     // Defines a click on the UI and runs the appropriate action function
-    public void Select()
+    public void Select(Character character)
     {
         if (mSelection >= actions.Count || mSelection < 0) return;
-        actions[mSelection].Run();
+        actions[mSelection].Run(character);
     }
 
     // Generate Vertex data for the current segment

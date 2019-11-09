@@ -10,7 +10,7 @@ public class TileActionFish : TileAction
 
     }
 
-    public override void Run()
+    public override void Run(Entity entity)
     {
         EnvironmentTile tile = this.GetComponent<EnvironmentTile>();
         if (tile == null) return;

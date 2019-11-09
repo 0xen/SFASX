@@ -105,7 +105,7 @@ public class Game : MonoBehaviour
                     }
                     if (Input.GetMouseButtonUp(0))
                     {
-                        ActionSelector.Select();
+                        ActionSelector.Select(mCharacter);
                         if (HasBit(mInterfaceState, (int)InterfaceState.ActionSelector))
                         {
                             ToggleState(InterfaceState.ActionSelector);

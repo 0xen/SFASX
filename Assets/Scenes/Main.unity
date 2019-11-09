@@ -165,8 +165,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Character: {fileID: 0}
-  ScreenBounds: {x: 0.5, y: 0.5}
-  CameraScrollSpeed: {x: 0.2, y: 0.2}
+  ScreenBounds: {x: 0.2, y: 0.2}
+  CameraScrollSpeed: {x: 0.17, y: 0.17}
 --- !u!1 &250153949
 GameObject:
   m_ObjectHideFlags: 0
