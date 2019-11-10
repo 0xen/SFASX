@@ -71,7 +71,7 @@ public class UIActionSelector : Graphic
 
             if (mSelection < actions.Count)
             {
-                ActionSelectorLable.text = actions[mSelection].tileName;
+                ActionSelectorLable.text = actions[mSelection].actionName;
             }
 
         }
@@ -87,7 +87,14 @@ public class UIActionSelector : Graphic
     // Defines a click on the UI and runs the appropriate action function
     public void Select(Character character)
     {
+        if (actions.Count > 0 && !selectorCanvas.enabled)
+        {
+            Debug.Log("Action: " + actions[0].actionName);
+            actions[0].Run(character);
+            return;
+        }
         if (mSelection >= actions.Count || mSelection < 0) return;
+        Debug.Log("Action: " + actions[mSelection].actionName);
         actions[mSelection].Run(character);
     }
 

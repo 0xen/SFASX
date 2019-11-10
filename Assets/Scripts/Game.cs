@@ -26,6 +26,8 @@ public class Game : MonoBehaviour
     [SerializeField] private Color MidDayLightColor = Color.black;
     [SerializeField] private Color EveningLightColor = Color.black;
 
+    private EnvironmentTile mCurrentHoveredTile = null;
+
     private RaycastHit[] mRaycastHits;
     private Character mCharacter;
     private Environment mMap;
@@ -35,7 +37,7 @@ public class Game : MonoBehaviour
     // Time how long between the mouse has been held and released to decide if a quick action will be used or a menu select
     private float mMouseHoldTime;
 
-    private readonly int NumberOfRaycastHits = 1;
+    private readonly int NumberOfRaycastHits = 5;
 
     void Start()
     {
@@ -98,6 +100,53 @@ public class Game : MonoBehaviour
                 break;
             case GameStates.InGame:
                 {
+
+                    Ray screenClick = MainCamera.ScreenPointToRay(Input.mousePosition);
+                    // See what tiles are in the way of the cursor
+                    int hits = Physics.RaycastNonAlloc(screenClick, mRaycastHits);
+                    if (hits > 0)
+                    {
+                        // Calculate the closest tile from the cursor
+                        RaycastHit closestHit = mRaycastHits[0];
+                        float distance = (Camera.main.transform.position - closestHit.transform.position).magnitude;
+                        for(int i= 1; i < hits; i++)
+                        {
+                            float currentDistance = (Camera.main.transform.position - mRaycastHits[i].transform.position).magnitude;
+                            if(currentDistance < distance)
+                            {
+                                distance = currentDistance;
+                                closestHit = mRaycastHits[i];
+                            }
+                        }
+
+
+                        EnvironmentTile tile = closestHit.transform.GetComponent<EnvironmentTile>();
+                        // If we have not already selected the tile, change its tint
+                        if (tile != mCurrentHoveredTile)
+                        {
+                            tile.SetTint(new Color(1.0f, 0.75f, 0.75f));
+
+                            // If we have had a previous selected tile, then reset its tint
+                            if (mCurrentHoveredTile != null)
+                            {
+                                mCurrentHoveredTile.SetTint(Color.white);
+                            }
+
+                            mCurrentHoveredTile = tile;
+
+                        }
+                    }
+                    else
+                    {
+                        // If we are not hitting any tiles, reset the current tiles tint
+                        if(mCurrentHoveredTile!=null)
+                        {
+                            mCurrentHoveredTile.SetTint(Color.white);
+                            mCurrentHoveredTile = null;
+                        }
+                    }
+
+
                     if (Input.GetMouseButtonDown(0))
                     {
                         // Find out what actions are available from the current location and store them
@@ -131,12 +180,18 @@ public class Game : MonoBehaviour
     void GatherActionList()
     {
         ActionSelector.actions.Clear();
-
-        Ray screenClick = MainCamera.ScreenPointToRay(Input.mousePosition);
-        int hits = Physics.RaycastNonAlloc(screenClick, mRaycastHits);
-        if (hits > 0)
+        if (mCurrentHoveredTile!=null)
         {
-            EnvironmentTile tile = mRaycastHits[0].transform.GetComponent<EnvironmentTile>();
+            EnvironmentTile tile = mCurrentHoveredTile.transform.GetComponent<EnvironmentTile>();
+
+
+            foreach(Material m in tile.GetComponent<MeshRenderer>().materials)
+            {
+                m.SetColor("_Tint", new Color(0.8f, 0.8f, 0.8f));
+            }
+
+            Debug.Log(tile.GetComponent<MeshRenderer>().material.color);
+
             Debug.Log("Hit " + tile.name);
             if (tile != null)
             {

@@ -22,6 +22,14 @@ public class TileActionGather : TileAction
         foreach (EnvironmentTile childTile in tile.Connections)
         {
             List<EnvironmentTile> route = Map.Solve(entity.CurrentPosition, childTile);
+            // If we could not find a route, it means we arew already at the node, so try to gather it
+            if(route == null)
+            {
+                entity.StopAllCoroutines();
+                entity.StartCoroutine(DoGather(entity));
+                break; 
+            }
+            // If there are nodes within the route, then we need to move to the node and then gather it
             if(route.Count>0)
             {
                 entity.StopAllCoroutines();
@@ -29,15 +37,22 @@ public class TileActionGather : TileAction
                 break;
             }
         }
-
     }
-
-
 
     private IEnumerator DoWalkAndGather(Entity entity, List<EnvironmentTile> route)
     {
         yield return TileActionWalk.DoGoTo(entity, 0.5f, route);
+        yield return DoGather(entity);
+    }
+
+    private IEnumerator DoGather(Entity entity)
+    {
         Debug.Log("Time To Gather");
+        if (!entity.AddToInventory(new Item("Test")))
+        {
+            // Drop item on ground
+        }
+        yield return null;
     }
 
 }

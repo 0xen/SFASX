@@ -11,4 +11,12 @@ public class EnvironmentTile : MonoBehaviour
     public float Local { get; set; }
     public bool Visited { get; set; }
     public bool IsAccessible { get; set; }
+
+    public void SetTint(Color color)
+    {
+        foreach (Material m in GetComponent<MeshRenderer>().materials)
+        {
+            m.SetColor("_Tint", color);
+        }
+    }
 }

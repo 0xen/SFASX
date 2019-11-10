@@ -4,13 +4,36 @@ using UnityEngine;
 
 public class Environment : MonoBehaviour
 {
-
+    [System.Serializable]
+    public enum TileType
+    {
+        Accessible,
+        Inaccessible,
+        Resource
+    }
+    [System.Serializable]
+    public struct TileInstance
+    {
+        // This is used to define how frequantly a object should spawn in the world.
+        // Range 1-100, 1 being rare and 100 being common
+        public float spawnChance;
+        public EnvironmentTile tile;
+    }
+    [System.Serializable]
+    public struct WorldTiles
+    {
+        public TileType type;
+        // Spawn chance of it choosing this tile group
+        public float spawnChance;
+        public List<TileInstance> tiles;
+    }
     [Header("World Tiles")]
-    [SerializeField] private List<EnvironmentTile> AccessibleTiles;
-    [SerializeField] private List<EnvironmentTile> InaccessibleTiles;
+    [SerializeField] private WorldTiles[] WorldTileGroups;
+
+    private Dictionary<TileType, WorldTiles> mTiles;
+
     [Header("World Generation")]
     [SerializeField] private Vector2Int Size;
-    [SerializeField] private float AccessiblePercentage;
     [System.Serializable]
     public struct WaterTile
     {
@@ -45,6 +68,7 @@ public class Environment : MonoBehaviour
     private const float TileSize = 10.0f;
     private const float TileHeight = 2.5f;
 
+    [SerializeField] private Shader TintShader;
 
     public EnvironmentTile Start { get; private set; }
 
@@ -52,6 +76,46 @@ public class Environment : MonoBehaviour
     {
         mAll = new List<EnvironmentTile>();
         mToBeTested = new List<EnvironmentTile>();
+        mTiles = new Dictionary<TileType, WorldTiles>();
+        SetupTileGroups();
+    }
+
+    // Organise the tile map groups into a faster to search format and resolve odds of choosing tiles/groups
+    private void SetupTileGroups()
+    {
+        //Used to store the normalised odds of choosing x group
+        float groupSpawnRate = 0.0f;
+        for (int i = 0; i < WorldTileGroups.Length; ++i)
+        {
+            // Add the groups odds to the total odds
+            groupSpawnRate += WorldTileGroups[i].spawnChance;
+
+            // Used to store the normalised odds of choosing y tile in x group
+            float prefabSpawnRate = 0.0f;
+            // Loop through and add the spawn chances to the spawn rate var
+            foreach(TileInstance tile in WorldTileGroups[i].tiles)
+            {
+                prefabSpawnRate += tile.spawnChance;
+            }
+            // Calculate the spawn rate
+            prefabSpawnRate = 100.0f / prefabSpawnRate;
+            for( int j = 0; j < WorldTileGroups[i].tiles.Count; ++j)
+            {
+                // Recalculate the provided spawn rate with the new normalisation
+                TileInstance tileInstance = WorldTileGroups[i].tiles[j];
+                tileInstance.spawnChance = prefabSpawnRate * tileInstance.spawnChance;
+                WorldTileGroups[i].tiles[j] = tileInstance;
+            }
+        }
+        // Calculate the spawn rate
+        groupSpawnRate = 100.0f / groupSpawnRate;
+
+        for (int i = 0; i < WorldTileGroups.Length; ++i)
+        {
+            // Recalculate the provided spawn rate with the new normalisation
+            WorldTileGroups[i].spawnChance *= groupSpawnRate;
+            mTiles[WorldTileGroups[i].type] = WorldTileGroups[i];
+        }
     }
 
 
@@ -283,17 +347,16 @@ public class Environment : MonoBehaviour
             for ( int y = 0; y < Size.y; ++y)
             {
                 bool isWater = mWaterMap[x][y];
-                bool isAccessible = (start || Random.value < AccessiblePercentage) && !isWater;
-                //List<EnvironmentTile> tiles = isAccessible ? AccessibleTiles : InaccessibleTiles;
 
                 EnvironmentTile tile = null;
                 if(isWater)
                 {
-                    List<EnvironmentTile> tiles = AccessibleTiles;
                     int rotation = 0;
                     EnvironmentTile prefab = null;
+                    // Return what water tile fits within the provided world requirment
                     if (GetWaterTile(x, y, ref prefab, ref rotation)) 
                     {
+                        // Calculate the posiiton and rotation of the water tile in the world
                         Quaternion q = Quaternion.Euler(0, 90 * rotation, 0);
                         Vector3 positionOffset = new Vector3();
 
@@ -301,32 +364,73 @@ public class Environment : MonoBehaviour
                         positionOffset.z += (rotation >= 1 && rotation < 3 ? 10.0f : 0);
 
                         tile = Instantiate(prefab, position + positionOffset, q, transform);
+                        // Attach the tint shader to all the tile blocks
+                        foreach (Material m in tile.GetComponent<MeshRenderer>().materials)
+                        {
+                            m.shader = TintShader;
+                        }
+                        tile.IsAccessible = false;
                     }
-                    else
+                    else // Output a error if we cant find the required tile
                     {
                         Debug.LogError("Could not find water tile to fit senario");
                     }
                 }
                 else
                 {
-                    List<EnvironmentTile> tiles = isAccessible ? AccessibleTiles : InaccessibleTiles; ;
-                    EnvironmentTile prefab = tiles[Random.Range(0, tiles.Count)];
-                    tile = Instantiate(prefab, position, Quaternion.identity, transform);
-                }
+                    // Calculate the random chance of choosing x tile group
+                    float randomChoice = Random.Range(0.0f, 100.0f);
+                    float runningTotal = 0.0f;
+                    // Provide a default tile group incase it falls through
+                    WorldTiles worldTilesChoice = mTiles[TileType.Accessible];
+                    
+                    foreach(WorldTiles worldTiles in mTiles.Values)
+                    {
+                        // If the current tile group falls within the bounds of the random number, select the tile group
+                        if (runningTotal + worldTiles.spawnChance > randomChoice)
+                        {
+                            worldTilesChoice = worldTiles;
+                            break;
+                        }
+                        runningTotal += worldTiles.spawnChance;
+                    }
 
+                    EnvironmentTile prefab = null;
+                    // Calculate the random chance of choosing x tile
+                    randomChoice = Random.Range(0.0f, 100.0f);
+                    runningTotal = 0;
+                    foreach (TileInstance tileInstance in worldTilesChoice.tiles)
+                    {
+                        // If the current tile group falls within the bounds of the random number, select the tile group
+                        if (runningTotal + tileInstance.spawnChance > randomChoice)
+                        {
+                            prefab = tileInstance.tile;
+                            break;
+                        }
+                        runningTotal += tileInstance.spawnChance;
+                    }
+
+                    tile = Instantiate(prefab, position, Quaternion.identity, transform);
+                    // Attach the tint shader to all the tile blocks
+                    foreach (Material m in tile.GetComponent<MeshRenderer>().materials)
+                    {
+                        m.shader = TintShader;
+                    }
+                    tile.IsAccessible = worldTilesChoice.type == TileType.Accessible;
+                }
+                // attach the map to all the tile action based components on the tile
                 foreach (var component in tile.GetComponents<TileAction>())
                 {
                     component.Map = this;
                 }
 
                 tile.Position = new Vector3( position.x + (TileSize / 2), TileHeight, position.z + (TileSize / 2));
-                tile.IsAccessible = isAccessible;
                 tile.gameObject.name = string.Format("Tile({0},{1})", x, y);
                 mMap[x][y] = tile;
                 mAll.Add(tile);
 
                 // Choose the first, most south available tile that is accessible to the user to walk on
-                if(start && isAccessible)
+                if(start && tile.IsAccessible)
                 {
                     Start = tile;
                     start = false;
@@ -503,10 +607,6 @@ public class Environment : MonoBehaviour
                     result.Reverse();
 
                     Debug.LogFormat("Path Found: {0} steps {1} long", result.Count, destination.Local);
-                }
-                else
-                {
-                    Debug.LogWarning("Path Not Found");
                 }
             }
             else
