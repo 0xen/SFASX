@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5225831561217036612}
   - component: {fileID: 7093103895150171822}
   - component: {fileID: 8145249072175936071}
+  - component: {fileID: 2684884672044060303}
   m_Layer: 0
   m_Name: Plain
   m_TagString: Untagged
@@ -119,6 +120,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b6e3596f27d3af4791f61d55f20509e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: Walk
   Map: {fileID: 0}
-  mCharacter: {fileID: 0}
+  actionName: Walk
+  SingleNodeMoveTime: 0.5
+--- !u!114 &2684884672044060303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3030514941319876423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa41a4584604a8744a715436bbc7d6f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Map: {fileID: 0}
+  actionName: Build

@@ -424,7 +424,10 @@ public class Environment : MonoBehaviour
                     component.Map = this;
                 }
 
+                tile.PositionTile = new Vector2Int(x, y);
+
                 tile.Position = new Vector3( position.x + (TileSize / 2), TileHeight, position.z + (TileSize / 2));
+
                 tile.gameObject.name = string.Format("Tile({0},{1})", x, y);
                 mMap[x][y] = tile;
                 mAll.Add(tile);
@@ -522,6 +525,30 @@ public class Environment : MonoBehaviour
         }
     }
 
+    public List<EnvironmentTile> SolveNeighbour(EnvironmentTile begin, EnvironmentTile destination)
+    {
+        foreach (EnvironmentTile childTile in destination.Connections)
+        {
+            if(childTile.PositionTile == begin.PositionTile)
+            {
+                return null;
+            }
+        }
+        // Sort the connections array so that the closest one to the player will be first
+        destination.Connections.Sort(((x, y) => (x.PositionTile - begin.PositionTile).magnitude.CompareTo((y.PositionTile - begin.PositionTile).magnitude)));
+
+        // Loop through the connections, if we find one that we can path to, go to it
+        foreach (EnvironmentTile childTile in destination.Connections)
+        {
+            List<EnvironmentTile> route = Solve(begin, childTile);
+            // If there are nodes within the route, then we need to move to the node
+            if (route!=null && route.Count > 0)
+            {
+                return route;
+            }
+        }
+        return new List<EnvironmentTile>();
+    }
     public List<EnvironmentTile> Solve(EnvironmentTile begin, EnvironmentTile destination)
     {
         List<EnvironmentTile> result = null;

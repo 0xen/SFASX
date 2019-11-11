@@ -43,6 +43,7 @@ public class UIActionSelector : Graphic
 
     public void SetEnabled(bool enabled)
     {
+        if (enabled && actions.Count <= 1) return;
         selectorCanvas.enabled = enabled;
     }
 
