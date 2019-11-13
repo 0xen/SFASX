@@ -5,13 +5,6 @@ using UnityEngine;
 public class Environment : MonoBehaviour
 {
     [System.Serializable]
-    public enum TileType
-    {
-        Accessible,
-        Inaccessible,
-        Resource
-    }
-    [System.Serializable]
     public struct TileInstance
     {
         // This is used to define how frequantly a object should spawn in the world.
@@ -22,7 +15,7 @@ public class Environment : MonoBehaviour
     [System.Serializable]
     public struct WorldTiles
     {
-        public TileType type;
+        public EnvironmentTile.TileType type;
         // Spawn chance of it choosing this tile group
         public float spawnChance;
         public List<TileInstance> tiles;
@@ -30,7 +23,7 @@ public class Environment : MonoBehaviour
     [Header("World Tiles")]
     [SerializeField] private WorldTiles[] WorldTileGroups;
 
-    private Dictionary<TileType, WorldTiles> mTiles;
+    private Dictionary<EnvironmentTile.TileType, WorldTiles> mTiles; 
 
     [Header("World Generation")]
     [SerializeField] private Vector2Int Size;
@@ -76,7 +69,7 @@ public class Environment : MonoBehaviour
     {
         mAll = new List<EnvironmentTile>();
         mToBeTested = new List<EnvironmentTile>();
-        mTiles = new Dictionary<TileType, WorldTiles>();
+        mTiles = new Dictionary<EnvironmentTile.TileType, WorldTiles>();
         SetupTileGroups();
     }
 
@@ -140,7 +133,7 @@ public class Environment : MonoBehaviour
 
                     // Use different colours to represent the state of the nodes
                     Color c = Color.white;
-                    if ( !mMap[x][y].IsAccessible )
+                    if ( mMap[x][y].Type == EnvironmentTile.TileType.Inaccessible)
                     {
                         c = Color.red;
                     }
@@ -329,6 +322,11 @@ public class Environment : MonoBehaviour
         return true;
     }
 
+    private void AddTile(int x, int y)
+    {
+
+    }
+
     private void Generate(Character Character)
     {
         // Setup the map of the environment tiles according to the specified width and height
@@ -364,12 +362,7 @@ public class Environment : MonoBehaviour
                         positionOffset.z += (rotation >= 1 && rotation < 3 ? 10.0f : 0);
 
                         tile = Instantiate(prefab, position + positionOffset, q, transform);
-                        // Attach the tint shader to all the tile blocks
-                        foreach (Material m in tile.GetComponent<MeshRenderer>().materials)
-                        {
-                            m.shader = TintShader;
-                        }
-                        tile.IsAccessible = false;
+                        tile.Type = EnvironmentTile.TileType.Inaccessible;
                     }
                     else // Output a error if we cant find the required tile
                     {
@@ -382,7 +375,7 @@ public class Environment : MonoBehaviour
                     float randomChoice = Random.Range(0.0f, 100.0f);
                     float runningTotal = 0.0f;
                     // Provide a default tile group incase it falls through
-                    WorldTiles worldTilesChoice = mTiles[TileType.Accessible];
+                    WorldTiles worldTilesChoice = mTiles[EnvironmentTile.TileType.Accessible];
                     
                     foreach(WorldTiles worldTiles in mTiles.Values)
                     {
@@ -411,13 +404,16 @@ public class Environment : MonoBehaviour
                     }
 
                     tile = Instantiate(prefab, position, Quaternion.identity, transform);
-                    // Attach the tint shader to all the tile blocks
-                    foreach (Material m in tile.GetComponent<MeshRenderer>().materials)
-                    {
-                        m.shader = TintShader;
-                    }
-                    tile.IsAccessible = worldTilesChoice.type == TileType.Accessible;
+                    tile.Type = worldTilesChoice.type;
                 }
+
+
+                // Attach the tint shader to all the tile blocks
+                foreach (Material m in tile.GetComponent<MeshRenderer>().materials)
+                {
+                    m.shader = TintShader;
+                }
+
                 // attach the map to all the tile action based components on the tile
                 foreach (var component in tile.GetComponents<TileAction>())
                 {
@@ -433,7 +429,7 @@ public class Environment : MonoBehaviour
                 mAll.Add(tile);
 
                 // Choose the first, most south available tile that is accessible to the user to walk on
-                if(start && tile.IsAccessible)
+                if(start && tile.Type == EnvironmentTile.TileType.Accessible)
                 {
                     Start = tile;
                     start = false;
@@ -454,32 +450,37 @@ public class Environment : MonoBehaviour
         {
             for (int y = 0; y < Size.y; ++y)
             {
-                EnvironmentTile tile = mMap[x][y];
-                tile.Connections = new List<EnvironmentTile>();
-                if (x > 0)
-                {
-                    if(mMap[x - 1][y].IsAccessible)
-                        tile.Connections.Add(mMap[x - 1][y]);
-                }
-
-                if (x < Size.x - 1)
-                {
-                    if (mMap[x + 1][y].IsAccessible)
-                        tile.Connections.Add(mMap[x + 1][y]);
-                }
-
-                if (y > 0)
-                {
-                    if (mMap[x][y - 1].IsAccessible)
-                        tile.Connections.Add(mMap[x][y - 1]);
-                }
-
-                if (y < Size.y - 1)
-                {
-                    if (mMap[x][y + 1].IsAccessible)
-                        tile.Connections.Add(mMap[x][y + 1]);
-                }
+                SetupConnections(x, y);
             }
+        }
+    }
+
+    private void SetupConnections(int x, int y)
+    {
+        EnvironmentTile tile = mMap[x][y];
+        tile.Connections = new List<EnvironmentTile>();
+        if (x > 0)
+        {
+            if (mMap[x - 1][y].Type == EnvironmentTile.TileType.Accessible)
+                tile.Connections.Add(mMap[x - 1][y]);
+        }
+
+        if (x < Size.x - 1)
+        {
+            if (mMap[x + 1][y].Type == EnvironmentTile.TileType.Accessible)
+                tile.Connections.Add(mMap[x + 1][y]);
+        }
+
+        if (y > 0)
+        {
+            if (mMap[x][y - 1].Type == EnvironmentTile.TileType.Accessible)
+                tile.Connections.Add(mMap[x][y - 1]);
+        }
+
+        if (y < Size.y - 1)
+        {
+            if (mMap[x][y + 1].Type == EnvironmentTile.TileType.Accessible)
+                tile.Connections.Add(mMap[x][y + 1]);
         }
     }
 
@@ -599,7 +600,7 @@ public class Environment : MonoBehaviour
                         {
                             EnvironmentTile neighbour = currentNode.Connections[count];
 
-                            if (!neighbour.Visited && neighbour.IsAccessible)
+                            if (!neighbour.Visited && neighbour.Type == EnvironmentTile.TileType.Accessible)
                             {
                                 mToBeTested.Add(neighbour);
                             }
@@ -652,5 +653,49 @@ public class Environment : MonoBehaviour
         mLastSolution = result;
 
         return result;
+    }
+
+    public void ReplaceEnviromentTile(EnvironmentTile current, EnvironmentTile replacment)
+    {
+        Vector3 newPosition = new Vector3(current.Position.x - (TileSize / 2), 0.0f, current.Position.z - (TileSize / 2));
+        GameObject newObject = Instantiate(replacment.gameObject, newPosition, Quaternion.identity, transform);
+        EnvironmentTile tile = newObject.GetComponent<EnvironmentTile>();
+
+
+        tile.Position = current.Position;
+        tile.PositionTile = current.PositionTile;
+
+        // Attach the tint shader to all the tile blocks
+        foreach (Material m in tile.GetComponent<MeshRenderer>().materials)
+        {
+            m.shader = TintShader;
+        }
+        // attach the map to all the tile action based components on the tile
+        foreach (var component in tile.GetComponents<TileAction>())
+        {
+            component.Map = this;
+        }
+
+        // Add the tile to the global map
+        mMap[current.PositionTile.x][current.PositionTile.y] = tile;
+
+        // Setup connections between the new tile and its local tiles
+        SetupConnections(current.PositionTile.x, current.PositionTile.y);
+        if (current.PositionTile.x > 0)
+            SetupConnections(current.PositionTile.x - 1, current.PositionTile.y);
+        if (current.PositionTile.x < Size.x)
+            SetupConnections(current.PositionTile.x + 1, current.PositionTile.y);
+        if (current.PositionTile.y > 0)
+            SetupConnections(current.PositionTile.x, current.PositionTile.y - 1);
+        if (current.PositionTile.y < Size.y)
+            SetupConnections(current.PositionTile.x, current.PositionTile.y + 1);
+
+
+        // Remove the old tile and add the new one
+        mAll.Remove(current);
+        mAll.Add(tile);
+
+
+        Destroy(current.gameObject); 
     }
 }

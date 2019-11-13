@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 9032469235390902045}
   - component: {fileID: 571534609703175618}
   - component: {fileID: 6654688128206687706}
+  - component: {fileID: 3312097745907890286}
   m_Layer: 0
   m_Name: TreeSmall
   m_TagString: Untagged
@@ -94,6 +95,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b81c1a74f97fbca4a81350fa9f3bdddb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Visited: 0
+  Type: 2
 --- !u!65 &6654688128206687706
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -107,6 +110,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 2.5, z: 10}
   m_Center: {x: 5, y: 1.25, z: 5}
+--- !u!114 &3312097745907890286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7306264547982859201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7d0e301717a5334fa4aed42e97f383c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Map: {fileID: 0}
+  actionName: Gather
+  GatherTime: 3
+  replacmentTile:
+  - {fileID: 7228575818001999334, guid: d85ca6f08a4ef8848b08ae4126b05734, type: 3}
 --- !u!1001 &8879202610280605618
 PrefabInstance:
   m_ObjectHideFlags: 0

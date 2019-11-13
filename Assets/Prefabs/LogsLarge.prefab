@@ -95,6 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b81c1a74f97fbca4a81350fa9f3bdddb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Type: 2
 --- !u!65 &5539415378380972804
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -123,6 +124,8 @@ MonoBehaviour:
   Map: {fileID: 0}
   actionName: Gather
   GatherTime: 1.5
+  replacmentTile:
+  - {fileID: 5225831561217036612, guid: 068b00b1b45e14e49a33d5ab4dc954a2, type: 3}
 --- !u!1001 &2161860736337687057
 PrefabInstance:
   m_ObjectHideFlags: 0

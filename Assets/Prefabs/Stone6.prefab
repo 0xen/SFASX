@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 9171041265190082378}
   - component: {fileID: 428312736237616533}
   - component: {fileID: -1749308653127198124}
+  - component: {fileID: -8185468162025276474}
   m_Layer: 0
   m_Name: Stone6
   m_TagString: Untagged
@@ -94,6 +95,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b81c1a74f97fbca4a81350fa9f3bdddb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Visited: 0
+  Type: 2
 --- !u!65 &-1749308653127198124
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -107,6 +110,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 2.5, z: 10}
   m_Center: {x: 5, y: 1.25, z: 5}
+--- !u!114 &-8185468162025276474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7456487072380527510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7d0e301717a5334fa4aed42e97f383c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Map: {fileID: 0}
+  actionName: Gather
+  GatherTime: 1.5
+  replacmentTile:
+  - {fileID: 5225831561217036612, guid: 068b00b1b45e14e49a33d5ab4dc954a2, type: 3}
 --- !u!1001 &7438152161128381642
 PrefabInstance:
   m_ObjectHideFlags: 0

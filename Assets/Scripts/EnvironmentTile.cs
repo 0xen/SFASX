@@ -4,14 +4,22 @@ using UnityEngine;
 
 public class EnvironmentTile : MonoBehaviour
 {
+
+    [System.Serializable]
+    public enum TileType
+    {
+        Accessible,
+        Inaccessible,
+        Resource
+    }
     public List<EnvironmentTile> Connections { get; set; }
     public EnvironmentTile Parent { get; set; }
     public Vector3 Position { get; set; }
     public Vector2Int PositionTile { get; set; }
     public float Global { get; set; }
     public float Local { get; set; }
-    public bool Visited { get; set; }
-    public bool IsAccessible { get; set; }
+    public bool Visited;// { get; set; }
+    public TileType Type;
 
     public void SetTint(Color color)
     {

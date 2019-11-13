@@ -6,6 +6,8 @@ public class TileActionGather : TileAction
 {
     public float GatherTime = 0.0f;
 
+    public EnvironmentTile[] replacmentTile;
+
     public TileActionGather() : base("Gather")
     {
 
@@ -22,25 +24,26 @@ public class TileActionGather : TileAction
         if(route==null)
         {
             entity.StopAllCoroutines();
-            entity.StartCoroutine(DoGather(entity));
+            entity.StartCoroutine(DoGather(entity, tile));
         }
         else if(route.Count>0)
         {
             entity.StopAllCoroutines();
-            entity.StartCoroutine(DoWalkAndGather(entity, route));
+            entity.StartCoroutine(DoWalkAndGather(entity, route, tile));
         }
     }
 
-    private IEnumerator DoWalkAndGather(Entity entity, List<EnvironmentTile> route)
+    private IEnumerator DoWalkAndGather(Entity entity, List<EnvironmentTile> route, EnvironmentTile tile)
     {
         yield return TileActionWalk.DoGoTo(entity, 0.5f, route);
-        yield return DoGather(entity);
+        yield return DoGather(entity, tile);
     }
 
-    private IEnumerator DoGather(Entity entity)
+    private IEnumerator DoGather(Entity entity, EnvironmentTile tile)
     {
         yield return new WaitForSeconds(GatherTime);
         Debug.Log("Time To Gather");
+        Map.ReplaceEnviromentTile(tile, replacmentTile[Random.Range(0, replacmentTile.Length)]); 
         if (!entity.AddToInventory(new Item("Test")))
         {
             // Drop item on ground

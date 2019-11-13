@@ -1690,11 +1690,11 @@ MonoBehaviour:
   - type: 0
     spawnChance: 100
     tiles:
-    - spawnChance: 100
+    - spawnChance: 1
       tile: {fileID: 5225831561217036612, guid: 068b00b1b45e14e49a33d5ab4dc954a2,
         type: 3}
   - type: 1
-    spawnChance: 2
+    spawnChance: 5
     tiles:
     - spawnChance: 1
       tile: {fileID: 7603024997213197666, guid: 85c72f2e63f7ff349b2aa0cc58203b3d,
@@ -1717,10 +1717,10 @@ MonoBehaviour:
   - type: 2
     spawnChance: 20
     tiles:
-    - spawnChance: 2
+    - spawnChance: 1
       tile: {fileID: 4499036324842488966, guid: cd048cafd4c60d14d81bdb56cdb167ef,
         type: 3}
-    - spawnChance: 2
+    - spawnChance: 1
       tile: {fileID: 7228575818001999334, guid: d85ca6f08a4ef8848b08ae4126b05734,
         type: 3}
     - spawnChance: 3
