@@ -817,7 +817,7 @@ MonoBehaviour:
   CharacterStart: {fileID: 561634765}
   MinMenuOpenTime: 0.45
   DirectionalLight: {fileID: 705507994}
-  DayLength: 60
+  DayLength: 600
   SunsetSunriseBrightness: 0.5
   MidDayBrightness: 0.8
   MorningLightColor: {r: 0.9882353, g: 0.81960785, b: 0.3019608, a: 0}
@@ -1743,7 +1743,7 @@ MonoBehaviour:
         type: 3}
     - spawnChance: 1
       tile: {fileID: 428312736237616533, guid: b2937a6c300c0624a8fb7c65bf8b21b3, type: 3}
-  Size: {x: 100, y: 50}
+  Size: {x: 100, y: 100}
   WaterTiles:
   - tile: {fileID: 814809362170723094, guid: 8ffd1398f8889994880046e6688ed649, type: 3}
     Connectors: 0100000001000000
@@ -1779,6 +1779,7 @@ MonoBehaviour:
     Connectors: 0101010000000100
   SeaInletDistanceBetween: 8
   SeaInletMaxInletSize: 6
+  seaDeapth: 2
   TintShader: {fileID: 4800000, guid: 25c077fcd88dac346a690f368da47d6d, type: 3}
 --- !u!4 &2083344931
 Transform:

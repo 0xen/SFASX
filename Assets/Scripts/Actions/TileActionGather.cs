@@ -39,16 +39,23 @@ public class TileActionGather : TileAction
         yield return DoGather(entity, tile);
     }
 
-    private IEnumerator DoGather(Entity entity, EnvironmentTile tile)
+    public IEnumerator DoGather(Entity entity, EnvironmentTile tile)
     {
         yield return new WaitForSeconds(GatherTime);
         Debug.Log("Time To Gather");
-        Map.ReplaceEnviromentTile(tile, replacmentTile[Random.Range(0, replacmentTile.Length)]); 
+        GameObject newObject = Map.ReplaceEnviromentTile(tile, replacmentTile[Random.Range(0, replacmentTile.Length)]);
+
         if (!entity.AddToInventory(new Item("Test")))
         {
             // Drop item on ground
         }
-        yield return null;
+
+        if(newObject.GetComponent<TileActionGather>())
+        {
+            TileActionGather newGatherAction = newObject.GetComponent<TileActionGather>();
+            yield return newGatherAction.DoGather(entity, newObject.GetComponent<EnvironmentTile>());
+        }
+
     }
 
 }

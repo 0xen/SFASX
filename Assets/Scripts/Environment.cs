@@ -50,6 +50,8 @@ public class Environment : MonoBehaviour
     [SerializeField] private int SeaInletDistanceBetween;
     // How big can each sea inlet be
     [SerializeField] private int SeaInletMaxInletSize;
+    [SerializeField] private int seaDeapth;
+
 
     private EnvironmentTile[][] mMap;
     private bool[][] mWaterMap;
@@ -119,9 +121,11 @@ public class Environment : MonoBehaviour
         if (mMap != null)
         {
             for (int x = 0; x < Size.x; ++x)
-            {
+            { 
                 for (int y = 0; y < Size.y; ++y)
                 {
+                    if (mMap[x][y] == null)
+                        continue;
                     if (mMap[x][y].Connections != null)
                     {
                         for (int n = 0; n < mMap[x][y].Connections.Count; ++n)
@@ -170,6 +174,7 @@ public class Environment : MonoBehaviour
             }
         }
 
+        /*
         // Generate a basic Sea
         {
             // Create the base layer that is the lower portion of the map and that should always be water, after that, there can be between 1-3 extra layers of sea
@@ -192,6 +197,16 @@ public class Environment : MonoBehaviour
                         mWaterMap[xb][seaDepth] = true; // Set tile to be a part of the sea
                     xa += r;
                 }
+            }
+        }*/
+
+        for (int x = 0; x < Size.x; x++)
+        {
+            for(int y = 0; y < Size.y; y++) 
+            {
+                float xCoord = 0.0f + (float)x / (float)Size.x * 0.5f;
+                float yCoord = 0.0f + (float)y / (float)Size.y * 0.5f;
+                mWaterMap[x][y] = 0.5f > Mathf.PerlinNoise(xCoord, yCoord);
             }
         }
 
@@ -322,10 +337,6 @@ public class Environment : MonoBehaviour
         return true;
     }
 
-    private void AddTile(int x, int y)
-    {
-
-    }
 
     private void Generate(Character Character)
     {
@@ -349,6 +360,33 @@ public class Environment : MonoBehaviour
                 EnvironmentTile tile = null;
                 if(isWater)
                 {
+                    bool foundLand = false;
+                    for (int xa = x - seaDeapth; xa < x + seaDeapth + 1; xa++)
+                    {
+                        if (xa < 0)
+                            continue;
+                        if (xa > Size.x - 1)
+                            break;
+
+                        for (int ya = y - seaDeapth; ya < y + seaDeapth + 1; ya++)
+                        {
+                            if (ya < 0)
+                                continue;
+                            if (ya > Size.y - 1)
+                                break;
+
+                            if (!mWaterMap[xa][ya])
+                            {
+                                foundLand = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (!foundLand)
+                        continue;
+
+
+
                     int rotation = 0;
                     EnvironmentTile prefab = null;
                     // Return what water tile fits within the provided world requirment
@@ -457,27 +495,28 @@ public class Environment : MonoBehaviour
 
     private void SetupConnections(int x, int y)
     {
+        if (mMap[x][y] == null) return;
         EnvironmentTile tile = mMap[x][y];
         tile.Connections = new List<EnvironmentTile>();
-        if (x > 0)
+        if (x > 0 && mMap[x - 1][y] != null)
         {
             if (mMap[x - 1][y].Type == EnvironmentTile.TileType.Accessible)
                 tile.Connections.Add(mMap[x - 1][y]);
         }
 
-        if (x < Size.x - 1)
+        if (x < Size.x - 1 && mMap[x + 1][y] != null)
         {
             if (mMap[x + 1][y].Type == EnvironmentTile.TileType.Accessible)
                 tile.Connections.Add(mMap[x + 1][y]);
         }
 
-        if (y > 0)
+        if (y > 0 && mMap[x][y - 1] != null)
         {
             if (mMap[x][y - 1].Type == EnvironmentTile.TileType.Accessible)
                 tile.Connections.Add(mMap[x][y - 1]);
         }
 
-        if (y < Size.y - 1)
+        if (y < Size.y - 1 && mMap[x][y + 1] != null)
         {
             if (mMap[x][y + 1].Type == EnvironmentTile.TileType.Accessible)
                 tile.Connections.Add(mMap[x][y + 1]);
@@ -655,7 +694,7 @@ public class Environment : MonoBehaviour
         return result;
     }
 
-    public void ReplaceEnviromentTile(EnvironmentTile current, EnvironmentTile replacment)
+    public GameObject ReplaceEnviromentTile(EnvironmentTile current, EnvironmentTile replacment)
     {
         Vector3 newPosition = new Vector3(current.Position.x - (TileSize / 2), 0.0f, current.Position.z - (TileSize / 2));
         GameObject newObject = Instantiate(replacment.gameObject, newPosition, Quaternion.identity, transform);
@@ -696,6 +735,8 @@ public class Environment : MonoBehaviour
         mAll.Add(tile);
 
 
-        Destroy(current.gameObject); 
+        Destroy(current.gameObject);
+
+        return newObject;
     }
 }
