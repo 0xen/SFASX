@@ -44,13 +44,20 @@ public class Environment : MonoBehaviour
         public EnvironmentTile tile;
         public int rotation;
     }
-    
+
     [Header("Sea Settings")]
-    // How far can each inlet be between each other
-    [SerializeField] private int SeaInletDistanceBetween;
-    // How big can each sea inlet be
-    [SerializeField] private int SeaInletMaxInletSize;
     [SerializeField] private int seaDeapth;
+
+    [Header("Island Settings")]
+    // How much with the noise be amplified
+    [SerializeField] private float islandFrequancy;
+    // How high each island should be amplified
+    [SerializeField] private float islandAmplitudeScalar;
+    // How high each island should be amplified
+    [SerializeField] private Vector2 islandWaveformOffset;
+
+    [Header("Shading")]
+    [SerializeField] private Shader TintShader;
 
 
     private EnvironmentTile[][] mMap;
@@ -63,7 +70,6 @@ public class Environment : MonoBehaviour
     private const float TileSize = 10.0f;
     private const float TileHeight = 2.5f;
 
-    [SerializeField] private Shader TintShader;
 
     public EnvironmentTile Start { get; private set; }
 
@@ -173,42 +179,41 @@ public class Environment : MonoBehaviour
                 mWaterMap[x][y] = false;
             }
         }
+        
 
-        /*
-        // Generate a basic Sea
         {
-            // Create the base layer that is the lower portion of the map and that should always be water, after that, there can be between 1-3 extra layers of sea
-            // 1 + (1 -> 3 extra layers)
-            int seaDepth = Random.Range(2, 5);
-            for (int y = 0; y < seaDepth; y++)
+            // Generate water map
+            float perTileRadX = 3.14159f / Size.x;
+            float perTileRadY = 3.14159f / Size.y;
+            float[,] heightMap = new float[Size.x, Size.y];
+
+            for (int x = 0; x < Size.x; x++)
             {
-                for (int x = 0; x < Size.x; x++)
+                for (int y = 0; y < Size.y; y++)
                 {
-                    mWaterMap[x][y] = true; // Set tile to be a part of the sea
+                    float xCoord = islandWaveformOffset.x + ((float)x / (float)Size.x) * islandFrequancy;
+                    float yCoord = islandWaveformOffset.y + ((float)y / (float)Size.y) * islandFrequancy;
+                    heightMap[x, y] = Mathf.PerlinNoise(xCoord, yCoord) + ((Mathf.Sin(perTileRadX * x) + Mathf.Sin(perTileRadY * y)) * islandAmplitudeScalar);
                 }
             }
-            // Generate sea inlet
+            float average = 0.0f;
+            for (int x = 0; x < Size.x; x++)
             {
-                int r = 0;
-                for (int xa = Random.Range(0, SeaInletDistanceBetween); xa < Size.x; xa += Random.Range(2, SeaInletDistanceBetween))
+                for (int y = 0; y < Size.y; y++)
                 {
-                    r = Random.Range(2, SeaInletMaxInletSize);
-                    for (int xb = xa; ((xb < xa + r) && (xb < Size.x)); xb++)
-                        mWaterMap[xb][seaDepth] = true; // Set tile to be a part of the sea
-                    xa += r;
+                    average += heightMap[x, y];
                 }
             }
-        }*/
-
-        for (int x = 0; x < Size.x; x++)
-        {
-            for(int y = 0; y < Size.y; y++) 
+            average /= ((Size.x * Size.y) * 0.9f);
+            for (int x = 0; x < Size.x; x++)
             {
-                float xCoord = 0.0f + (float)x / (float)Size.x * 0.5f;
-                float yCoord = 0.0f + (float)y / (float)Size.y * 0.5f;
-                mWaterMap[x][y] = 0.5f > Mathf.PerlinNoise(xCoord, yCoord);
+                for (int y = 0; y < Size.y; y++)
+                {
+                    mWaterMap[x][y] = heightMap[x, y] < average;
+                }
             }
         }
+       
 
         int lastX = Size.y / 2;
         int lastChange = 0;
@@ -361,14 +366,14 @@ public class Environment : MonoBehaviour
                 if(isWater)
                 {
                     bool foundLand = false;
-                    for (int xa = x - seaDeapth; xa < x + seaDeapth + 1; xa++)
+                    for (int xa = x - seaDeapth; !foundLand && xa < x + seaDeapth + 1; xa++)
                     {
                         if (xa < 0)
                             continue;
                         if (xa > Size.x - 1)
                             break;
 
-                        for (int ya = y - seaDeapth; ya < y + seaDeapth + 1; ya++)
+                        for (int ya = y - seaDeapth; !foundLand && ya < y + seaDeapth + 1; ya++)
                         {
                             if (ya < 0)
                                 continue;
@@ -383,7 +388,10 @@ public class Environment : MonoBehaviour
                         }
                     }
                     if (!foundLand)
+                    {
+                        position.z += TileSize;
                         continue;
+                    }
 
 
 
