@@ -1743,7 +1743,7 @@ MonoBehaviour:
         type: 3}
     - spawnChance: 1
       tile: {fileID: 428312736237616533, guid: b2937a6c300c0624a8fb7c65bf8b21b3, type: 3}
-  Size: {x: 150, y: 150}
+  Size: {x: 200, y: 200}
   WaterTiles:
   - tile: {fileID: 814809362170723094, guid: 8ffd1398f8889994880046e6688ed649, type: 3}
     Connectors: 0100000001000000
@@ -1777,10 +1777,14 @@ MonoBehaviour:
     Connectors: 0100010000000101
   - tile: {fileID: 942330804839682718, guid: 32bd2df60c5a40641a24a6f4a1792759, type: 3}
     Connectors: 0101010000000100
+  - tile: {fileID: 2816615468256395868, guid: 8839fac6e54d63a40a84f824ff724f80, type: 3}
+    Connectors: 0101010001010100
+  - tile: {fileID: 2466288146943059409, guid: 722296f6ce5fdb74ebfe4e19219e9c23, type: 3}
+    Connectors: 0101010001000100
   seaDeapth: 3
-  islandFrequancy: 17
-  islandAmplitudeScalar: 3
-  islandWaveformOffset: {x: 0, y: 0}
+  islandFrequancy: 15
+  islandAmplitudeScalar: 1.5
+  islandWaveformOffset: {x: 11.52, y: 0}
   TintShader: {fileID: 4800000, guid: 25c077fcd88dac346a690f368da47d6d, type: 3}
 --- !u!4 &2083344931
 Transform:

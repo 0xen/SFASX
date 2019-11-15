@@ -41,6 +41,10 @@ public class TileActionGather : TileAction
 
     public IEnumerator DoGather(Entity entity, EnvironmentTile tile)
     {
+
+
+        entity.transform.rotation = Quaternion.LookRotation(tile.Position - entity.CurrentPosition.Position, Vector3.up);
+
         yield return new WaitForSeconds(GatherTime);
         Debug.Log("Time To Gather");
         GameObject newObject = Map.ReplaceEnviromentTile(tile, replacmentTile[Random.Range(0, replacmentTile.Length)]);

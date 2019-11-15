@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Environment : MonoBehaviour
 {
@@ -61,7 +62,8 @@ public class Environment : MonoBehaviour
 
 
     private EnvironmentTile[][] mMap;
-    private bool[][] mWaterMap;
+    private bool[,] mWaterMap;
+
     private List<EnvironmentTile> mAll;
     private List<EnvironmentTile> mToBeTested;
     private List<EnvironmentTile> mLastSolution;
@@ -169,17 +171,15 @@ public class Environment : MonoBehaviour
     private void GenerateWaterMap()
     {
         // Generate a water map that represents what tiles of the map should be water and what ones wont be
-        mWaterMap = new bool[Size.x][];
+        mWaterMap = new bool[Size.x,Size.y];
         for (int x = 0; x < Size.x; ++x)
         {
-            mWaterMap[x] = new bool[Size.y];
 
             for (int y = 0; y < Size.y; ++y)
             {
-                mWaterMap[x][y] = false;
+                mWaterMap[x,y] = false;
             }
         }
-        
 
         {
             // Generate water map
@@ -209,7 +209,7 @@ public class Environment : MonoBehaviour
             {
                 for (int y = 0; y < Size.y; y++)
                 {
-                    mWaterMap[x][y] = heightMap[x, y] < average;
+                    mWaterMap[x,y] = heightMap[x, y] < average;
                 }
             }
         }
@@ -233,16 +233,12 @@ public class Environment : MonoBehaviour
             }
             if (lastX != newX)
             {
-                mWaterMap[lastX][y] = true;
+                mWaterMap[lastX,y] = true;
             }
-            mWaterMap[newX][y] = true;
+            mWaterMap[newX,y] = true;
              
             lastX = newX;
         }
-
-
-
-
     }
 
     // check to see if we can find any tiles that match the current dataset and append them to the search results
@@ -301,16 +297,16 @@ public class Environment : MonoBehaviour
         bool yMax = y < Size.y - 1;
 
         // If each NWEW tile is in the map, check to see if they are water
-        if (yMax) dataset[0] = mWaterMap[x][y + 1]; // N
-        if (xMax) dataset[2] = mWaterMap[x + 1][y]; // E
-        if (yMin) dataset[4] = mWaterMap[x][y - 1]; // S
-        if (xMin) dataset[6] = mWaterMap[x - 1][y]; // W
+        if (yMax) dataset[0] = mWaterMap[x,y + 1]; // N
+        if (xMax) dataset[2] = mWaterMap[x + 1,y]; // E
+        if (yMin) dataset[4] = mWaterMap[x,y - 1]; // S
+        if (xMin) dataset[6] = mWaterMap[x - 1,y]; // W
 
         // Check to see if the corner blocks ar ein the scene, if thye are load there data
-        if (xMax && yMax) dataset[1] = mWaterMap[x + 1][y + 1]; // NE
-        if (xMax && yMin) dataset[3] = mWaterMap[x + 1][y - 1]; // SE
-        if (xMin && yMin) dataset[5] = mWaterMap[x - 1][y - 1]; // SW
-        if (xMin && yMax) dataset[7] = mWaterMap[x - 1][y + 1]; // NW
+        if (xMax && yMax) dataset[1] = mWaterMap[x + 1,y + 1]; // NE
+        if (xMax && yMin) dataset[3] = mWaterMap[x + 1,y - 1]; // SE
+        if (xMin && yMin) dataset[5] = mWaterMap[x - 1,y - 1]; // SW
+        if (xMin && yMax) dataset[7] = mWaterMap[x - 1,y + 1]; // NW
 
         // We loop through 4 times for each corner block, if the side blocks surrounding the corner blocks are not water, then the corner cant be water
         for(int i = 0; i < 8; i+=2)
@@ -360,7 +356,7 @@ public class Environment : MonoBehaviour
             mMap[x] = new EnvironmentTile[Size.y];
             for ( int y = 0; y < Size.y; ++y)
             {
-                bool isWater = mWaterMap[x][y];
+                bool isWater = mWaterMap[x,y];
 
                 EnvironmentTile tile = null;
                 if(isWater)
@@ -380,7 +376,7 @@ public class Environment : MonoBehaviour
                             if (ya > Size.y - 1)
                                 break;
 
-                            if (!mWaterMap[xa][ya])
+                            if (!mWaterMap[xa,ya])
                             {
                                 foundLand = true;
                                 break;
