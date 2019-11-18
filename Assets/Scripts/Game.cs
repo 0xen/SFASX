@@ -295,10 +295,4 @@ public class Game : MonoBehaviour
         mMap.GenerateWorld(mCharacter);
     }
 
-    public void Exit()
-    {
-#if !UNITY_EDITOR
-        Application.Quit();
-#endif
-    }
 }
