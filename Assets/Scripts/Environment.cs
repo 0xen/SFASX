@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static WorldGenerator;
 
 public class Environment : MonoBehaviour
 {
@@ -26,8 +27,6 @@ public class Environment : MonoBehaviour
 
     private Dictionary<EnvironmentTile.TileType, WorldTiles> mTiles; 
 
-    [Header("World Generation")]
-    [SerializeField] private Vector2Int Size;
     [System.Serializable]
     public struct WaterTile
     {
@@ -49,14 +48,6 @@ public class Environment : MonoBehaviour
     [Header("Sea Settings")]
     [SerializeField] private int seaDeapth;
 
-    [Header("Island Settings")]
-    // How much with the noise be amplified
-    [SerializeField] private float islandFrequancy;
-    // How high each island should be amplified
-    [SerializeField] private float islandAmplitudeScalar;
-    // How high each island should be amplified
-    [SerializeField] private Vector2 islandWaveformOffset;
-
     [Header("Shading")]
     [SerializeField] private Shader TintShader;
 
@@ -71,6 +62,8 @@ public class Environment : MonoBehaviour
     private readonly Vector3 NodeSize = Vector3.one * 9.0f; 
     private const float TileSize = 10.0f;
     private const float TileHeight = 2.5f;
+
+    private GenerationPayload mMapGenerationPayload;
 
 
     public EnvironmentTile Start { get; private set; }
@@ -128,9 +121,9 @@ public class Environment : MonoBehaviour
         // Draw the environment nodes and connections if we have them
         if (mMap != null)
         {
-            for (int x = 0; x < Size.x; ++x)
+            for (int x = 0; x < mMapGenerationPayload.size.x; ++x)
             { 
-                for (int y = 0; y < Size.y; ++y)
+                for (int y = 0; y < mMapGenerationPayload.size.y; ++y)
                 {
                     if (mMap[x][y] == null)
                         continue;
@@ -171,74 +164,7 @@ public class Environment : MonoBehaviour
     private void GenerateWaterMap()
     {
         // Generate a water map that represents what tiles of the map should be water and what ones wont be
-        mWaterMap = new bool[Size.x,Size.y];
-        for (int x = 0; x < Size.x; ++x)
-        {
-
-            for (int y = 0; y < Size.y; ++y)
-            {
-                mWaterMap[x,y] = false;
-            }
-        }
-
-        {
-            // Generate water map
-            float perTileRadX = 3.14159f / Size.x;
-            float perTileRadY = 3.14159f / Size.y;
-            float[,] heightMap = new float[Size.x, Size.y];
-
-            for (int x = 0; x < Size.x; x++)
-            {
-                for (int y = 0; y < Size.y; y++)
-                {
-                    float xCoord = islandWaveformOffset.x + ((float)x / (float)Size.x) * islandFrequancy;
-                    float yCoord = islandWaveformOffset.y + ((float)y / (float)Size.y) * islandFrequancy;
-                    heightMap[x, y] = Mathf.PerlinNoise(xCoord, yCoord) + ((Mathf.Sin(perTileRadX * x) + Mathf.Sin(perTileRadY * y)) * islandAmplitudeScalar);
-                }
-            }
-            float average = 0.0f;
-            for (int x = 0; x < Size.x; x++)
-            {
-                for (int y = 0; y < Size.y; y++)
-                {
-                    average += heightMap[x, y];
-                }
-            }
-            average /= ((Size.x * Size.y) * 0.9f);
-            for (int x = 0; x < Size.x; x++)
-            {
-                for (int y = 0; y < Size.y; y++)
-                {
-                    mWaterMap[x,y] = heightMap[x, y] < average;
-                }
-            }
-        }
-       
-
-        int lastX = Size.y / 2;
-        int lastChange = 0;
-        // Generate a basic winding river in the center of the map
-        for (int y = 0; y < Size.y - 1; ++y)
-        {
-            int newChange = Random.Range(-1, 2);
-            int newX = lastX;
-            if (newChange + lastChange == 0) 
-            {
-                lastChange = 0;
-            }
-            else
-            {
-                lastChange = newChange;
-                newX += newChange;
-            }
-            if (lastX != newX)
-            {
-                mWaterMap[lastX,y] = true;
-            }
-            mWaterMap[newX,y] = true;
-             
-            lastX = newX;
-        }
+        mWaterMap = WorldGenerator.GenerateWaterMap(mMapGenerationPayload);
     }
 
     // check to see if we can find any tiles that match the current dataset and append them to the search results
@@ -293,8 +219,8 @@ public class Environment : MonoBehaviour
         // Check each axis to see if they are in range or not
         bool xMin = x > 0;
         bool yMin = y > 0;
-        bool xMax = x < Size.x - 1;
-        bool yMax = y < Size.y - 1;
+        bool xMax = x < mMapGenerationPayload.size.x - 1;
+        bool yMax = y < mMapGenerationPayload.size.y - 1;
 
         // If each NWEW tile is in the map, check to see if they are water
         if (yMax) dataset[0] = mWaterMap[x,y + 1]; // N
@@ -339,11 +265,14 @@ public class Environment : MonoBehaviour
     }
 
 
-    private void Generate(Character Character)
+    private void Generate()
     {
         // Setup the map of the environment tiles according to the specified width and height
         // Generate tiles from the list of accessible and inaccessible prefabs using a random
         // and the specified accessible percentage
+
+        Vector2Int Size = mMapGenerationPayload.size;
+
         mMap = new EnvironmentTile[Size.x][];
 
         int halfWidth = Size.x / 2;
@@ -488,9 +417,9 @@ public class Environment : MonoBehaviour
     private void SetupConnections()
     {
         // Currently we are only setting up connections between adjacnt nodes
-        for (int x = 0; x < Size.x; ++x)
+        for (int x = 0; x < mMapGenerationPayload.size.x; ++x)
         {
-            for (int y = 0; y < Size.y; ++y)
+            for (int y = 0; y < mMapGenerationPayload.size.y; ++y)
             {
                 SetupConnections(x, y);
             }
@@ -508,7 +437,7 @@ public class Environment : MonoBehaviour
                 tile.Connections.Add(mMap[x - 1][y]);
         }
 
-        if (x < Size.x - 1 && mMap[x + 1][y] != null)
+        if (x < mMapGenerationPayload.size.x - 1 && mMap[x + 1][y] != null)
         {
             if (mMap[x + 1][y].Type == EnvironmentTile.TileType.Accessible)
                 tile.Connections.Add(mMap[x + 1][y]);
@@ -520,7 +449,7 @@ public class Environment : MonoBehaviour
                 tile.Connections.Add(mMap[x][y - 1]);
         }
 
-        if (y < Size.y - 1 && mMap[x][y + 1] != null)
+        if (y < mMapGenerationPayload.size.y - 1 && mMap[x][y + 1] != null)
         {
             if (mMap[x][y + 1].Type == EnvironmentTile.TileType.Accessible)
                 tile.Connections.Add(mMap[x][y + 1]);
@@ -548,20 +477,29 @@ public class Environment : MonoBehaviour
         return Vector3.Distance(a.Position, b.Position);
     }
 
-    public void GenerateWorld(Character Character)
+    public void GenerateWorld(Character Character, GenerationPayload generationPayload)
     {
+        mMapGenerationPayload = generationPayload;
         GenerateWaterMap();
-        Generate(Character);
+        Generate();
         SetupConnections();
+        MovePlayerToStart(Character);
+    }
+
+    private void MovePlayerToStart(Character Character)
+    {
+        Character.transform.position = Start.Position;
+        Character.transform.rotation = Quaternion.identity;
+        Character.CurrentPosition = Start;
     }
 
     public void CleanUpWorld()
     {
         if (mMap != null)
         {
-            for (int x = 0; x < Size.x; ++x)
+            for (int x = 0; x < mMapGenerationPayload.size.x; ++x)
             {
-                for (int y = 0; y < Size.y; ++y)
+                for (int y = 0; y < mMapGenerationPayload.size.y; ++y)
                 {
                     Destroy(mMap[x][y].gameObject);
                 }
@@ -726,11 +664,11 @@ public class Environment : MonoBehaviour
         SetupConnections(current.PositionTile.x, current.PositionTile.y);
         if (current.PositionTile.x > 0)
             SetupConnections(current.PositionTile.x - 1, current.PositionTile.y);
-        if (current.PositionTile.x < Size.x)
+        if (current.PositionTile.x < mMapGenerationPayload.size.x)
             SetupConnections(current.PositionTile.x + 1, current.PositionTile.y);
         if (current.PositionTile.y > 0)
             SetupConnections(current.PositionTile.x, current.PositionTile.y - 1);
-        if (current.PositionTile.y < Size.y)
+        if (current.PositionTile.y < mMapGenerationPayload.size.y)
             SetupConnections(current.PositionTile.x, current.PositionTile.y + 1);
 
 
