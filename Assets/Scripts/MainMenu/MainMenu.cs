@@ -14,6 +14,14 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Canvas MainMenuInterface = null;
     [SerializeField] private Environment BackgroundEnviroment = null;
 
+    [SerializeField] private float IslandStartRotation;
+    [SerializeField] private float IslandRotationSpeed;
+
+    [SerializeField] private float IslandAmplitude;
+    [SerializeField] private float IslandFrequancy;
+    [SerializeField] private float IslandWaterHeight;
+    [SerializeField] private Vector2Int IslandSize;
+
     private GenerationPayload BackgroundGenerationPayload;
 
     private Character mCharacter;
@@ -26,17 +34,20 @@ public class MainMenu : MonoBehaviour
         mCharacter.transform.rotation = CharacterStart.rotation;
         MenuEnabled = true;
         BackgroundGenerationPayload = new GenerationPayload();
-        BackgroundGenerationPayload.amplitude = 4.142858f;
-        BackgroundGenerationPayload.frequancy = 10.0f;
-        BackgroundGenerationPayload.waterHeight = 1.435714f;
-        BackgroundGenerationPayload.size = new Vector2Int(50, 50);
+        BackgroundGenerationPayload.amplitude = IslandAmplitude;
+        BackgroundGenerationPayload.frequancy = IslandFrequancy;
+        BackgroundGenerationPayload.waterHeight = IslandWaterHeight;
+        BackgroundGenerationPayload.size = IslandSize;
+
         BackgroundEnviroment.GenerateWorld(mCharacter, BackgroundGenerationPayload);
+        BackgroundEnviroment.transform.RotateAround(BackgroundEnviroment.transform.position, transform.up, IslandStartRotation);
     }
 
     // Update is called once per frame
     void Update()
     {
         MainMenuInterface.enabled = MenuEnabled;
+        BackgroundEnviroment.transform.RotateAround(BackgroundEnviroment.transform.position, transform.up, Time.deltaTime * IslandRotationSpeed);
     }
 
     public void NewGame()

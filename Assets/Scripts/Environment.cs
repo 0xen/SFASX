@@ -491,6 +491,7 @@ public class Environment : MonoBehaviour
         Character.transform.position = Start.Position;
         Character.transform.rotation = Quaternion.identity;
         Character.CurrentPosition = Start;
+        Character.transform.parent = this.transform;
     }
 
     public void CleanUpWorld()
