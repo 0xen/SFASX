@@ -28,6 +28,18 @@ public class Game : MonoBehaviour
     [SerializeField] private Color MidDayLightColor = Color.black;
     [SerializeField] private Color EveningLightColor = Color.black;
 
+    /*
+    [SerializeField]
+    public struct DayColor
+    {
+        public float timeLength;
+        public float brightness;
+        public Color color;
+    }
+
+    [SerializeField] private DayColor[] DaylightScheduler;*/
+
+
     private EnvironmentTile mCurrentHoveredTile = null;
 
     private RaycastHit[] mRaycastHits;
