@@ -22,22 +22,16 @@ public class Game : MonoBehaviour
     [SerializeField] private Light DirectionalLight = null;
     [SerializeField] private float DayLength = 120;
     private float mDayTime;
-    [SerializeField] private float SunsetSunriseBrightness = 0.4f;
-    [SerializeField] private float MidDayBrightness = 0.8f;
-    [SerializeField] private Color MorningLightColor = Color.black;
-    [SerializeField] private Color MidDayLightColor = Color.black;
-    [SerializeField] private Color EveningLightColor = Color.black;
 
-    /*
-    [SerializeField]
+    
+    [System.Serializable]
     public struct DayColor
     {
-        public float timeLength;
         public float brightness;
         public Color color;
     }
 
-    [SerializeField] private DayColor[] DaylightScheduler;*/
+    public DayColor[] DaylightScheduler;
 
 
     private EnvironmentTile mCurrentHoveredTile = null;
@@ -75,31 +69,34 @@ public class Game : MonoBehaviour
         }
 
         {
+
+
+
             // Calculate the time of day in a range of 0-1
             float timeRed = mDayTime / DayLength;
             float lightDelta = Mathf.Lerp(0, 360.0f, timeRed);
             // Rotate the light from 0-360
             DirectionalLight.transform.eulerAngles = new Vector3(lightDelta, 90.0f, 0.0f);
 
-            // If we are in the morning, lerp between morning -> Mid day color
-            if (timeRed < 0.125f)
-            {
-                float lerp = timeRed / 0.125f;
-                Color lightColor = Color.Lerp(MorningLightColor, MidDayLightColor, lerp);
-                DirectionalLight.color = lightColor;
-                Camera.main.backgroundColor = lightColor;
-                DirectionalLight.intensity = Mathf.Lerp(SunsetSunriseBrightness, MidDayBrightness, lerp);
-            }
-            else // If we are going into evening, lerp between mid day and evening color
-            if (timeRed > 0.35f)
-            {
-                float lerp = (timeRed - 0.35f) / 0.225f;
-                Color lightColor = Color.Lerp(MidDayLightColor, EveningLightColor, lerp);
-                DirectionalLight.color = lightColor;
-                Camera.main.backgroundColor = lightColor;
-                DirectionalLight.intensity = Mathf.Lerp(MidDayBrightness, SunsetSunriseBrightness, lerp);
-            }
 
+            DayColor start;
+            DayColor end;
+            
+            float dayColorFrackRange = 1.0f / DaylightScheduler.Length;
+
+            int startIndex = Mathf.FloorToInt(mDayTime / (DayLength / DaylightScheduler.Length));
+
+
+            start = DaylightScheduler[startIndex];
+            end = DaylightScheduler[(startIndex + 1) % DaylightScheduler.Length];
+
+
+            float temp = (timeRed - (dayColorFrackRange * startIndex)) / dayColorFrackRange;
+
+            Color lightColor = Color.Lerp(start.color, end.color, temp);
+            DirectionalLight.color = lightColor;
+            Camera.main.backgroundColor = lightColor;
+            DirectionalLight.intensity = Mathf.Lerp(start.brightness, end.brightness, temp);
 
 
         }
