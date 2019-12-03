@@ -194,6 +194,14 @@ public class Game : MonoBehaviour
                 {
                     ActionSelector.actions.Add(component);
                 }
+                if(mCharacter.GetHandItem()!=null)
+                {
+                    Item item = mCharacter.GetHandItem();
+                    foreach (var component in item.GetComponents<TileAction>())
+                    {
+                        ActionSelector.actions.Add(component);
+                    }
+                }
             }
         }
     }

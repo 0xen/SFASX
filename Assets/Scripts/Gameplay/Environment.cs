@@ -6,6 +6,8 @@ using static WorldGenerator;
 
 public class Environment : MonoBehaviour
 {
+    public static Environment instance;
+
     [System.Serializable]
     public struct TileInstance
     {
@@ -70,6 +72,7 @@ public class Environment : MonoBehaviour
 
     private void Awake()
     {
+        instance = this;
         mAll = new List<EnvironmentTile>();
         mToBeTested = new List<EnvironmentTile>();
         mTiles = new Dictionary<EnvironmentTile.TileType, WorldTiles>();
@@ -384,12 +387,7 @@ public class Environment : MonoBehaviour
                 {
                     m.shader = TintShader;
                 }
-
-                // attach the map to all the tile action based components on the tile
-                foreach (var component in tile.GetComponents<TileAction>())
-                {
-                    component.Map = this;
-                }
+               
 
                 tile.PositionTile = new Vector2Int(x, y);
 
@@ -651,11 +649,6 @@ public class Environment : MonoBehaviour
         foreach (Material m in tile.GetComponent<MeshRenderer>().materials)
         {
             m.shader = TintShader;
-        }
-        // attach the map to all the tile action based components on the tile
-        foreach (var component in tile.GetComponents<TileAction>())
-        {
-            component.Map = this;
         }
 
         // Add the tile to the global map

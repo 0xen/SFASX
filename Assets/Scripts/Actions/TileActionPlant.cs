@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TileActionFish : TileAction
+public class TileActionPlant : TileAction
 {
+    public float PlantTime = 0.0f;
 
-    public TileActionFish() : base("Fish")
+    public EnvironmentTile[] replacmentTile;
+
+    public TileActionPlant() : base("Plant")
     {
 
     }
@@ -19,9 +22,6 @@ public class TileActionFish : TileAction
 
     public override void Run(Entity entity, EnvironmentTile tile)
     {
-
-
-
 
     }
 }

@@ -15,7 +15,12 @@ public class TileActionWalk : TileAction
     {
         EnvironmentTile tile = this.GetComponent<EnvironmentTile>();
         if (tile == null) return;
-        List<EnvironmentTile> route = Map.Solve(entity.CurrentPosition, tile);
+        Run(entity, tile);
+    }
+
+    public override void Run(Entity entity, EnvironmentTile tile)
+    {
+        List<EnvironmentTile> route = Environment.instance.Solve(entity.CurrentPosition, tile);
         entity.StopAllCoroutines();
         entity.StartCoroutine(DoGoTo(entity, SingleNodeMoveTime, route));
     }

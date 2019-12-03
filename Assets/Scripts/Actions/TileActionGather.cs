@@ -8,6 +8,15 @@ public class TileActionGather : TileAction
 
     public EnvironmentTile[] replacmentTile;
 
+    [System.Serializable]
+    public struct Pickup
+    {
+        public Item item;
+        public uint count;
+    }
+
+    public Pickup[] pickups;
+
     public TileActionGather() : base("Gather")
     {
 
@@ -17,16 +26,21 @@ public class TileActionGather : TileAction
     {
         EnvironmentTile tile = this.GetComponent<EnvironmentTile>();
         if (tile == null) return;
+        Run(entity, tile);
+    }
+
+    public override void Run(Entity entity, EnvironmentTile tile)
+    {
 
 
 
-        List<EnvironmentTile> route = Map.SolveNeighbour(entity.CurrentPosition, tile);
-        if(route==null)
+        List<EnvironmentTile> route = Environment.instance.SolveNeighbour(entity.CurrentPosition, tile);
+        if (route == null)
         {
             entity.StopAllCoroutines();
             entity.StartCoroutine(DoGather(entity, tile));
         }
-        else if(route.Count>0)
+        else if (route.Count > 0)
         {
             entity.StopAllCoroutines();
             entity.StartCoroutine(DoWalkAndGather(entity, route, tile));
@@ -47,12 +61,18 @@ public class TileActionGather : TileAction
 
         yield return new WaitForSeconds(GatherTime);
         Debug.Log("Time To Gather");
-        GameObject newObject = Map.ReplaceEnviromentTile(tile, replacmentTile[Random.Range(0, replacmentTile.Length)]);
+        GameObject newObject = Environment.instance.ReplaceEnviromentTile(tile, replacmentTile[Random.Range(0, replacmentTile.Length)]);
 
-        if (!entity.AddToInventory(new Item("Test")))
+
+        foreach(Pickup pickup in pickups)
         {
-            // Drop item on ground
+            if (!entity.AddToInventory(pickup.item, pickup.count))
+            {
+                // Drop item on ground
+            }
         }
+
+
 
         if(newObject.GetComponent<TileActionGather>())
         {

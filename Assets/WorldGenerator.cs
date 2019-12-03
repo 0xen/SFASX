@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class WorldGenerator : MonoBehaviour
 {
-
     [SerializeField] private Vector2Int PreviewSize;
     [SerializeField] private RawImage Image;
     public class GenerationPayload
