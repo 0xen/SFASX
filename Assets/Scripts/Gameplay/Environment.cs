@@ -53,6 +53,10 @@ public class Environment : MonoBehaviour
     [Header("Shading")]
     [SerializeField] private Shader TintShader;
 
+    [Header("UI")]
+    [SerializeField] private GameObject ItemPickupUIParent;
+    [SerializeField] private ItemPickupUi ItemPickupUIInstance;
+
 
     private EnvironmentTile[][] mMap;
     private bool[,] mWaterMap;
@@ -69,6 +73,19 @@ public class Environment : MonoBehaviour
 
 
     public EnvironmentTile Start { get; private set; }
+
+    public void AddItemToPickupUI(string name, uint count, Sprite sprite)
+    {
+        ItemPickupUi ui = GameObject.Instantiate(ItemPickupUIInstance);
+
+        ui.transform.parent = ItemPickupUIParent.transform;
+        ui.SetupUI("+" + count + " " + name, sprite);
+
+        RectTransform recTransform = ui.GetComponent<RectTransform>();
+        recTransform.localScale = new Vector3(1, 1, 1);
+        recTransform.localEulerAngles = new Vector3(0, 0, 0);
+        recTransform.localPosition = new Vector3(recTransform.position.x, recTransform.position.y, 0);
+    }
 
     private void Awake()
     {

@@ -122,11 +122,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7d0e301717a5334fa4aed42e97f383c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Map: {fileID: 0}
   actionName: Gather
   GatherTime: 1.5
   replacmentTile:
   - {fileID: 5225831561217036612, guid: 068b00b1b45e14e49a33d5ab4dc954a2, type: 3}
+  pickups:
+  - item: {fileID: 3987617966587672014, guid: 355d1f2fdd464404c872e0f576dc5f91, type: 3}
+    count: 10
 --- !u!1001 &7768566853864236779
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -129,6 +129,8 @@ MonoBehaviour:
   pickups:
   - item: {fileID: 5318094462226911501, guid: 0e9c298ae323a9948a3575861d17197b, type: 3}
     count: 1
+  - item: {fileID: 4736621118778930762, guid: 395ee2ddd0392f34a84501dc3e6a5d6b, type: 3}
+    count: 25
 --- !u!1001 &8879202610280605618
 PrefabInstance:
   m_ObjectHideFlags: 0

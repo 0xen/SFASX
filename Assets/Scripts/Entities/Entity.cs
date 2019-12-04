@@ -16,20 +16,27 @@ public class Entity : MonoBehaviour
         Inventory = new List<Item>();
     }
 
+    private void Update()
+    {
+
+    }
+
     // Add a item to the entities inventory, if there is no space, a failed bool will be returned
     public bool AddToInventory(Item item, uint count)
     {
-
-        for(int i = 0; i < Inventory.Count; i++)
+        for (int i = 0; i < Inventory.Count; i++)
         {
             if(Inventory[i] == item)
             {
                 Inventory[i].count += count;
+                Environment.instance.AddItemToPickupUI(item.itemName, count, item.itemSprite);
+                return true;
             }
         }
         if (Inventory.Count >= InventorySize) return false;
         item.count = count;
         Inventory.Add(item);
+        Environment.instance.AddItemToPickupUI(item.itemName, count, item.itemSprite);
         Debug.Log("Item added to inv");
         return true;
     }
