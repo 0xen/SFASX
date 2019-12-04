@@ -14,4 +14,8 @@ public abstract class TileAction : MonoBehaviour
         actionName = _name;
     }
     public abstract void Run(Entity entity);
+    public virtual bool CanPreformAction(Entity entity)
+    {
+        return true;
+    }
 }

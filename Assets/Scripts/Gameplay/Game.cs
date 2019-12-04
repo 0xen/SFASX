@@ -218,7 +218,10 @@ public class Game : MonoBehaviour
                     foreach (var component in item.GetComponents<TileAction>())
                     {
                         component.environmentTile = tile;
-                        ActionSelector.actions.Add(component);
+
+                        if(component.CanPreformAction(mCharacter))
+                            ActionSelector.actions.Add(component);
+
                     }
                 }
             }

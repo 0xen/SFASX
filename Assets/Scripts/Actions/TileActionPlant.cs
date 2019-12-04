@@ -46,6 +46,10 @@ public class TileActionPlant : TileAction
         Environment.instance.ReplaceEnviromentTile(tile, replacmentTile[Random.Range(0, replacmentTile.Length)]);
 
     }
+    public override bool CanPreformAction(Entity entity)
+    {
+        return environmentTile.Type == EnvironmentTile.TileType.Accessible;
+    }
 
 
 

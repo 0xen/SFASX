@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 9098813209801815025}
   - component: {fileID: 3276917399493119752}
   - component: {fileID: 6327076274816214487}
+  - component: {fileID: 4963255186011166771}
+  - component: {fileID: 5140302086389485474}
   m_Layer: 0
   m_Name: Rock6
   m_TagString: Untagged
@@ -93,7 +95,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b81c1a74f97fbca4a81350fa9f3bdddb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Type: 1
+  Visited: 0
+  Type: 2
+--- !u!114 &4963255186011166771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3838515007625608148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7d0e301717a5334fa4aed42e97f383c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  environmentTile: {fileID: 0}
+  actionName: Gather
+  GatherTime: 4
+  replacmentTile:
+  - {fileID: 5225831561217036612, guid: 068b00b1b45e14e49a33d5ab4dc954a2, type: 3}
+  pickups:
+  - item: {fileID: 4533941966492324244, guid: a94cf1252f13fc84bad08b642f5d9cb0, type: 3}
+    count: 5
+--- !u!65 &5140302086389485474
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3838515007625608148}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10, y: 2.5, z: 10}
+  m_Center: {x: 5, y: 1.25, z: 5}
 --- !u!1001 &1909823762737806658
 PrefabInstance:
   m_ObjectHideFlags: 0

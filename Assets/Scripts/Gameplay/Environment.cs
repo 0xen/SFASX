@@ -48,7 +48,7 @@ public class Environment : MonoBehaviour
     }
 
     [Header("Sea Settings")]
-    [SerializeField] private int seaDeapth;
+    [SerializeField] public int seaDeapth;
 
     [Header("Shading")]
     [SerializeField] private Shader TintShader;
@@ -58,8 +58,8 @@ public class Environment : MonoBehaviour
     [SerializeField] private ItemPickupUi ItemPickupUIInstance;
 
 
-    private EnvironmentTile[][] mMap;
-    private bool[,] mWaterMap;
+    public EnvironmentTile[][] mMap;
+    public bool[,] mWaterMap;
 
     private List<EnvironmentTile> mAll;
     private List<EnvironmentTile> mToBeTested;
@@ -69,7 +69,7 @@ public class Environment : MonoBehaviour
     private const float TileSize = 10.0f;
     private const float TileHeight = 2.5f;
 
-    private GenerationPayload mMapGenerationPayload;
+    public GenerationPayload mMapGenerationPayload;
 
 
     public EnvironmentTile Start { get; private set; }
@@ -285,6 +285,145 @@ public class Environment : MonoBehaviour
     }
 
 
+
+    public void GenerateWaterTile()
+    {
+
+        
+    }
+
+    public Vector3 GetRawPosition(int x, int z)
+    {
+        int halfWidth = mMapGenerationPayload.size.x / 2;
+        int halfHeight = mMapGenerationPayload.size.y / 2;
+        Vector3 position = new Vector3(-(halfWidth * TileSize), 0.0f, -(halfHeight * TileSize));
+        position.x += x * TileSize;
+        position.z += z * TileSize;
+        return position;
+    }
+
+
+    public void AddWaterTile(Vector3 position,ref EnvironmentTile tile, Vector2Int mapSize, int x, int y)
+    {
+
+        bool foundLand = false;
+        for (int xa = x - seaDeapth; !foundLand && xa < x + seaDeapth + 1; xa++)
+        {
+            if (xa < 0)
+                continue;
+            if (xa > mapSize.x - 1)
+                break;
+
+            for (int ya = y - seaDeapth; !foundLand && ya < y + seaDeapth + 1; ya++)
+            {
+                if (ya < 0)
+                    continue;
+                if (ya > mapSize.y - 1)
+                    break;
+
+                if (!mWaterMap[xa, ya])
+                {
+                    foundLand = true;
+                    break;
+                }
+            }
+        }
+        if (!foundLand)
+        {
+            position.z += TileSize;
+            return;
+        }
+
+
+
+        int rotation = 0;
+        EnvironmentTile prefab = null;
+        // Return what water tile fits within the provided world requirment
+        if (GetWaterTile(x, y, ref prefab, ref rotation))
+        {
+            // Calculate the posiiton and rotation of the water tile in the world
+            Quaternion q = Quaternion.Euler(0, 90 * rotation, 0);
+            Vector3 positionOffset = new Vector3();
+
+            positionOffset.x += (rotation > 1 ? 10.0f : 0);
+            positionOffset.z += (rotation >= 1 && rotation < 3 ? 10.0f : 0);
+
+            tile = Instantiate(prefab, position + positionOffset, q, transform);
+            tile.Type = EnvironmentTile.TileType.Inaccessible;
+        }
+        else // Output a error if we cant find the required tile
+        {
+            Debug.LogError("Could not find water tile to fit senario");
+        }
+
+
+        FinalizeTile(ref tile, x, y, position);
+
+    }
+    public void AddLandTile(Vector3 position, ref EnvironmentTile tile, Vector2Int mapSize, int x, int y)
+    {
+
+        // Calculate the random chance of choosing x tile group
+        float randomChoice = Random.Range(0.0f, 100.0f);
+        float runningTotal = 0.0f;
+        // Provide a default tile group incase it falls through
+        WorldTiles worldTilesChoice = mTiles[EnvironmentTile.TileType.Accessible];
+
+        foreach (WorldTiles worldTiles in mTiles.Values)
+        {
+            // If the current tile group falls within the bounds of the random number, select the tile group
+            if (runningTotal + worldTiles.spawnChance > randomChoice)
+            {
+                worldTilesChoice = worldTiles;
+                break;
+            }
+            runningTotal += worldTiles.spawnChance;
+        }
+
+        EnvironmentTile prefab = null;
+        // Calculate the random chance of choosing x tile
+        randomChoice = Random.Range(0.0f, 100.0f);
+        runningTotal = 0;
+        foreach (TileInstance tileInstance in worldTilesChoice.tiles)
+        {
+            // If the current tile group falls within the bounds of the random number, select the tile group
+            if (runningTotal + tileInstance.spawnChance > randomChoice)
+            {
+                prefab = tileInstance.tile;
+                break;
+            }
+            runningTotal += tileInstance.spawnChance;
+        }
+
+        tile = Instantiate(prefab, position, Quaternion.identity, transform);
+        tile.Type = worldTilesChoice.type;
+
+
+        FinalizeTile(ref tile, x, y, position);
+    }
+
+    private void FinalizeTile(ref EnvironmentTile tile, int x, int y, Vector3 position)
+    {
+        // Attach the tint shader to all the tile blocks
+        foreach (Material m in tile.GetComponent<MeshRenderer>().materials)
+        {
+            m.shader = TintShader;
+        }
+
+
+        tile.PositionTile = new Vector2Int(x, y);
+
+        tile.Position = new Vector3(position.x + (TileSize / 2), TileHeight, position.z + (TileSize / 2));
+
+        tile.gameObject.name = string.Format("Tile({0},{1})", x, y);
+
+        if (mMap[x][y] != null) Destroy(mMap[x][y].gameObject);
+
+        mMap[x][y] = tile;
+        mAll.Add(tile);
+
+    }
+
     private void Generate()
     {
         // Setup the map of the environment tiles according to the specified width and height
@@ -295,9 +434,6 @@ public class Environment : MonoBehaviour
 
         mMap = new EnvironmentTile[Size.x][];
 
-        int halfWidth = Size.x / 2;
-        int halfHeight = Size.y / 2;
-        Vector3 position = new Vector3( -(halfWidth * TileSize), 0.0f, -(halfHeight * TileSize) );
         bool start = true;
 
         for ( int x = 0; x < Size.x; ++x)
@@ -308,124 +444,32 @@ public class Environment : MonoBehaviour
                 bool isWater = mWaterMap[x,y];
 
                 EnvironmentTile tile = null;
-                if(isWater)
+
+                Vector3 position = GetRawPosition(x, y);
+
+                if (isWater)
                 {
-                    bool foundLand = false;
-                    for (int xa = x - seaDeapth; !foundLand && xa < x + seaDeapth + 1; xa++)
-                    {
-                        if (xa < 0)
-                            continue;
-                        if (xa > Size.x - 1)
-                            break;
-
-                        for (int ya = y - seaDeapth; !foundLand && ya < y + seaDeapth + 1; ya++)
-                        {
-                            if (ya < 0)
-                                continue;
-                            if (ya > Size.y - 1)
-                                break;
-
-                            if (!mWaterMap[xa,ya])
-                            {
-                                foundLand = true;
-                                break;
-                            }
-                        }
-                    }
-                    if (!foundLand)
-                    {
-                        position.z += TileSize;
-                        continue;
-                    }
-
-
-
-                    int rotation = 0;
-                    EnvironmentTile prefab = null;
-                    // Return what water tile fits within the provided world requirment
-                    if (GetWaterTile(x, y, ref prefab, ref rotation)) 
-                    {
-                        // Calculate the posiiton and rotation of the water tile in the world
-                        Quaternion q = Quaternion.Euler(0, 90 * rotation, 0);
-                        Vector3 positionOffset = new Vector3();
-
-                        positionOffset.x += (rotation > 1 ? 10.0f : 0);
-                        positionOffset.z += (rotation >= 1 && rotation < 3 ? 10.0f : 0);
-
-                        tile = Instantiate(prefab, position + positionOffset, q, transform);
-                        tile.Type = EnvironmentTile.TileType.Inaccessible;
-                    }
-                    else // Output a error if we cant find the required tile
-                    {
-                        Debug.LogError("Could not find water tile to fit senario");
-                    }
+                    AddWaterTile(position, ref tile, mMapGenerationPayload.size, x, y);
                 }
                 else
                 {
-                    // Calculate the random chance of choosing x tile group
-                    float randomChoice = Random.Range(0.0f, 100.0f);
-                    float runningTotal = 0.0f;
-                    // Provide a default tile group incase it falls through
-                    WorldTiles worldTilesChoice = mTiles[EnvironmentTile.TileType.Accessible];
+
+                    AddLandTile(position, ref tile, mMapGenerationPayload.size, x, y);
+
                     
-                    foreach(WorldTiles worldTiles in mTiles.Values)
-                    {
-                        // If the current tile group falls within the bounds of the random number, select the tile group
-                        if (runningTotal + worldTiles.spawnChance > randomChoice)
-                        {
-                            worldTilesChoice = worldTiles;
-                            break;
-                        }
-                        runningTotal += worldTiles.spawnChance;
-                    }
-
-                    EnvironmentTile prefab = null;
-                    // Calculate the random chance of choosing x tile
-                    randomChoice = Random.Range(0.0f, 100.0f);
-                    runningTotal = 0;
-                    foreach (TileInstance tileInstance in worldTilesChoice.tiles)
-                    {
-                        // If the current tile group falls within the bounds of the random number, select the tile group
-                        if (runningTotal + tileInstance.spawnChance > randomChoice)
-                        {
-                            prefab = tileInstance.tile;
-                            break;
-                        }
-                        runningTotal += tileInstance.spawnChance;
-                    }
-
-                    tile = Instantiate(prefab, position, Quaternion.identity, transform);
-                    tile.Type = worldTilesChoice.type;
                 }
+                if (tile == null) continue;
 
-
-                // Attach the tint shader to all the tile blocks
-                foreach (Material m in tile.GetComponent<MeshRenderer>().materials)
-                {
-                    m.shader = TintShader;
-                }
-               
-
-                tile.PositionTile = new Vector2Int(x, y);
-
-                tile.Position = new Vector3( position.x + (TileSize / 2), TileHeight, position.z + (TileSize / 2));
-
-                tile.gameObject.name = string.Format("Tile({0},{1})", x, y);
-                mMap[x][y] = tile;
-                mAll.Add(tile);
 
                 // Choose the first, most south available tile that is accessible to the user to walk on
-                if(start && tile.Type == EnvironmentTile.TileType.Accessible)
+                if (start && tile.Type == EnvironmentTile.TileType.Accessible)
                 {
                     Start = tile;
                     start = false;
                 }
 
-                position.z += TileSize;
-            }
 
-            position.x += TileSize;
-            position.z = -(halfHeight * TileSize);
+            }
         }
     }
 
@@ -441,7 +485,7 @@ public class Environment : MonoBehaviour
         }
     }
 
-    private void SetupConnections(int x, int y)
+    public void SetupConnections(int x, int y)
     {
         if (mMap[x][y] == null) return;
         EnvironmentTile tile = mMap[x][y];
