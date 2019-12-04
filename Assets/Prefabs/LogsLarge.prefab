@@ -128,7 +128,7 @@ MonoBehaviour:
   - {fileID: 5225831561217036612, guid: 068b00b1b45e14e49a33d5ab4dc954a2, type: 3}
   pickups:
   - item: {fileID: 4736621118778930762, guid: 395ee2ddd0392f34a84501dc3e6a5d6b, type: 3}
-    count: 50
+    count: 10
 --- !u!1001 &2161860736337687057
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -136,11 +136,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7692147329787848854}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: dd7d8a30413e7834c8b3b89fedf7e2a7,
-        type: 3}
-      propertyPath: m_Name
-      value: logs_stackLarge
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: dd7d8a30413e7834c8b3b89fedf7e2a7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -195,6 +190,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: dd7d8a30413e7834c8b3b89fedf7e2a7,
+        type: 3}
+      propertyPath: m_Name
+      value: logs_stackLarge
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dd7d8a30413e7834c8b3b89fedf7e2a7, type: 3}

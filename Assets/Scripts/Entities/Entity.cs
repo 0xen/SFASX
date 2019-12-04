@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Entity : MonoBehaviour
+public abstract class Entity : MonoBehaviour
 {
 
     public EnvironmentTile CurrentPosition { get; set; }
@@ -29,6 +29,7 @@ public class Entity : MonoBehaviour
             if(Inventory[i] == item)
             {
                 Inventory[i].count += count;
+                InventoryChange();
                 Environment.instance.AddItemToPickupUI(item.itemName, count, item.itemSprite);
                 return true;
             }
@@ -36,6 +37,7 @@ public class Entity : MonoBehaviour
         if (Inventory.Count >= InventorySize) return false;
         item.count = count;
         Inventory.Add(item);
+        InventoryChange();
         Environment.instance.AddItemToPickupUI(item.itemName, count, item.itemSprite);
         Debug.Log("Item added to inv");
         return true;
@@ -51,4 +53,6 @@ public class Entity : MonoBehaviour
         if (Inventory.Count == 0) return null;
         return Inventory[0];
     }
+
+    public abstract void InventoryChange();
 }

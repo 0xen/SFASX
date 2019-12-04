@@ -46,7 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionName: Plant
   PlantTime: 2
-  replacmentTile: []
+  replacmentTile:
+  - {fileID: 7692651029497598846, guid: 74114c185bfa69341b9499b70875ab94, type: 3}
 --- !u!114 &5318094462226911501
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class TileAction : MonoBehaviour
 {
+    public EnvironmentTile environmentTile;
 
     // Made public so it is accessible by the game controller
     public string actionName;
@@ -13,5 +14,4 @@ public abstract class TileAction : MonoBehaviour
         actionName = _name;
     }
     public abstract void Run(Entity entity);
-    public abstract void Run(Entity entity, EnvironmentTile tile);
 }

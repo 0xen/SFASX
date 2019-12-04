@@ -11,15 +11,9 @@ public class TileActionBuild : TileAction
     }
     public override void Run(Entity entity)
     {
-        EnvironmentTile tile = this.GetComponent<EnvironmentTile>();
-        if (tile == null) return;
-        Run(entity, tile);
-    }
+        if (environmentTile == null) return;
 
-    public override void Run(Entity entity, EnvironmentTile tile)
-    {
-
-        List<EnvironmentTile> route = Environment.instance.SolveNeighbour(entity.CurrentPosition, tile);
+        List<EnvironmentTile> route = Environment.instance.SolveNeighbour(entity.CurrentPosition, environmentTile);
         if (route == null)
         {
             entity.StopAllCoroutines();

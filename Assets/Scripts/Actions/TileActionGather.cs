@@ -24,26 +24,18 @@ public class TileActionGather : TileAction
 
     public override void Run(Entity entity)
     {
-        EnvironmentTile tile = this.GetComponent<EnvironmentTile>();
-        if (tile == null) return;
-        Run(entity, tile);
-    }
+        if (environmentTile == null) return;
 
-    public override void Run(Entity entity, EnvironmentTile tile)
-    {
-
-
-
-        List<EnvironmentTile> route = Environment.instance.SolveNeighbour(entity.CurrentPosition, tile);
+        List<EnvironmentTile> route = Environment.instance.SolveNeighbour(entity.CurrentPosition, environmentTile);
         if (route == null)
         {
             entity.StopAllCoroutines();
-            entity.StartCoroutine(DoGather(entity, tile));
+            entity.StartCoroutine(DoGather(entity, environmentTile));
         }
         else if (route.Count > 0)
         {
             entity.StopAllCoroutines();
-            entity.StartCoroutine(DoWalkAndGather(entity, route, tile));
+            entity.StartCoroutine(DoWalkAndGather(entity, route, environmentTile));
         }
     }
 

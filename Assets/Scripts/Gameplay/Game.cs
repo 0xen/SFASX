@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 using static WorldGenerator;
 
 public class Game : MonoBehaviour
@@ -18,12 +18,19 @@ public class Game : MonoBehaviour
     // How long a mouse button needs to be held before a click menu should open
     [SerializeField] private float MinMenuOpenTime = 0.6f;
 
-
     [SerializeField] private Light DirectionalLight = null;
     [SerializeField] private float DayLength = 120;
+
+
+    [SerializeField] private GameObject UiItemMenuBar;
+    [SerializeField] private ItemSlotController UiItemMenuBarItem;
+    [SerializeField] private uint UiItemMenuBarItemCount;
+    private ItemSlotController[] mUiItemBar;
+
+
     private float mDayTime;
 
-    
+
     [System.Serializable]
     public struct DayColor
     {
@@ -51,6 +58,16 @@ public class Game : MonoBehaviour
         mRaycastHits = new RaycastHit[NumberOfRaycastHits];
         mMap = GetComponentInChildren<Environment>();
         mCharacter = Instantiate(Character, transform);
+
+        mUiItemBar = new ItemSlotController[UiItemMenuBarItemCount];
+
+        for (int i = 0; i < UiItemMenuBarItemCount; i++)
+        {
+            mUiItemBar[i] = GameObject.Instantiate(UiItemMenuBarItem);
+            mUiItemBar[i].transform.parent = UiItemMenuBar.transform;
+        }
+
+        mCharacter.SetUIItemBar(mUiItemBar);
         CameraController.Character = mCharacter;
         mMouseHoldTime = 0.0f;
         mInterfaceState = 0;
@@ -192,6 +209,7 @@ public class Game : MonoBehaviour
             {
                 foreach (var component in tile.GetComponents<TileAction>())
                 {
+                    component.environmentTile = tile;
                     ActionSelector.actions.Add(component);
                 }
                 if(mCharacter.GetHandItem()!=null)
@@ -199,6 +217,7 @@ public class Game : MonoBehaviour
                     Item item = mCharacter.GetHandItem();
                     foreach (var component in item.GetComponents<TileAction>())
                     {
+                        component.environmentTile = tile;
                         ActionSelector.actions.Add(component);
                     }
                 }
