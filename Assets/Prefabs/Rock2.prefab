@@ -115,7 +115,7 @@ MonoBehaviour:
   replacmentTile:
   - {fileID: 5225831561217036612, guid: 068b00b1b45e14e49a33d5ab4dc954a2, type: 3}
   pickups:
-  - item: {fileID: 4533941966492324244, guid: a94cf1252f13fc84bad08b642f5d9cb0, type: 3}
+  - item: {fileID: 2361852989507392283, guid: a94cf1252f13fc84bad08b642f5d9cb0, type: 3}
     count: 5
 --- !u!65 &3584365135359305096
 BoxCollider:

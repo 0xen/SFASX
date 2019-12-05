@@ -25,7 +25,7 @@ public class Game : MonoBehaviour
     [SerializeField] private GameObject UiItemMenuBar;
     [SerializeField] private ItemSlotController UiItemMenuBarItem;
     [SerializeField] private uint UiItemMenuBarItemCount;
-    private ItemSlotController[] mUiItemBar;
+    private ItemSlotController[] mUiItemBar; 
 
 
     private float mDayTime;
@@ -65,6 +65,11 @@ public class Game : MonoBehaviour
         {
             mUiItemBar[i] = GameObject.Instantiate(UiItemMenuBarItem);
             mUiItemBar[i].transform.parent = UiItemMenuBar.transform;
+
+            RectTransform recTransform = mUiItemBar[i].GetComponent<RectTransform>();
+            recTransform.localScale = new Vector3(1, 1, 1);
+            recTransform.localEulerAngles = new Vector3(0, 0, 0);
+            recTransform.localPosition = new Vector3(recTransform.position.x, recTransform.position.y, 0);
         }
 
         mCharacter.SetUIItemBar(mUiItemBar);
