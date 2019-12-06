@@ -33,7 +33,7 @@ public class TileActionPlaceEarth : TileAction
 
     private IEnumerator DoWalkAndPlant(Entity entity, List<EnvironmentTile> route, EnvironmentTile tile)
     {
-        yield return TileActionWalk.DoGoTo(entity, 0.5f, route);
+        yield return TileActionWalk.DoGoTo(entity, entity.GetMovmentSpeed(), route);
         yield return DoPlace(entity, tile);
     }
 

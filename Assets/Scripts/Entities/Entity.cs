@@ -10,6 +10,8 @@ public abstract class Entity : MonoBehaviour
 
     public List<Item> Inventory;
 
+    public float movmentSpeed;
+
     public Entity(int inventorySize)
     {
         InventorySize = inventorySize;
@@ -19,6 +21,11 @@ public abstract class Entity : MonoBehaviour
     private void Update()
     {
 
+    }
+
+    public float GetMovmentSpeed()
+    {
+        return movmentSpeed;
     }
 
     // Add a item to the entities inventory, if there is no space, a failed bool will be returned
@@ -48,11 +55,7 @@ public abstract class Entity : MonoBehaviour
         // To do
         return true;
     }
-    public Item GetHandItem()
-    {
-        if (Inventory.Count == 0) return null;
-        return Inventory[0];
-    }
+    public abstract Item GetHandItem();
 
     public abstract void InventoryChange();
 }

@@ -8,7 +8,7 @@ public class WorldGenerator : MonoBehaviour
 {
     [SerializeField] private Vector2Int PreviewSize;
     [SerializeField] private RawImage Image;
-    public class GenerationPayload
+    public class GenerationPayload 
     {
         [SerializeField] public Vector2Int size;
         [SerializeField] public float frequancy;
@@ -117,7 +117,7 @@ public class WorldGenerator : MonoBehaviour
         return mapData;
     }
 
-    void ReturnHome()
+    public void ReturnHome()
     {
         MainMenu.MenuEnabled = true;
         SceneManager.UnloadSceneAsync("WorldCreator");
@@ -128,6 +128,6 @@ public class WorldGenerator : MonoBehaviour
         Game.MapGenerationPayload = MapGenerationPayload;
         SceneManager.UnloadSceneAsync("MainMenu");
         SceneManager.UnloadSceneAsync("WorldCreator");
-        SceneManager.LoadScene("Main");
+        SceneManager.LoadScene("Main", LoadSceneMode.Additive);
     }
 }

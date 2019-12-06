@@ -29,6 +29,8 @@ public class MainMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SceneManager.LoadScene("Music-SFX", LoadSceneMode.Additive);
+
         mCharacter = Instantiate(Character, transform);
         mCharacter.transform.position = CharacterStart.position;
         mCharacter.transform.rotation = CharacterStart.rotation;

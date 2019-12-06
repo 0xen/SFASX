@@ -8,7 +8,11 @@ public abstract class TileAction : MonoBehaviour
 
     // Made public so it is accessible by the game controller
     public string actionName;
-     
+
+    public TileAction()
+    {
+
+    }
     public TileAction(string _name)
     {
         actionName = _name;

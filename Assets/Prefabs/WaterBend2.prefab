@@ -95,6 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b81c1a74f97fbca4a81350fa9f3bdddb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Visited: 0
   Type: 1
 --- !u!65 &4957738710570390342
 BoxCollider:
@@ -121,5 +122,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff4924cada33025418d896c1cccdd683, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Map: {fileID: 0}
+  environmentTile: {fileID: 0}
   actionName: Fish

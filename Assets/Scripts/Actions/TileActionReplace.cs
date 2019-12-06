@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TileActionPlant : TileAction
+public class TileActionReplace : TileAction
 {
-    public float PlantTime = 0.0f;
+    public float ReplaceTime = 0.0f;
 
     public EnvironmentTile[] replacmentTile;
 
-    public TileActionPlant() : base("Plant")
+    public TileActionReplace() : base()
     {
 
     }
@@ -20,29 +20,28 @@ public class TileActionPlant : TileAction
         if (route == null)
         {
             entity.StopAllCoroutines();
-            entity.StartCoroutine(DoPlant(entity, environmentTile));
+            entity.StartCoroutine(DoReplace(entity, environmentTile));
         }
         else if (route.Count > 0)
         {
             entity.StopAllCoroutines();
-            entity.StartCoroutine(DoWalkAndPlant(entity, route, environmentTile));
+            entity.StartCoroutine(DoWalkAndReplace(entity, route, environmentTile));
         }
     }
 
-    private IEnumerator DoWalkAndPlant(Entity entity, List<EnvironmentTile> route, EnvironmentTile tile)
+    private IEnumerator DoWalkAndReplace(Entity entity, List<EnvironmentTile> route, EnvironmentTile tile)
     {
-        yield return TileActionWalk.DoGoTo(entity, 0.5f, route);
-        yield return DoPlant(entity, tile);
+        yield return TileActionWalk.DoGoTo(entity, entity.GetMovmentSpeed(), route);
+        yield return DoReplace(entity, tile);
     }
 
-    public IEnumerator DoPlant(Entity entity, EnvironmentTile tile)
+    public IEnumerator DoReplace(Entity entity, EnvironmentTile tile)
     {
 
 
         entity.transform.rotation = Quaternion.LookRotation(tile.Position - entity.CurrentPosition.Position, Vector3.up);
 
-        yield return new WaitForSeconds(PlantTime);
-        Debug.Log("Time To Plant");
+        yield return new WaitForSeconds(ReplaceTime);
         Environment.instance.ReplaceEnviromentTile(tile, replacmentTile[Random.Range(0, replacmentTile.Length)]);
 
     }

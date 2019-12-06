@@ -212,22 +212,22 @@ public class Game : MonoBehaviour
 
             if (tile != null)
             {
-                foreach (var component in tile.GetComponents<TileAction>())
-                {
-                    component.environmentTile = tile;
-                    ActionSelector.actions.Add(component);
-                }
-                if(mCharacter.GetHandItem()!=null)
+                if (mCharacter.GetHandItem() != null)
                 {
                     Item item = mCharacter.GetHandItem();
                     foreach (var component in item.GetComponents<TileAction>())
                     {
                         component.environmentTile = tile;
 
-                        if(component.CanPreformAction(mCharacter))
+                        if (component.CanPreformAction(mCharacter))
                             ActionSelector.actions.Add(component);
 
                     }
+                }
+                foreach (var component in tile.GetComponents<TileAction>())
+                {
+                    component.environmentTile = tile;
+                    ActionSelector.actions.Add(component);
                 }
             }
         }

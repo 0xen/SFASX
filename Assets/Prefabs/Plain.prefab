@@ -121,6 +121,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b6e3596f27d3af4791f61d55f20509e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Map: {fileID: 0}
+  environmentTile: {fileID: 0}
   actionName: Walk
-  SingleNodeMoveTime: 0.5
+  EntityMovmentPerSeccond: 10

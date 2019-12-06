@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3637732960540615920}
   - component: {fileID: 942330804839682718}
   - component: {fileID: 8676008329134945843}
+  - component: {fileID: -428478938862286851}
   m_Layer: 0
   m_Name: WaterRBend
   m_TagString: Untagged
@@ -94,6 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b81c1a74f97fbca4a81350fa9f3bdddb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Visited: 0
   Type: 1
 --- !u!114 &8676008329134945843
 MonoBehaviour:
@@ -107,5 +109,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff4924cada33025418d896c1cccdd683, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Map: {fileID: 0}
+  environmentTile: {fileID: 0}
   actionName: Fish
+--- !u!65 &-428478938862286851
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3046408990399582252}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.099999994, y: 0.024999999, z: 0.099999994}
+  m_Center: {x: 0.049999997, y: 0.012499999, z: 0.049999997}

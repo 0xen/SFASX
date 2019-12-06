@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TileActionWalk : TileAction
-{
-    [SerializeField] private float SingleNodeMoveTime = 0.5f;
-
+{ 
     public TileActionWalk() : base("Walk")
     {
 
@@ -17,10 +15,10 @@ public class TileActionWalk : TileAction
         List<EnvironmentTile> route = Environment.instance.Solve(entity.CurrentPosition, environmentTile);
 
         entity.StopAllCoroutines();
-        entity.StartCoroutine(DoGoTo(entity, SingleNodeMoveTime, route));
+        entity.StartCoroutine(DoGoTo(entity, entity.GetMovmentSpeed(), route));
     }
 
-    private static IEnumerator DoMove(Entity entity, float NodeMoveTime, Vector3 position, Vector3 destination)
+    private static IEnumerator DoMove(Entity entity, float entityMovmentPerSeccond, Vector3 position, Vector3 destination)
     {
         // Move between the two specified positions over the specified amount of time
         if (position != destination)
@@ -28,12 +26,13 @@ public class TileActionWalk : TileAction
             entity.transform.rotation = Quaternion.LookRotation(destination - position, Vector3.up);
 
             Vector3 p = entity.transform.position;
-            float t = 0.0f;
+            float distance = (destination - p).magnitude;
+            float distanceMoved = 0.0f;
 
-            while (t < NodeMoveTime)
+            while (distanceMoved < distance)
             {
-                t += Time.deltaTime;
-                p = Vector3.Lerp(position, destination, t / NodeMoveTime);
+                distanceMoved += entityMovmentPerSeccond * Time.deltaTime;
+                p = Vector3.Lerp(position, destination, distanceMoved / distance);
                 entity.transform.position = p;
                 yield return null;
             }

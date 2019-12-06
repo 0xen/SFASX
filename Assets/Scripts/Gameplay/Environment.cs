@@ -69,6 +69,8 @@ public class Environment : MonoBehaviour
     private const float TileSize = 10.0f;
     private const float TileHeight = 2.5f;
 
+    private Character mCharacter;
+
     public GenerationPayload mMapGenerationPayload;
 
 
@@ -490,28 +492,40 @@ public class Environment : MonoBehaviour
         if (mMap[x][y] == null) return;
         EnvironmentTile tile = mMap[x][y];
         tile.Connections = new List<EnvironmentTile>();
-        if (x > 0 && mMap[x - 1][y] != null)
-        {
-            if (mMap[x - 1][y].Type == EnvironmentTile.TileType.Accessible)
-                tile.Connections.Add(mMap[x - 1][y]);
-        }
 
-        if (x < mMapGenerationPayload.size.x - 1 && mMap[x + 1][y] != null)
+        // Calculate the mins and maxes for the possible touching tile coordinates
+        int xMin = x - 1 < 0 ? 0 : x - 1;
+        int yMin = y - 1 < 0 ? 0 : y - 1;
+        int xMax = x + 1 < mMapGenerationPayload.size.x ? x + 1 : mMapGenerationPayload.size.x - 1;
+        int yMax = y + 1 < mMapGenerationPayload.size.y ? y + 1 : mMapGenerationPayload.size.y - 1;
+        
+        for (int xa = xMin; xa <= xMax; xa++)
         {
-            if (mMap[x + 1][y].Type == EnvironmentTile.TileType.Accessible)
-                tile.Connections.Add(mMap[x + 1][y]);
-        }
-
-        if (y > 0 && mMap[x][y - 1] != null)
-        {
-            if (mMap[x][y - 1].Type == EnvironmentTile.TileType.Accessible)
-                tile.Connections.Add(mMap[x][y - 1]);
-        }
-
-        if (y < mMapGenerationPayload.size.y - 1 && mMap[x][y + 1] != null)
-        {
-            if (mMap[x][y + 1].Type == EnvironmentTile.TileType.Accessible)
-                tile.Connections.Add(mMap[x][y + 1]);
+            for (int ya = yMin; ya <= yMax; ya++)
+            {
+                // Check all touching tile instances
+                if ((xa == x || ya == y) && mMap[xa][ya] != null) 
+                {
+                    if (mMap[xa][ya].Type == EnvironmentTile.TileType.Accessible)
+                        tile.Connections.Add(mMap[xa][ya]);
+                }
+                else// Check all diagonal tile instances
+                {
+                    // Make sure the diagonal tile is considered accessible
+                    if (mMap[xa][ya] != null && mMap[xa][ya].Type == EnvironmentTile.TileType.Accessible)
+                    {
+                        // Calculate the offset from the tile we are checking for to the diagonal tiles
+                        int xDif = x - xa; // Can be -1 or 1
+                        int yDif = y - ya; // Can be -1 or 1
+                        // Check the two touching tiles that are both touching the diagonal tile and the tile that we are checking
+                        if ((mMap[xa + xDif][ya] != null && mMap[xa + xDif][ya].Type == EnvironmentTile.TileType.Accessible) ||
+                            (mMap[xa][ya + yDif] != null && mMap[xa][ya + yDif].Type == EnvironmentTile.TileType.Accessible))
+                        {
+                            tile.Connections.Add(mMap[xa][ya]);
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -543,6 +557,7 @@ public class Environment : MonoBehaviour
         Generate();
         SetupConnections();
         MovePlayerToStart(Character);
+        mCharacter = Character;
     }
 
     private void MovePlayerToStart(Character Character)
@@ -705,6 +720,10 @@ public class Environment : MonoBehaviour
 
         tile.Position = current.Position;
         tile.PositionTile = current.PositionTile;
+        if(mCharacter.CurrentPosition == current)
+        {
+            mCharacter.CurrentPosition = tile;
+        }
 
         // Attach the tint shader to all the tile blocks
         foreach (Material m in tile.GetComponent<MeshRenderer>().materials)

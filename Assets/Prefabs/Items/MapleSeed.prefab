@@ -44,8 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e55c72c3d5b06bf4bad76ff0a65f7584, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  environmentTile: {fileID: 0}
   actionName: Plant
-  PlantTime: 2
+  ReplaceTime: 2
   replacmentTile:
   - {fileID: 7692651029497598846, guid: 74114c185bfa69341b9499b70875ab94, type: 3}
 --- !u!114 &5318094462226911501

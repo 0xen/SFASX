@@ -90,6 +90,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemImage: {fileID: 7978792451695286058}
   text: {fileID: 6703123990756593403}
+  selectedColor: {r: 0.18867922, g: 0.18867922, b: 0.18867922, a: 0.8235294}
+  deselectedColor: {r: 0.39607844, g: 0.39607844, b: 0.39607844, a: 0.39215687}
 --- !u!1 &6706189566508743968
 GameObject:
   m_ObjectHideFlags: 0
