@@ -25,6 +25,7 @@ public class TileActionBuild : TileAction
             entity.StartCoroutine(DoWalkAndBuild(entity, route));
         }
     }
+
     private IEnumerator DoWalkAndBuild(Entity entity, List<EnvironmentTile> route)
     {
         yield return TileActionWalk.DoGoTo(entity, entity.GetMovmentSpeed(), route);

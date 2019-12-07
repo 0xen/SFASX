@@ -7,5 +7,5 @@ public class Item : MonoBehaviour
     public string itemName;
     public uint count;
     public Sprite itemSprite;
-
+    public bool consumeOnUse;
 }

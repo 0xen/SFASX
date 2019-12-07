@@ -105,6 +105,7 @@ public class TileActionPlaceEarth : TileAction
 
 
 
+        PostRun(entity);
     }
     public override bool CanPreformAction(Entity entity)
     {

@@ -8,19 +8,14 @@ public abstract class Entity : MonoBehaviour
     public EnvironmentTile CurrentPosition { get; set; }
     public int InventorySize { get; }
 
-    public List<Item> Inventory;
+    public Item[] inventory;
 
     public float movmentSpeed;
 
     public Entity(int inventorySize)
     {
         InventorySize = inventorySize;
-        Inventory = new List<Item>();
-    }
-
-    private void Update()
-    {
-
+        inventory = new Item[InventorySize];
     }
 
     public float GetMovmentSpeed()
@@ -31,29 +26,49 @@ public abstract class Entity : MonoBehaviour
     // Add a item to the entities inventory, if there is no space, a failed bool will be returned
     public bool AddToInventory(Item item, uint count)
     {
-        for (int i = 0; i < Inventory.Count; i++)
+        bool hasEmptySpace = false;
+        int emptySpaceID = -1;
+        for (int i = 0; i < inventory.Length; i++)
         {
-            if(Inventory[i] == item)
+            if(inventory[i]==null)
             {
-                Inventory[i].count += count;
+                if(!hasEmptySpace)
+                    emptySpaceID = i;
+                hasEmptySpace = true;
+                continue;
+            }
+            if(inventory[i] == item)
+            {
+                inventory[i].count += count;
                 InventoryChange();
                 Environment.instance.AddItemToPickupUI(item.itemName, count, item.itemSprite);
                 return true;
             }
         }
-        if (Inventory.Count >= InventorySize) return false;
+        if (!hasEmptySpace) return false;
+
         item.count = count;
-        Inventory.Add(item);
+        inventory[emptySpaceID] = item;
         InventoryChange();
         Environment.instance.AddItemToPickupUI(item.itemName, count, item.itemSprite);
-        Debug.Log("Item added to inv");
         return true;
     }
 
     public bool RemoveFromInventory(Item item)
     {
-        // To do
-        return true;
+        for (int i = 0; i < inventory.Length; i++)
+        {
+            if (inventory[i] == item)
+            {
+                inventory[i].count--;
+                if (inventory[i].count <= 0)
+                    inventory[i] = null;
+                InventoryChange();
+                return true;
+            }
+        }
+
+        return false;
     }
     public abstract Item GetHandItem();
 

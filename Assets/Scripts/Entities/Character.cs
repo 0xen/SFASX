@@ -36,27 +36,27 @@ public class Character : Entity
     public void SetUIItemBar(ItemSlotController[] uiItemBar)
     {
         mUiItemBar = uiItemBar;
-        InventoryChange();
     }
     
     public override Item GetHandItem()
     {
-        if (Inventory.Count < mSelectedItem || mSelectedItem < 0 || mSelectedItem > mUiItemBar.Length) return null;
-        return Inventory[mSelectedItem];
+        if (mSelectedItem<0) return null;
+        return inventory[mSelectedItem];
     }
     public override void InventoryChange()
     {
-        for(int i = 0; i < mUiItemBar.Length; i++)
+        if (inventory.Length <=0) return;
+        for (int i = 0; i < mUiItemBar.Length; i++)
         {
-            if(i < Inventory.Count)
+            if (inventory[i] != null) 
             {
-                mUiItemBar[i].AddItem(Inventory[i].itemSprite, Inventory[i].count);
-                mUiItemBar[i].SetSelectedState(mSelectedItem == i);
+                mUiItemBar[i].AddItem(inventory[i].itemSprite, inventory[i].count);
             }
             else
             {
                 mUiItemBar[i].RemoveItem();
             }
+            mUiItemBar[i].SetSelectedState(mSelectedItem == i);
         }
 
 

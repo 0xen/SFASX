@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   environmentTile: {fileID: 0}
+  item: {fileID: 1589002361256282029}
   actionName: Place
   ReplaceTime: 0.5
   replacmentTile:
@@ -65,3 +66,4 @@ MonoBehaviour:
   count: 1
   itemSprite: {fileID: -7612429470003351130, guid: 5fb7b6e1f37b2964083f5cfe204aaa9f,
     type: 3}
+  consumeOnUse: 1

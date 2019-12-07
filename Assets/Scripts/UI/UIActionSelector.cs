@@ -90,12 +90,11 @@ public class UIActionSelector : Graphic
     {
         if (actions.Count > 0 && !selectorCanvas.enabled)
         {
-            Debug.Log("Action: " + actions[0].actionName);
             actions[0].Run(character);
             return;
         }
         if (mSelection >= actions.Count || mSelection < 0) return;
-        Debug.Log("Action: " + actions[mSelection].actionName);
+
         actions[mSelection].Run(character);
     }
 

@@ -6,6 +6,8 @@ public abstract class TileAction : MonoBehaviour
 {
     public EnvironmentTile environmentTile;
 
+    public Item item;
+
     // Made public so it is accessible by the game controller
     public string actionName;
 
@@ -17,7 +19,18 @@ public abstract class TileAction : MonoBehaviour
     {
         actionName = _name;
     }
+    
     public abstract void Run(Entity entity);
+    
+    public virtual void PostRun(Entity entity)
+    {
+
+        if (item != null)
+        {
+            entity.RemoveFromInventory(item);
+        }
+    }
+
     public virtual bool CanPreformAction(Entity entity)
     {
         return true;

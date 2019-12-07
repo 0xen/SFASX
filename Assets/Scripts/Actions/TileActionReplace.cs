@@ -44,6 +44,7 @@ public class TileActionReplace : TileAction
         yield return new WaitForSeconds(ReplaceTime);
         Environment.instance.ReplaceEnviromentTile(tile, replacmentTile[Random.Range(0, replacmentTile.Length)]);
 
+        PostRun(entity);
     }
     public override bool CanPreformAction(Entity entity)
     {

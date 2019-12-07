@@ -48,6 +48,7 @@ MonoBehaviour:
   count: 5
   itemSprite: {fileID: 6753627641621139039, guid: 5fb7b6e1f37b2964083f5cfe204aaa9f,
     type: 3}
+  consumeOnUse: 1
 --- !u!114 &8768180131059341146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,6 +62,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   environmentTile: {fileID: 0}
+  item: {fileID: 2361852989507392283}
   actionName: Place Earth
   placeTime: 0.1
   replacmentTile: {fileID: 5225831561217036612, guid: 068b00b1b45e14e49a33d5ab4dc954a2,
