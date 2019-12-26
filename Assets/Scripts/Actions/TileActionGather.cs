@@ -63,9 +63,7 @@ public class TileActionGather : TileAction
                 // Drop item on ground
             }
         }
-
-
-
+        
         if(newObject.GetComponent<TileActionGather>())
         {
             TileActionGather newGatherAction = newObject.GetComponent<TileActionGather>();
