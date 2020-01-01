@@ -98,6 +98,11 @@ public class Environment : MonoBehaviour
         SetupTileGroups();
     }
 
+    public Character GetCharacter()
+    {
+        return mCharacter;
+    }
+
     // Organise the tile map groups into a faster to search format and resolve odds of choosing tiles/groups
     private void SetupTileGroups()
     {

@@ -70,6 +70,7 @@ public abstract class Entity : MonoBehaviour
 
         return false;
     }
+
     public abstract Item GetHandItem();
 
     public abstract void InventoryChange();

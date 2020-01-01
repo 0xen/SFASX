@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+
 using static WorldGenerator;
 
 public class Game : MonoBehaviour
@@ -26,8 +28,7 @@ public class Game : MonoBehaviour
     [SerializeField] private ItemSlotController UiItemMenuBarItem;
     [SerializeField] private uint UiItemMenuBarItemCount;
     private ItemSlotController[] mUiItemBar; 
-
-
+    
     private float mDayTime;
 
 
@@ -64,7 +65,7 @@ public class Game : MonoBehaviour
         for (int i = 0; i < UiItemMenuBarItemCount; i++)
         {
             mUiItemBar[i] = GameObject.Instantiate(UiItemMenuBarItem);
-            mUiItemBar[i].transform.parent = UiItemMenuBar.transform;
+            mUiItemBar[i].transform.SetParent(UiItemMenuBar.transform);
 
             RectTransform recTransform = mUiItemBar[i].GetComponent<RectTransform>();
             recTransform.localScale = new Vector3(1, 1, 1);
@@ -127,7 +128,7 @@ public class Game : MonoBehaviour
         Ray screenClick = MainCamera.ScreenPointToRay(Input.mousePosition);
         // See what tiles are in the way of the cursor
         int hits = Physics.RaycastNonAlloc(screenClick, mRaycastHits);
-        if (hits > 0)
+        if (hits > 0 && !EventSystem.current.IsPointerOverGameObject())
         {
             // Calculate the closest tile from the cursor
             RaycastHit closestHit = mRaycastHits[0];
