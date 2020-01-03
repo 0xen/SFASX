@@ -23,6 +23,22 @@ public abstract class Entity : MonoBehaviour
         return movmentSpeed;
     }
 
+    public bool HasItem(Item item, uint count = 1)
+    {
+        for (int i = 0; i < inventory.Length; i++)
+        {
+            if (inventory[i] == null)
+            {
+                continue;
+            }
+            if (inventory[i] == item && inventory[i].count >= count) 
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     // Add a item to the entities inventory, if there is no space, a failed bool will be returned
     public bool AddToInventory(Item item, uint count)
     {
@@ -54,14 +70,14 @@ public abstract class Entity : MonoBehaviour
         return true;
     }
 
-    public bool RemoveFromInventory(Item item)
+    public bool RemoveFromInventory(Item item, uint amount = 1)
     {
         for (int i = 0; i < inventory.Length; i++)
         {
-            if (inventory[i] == item)
+            if (inventory[i] == item && inventory[i].count >= amount)
             {
-                inventory[i].count--;
-                if (inventory[i].count <= 0)
+                inventory[i].count-= amount;
+                if (inventory[i].count == 0)
                     inventory[i] = null;
                 InventoryChange();
                 return true;

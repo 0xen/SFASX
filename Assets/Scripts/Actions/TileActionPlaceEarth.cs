@@ -107,8 +107,8 @@ public class TileActionPlaceEarth : TileAction
 
         PostRun(entity);
     }
-    public override bool CanPreformAction(Entity entity)
+    public override bool Valid(Entity entity)
     {
-        return Environment.instance.mWaterMap[environmentTile.PositionTile.x, environmentTile.PositionTile.y];
+        return Environment.instance.mWaterMap[environmentTile.PositionTile.x, environmentTile.PositionTile.y] && base.Valid(entity);
     }
 }

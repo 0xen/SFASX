@@ -72,4 +72,9 @@ public class TileActionGather : TileAction
 
     }
 
+    public override bool Valid(Entity entity)
+    {
+        return true;
+    }
+
 }

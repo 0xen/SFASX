@@ -47,6 +47,7 @@ MonoBehaviour:
   environmentTile: {fileID: 0}
   item: {fileID: 5318094462226911501}
   actionName: Plant
+  amountNeeded: 1
   ReplaceTime: 2
   replacmentTile:
   - {fileID: 7692651029497598846, guid: 74114c185bfa69341b9499b70875ab94, type: 3}

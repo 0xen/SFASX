@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TileActionReplace : TileAction
 {
+
     public float ReplaceTime = 0.0f;
 
     public EnvironmentTile[] replacmentTile;
@@ -42,13 +43,20 @@ public class TileActionReplace : TileAction
         entity.transform.rotation = Quaternion.LookRotation(tile.Position - entity.CurrentPosition.Position, Vector3.up);
 
         yield return new WaitForSeconds(ReplaceTime);
-        Environment.instance.ReplaceEnviromentTile(tile, replacmentTile[Random.Range(0, replacmentTile.Length)]);
 
-        PostRun(entity);
+        if (item != null)
+        {
+            // We make sure we can remove the item before we replace the tile to stop people accessing the shop and selling the item mid interaction
+            if(entity.RemoveFromInventory(item, amountNeeded))
+            {
+                Environment.instance.ReplaceEnviromentTile(tile, replacmentTile[Random.Range(0, replacmentTile.Length)]);
+            }
+        }
+        
     }
-    public override bool CanPreformAction(Entity entity)
+    public override bool Valid(Entity entity)
     {
-        return environmentTile.Type == EnvironmentTile.TileType.Accessible;
+        return environmentTile.Type == EnvironmentTile.TileType.Accessible && base.Valid(entity);
     }
 
 

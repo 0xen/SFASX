@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 731608205821865234}
   - component: {fileID: 3987617966587672014}
+  - component: {fileID: 4785065415488294947}
   m_Layer: 0
   m_Name: Stone
   m_TagString: Untagged
@@ -44,7 +45,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Stone
-  count: 0
+  count: 2
   itemSprite: {fileID: 317711084924465178, guid: 9cf7cd7d33a37434099536b7f750ff41,
     type: 3}
   consumeOnUse: 1
+--- !u!114 &4785065415488294947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1025863293644652486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e55c72c3d5b06bf4bad76ff0a65f7584, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  environmentTile: {fileID: 0}
+  amountNeeded: 2
+  item: {fileID: 3987617966587672014}
+  actionName: Place Rock
+  ReplaceTime: 3
+  replacmentTile:
+  - {fileID: 4443834457755422267, guid: c92f341529f498949a8bb6b831a12b68, type: 3}
+  - {fileID: 4813118846058157084, guid: 24e8e3333cc7b864c9339faac3d44219, type: 3}
+  - {fileID: 945550802858055119, guid: 27727d922a27a4b47afa81ac009daa90, type: 3}
+  - {fileID: 10103160160458647, guid: aa373cc3cd8cfa7418126bd0b9a47880, type: 3}
+  - {fileID: 8392035395846825301, guid: 4c0f70225ccee9c4eb8b566b0124f754, type: 3}
+  - {fileID: 428312736237616533, guid: b2937a6c300c0624a8fb7c65bf8b21b3, type: 3}

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2141198184484031431}
   - component: {fileID: 2361852989507392283}
   - component: {fileID: 8768180131059341146}
+  - component: {fileID: 294677414193567582}
   m_Layer: 0
   m_Name: Soil
   m_TagString: Untagged
@@ -62,8 +63,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   environmentTile: {fileID: 0}
+  amountNeeded: 1
   item: {fileID: 2361852989507392283}
   actionName: Place Earth
   placeTime: 0.1
   replacmentTile: {fileID: 5225831561217036612, guid: 068b00b1b45e14e49a33d5ab4dc954a2,
     type: 3}
+--- !u!114 &294677414193567582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1850056496913127699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e55c72c3d5b06bf4bad76ff0a65f7584, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  environmentTile: {fileID: 0}
+  amountNeeded: 2
+  item: {fileID: 2361852989507392283}
+  actionName: Place Dirt Mound
+  ReplaceTime: 3
+  replacmentTile:
+  - {fileID: 7603024997213197666, guid: 85c72f2e63f7ff349b2aa0cc58203b3d, type: 3}
+  - {fileID: 6878312587856686978, guid: 2e24aaa96e0e79a46a25f9d3b9aa0679, type: 3}
+  - {fileID: 8522373763716547169, guid: 8f9604e6cd0daa340bd2ea2bd9e2f757, type: 3}
+  - {fileID: 6828311611057938483, guid: 2593f9f48587c074b832d6b770276a89, type: 3}
+  - {fileID: 7154152902380780791, guid: c5e37a9ed6d6fa647b00d6e82ee5c16b, type: 3}
+  - {fileID: 6327076274816214487, guid: 5c03a0599a791424e81d737a11c51460, type: 3}

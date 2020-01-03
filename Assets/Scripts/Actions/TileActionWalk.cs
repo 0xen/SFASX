@@ -54,4 +54,9 @@ public class TileActionWalk : TileAction
             }
         }
     }
+
+    public override bool Valid(Entity entity)
+    {
+        return true;
+    }
 }

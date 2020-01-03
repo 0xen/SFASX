@@ -216,7 +216,10 @@ public class Game : MonoBehaviour
                 foreach (var component in tile.GetComponents<TileAction>())
                 {
                     component.environmentTile = tile;
-                    ActionSelector.actions.Add(component);
+                    if (component.Valid(mCharacter))
+                    {
+                        ActionSelector.actions.Add(component);
+                    }
                 }
                 if (mCharacter.GetHandItem() != null)
                 {
@@ -225,8 +228,10 @@ public class Game : MonoBehaviour
                     {
                         component.environmentTile = tile;
 
-                        if (component.CanPreformAction(mCharacter))
+                        if (component.Valid(mCharacter))
+                        {
                             ActionSelector.actions.Add(component);
+                        }
 
                     }
                 }

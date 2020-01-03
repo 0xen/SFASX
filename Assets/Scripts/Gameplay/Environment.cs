@@ -508,6 +508,8 @@ public class Environment : MonoBehaviour
         {
             for (int ya = yMin; ya <= yMax; ya++)
             {
+                // Stop tiles having connections to themselves
+                if (ya == y && xa == x) continue;
                 // Check all touching tile instances
                 if ((xa == x || ya == y) && mMap[xa][ya] != null) 
                 {
