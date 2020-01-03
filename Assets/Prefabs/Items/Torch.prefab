@@ -45,10 +45,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   environmentTile: {fileID: 0}
+  amountNeeded: 1
   item: {fileID: 1589002361256282029}
   actionName: Place
-  amountNeeded: 1
   ReplaceTime: 0.5
+  Rotatable: 1
   replacmentTile:
   - {fileID: 8968664797230672486, guid: 3ce27b7f5ac2c744b9d92ceb5b3e6b87, type: 3}
 --- !u!114 &1589002361256282029
@@ -64,7 +65,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Torch
-  count: 0
+  count: 1
   itemSprite: {fileID: -7612429470003351130, guid: 5fb7b6e1f37b2964083f5cfe204aaa9f,
     type: 3}
   consumeOnUse: 1

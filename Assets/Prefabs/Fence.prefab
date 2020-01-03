@@ -13,8 +13,7 @@ GameObject:
   - component: {fileID: 7775128172354409877}
   - component: {fileID: 1247906914180562762}
   - component: {fileID: 4304124910973499552}
-  - component: {fileID: 2944556203855961161}
-  - component: {fileID: 8977423132821446785}
+  - component: {fileID: 1534898898071018647}
   m_Layer: 0
   m_Name: Fence
   m_TagString: Untagged
@@ -29,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8348015561485263177}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 141.06581, y: 201.23048, z: -482.60294}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -97,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Visited: 0
-  Type: 0
+  Type: 3
 --- !u!65 &4304124910973499552
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -111,7 +110,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 2.5, z: 10}
   m_Center: {x: 5, y: 1.25, z: 5}
---- !u!114 &2944556203855961161
+--- !u!114 &1534898898071018647
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -120,26 +119,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 8348015561485263177}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b6e3596f27d3af4791f61d55f20509e, type: 3}
+  m_Script: {fileID: 11500000, guid: f7d0e301717a5334fa4aed42e97f383c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Map: {fileID: 0}
-  actionName: Walk
-  SingleNodeMoveTime: 0.5
---- !u!114 &8977423132821446785
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8348015561485263177}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa41a4584604a8744a715436bbc7d6f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Map: {fileID: 0}
-  actionName: Build
+  environmentTile: {fileID: 0}
+  amountNeeded: 0
+  item: {fileID: 0}
+  actionName: Pick Up
+  GatherTime: 1
+  replacmentTile:
+  - {fileID: 5225831561217036612, guid: 068b00b1b45e14e49a33d5ab4dc954a2, type: 3}
+  pickups:
+  - item: {fileID: 2153262866484951227, guid: 0200a3b1b19e5364d9d10fc799cda6c6, type: 3}
+    count: 1
 --- !u!1001 &6109043721872560279
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -153,7 +145,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 408904, guid: 4cc487e002327cb43995ca1871bd142e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9
+      value: 9.55
       objectReference: {fileID: 0}
     - target: {fileID: 408904, guid: 4cc487e002327cb43995ca1871bd142e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -161,19 +153,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 408904, guid: 4cc487e002327cb43995ca1871bd142e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.5
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 408904, guid: 4cc487e002327cb43995ca1871bd142e, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 408904, guid: 4cc487e002327cb43995ca1871bd142e, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 408904, guid: 4cc487e002327cb43995ca1871bd142e, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 408904, guid: 4cc487e002327cb43995ca1871bd142e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -197,7 +189,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 408904, guid: 4cc487e002327cb43995ca1871bd142e, type: 3}
       propertyPath: m_LocalScale.x
-      value: 4
+      value: 4.55
       objectReference: {fileID: 0}
     - target: {fileID: 408904, guid: 4cc487e002327cb43995ca1871bd142e, type: 3}
       propertyPath: m_LocalScale.y

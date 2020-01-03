@@ -6678,11 +6678,15 @@ MonoBehaviour:
       sellPrice: 1
       item: {fileID: 5318094462226911501, guid: 0e9c298ae323a9948a3575861d17197b,
         type: 3}
-  - name: Other
+  - name: Building
     items:
     - buyPrice: 10
       sellPrice: 1
       item: {fileID: 1589002361256282029, guid: 6deed9a5c2c31614c89a2fce37154e20,
+        type: 3}
+    - buyPrice: 15
+      sellPrice: 5
+      item: {fileID: 2153262866484951227, guid: 0200a3b1b19e5364d9d10fc799cda6c6,
         type: 3}
 --- !u!1 &2083344929
 GameObject:

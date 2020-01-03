@@ -4828,7 +4828,7 @@ GameObject:
   - component: {fileID: 8968664797230672191}
   - component: {fileID: 8968664797230672486}
   - component: {fileID: 8968664797230672288}
-  - component: {fileID: 8968664797230672497}
+  - component: {fileID: 5250191123328272379}
   m_Layer: 0
   m_Name: Torch
   m_TagString: Untagged
@@ -4911,7 +4911,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Visited: 0
-  Type: 0
+  Type: 3
 --- !u!65 &8968664797230672288
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4925,7 +4925,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 2.5, z: 10}
   m_Center: {x: 5, y: 1.25, z: 5}
---- !u!114 &8968664797230672497
+--- !u!114 &5250191123328272379
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4934,12 +4934,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 8968664797230672015}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b6e3596f27d3af4791f61d55f20509e, type: 3}
+  m_Script: {fileID: 11500000, guid: f7d0e301717a5334fa4aed42e97f383c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   environmentTile: {fileID: 0}
+  amountNeeded: 0
   item: {fileID: 0}
-  actionName: Walk
+  actionName: Pick Up
+  GatherTime: 1
+  replacmentTile:
+  - {fileID: 5225831561217036612, guid: 068b00b1b45e14e49a33d5ab4dc954a2, type: 3}
+  pickups:
+  - item: {fileID: 1589002361256282029, guid: 6deed9a5c2c31614c89a2fce37154e20, type: 3}
+    count: 1
 --- !u!1001 &8968664797240890214
 PrefabInstance:
   m_ObjectHideFlags: 0

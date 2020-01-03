@@ -402,11 +402,34 @@ public class Environment : MonoBehaviour
             runningTotal += tileInstance.spawnChance;
         }
 
+        
         tile = Instantiate(prefab, position, Quaternion.identity, transform);
         tile.Type = worldTilesChoice.type;
-
-
+        
         FinalizeTile(ref tile, x, y, position);
+
+        // Rotate the tile a random amount
+        int rotationRand = Random.Range(0, 4);
+        SetTileRotation(ref tile, rotationRand);
+    }
+
+    public void SetTileRotation(ref EnvironmentTile tile, int newRotation)
+    {
+
+        Quaternion rotation = Quaternion.identity;
+        rotation.eulerAngles = new Vector3(0.0f, 90.0f * newRotation, 0.0f);
+        
+        Vector3 Posiiton0ffset = new Vector3(
+            newRotation < 2 ? 0.0f : 10.0f,   // Rotation 0-1 Needs a offset of 0 and rotation 2-3 needs a offset of 10
+            0, // Y axis is unchanged
+            newRotation < 1 || newRotation > 2 ? 0.0f : 10.0f // Rotation 0 and 3 needs a offset of 0 and rotation 1 and 2 need a offset of 10
+            );
+
+        Vector3 position = GetRawPosition(tile.PositionTile.x, tile.PositionTile.y) + Posiiton0ffset;
+        tile.transform.position = position;
+        tile.transform.rotation = rotation;
+        // Set the environment tile so it knows what rotation the tile is at
+        tile.Rotation = newRotation;
     }
 
     private void FinalizeTile(ref EnvironmentTile tile, int x, int y, Vector3 position)

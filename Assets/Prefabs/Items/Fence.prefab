@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8705915051070929986
+--- !u!1 &2633384740316426931
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,24 +8,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8992060557704556182}
-  - component: {fileID: 4736621118778930762}
-  - component: {fileID: -4417993878350089634}
-  - component: {fileID: -8106703588994066490}
+  - component: {fileID: 2346377104795787367}
+  - component: {fileID: 2153262866484951227}
+  - component: {fileID: 2227618380513688751}
   m_Layer: 0
-  m_Name: Wood
+  m_Name: Fence
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8992060557704556182
+--- !u!4 &2346377104795787367
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8705915051070929986}
+  m_GameObject: {fileID: 2633384740316426931}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -33,30 +32,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4736621118778930762
+--- !u!114 &2153262866484951227
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8705915051070929986}
+  m_GameObject: {fileID: 2633384740316426931}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a8082f9426317404c93d1f3e41be8007, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: Wood
-  count: 4
+  itemName: Fence
+  count: 1
   itemSprite: {fileID: 4126004077657876305, guid: 5fb7b6e1f37b2964083f5cfe204aaa9f,
     type: 3}
   consumeOnUse: 1
---- !u!114 &-4417993878350089634
+--- !u!114 &2227618380513688751
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8705915051070929986}
+  m_GameObject: {fileID: 2633384740316426931}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e55c72c3d5b06bf4bad76ff0a65f7584, type: 3}
@@ -64,29 +63,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   environmentTile: {fileID: 0}
   amountNeeded: 1
-  item: {fileID: 4736621118778930762}
-  actionName: Place Small Logs
+  item: {fileID: 2153262866484951227}
+  actionName: Place
   ReplaceTime: 2
   Rotatable: 1
   replacmentTile:
-  - {fileID: 7228575818001999334, guid: d85ca6f08a4ef8848b08ae4126b05734, type: 3}
---- !u!114 &-8106703588994066490
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8705915051070929986}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e55c72c3d5b06bf4bad76ff0a65f7584, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  environmentTile: {fileID: 0}
-  amountNeeded: 2
-  item: {fileID: 4736621118778930762}
-  actionName: Place Large Logs
-  ReplaceTime: 3
-  Rotatable: 1
-  replacmentTile:
-  - {fileID: 4499036324842488966, guid: cd048cafd4c60d14d81bdb56cdb167ef, type: 3}
+  - {fileID: 1247906914180562762, guid: 72dd898d08a8f52459df325a1bef456d, type: 3}
