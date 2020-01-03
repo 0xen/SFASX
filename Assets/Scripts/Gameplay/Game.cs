@@ -213,6 +213,11 @@ public class Game : MonoBehaviour
 
             if (tile != null)
             {
+                foreach (var component in tile.GetComponents<TileAction>())
+                {
+                    component.environmentTile = tile;
+                    ActionSelector.actions.Add(component);
+                }
                 if (mCharacter.GetHandItem() != null)
                 {
                     Item item = mCharacter.GetHandItem();
@@ -224,11 +229,6 @@ public class Game : MonoBehaviour
                             ActionSelector.actions.Add(component);
 
                     }
-                }
-                foreach (var component in tile.GetComponents<TileAction>())
-                {
-                    component.environmentTile = tile;
-                    ActionSelector.actions.Add(component);
                 }
             }
         }

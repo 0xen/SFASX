@@ -16,10 +16,12 @@ public class WorldGenerator : MonoBehaviour
         [SerializeField] public float waterHeight;
     }
 
+    // Define various random generation settings for the noise generator
     [SerializeField] private Slider IslandFrequancy;
     [SerializeField] private Slider IslandAmplitude;
     [SerializeField] private Slider WaterHeight;
     [SerializeField] private Slider MapSize;
+
     [SerializeField] private Text MapSizeLabel;
 
     [SerializeField] private int MapSizeScalar;
@@ -91,8 +93,10 @@ public class WorldGenerator : MonoBehaviour
         {
             for (int y = 0; y < Size.y; y++)
             {
+                // Calculate x and y coordinates based on the maps size / frequency
                 float xCoord = /*islandWaveformOffset.x + */((float)x / (float)Size.x) * MapGenerationPayload.frequancy;
                 float yCoord = /*islandWaveformOffset.y + */((float)y / (float)Size.y) * MapGenerationPayload.frequancy;
+                // Generate the height map for the tile using the perlin noise function
                 heightMap[x, y] = Mathf.PerlinNoise(xCoord, yCoord) + ((Mathf.Sin(perTileRadX * x) + Mathf.Sin(perTileRadY * y)) * MapGenerationPayload.amplitude);
             }
         }

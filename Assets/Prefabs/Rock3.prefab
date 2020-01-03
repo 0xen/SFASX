@@ -110,13 +110,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   environmentTile: {fileID: 0}
+  item: {fileID: 0}
   actionName: Gather
   GatherTime: 4
   replacmentTile:
   - {fileID: 5225831561217036612, guid: 068b00b1b45e14e49a33d5ab4dc954a2, type: 3}
   pickups:
   - item: {fileID: 2361852989507392283, guid: a94cf1252f13fc84bad08b642f5d9cb0, type: 3}
-    count: 5
+    count: 2
 --- !u!65 &-2878905638578892713
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -87,7 +87,7 @@ public class ShopHandler : MonoBehaviour
             {
                 break;
             }
-            mCurrency -= selectedItem.sellPrice;
+            mCurrency += selectedItem.sellPrice;
         }
         UpdateCoinText();
 

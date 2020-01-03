@@ -6745,11 +6745,10 @@ MonoBehaviour:
     spawnChance: 20
     tiles:
     - spawnChance: 1
-      tile: {fileID: 4499036324842488966, guid: cd048cafd4c60d14d81bdb56cdb167ef,
+      tile: {fileID: 8392035395846825301, guid: 4c0f70225ccee9c4eb8b566b0124f754,
         type: 3}
     - spawnChance: 1
-      tile: {fileID: 7228575818001999334, guid: d85ca6f08a4ef8848b08ae4126b05734,
-        type: 3}
+      tile: {fileID: 428312736237616533, guid: b2937a6c300c0624a8fb7c65bf8b21b3, type: 3}
     - spawnChance: 3
       tile: {fileID: 4665734947335233729, guid: 84d83d076aecd1044aa0cdd7f246274b,
         type: 3}
@@ -6765,11 +6764,6 @@ MonoBehaviour:
       tile: {fileID: 945550802858055119, guid: 27727d922a27a4b47afa81ac009daa90, type: 3}
     - spawnChance: 1
       tile: {fileID: 10103160160458647, guid: aa373cc3cd8cfa7418126bd0b9a47880, type: 3}
-    - spawnChance: 1
-      tile: {fileID: 8392035395846825301, guid: 4c0f70225ccee9c4eb8b566b0124f754,
-        type: 3}
-    - spawnChance: 1
-      tile: {fileID: 428312736237616533, guid: b2937a6c300c0624a8fb7c65bf8b21b3, type: 3}
   WaterTiles:
   - tile: {fileID: 814809362170723094, guid: 8ffd1398f8889994880046e6688ed649, type: 3}
     Connectors: 0100000001000000

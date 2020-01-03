@@ -122,6 +122,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7d0e301717a5334fa4aed42e97f383c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  environmentTile: {fileID: 0}
+  item: {fileID: 0}
   actionName: Gather
   GatherTime: 3
   replacmentTile:
@@ -130,7 +132,7 @@ MonoBehaviour:
   - item: {fileID: 5318094462226911501, guid: 0e9c298ae323a9948a3575861d17197b, type: 3}
     count: 1
   - item: {fileID: 4736621118778930762, guid: 395ee2ddd0392f34a84501dc3e6a5d6b, type: 3}
-    count: 10
+    count: 2
 --- !u!1001 &6925956467986050535
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -138,6 +140,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1445712347399408849}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 25a9f89ddfea5e546aa52748c8b9a949,
+        type: 3}
+      propertyPath: m_Name
+      value: palmDetailed_large
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 25a9f89ddfea5e546aa52748c8b9a949,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -207,11 +214,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.35
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 25a9f89ddfea5e546aa52748c8b9a949,
-        type: 3}
-      propertyPath: m_Name
-      value: palmDetailed_large
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 25a9f89ddfea5e546aa52748c8b9a949, type: 3}
