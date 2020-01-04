@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 571534609703175618}
   - component: {fileID: 6654688128206687706}
   - component: {fileID: 3312097745907890286}
+  - component: {fileID: -4492596177458361466}
   m_Layer: 0
   m_Name: TreeSmall
   m_TagString: Untagged
@@ -123,6 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   environmentTile: {fileID: 0}
+  amountNeeded: 0
   item: {fileID: 0}
   actionName: Gather
   GatherTime: 3
@@ -133,6 +135,22 @@ MonoBehaviour:
     count: 1
   - item: {fileID: 4736621118778930762, guid: 395ee2ddd0392f34a84501dc3e6a5d6b, type: 3}
     count: 1
+--- !u!114 &-4492596177458361466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7306264547982859201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da2a3c82691d7f948b96c5c31be363f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  replacmentTile: {fileID: 4665734947335233729, guid: 84d83d076aecd1044aa0cdd7f246274b,
+    type: 3}
+  minTime: 60
+  maxTime: 120
 --- !u!1001 &8879202610280605618
 PrefabInstance:
   m_ObjectHideFlags: 0

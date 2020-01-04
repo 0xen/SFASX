@@ -6805,7 +6805,7 @@ MonoBehaviour:
     Connectors: 0101010001010100
   - tile: {fileID: 2466288146943059409, guid: 722296f6ce5fdb74ebfe4e19219e9c23, type: 3}
     Connectors: 0100010001010100
-  seaDeapth: 3
+  seaDeapth: 1
   TintShader: {fileID: 4800000, guid: 25c077fcd88dac346a690f368da47d6d, type: 3}
   ItemPickupUIParent: {fileID: 156133749}
   ItemPickupUIInstance: {fileID: 750368258179646081, guid: 74b7a3cd77dd2da4ab3d552d27efe4e3,
