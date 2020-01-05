@@ -20,6 +20,8 @@ public class ShopHandler : MonoBehaviour
     [SerializeField] GameObject ItemSelector;
     [SerializeField] ShopItem ShopItemPrefab;
 
+    [SerializeField] Button CatagoryButtonPlaceholder;
+    [SerializeField] GameObject CatagoryButtonParent;
 
 
     [SerializeField] TextMeshProUGUI selectedItemTitle;
@@ -56,6 +58,7 @@ public class ShopHandler : MonoBehaviour
     {
         mAmount = 1;
         mCurrency = 500;
+        SetupCatagoryButtons();
         UpdateCoinText();
         AllCatagory();
     }
@@ -63,6 +66,39 @@ public class ShopHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+    }
+
+    private void SetupCatagoryButtons()
+    {
+        //CatagoryButtonParent
+        foreach (Catagory cat in catagories)
+        {
+            Button catButton = Instantiate(CatagoryButtonPlaceholder,new Vector3(0,0,0),Quaternion.identity, CatagoryButtonParent.transform);
+            
+            catButton.onClick.AddListener(delegate () {
+                ClearCatagory();
+                OpenCatagory(cat.name);
+            });
+
+            RectTransform recTransform = catButton.GetComponent<RectTransform>();
+            recTransform.localScale = new Vector3(1, 1, 1);
+            recTransform.localEulerAngles = new Vector3(0, 0, 0);
+            recTransform.localPosition = new Vector3(recTransform.position.x, recTransform.position.y, 0);
+
+            catButton.name = cat.name;
+
+            // Access child text and change button text
+            {
+                if(recTransform.childCount>0)
+                {
+                    TextMeshProUGUI text = recTransform.GetChild(0).GetComponent<TextMeshProUGUI>();
+                    if(text!=null)
+                    {
+                        text.text = cat.name;
+                    }
+                }
+            }
+        }
     }
 
     public void Buy()

@@ -80,7 +80,7 @@ public class Environment : MonoBehaviour
     {
         ItemPickupUi ui = GameObject.Instantiate(ItemPickupUIInstance);
 
-        ui.transform.parent = ItemPickupUIParent.transform;
+        ui.transform.SetParent(ItemPickupUIParent.transform);
         ui.SetupUI("+" + count + " " + name, sprite);
 
         RectTransform recTransform = ui.GetComponent<RectTransform>();
