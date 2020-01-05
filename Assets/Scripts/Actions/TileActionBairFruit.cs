@@ -66,7 +66,11 @@ public class TileActionBairFruit : TileAction
 
     public IEnumerator DoCollect(Entity entity, EnvironmentTile tile)
     {
-        for(int i = 0; i < m_aliveFruit.Count; i++)
+        // Turn towards the tile
+        entity.transform.rotation = Quaternion.LookRotation(tile.Position - entity.CurrentPosition.Position, Vector3.up);
+
+
+        for (int i = m_aliveFruit.Count-1; i >=0 ; i--)
         {
             foreach (Pickup pickup in pickups)
             {
@@ -75,8 +79,8 @@ public class TileActionBairFruit : TileAction
                     // Drop item on ground
                 }
             }
-            Destroy(m_aliveFruit[0]);
-            m_aliveFruit.RemoveAt(0);
+            Destroy(m_aliveFruit[i]);
+            m_aliveFruit.RemoveAt(i);
             yield return new WaitForSeconds(collectionTime);
         }
     }
@@ -108,7 +112,7 @@ public class TileActionBairFruit : TileAction
 
             GameObject fruit = GameObject.Instantiate(furitPrefab, spawnLocation.position, spawnLocation.rotation, transform);
             Rigidbody body = fruit.GetComponent<Rigidbody>();
-            body.AddForce(new Vector3(Random.Range(0, 001f), Random.Range(0, 001f), Random.Range(0, 001f)), ForceMode.Impulse);
+            body.AddForce(new Vector3(Random.Range(-001f, 001f), Random.Range(-001f, 001f), Random.Range(-001f, 001f)), ForceMode.Impulse);
             m_aliveFruit.Add(fruit);
 
         }

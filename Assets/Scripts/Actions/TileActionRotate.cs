@@ -46,6 +46,7 @@ public class TileActionRotate : TileAction
         
         yield return new WaitForSeconds(rotateTime);
     }
+
     public override bool Valid(Entity entity)
     {
         return true;

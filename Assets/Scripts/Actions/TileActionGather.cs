@@ -47,9 +47,9 @@ public class TileActionGather : TileAction
 
     public IEnumerator DoGather(Entity entity, EnvironmentTile tile)
     {
-
-
+        // Turn towards the tile
         entity.transform.rotation = Quaternion.LookRotation(tile.Position - entity.CurrentPosition.Position, Vector3.up);
+
 
         yield return new WaitForSeconds(GatherTime);
         Debug.Log("Time To Gather");

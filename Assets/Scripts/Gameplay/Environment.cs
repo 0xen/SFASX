@@ -612,6 +612,11 @@ public class Environment : MonoBehaviour
         }
     }
 
+    public EnvironmentTile GetTile(int x, int y)
+    {
+        return mMap[x][y];
+    }
+
     public List<EnvironmentTile> SolveNeighbour(EnvironmentTile begin, EnvironmentTile destination)
     {
         foreach (EnvironmentTile childTile in destination.Connections)
