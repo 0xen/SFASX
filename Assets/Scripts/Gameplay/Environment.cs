@@ -744,12 +744,10 @@ public class Environment : MonoBehaviour
     public GameObject ReplaceEnviromentTile(EnvironmentTile current, EnvironmentTile replacment)
     {
         Vector3 newPosition = GetRawPosition(current.PositionTile.x,current.PositionTile.y);
-        //Vector3 newPosition = new Vector3(current.Position.x - (TileSize / 2), 0.0f, current.Position.z - (TileSize / 2));
+
         GameObject newObject = Instantiate(replacment.gameObject, new Vector3(), Quaternion.identity, transform);
         EnvironmentTile tile = newObject.GetComponent<EnvironmentTile>();
-
-        //newObject.transform.localPosition = newPosition;
-        //newObject.transform.localRotation = Quaternion.identity;
+        
 
         tile.Position = current.Position;
         tile.PositionTile = current.PositionTile;
