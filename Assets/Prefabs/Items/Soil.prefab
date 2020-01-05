@@ -85,7 +85,7 @@ MonoBehaviour:
   amountNeeded: 2
   item: {fileID: 2361852989507392283}
   actionName: Place Dirt Mound
-  ReplaceTime: 3
+  ReplaceTime: 1
   Rotatable: 1
   replacmentTile:
   - {fileID: 7603024997213197666, guid: 85c72f2e63f7ff349b2aa0cc58203b3d, type: 3}

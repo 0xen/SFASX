@@ -211,16 +211,16 @@ TextureImporter:
     second: Farm_68
   - first:
       213: 7606791111815138788
-    second: Farm_69
+    second: Egg
   - first:
       213: -2004546666460064615
-    second: Farm_70
+    second: Pork
   - first:
       213: -5125881470589557816
     second: Farm_71
   - first:
       213: 7781642708770859160
-    second: Farm_72
+    second: Milk
   - first:
       213: 4940277129753629115
     second: Farm_73
@@ -2156,7 +2156,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Farm_69
+      name: Egg
       rect:
         serializedVersion: 2
         x: 252
@@ -2177,7 +2177,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Farm_70
+      name: Pork
       rect:
         serializedVersion: 2
         x: 291
@@ -2219,7 +2219,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Farm_72
+      name: Milk
       rect:
         serializedVersion: 2
         x: 433

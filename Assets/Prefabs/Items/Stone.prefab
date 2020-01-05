@@ -65,7 +65,7 @@ MonoBehaviour:
   amountNeeded: 2
   item: {fileID: 3987617966587672014}
   actionName: Place Rock
-  ReplaceTime: 3
+  ReplaceTime: 1
   Rotatable: 1
   replacmentTile:
   - {fileID: 4443834457755422267, guid: c92f341529f498949a8bb6b831a12b68, type: 3}

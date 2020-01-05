@@ -4,6 +4,12 @@ using UnityEngine;
 
 public abstract class Entity : MonoBehaviour
 {
+    public enum InventoryChangeEvent
+    {
+        Add,
+        Remove
+    }
+
 
     public EnvironmentTile CurrentPosition { get; set; }
     public int InventorySize { get; }
@@ -56,8 +62,7 @@ public abstract class Entity : MonoBehaviour
             if(inventory[i] == item)
             {
                 inventory[i].count += count;
-                InventoryChange();
-                Environment.instance.AddItemToPickupUI(item.itemName, count, item.itemSprite);
+                InventoryChange(item, count, InventoryChangeEvent.Add);
                 return true;
             }
         }
@@ -65,8 +70,7 @@ public abstract class Entity : MonoBehaviour
 
         item.count = count;
         inventory[emptySpaceID] = item;
-        InventoryChange();
-        Environment.instance.AddItemToPickupUI(item.itemName, count, item.itemSprite);
+        InventoryChange(item, count, InventoryChangeEvent.Add);
         return true;
     }
 
@@ -79,7 +83,7 @@ public abstract class Entity : MonoBehaviour
                 inventory[i].count-= amount;
                 if (inventory[i].count == 0)
                     inventory[i] = null;
-                InventoryChange();
+                InventoryChange(item, amount, InventoryChangeEvent.Remove);
                 return true;
             }
         }
@@ -89,5 +93,5 @@ public abstract class Entity : MonoBehaviour
 
     public abstract Item GetHandItem();
 
-    public abstract void InventoryChange();
+    public abstract void InventoryChange(Item item, uint count, InventoryChangeEvent eve);
 }

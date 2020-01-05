@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class AnimalEntity : Entity
 {
+    
+    [SerializeField] private AnimalActions[] actions;
 
+    [SerializeField] private int walkRange;
 
-    [SerializeField] AnimalActions[] actions;
-    [SerializeField] int walkRange;
+    [SerializeField] private Item item;
+    [SerializeField] private uint maxItems;
+    [SerializeField] private float itemSpawnTime;
+
+    [SerializeField] private ObjectNotification Notification;
 
     public enum AnimalActions
     {
@@ -17,6 +23,8 @@ public class AnimalEntity : Entity
     public float minTimeBeforeAction;
 
     public float maxTimeBeforeAction;
+
+    private float itemSpawnDelta;
 
     private float actionDelta;
 
@@ -28,6 +36,7 @@ public class AnimalEntity : Entity
     public AnimalEntity() : base(AnimalInventorySize)
     {
         mPreformingAction = false;
+        itemSpawnDelta = itemSpawnTime;
     } 
 
     public void Start()
@@ -51,6 +60,18 @@ public class AnimalEntity : Entity
                 }
             }
         }
+        itemSpawnDelta -= Time.deltaTime;
+        if (itemSpawnDelta < 0)
+        {
+            // Pre Inventory insertion
+            if (!HasItem(item, maxItems))
+            {
+                AddToInventory(item, 1);
+            }
+            // Post inventory insertion
+            Notification.DisplayNotification(HasItem(item, maxItems));
+            itemSpawnDelta = itemSpawnTime;
+        }
     }
     
     public override Item GetHandItem()
@@ -58,7 +79,7 @@ public class AnimalEntity : Entity
         return inventory[0];
     }
 
-    public override void InventoryChange()
+    public override void InventoryChange(Item item, uint count, InventoryChangeEvent eve)
     {
 
     }

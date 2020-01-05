@@ -28,7 +28,7 @@ public class Character : Entity
                     mSelectedItem = -1;
                 else
                     mSelectedItem = i;
-                InventoryChange();
+                UpdateBar();
             }
         }
     }
@@ -43,12 +43,13 @@ public class Character : Entity
         if (mSelectedItem<0) return null;
         return inventory[mSelectedItem];
     }
-    public override void InventoryChange()
+
+    private void UpdateBar()
     {
-        if (inventory.Length <=0) return;
+        if (inventory.Length <= 0) return;
         for (int i = 0; i < mUiItemBar.Length; i++)
         {
-            if (inventory[i] != null) 
+            if (inventory[i] != null)
             {
                 mUiItemBar[i].AddItem(inventory[i].itemSprite, inventory[i].count);
             }
@@ -58,7 +59,11 @@ public class Character : Entity
             }
             mUiItemBar[i].SetSelectedState(mSelectedItem == i);
         }
+    }
 
-
+    public override void InventoryChange(Item item, uint count, InventoryChangeEvent eve)
+    {
+        if(eve== InventoryChangeEvent.Add)  Environment.instance.AddItemToPickupUI(item.itemName, count, item.itemSprite);
+        UpdateBar();
     }
 }

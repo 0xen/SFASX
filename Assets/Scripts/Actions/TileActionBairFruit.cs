@@ -17,6 +17,8 @@ public class TileActionBairFruit : TileAction
     [SerializeField] private int maxFruit;
     [SerializeField] private float collectionTime;
 
+    [SerializeField] private ObjectNotification Notification;
+
     [System.Serializable]
     public struct Pickup
     {
@@ -81,6 +83,7 @@ public class TileActionBairFruit : TileAction
             }
             Destroy(m_aliveFruit[i]);
             m_aliveFruit.RemoveAt(i);
+            Notification.DisplayNotification(false);
             yield return new WaitForSeconds(collectionTime);
         }
     }
@@ -116,7 +119,11 @@ public class TileActionBairFruit : TileAction
             m_aliveFruit.Add(fruit);
 
         }
-        if(m_aliveFruit.Count > maxFruit)
+        if (m_aliveFruit.Count == maxFruit)
+        {
+            Notification.DisplayNotification(true);
+        }
+        else if (m_aliveFruit.Count > maxFruit)
         {
             Destroy(m_aliveFruit[0]);
             m_aliveFruit.RemoveAt(0);
