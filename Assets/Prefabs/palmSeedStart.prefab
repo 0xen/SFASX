@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Visited: 0
-  Type: 1
+  Type: 2
 --- !u!65 &4624052423093064852
 BoxCollider:
   m_ObjectHideFlags: 0

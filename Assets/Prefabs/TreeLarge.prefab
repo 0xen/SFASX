@@ -123,8 +123,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   environmentTile: {fileID: 0}
+  amountNeeded: 0
   item: {fileID: 0}
-  actionName: Gather
+  actionName: Chop
   GatherTime: 3
   replacmentTile:
   - {fileID: 4499036324842488966, guid: cd048cafd4c60d14d81bdb56cdb167ef, type: 3}
