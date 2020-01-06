@@ -47,6 +47,7 @@ public class TileActionWalk : TileAction
 
     public static IEnumerator DoGoTo(Entity entity, float NodeMoveTime, List<EnvironmentTile> route)
     {
+        entity.ChangeAnimation(AnimationStates.Walking);
         // Move through each tile in the given route
         if (route != null)
         {
@@ -59,6 +60,7 @@ public class TileActionWalk : TileAction
                 position = next;
             }
         }
+        entity.ChangeAnimation(AnimationStates.Idle);
     }
 
     public override bool Valid(Entity entity)

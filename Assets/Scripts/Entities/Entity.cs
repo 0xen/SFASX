@@ -116,5 +116,7 @@ public abstract class Entity : MonoBehaviour
 
     public abstract Item GetHandItem();
 
+    public abstract void ChangeAnimation(AnimationStates state);
+
     public abstract void InventoryChange(Item item, uint count, InventoryChangeEvent eve);
 }

@@ -62,6 +62,10 @@ public class AnimalEntity : Entity
     {
 
     }
+    public override void ChangeAnimation(AnimationStates state)
+    {
+
+    }
 
     public void Walk(int range)
     {

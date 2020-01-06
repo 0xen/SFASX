@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEditor.Animations;
 
 public class Character : Entity
 {
@@ -13,11 +14,18 @@ public class Character : Entity
 
     private List<TileAction> actionQue;
 
+    private Animator mAnimationController;
+
     public Character() : base(CharacterInventorySize)
     {
         mUiItemBar = null;
         mSelectedItem = -1;
         actionQue = new List<TileAction>();
+    }
+
+    public void Start()
+    {
+        mAnimationController = GetComponent<Animator>();
     }
 
     public void AddActionToQue(TileAction action)
@@ -127,6 +135,29 @@ public class Character : Entity
             }
             mUiItemBar[i].SetSelectedState(mSelectedItem == i);
         }
+    }
+
+    public override void ChangeAnimation(AnimationStates state)
+    {
+        switch (state)
+        {
+            case AnimationStates.Idle:
+
+                mAnimationController.SetBool("Walking", false);
+                mAnimationController.SetBool("Gathering", false);
+                break;
+            case AnimationStates.Walking:
+
+                mAnimationController.SetBool("Walking", true);
+                mAnimationController.SetBool("Gathering", false);
+                break;
+            case AnimationStates.Gathering:
+                mAnimationController.SetBool("Walking", false);
+                mAnimationController.SetBool("Gathering", true);
+                break;
+
+        }
+
     }
 
     public override void InventoryChange(Item item, uint count, InventoryChangeEvent eve)

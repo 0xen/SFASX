@@ -51,6 +51,7 @@ public class TileActionGather : TileAction
 
     public IEnumerator DoGather(Entity entity, EnvironmentTile tile)
     {
+        entity.ChangeAnimation(AnimationStates.Gathering);
         // Turn towards the tile
         entity.transform.rotation = Quaternion.LookRotation(tile.Position - entity.CurrentPosition.Position, Vector3.up);
 
@@ -77,6 +78,7 @@ public class TileActionGather : TileAction
         else
         {
             entity.ResetAction();
+            entity.ChangeAnimation(AnimationStates.Idle);
         }
 
     }
