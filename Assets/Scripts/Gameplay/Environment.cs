@@ -573,7 +573,7 @@ public class Environment : MonoBehaviour
                     if (mMap[xa][ya].Type == EnvironmentTile.TileType.Accessible)
                         tile.Connections.Add(mMap[xa][ya]);
                 }
-                else// Check all diagonal tile instances
+                /*else// Check all diagonal tile instances
                 {
                     // Make sure the diagonal tile is considered accessible
                     if (mMap[xa][ya] != null && mMap[xa][ya].Type == EnvironmentTile.TileType.Accessible)
@@ -588,7 +588,7 @@ public class Environment : MonoBehaviour
                             tile.Connections.Add(mMap[xa][ya]);
                         }
                     }
-                }
+                }*/
             }
         }
     }

@@ -27,17 +27,17 @@ public abstract class Entity : MonoBehaviour
         mAction = null;
     }
 
-    public void SetCurrentAction(TileAction action)
-    {
-        mAction = action;
-    }
-
     public TileAction GetCurrentAction()
     {
         return mAction;
     }
 
-    public void ResetAction()
+    public virtual void SetCurrentAction(TileAction action)
+    {
+        mAction = action;
+    }
+
+    public virtual void ResetAction()
     {
         mAction = null;
     }

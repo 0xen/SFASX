@@ -112,8 +112,28 @@ public class TileActionPlaceEarth : TileAction
         entity.ResetAction();
         PostRun(entity);
     }
+
+    // Make sure that at least one of the touching tiles is land
     public override bool Valid(Entity entity)
     {
-        return Environment.instance.mWaterMap[environmentTile.PositionTile.x, environmentTile.PositionTile.y] && base.Valid(entity);
+        EnvironmentTile tile = environmentTile;
+        // Is the current tile water
+        if (!Environment.instance.mWaterMap[tile.PositionTile.x, tile.PositionTile.y] || !base.Valid(entity)) return false;
+
+        int xMin = (tile.PositionTile.x - 1 < 0) ? 0 : tile.PositionTile.x - 1;
+        int yMin = (tile.PositionTile.y - 1 < 0) ? 0 : tile.PositionTile.y - 1;
+        int xMax = (tile.PositionTile.x + 1 < Environment.instance.mMapGenerationPayload.size.x) ? (tile.PositionTile.x + 1) : (Environment.instance.mMapGenerationPayload.size.x - 1);
+        int yMax = (tile.PositionTile.y + 1 < Environment.instance.mMapGenerationPayload.size.y) ? (tile.PositionTile.y + 1) : (Environment.instance.mMapGenerationPayload.size.x - 1);
+
+        // Check the 4 edges of the water tile for land
+        if (!Environment.instance.mWaterMap[xMin, tile.PositionTile.y] ||
+            !Environment.instance.mWaterMap[xMax, tile.PositionTile.y] ||
+            !Environment.instance.mWaterMap[tile.PositionTile.x, yMin] ||
+            !Environment.instance.mWaterMap[tile.PositionTile.x, yMax])
+        {
+            return true;
+        }
+
+        return false;
     }
 }

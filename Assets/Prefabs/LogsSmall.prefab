@@ -122,7 +122,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7d0e301717a5334fa4aed42e97f383c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  environmentTile: {fileID: 0}
+  environmentTile: {fileID: 7228575818001999334}
+  amountNeeded: 0
   item: {fileID: 0}
   actionName: Gather
   GatherTime: 1.5

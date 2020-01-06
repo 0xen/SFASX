@@ -29,16 +29,53 @@ public class Character : Entity
             ClearActionQue();
             ResetAction();
         }
-        actionQue.Add(action);
+        // We must instantiate a instance of the current action.
+        // The reason for this is a edge case when you have a item action that has reference to a tile,
+        // then you select the option multiple times. Only the last one will be recognized and the
+        // tile highlighting will go crazy as it is pointing to unknown tiles
+        actionQue.Add(TileAction.Instantiate(action));
     }
 
     public void ClearActionQue()
     {
+        foreach (TileAction action in actionQue)
+        {
+            action.environmentTile.SetTint(Color.white);
+        }
         actionQue.Clear();
+    }
+
+    public override void SetCurrentAction(TileAction action)
+    {
+        if (mAction != null)
+        {
+            mAction.environmentTile.SetTint(Color.white);
+        }
+        base.SetCurrentAction(action);
+    }
+
+    public override void ResetAction()
+    {
+        if (mAction != null)
+        {
+            mAction.environmentTile.SetTint(Color.white);
+        }
+        base.ResetAction();
     }
 
     private void Update()
     {
+
+        for (int i = actionQue.Count - 1; i >= 0; i--)
+        {
+            if (actionQue[i] == null || actionQue[i].environmentTile == null)
+            {
+                actionQue.RemoveAt(i);
+                continue;
+            }
+            actionQue[i].environmentTile.SetTint(new Color(0.0f, 0.75f, 0.75f));
+        }
+
         if (!HasAction())
         {
             if (actionQue.Count > 0)
@@ -47,6 +84,10 @@ public class Character : Entity
                 actionQue.RemoveAt(0);
                 GetCurrentAction().Run(this);
             }
+        }
+        else
+        {
+            mAction.environmentTile.SetTint(new Color(0.0f, 0.75f, 0.1f));
         }
 
         if (mUiItemBar == null) return;

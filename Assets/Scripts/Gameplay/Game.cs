@@ -256,19 +256,10 @@ public class Game : MonoBehaviour
 
                 AttachTileActionsToSelector(tile.GetComponents<TileAction>(), tile);
 
-                if (mCharacter.GetHandItem() != null)
+                Item item = mCharacter.GetHandItem();
+                if (item != null)
                 {
-                    Item item = mCharacter.GetHandItem();
-                    foreach (var component in item.GetComponents<TileAction>())
-                    {
-                        component.environmentTile = tile;
-
-                        if (component.Valid(mCharacter))
-                        {
-                            ActionSelector.actions.Add(component);
-                        }
-
-                    }
+                    AttachTileActionsToSelector(item.GetComponents<TileAction>(), tile);
                 }
             }
         }

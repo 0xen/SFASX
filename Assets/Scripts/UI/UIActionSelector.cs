@@ -111,7 +111,7 @@ public class UIActionSelector : Graphic
         else
         {
             mCharacter.ClearActionQue();
-            mCharacter.ResetAction();
+            mCharacter.SetCurrentAction(action);
             action.Run(mCharacter);
         }
     }
