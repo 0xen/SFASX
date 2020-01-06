@@ -82,7 +82,7 @@ public abstract class Entity : MonoBehaviour
                 hasEmptySpace = true;
                 continue;
             }
-            if(inventory[i] == item)
+            if(inventory[i].itemName == item.itemName)
             {
                 inventory[i].count += count;
                 InventoryChange(item, count, InventoryChangeEvent.Add);
@@ -101,7 +101,7 @@ public abstract class Entity : MonoBehaviour
     {
         for (int i = 0; i < inventory.Length; i++)
         {
-            if (inventory[i] == item && inventory[i].count >= amount)
+            if (inventory[i]!=null && inventory[i].itemName == item.itemName && inventory[i].count >= amount)
             {
                 inventory[i].count-= amount;
                 if (inventory[i].count == 0)

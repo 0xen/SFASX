@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 809708797191443633}
   - component: {fileID: 7900902538975448714}
   - component: {fileID: 8107928514757293502}
+  - component: {fileID: 664770762131273425}
   m_Layer: 0
   m_Name: Pig
   m_TagString: Untagged
@@ -143,6 +144,26 @@ MonoBehaviour:
   Notification: {fileID: 6735668505486890315}
   ItemCount: 4
   KillOnGather: 1
+--- !u!114 &664770762131273425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 809708797198837617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06613980bd7f8b04abfc74c8f9f2e196, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  environmentTile: {fileID: 0}
+  amountNeeded: 0
+  item: {fileID: 0}
+  actionName: Pick Up
+  GatherTime: 0.5
+  GatherEntity: {fileID: 7900902538975448714}
+  EntityItem: {fileID: 8296177897985916695, guid: bb46ee49b650f424981815fff4e5898c,
+    type: 3}
 --- !u!1001 &2391013747337177302
 PrefabInstance:
   m_ObjectHideFlags: 0

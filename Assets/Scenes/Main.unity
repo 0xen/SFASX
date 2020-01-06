@@ -6261,15 +6261,15 @@ MonoBehaviour:
   - name: Animals
     items:
     - buyPrice: 100
-      sellPrice: 0
+      sellPrice: 30
       item: {fileID: 8922202913070996972, guid: 84f596a21ae0b844bad010ffb4d27db1,
         type: 3}
     - buyPrice: 150
-      sellPrice: 0
+      sellPrice: 50
       item: {fileID: 5505882069553148232, guid: b23826146f5af66409bf7e82eb031335,
         type: 3}
     - buyPrice: 200
-      sellPrice: 0
+      sellPrice: 60
       item: {fileID: 6207524583372306475, guid: 7734198a543df544bb6f77c66e1af575,
         type: 3}
 --- !u!1 &2083344929

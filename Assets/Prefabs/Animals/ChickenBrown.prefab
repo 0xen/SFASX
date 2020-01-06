@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1925250999730293944}
   - component: {fileID: -4537713324124862065}
   - component: {fileID: 1581440995401694421}
+  - component: {fileID: 5527223494586757016}
   m_Layer: 0
   m_Name: ChickenBrown
   m_TagString: Untagged
@@ -142,6 +143,27 @@ MonoBehaviour:
   GatherEntity: {fileID: -4537713324124862065}
   Notification: {fileID: 9123286104485878635}
   ItemCount: 1
+  KillOnGather: 0
+--- !u!114 &5527223494586757016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1925250999739662200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06613980bd7f8b04abfc74c8f9f2e196, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  environmentTile: {fileID: 0}
+  amountNeeded: 0
+  item: {fileID: 0}
+  actionName: Pick Up
+  GatherTime: 0.5
+  GatherEntity: {fileID: -4537713324124862065}
+  EntityItem: {fileID: 8922202913070996972, guid: 84f596a21ae0b844bad010ffb4d27db1,
+    type: 3}
 --- !u!1001 &201286338080532214
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -29,11 +29,7 @@ public class Character : Entity
             ClearActionQue();
             ResetAction();
         }
-        // We must instantiate a instance of the current action.
-        // The reason for this is a edge case when you have a item action that has reference to a tile,
-        // then you select the option multiple times. Only the last one will be recognized and the
-        // tile highlighting will go crazy as it is pointing to unknown tiles
-        actionQue.Add(TileAction.Instantiate(action));
+        actionQue.Add(action);
     }
 
     public void ClearActionQue()

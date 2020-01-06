@@ -58,6 +58,7 @@ public class SpawnEntity : TileAction
         }
 
 
+        entity.ResetAction();
     }
 
     public override bool Valid(Entity entity)
