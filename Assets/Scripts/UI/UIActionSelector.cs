@@ -26,7 +26,8 @@ public class UIActionSelector : Graphic
     // Store how far the button has bounced for rendering
     private float mBounceOffset;
 
-    // All actions that are avalaibe to the selector wheel
+    public Character mCharacter;
+    
     public List<TileAction> actions;
 
     // The current active selection
@@ -86,16 +87,16 @@ public class UIActionSelector : Graphic
     }
 
     // Defines a click on the UI and runs the appropriate action function
-    public void Select(Character character)
+    public void Select()
     {
         if (actions.Count > 0 && !selectorCanvas.enabled)
         {
-            actions[0].Run(character);
+            mCharacter.AddActionToQue(actions[0]);
             return;
         }
         if (mSelection >= actions.Count || mSelection < 0) return;
 
-        actions[mSelection].Run(character);
+        mCharacter.AddActionToQue(actions[mSelection]);
     }
 
     // Generate Vertex data for the current segment

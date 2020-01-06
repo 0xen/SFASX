@@ -27,6 +27,10 @@ public class TileActionRotate : TileAction
             entity.StopAllCoroutines();
             entity.StartCoroutine(DoWalkAndReplace(entity, route, environmentTile));
         }
+        else
+        {
+            entity.ResetAction();
+        }
     }
 
     private IEnumerator DoWalkAndReplace(Entity entity, List<EnvironmentTile> route, EnvironmentTile tile)
@@ -41,10 +45,12 @@ public class TileActionRotate : TileAction
         // Turn the player towards the object
         entity.transform.rotation = Quaternion.LookRotation(tile.Position - entity.CurrentPosition.Position, Vector3.up);
 
+        yield return new WaitForSeconds(rotateTime);
+
         // Rotate the tile 90 degrees clockwise
         Environment.instance.SetTileRotation(ref tile, (tile.Rotation + 1) % 4);
         
-        yield return new WaitForSeconds(rotateTime);
+        entity.ResetAction();
     }
 
     public override bool Valid(Entity entity)

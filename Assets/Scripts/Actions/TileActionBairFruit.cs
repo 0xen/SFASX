@@ -58,6 +58,10 @@ public class TileActionBairFruit : TileAction
             entity.StopAllCoroutines();
             entity.StartCoroutine(DoWalkAndCollect(entity, route, environmentTile));
         }
+        else
+        {
+            entity.ResetAction();
+        }
     }
 
     private IEnumerator DoWalkAndCollect(Entity entity, List<EnvironmentTile> route, EnvironmentTile tile)
@@ -86,6 +90,7 @@ public class TileActionBairFruit : TileAction
             Notification.DisplayNotification(false);
             yield return new WaitForSeconds(collectionTime);
         }
+        entity.ResetAction();
     }
 
     public override bool Valid(Entity entity)

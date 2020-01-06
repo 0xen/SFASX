@@ -78,6 +78,7 @@ public class Game : MonoBehaviour
         mMouseHoldTime = 0.0f;
         mInterfaceState = 0;
         ActionSelector.SetEnabled(false);
+        ActionSelector.mCharacter = mCharacter;
         Generate();
         CameraController.SetFollowing(true);
     }
@@ -178,7 +179,7 @@ public class Game : MonoBehaviour
         }
         if (Input.GetMouseButtonUp(0))
         {
-            ActionSelector.Select(mCharacter);
+            ActionSelector.Select();
             if (HasBit(mInterfaceState, (int)InterfaceState.ActionSelector))
             {
                 ToggleState(InterfaceState.ActionSelector);

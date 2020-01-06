@@ -15,7 +15,7 @@ public class TileActionWalk : TileAction
         List<EnvironmentTile> route = Environment.instance.Solve(entity.CurrentPosition, environmentTile);
 
         entity.StopAllCoroutines();
-        entity.StartCoroutine(DoGoTo(entity, entity.GetMovmentSpeed(), route));
+        entity.StartCoroutine(DoGoToLocal(entity, entity.GetMovmentSpeed(), route));
     }
 
     private static IEnumerator DoMove(Entity entity, float entityMovmentPerSeccond, Vector3 position, Vector3 destination)
@@ -37,6 +37,12 @@ public class TileActionWalk : TileAction
                 yield return null;
             }
         }
+    }
+
+    private IEnumerator DoGoToLocal(Entity entity, float NodeMoveTime, List<EnvironmentTile> route)
+    {
+        yield return DoGoTo(entity, NodeMoveTime, route);
+        entity.ResetAction();
     }
 
     public static IEnumerator DoGoTo(Entity entity, float NodeMoveTime, List<EnvironmentTile> route)

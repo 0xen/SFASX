@@ -11,15 +11,46 @@ public class Character : Entity
 
     private ItemSlotController[] mUiItemBar;
 
+    private List<TileAction> actionQue;
+
     public Character() : base(CharacterInventorySize)
     {
         mUiItemBar = null;
         mSelectedItem = -1;
+        actionQue = new List<TileAction>();
+    }
+
+    public void AddActionToQue(TileAction action)
+    {
+        TileActionWalk walkAction = action as TileActionWalk;
+        // If the new task is a walk task, calcel all previous tasks
+        if (walkAction != null)
+        {
+            ClearActionQue();
+            ResetAction();
+        }
+        actionQue.Add(action);
+    }
+
+    public void ClearActionQue()
+    {
+        actionQue.Clear();
     }
 
     private void Update()
     {
+        if (!HasAction())
+        {
+            if (actionQue.Count > 0)
+            {
+                SetCurrentAction(actionQue[0]);
+                actionQue.RemoveAt(0);
+                GetCurrentAction().Run(this);
+            }
+        }
+
         if (mUiItemBar == null) return;
+
         for(int i = 0; i < mUiItemBar.Length; i++)
         {
             if(Input.GetKeyDown(KeyCode.Alpha1 + i))

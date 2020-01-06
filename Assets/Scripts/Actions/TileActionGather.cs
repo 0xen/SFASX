@@ -37,6 +37,10 @@ public class TileActionGather : TileAction
             entity.StopAllCoroutines();
             entity.StartCoroutine(DoWalkAndGather(entity, route, environmentTile));
         }
+        else
+        {
+            entity.ResetAction();
+        }
     }
 
     private IEnumerator DoWalkAndGather(Entity entity, List<EnvironmentTile> route, EnvironmentTile tile)
@@ -52,7 +56,6 @@ public class TileActionGather : TileAction
 
 
         yield return new WaitForSeconds(GatherTime);
-        Debug.Log("Time To Gather");
         GameObject newObject = Environment.instance.ReplaceEnviromentTile(tile, replacmentTile[Random.Range(0, replacmentTile.Length)]);
 
 
@@ -67,7 +70,12 @@ public class TileActionGather : TileAction
         if(newObject.GetComponent<TileActionGather>())
         {
             TileActionGather newGatherAction = newObject.GetComponent<TileActionGather>();
+            entity.SetCurrentAction(newGatherAction);
             yield return newGatherAction.DoGather(entity, newObject.GetComponent<EnvironmentTile>());
+        }
+        else
+        {
+            entity.ResetAction();
         }
 
     }

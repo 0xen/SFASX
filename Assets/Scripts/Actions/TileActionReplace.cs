@@ -30,6 +30,10 @@ public class TileActionReplace : TileAction
             entity.StopAllCoroutines();
             entity.StartCoroutine(DoWalkAndReplace(entity, route, environmentTile));
         }
+        else
+        {
+            entity.ResetAction();
+        }
     }
 
     private IEnumerator DoWalkAndReplace(Entity entity, List<EnvironmentTile> route, EnvironmentTile tile)
@@ -59,7 +63,8 @@ public class TileActionReplace : TileAction
                 }
             }
         }
-        
+        entity.ResetAction();
+
     }
     public override bool Valid(Entity entity)
     {

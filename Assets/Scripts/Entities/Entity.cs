@@ -18,10 +18,33 @@ public abstract class Entity : MonoBehaviour
 
     public float movmentSpeed;
 
+    protected TileAction mAction;
+
     public Entity(int inventorySize)
     {
         InventorySize = inventorySize;
         inventory = new Item[InventorySize];
+        mAction = null;
+    }
+
+    public void SetCurrentAction(TileAction action)
+    {
+        mAction = action;
+    }
+
+    public TileAction GetCurrentAction()
+    {
+        return mAction;
+    }
+
+    public void ResetAction()
+    {
+        mAction = null;
+    }
+
+    public bool HasAction()
+    {
+        return mAction != null;
     }
 
     public float GetMovmentSpeed()

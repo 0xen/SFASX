@@ -15,7 +15,6 @@ public abstract class TileAction : MonoBehaviour
 
     public TileAction()
     {
-
     }
     public TileAction(string _name)
     {

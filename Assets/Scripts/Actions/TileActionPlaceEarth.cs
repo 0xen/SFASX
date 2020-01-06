@@ -29,6 +29,10 @@ public class TileActionPlaceEarth : TileAction
             entity.StopAllCoroutines();
             entity.StartCoroutine(DoWalkAndPlant(entity, route, environmentTile));
         }
+        else
+        {
+            entity.ResetAction();
+        }
     }
 
     private IEnumerator DoWalkAndPlant(Entity entity, List<EnvironmentTile> route, EnvironmentTile tile)
@@ -105,6 +109,7 @@ public class TileActionPlaceEarth : TileAction
 
 
 
+        entity.ResetAction();
         PostRun(entity);
     }
     public override bool Valid(Entity entity)
