@@ -66,8 +66,9 @@ public class TileActionGather : TileAction
                 // Drop item on ground
             }
         }
-        
-        if(newObject.GetComponent<TileActionGather>())
+        Environment.instance.notificationHandler.AddNotification(ref LandmarkNotification.GatherResources, "Resources can be sold to the shop to buy more usefull items such as animals or seeds");
+
+        if (newObject.GetComponent<TileActionGather>())
         {
             TileActionGather newGatherAction = newObject.GetComponent<TileActionGather>();
             entity.SetCurrentAction(newGatherAction);

@@ -48,10 +48,9 @@ public class TileActionPlaceEarth : TileAction
         entity.transform.rotation = Quaternion.LookRotation(tile.Position - entity.CurrentPosition.Position, Vector3.up);
 
         yield return new WaitForSeconds(placeTime);
-        Debug.Log("Time To Plant");
 
         Environment.instance.ReplaceEnviromentTile(tile, replacmentTile);
-        Environment.instance.mWaterMap[environmentTile.PositionTile.x, environmentTile.PositionTile.y] = false;
+        Environment.instance.mWaterMap[tile.PositionTile.x, tile.PositionTile.y] = false;
 
         {
             int xPadding = 1;
@@ -108,6 +107,7 @@ public class TileActionPlaceEarth : TileAction
         }
 
 
+       // Environment.instance.notificationHandler.AddNotification(ref LandmarkNotification.ReclaimingLand, "Resources can be sold to the shop to buy more usefull items such as animals or seeds");
 
         entity.ResetAction();
         PostRun(entity);

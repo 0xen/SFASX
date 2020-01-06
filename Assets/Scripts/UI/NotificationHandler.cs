@@ -71,9 +71,26 @@ public class NotificationHandler : MonoBehaviour
         mStoredText.Add(text);
     }
 
+    public void AddNotification(string[] text)
+    {
+        foreach(string s in text)
+        {
+            mStoredText.Add(s);
+        }
+    }
+
     public void AddNotification(ref bool notAlreadySeen, string text)
     {
-        if(!notAlreadySeen)
+        if (!notAlreadySeen)
+        {
+            AddNotification(text);
+            notAlreadySeen = true;
+        }
+    }
+
+    public void AddNotification(ref bool notAlreadySeen, string[] text)
+    {
+        if (!notAlreadySeen)
         {
             AddNotification(text);
             notAlreadySeen = true;
