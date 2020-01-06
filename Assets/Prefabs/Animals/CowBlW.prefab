@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3196724981688493675}
   - component: {fileID: 3196724981695974251}
   - component: {fileID: 8368044451791982087}
+  - component: {fileID: 3586294941815809951}
   m_Layer: 0
   m_Name: CowBlW
   m_TagString: Untagged
@@ -117,12 +118,30 @@ MonoBehaviour:
   movmentSpeed: 10
   actions: 00000000
   walkRange: 3
-  item: {fileID: 769755611341318568, guid: 54df903be1ecc2e4694b4f969f597952, type: 3}
-  maxItems: 3
-  itemSpawnTime: 60
-  Notification: {fileID: 3910534733907139790}
   minTimeBeforeAction: 3
   maxTimeBeforeAction: 6
+--- !u!114 &3586294941815809951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3196724981686499499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eab213b085019c1419592e2fc9ee705e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  environmentTile: {fileID: 0}
+  amountNeeded: 0
+  item: {fileID: 769755611341318568, guid: 54df903be1ecc2e4694b4f969f597952, type: 3}
+  actionName: Collect Milk
+  GatherTime: 0.5
+  maxItems: 4
+  itemSpawnTime: 60
+  GatherEntity: {fileID: 8368044451791982087}
+  Notification: {fileID: 3910534733907139790}
+  ItemCount: 1
 --- !u!1001 &5337453970641264979
 PrefabInstance:
   m_ObjectHideFlags: 0

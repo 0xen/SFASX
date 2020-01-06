@@ -49,11 +49,11 @@ public class SpawnEntity : TileAction
 
                 Entity ent = GameObject.Instantiate(entityPrefab, Environment.instance.transform);
 
+                Environment.instance.RegisterEntity(ent);
+
                 ent.transform.position = tile.Position;
                 ent.transform.rotation = Quaternion.identity;
                 ent.CurrentPosition = tile;
-
-
             }
         }
 

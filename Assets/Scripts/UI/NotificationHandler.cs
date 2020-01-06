@@ -33,6 +33,13 @@ public class NotificationHandler : MonoBehaviour
         {
             notificationOpenButton.gameObject.SetActive(true);
         }
+        else
+        {
+            if (notificationPanel.activeSelf)
+            {
+                ToggleNotification();
+            }
+        }
         if (notificationPanel.activeSelf)
         {
             previousButton.gameObject.SetActive(mCurrentPage > 0);
@@ -62,6 +69,15 @@ public class NotificationHandler : MonoBehaviour
     public void AddNotification(string text)
     {
         mStoredText.Add(text);
+    }
+
+    public void AddNotification(ref bool notAlreadySeen, string text)
+    {
+        if(!notAlreadySeen)
+        {
+            AddNotification(text);
+            notAlreadySeen = true;
+        }
     }
 
     public void Back()

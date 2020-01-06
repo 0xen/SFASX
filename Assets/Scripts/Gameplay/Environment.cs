@@ -25,7 +25,7 @@ public class Environment : MonoBehaviour
         public List<TileInstance> tiles;
     }
     [Header("World Tiles")]
-    [SerializeField] private WorldTiles[] WorldTileGroups;
+    [SerializeField] private WorldTiles[] WorldTileGroups = null;
 
     private Dictionary<EnvironmentTile.TileType, WorldTiles> mTiles; 
 
@@ -39,7 +39,7 @@ public class Environment : MonoBehaviour
         public bool[] Connectors;
     }
     [Header("Water Tile Configuration")]
-    [SerializeField] private List<WaterTile> WaterTiles;
+    [SerializeField] private List<WaterTile> WaterTiles = null;
 
     public struct WaterTileSearchResult
     {
@@ -51,11 +51,13 @@ public class Environment : MonoBehaviour
     [SerializeField] public int seaDeapth;
 
     [Header("Shading")]
-    [SerializeField] private Shader TintShader;
+    [SerializeField] private Shader TintShader = null;
 
     [Header("UI")]
-    [SerializeField] private GameObject ItemPickupUIParent;
-    [SerializeField] private ItemPickupUi ItemPickupUIInstance;
+    [SerializeField] private GameObject ItemPickupUIParent = null;
+    [SerializeField] private ItemPickupUi ItemPickupUIInstance = null;
+
+    public NotificationHandler notificationHandler = null;
 
 
     public EnvironmentTile[][] mMap;
@@ -64,6 +66,8 @@ public class Environment : MonoBehaviour
     private List<EnvironmentTile> mAll;
     private List<EnvironmentTile> mToBeTested;
     private List<EnvironmentTile> mLastSolution;
+
+    private List<Entity> mEntities;
 
     private readonly Vector3 NodeSize = Vector3.one * 9.0f; 
     private const float TileSize = 10.0f;
@@ -93,6 +97,7 @@ public class Environment : MonoBehaviour
     {
         instance = this;
         mAll = new List<EnvironmentTile>();
+        mEntities = new List<Entity>();
         mToBeTested = new List<EnvironmentTile>();
         mTiles = new Dictionary<EnvironmentTile.TileType, WorldTiles>();
         SetupTileGroups();
@@ -101,6 +106,35 @@ public class Environment : MonoBehaviour
     public Character GetCharacter()
     {
         return mCharacter;
+    }
+
+    public void RegisterEntity(Entity entity)
+    {
+        mEntities.Add(entity);
+    }
+
+    public Entity[] GetEntitiesAt(Vector2Int position)
+    {
+        List<Entity> entities = new List<Entity>();
+        foreach(Entity e in mEntities)
+        {
+            if(e.CurrentPosition.PositionTile == position)
+            {
+                entities.Add(e);
+            }
+        }
+
+        return entities.ToArray();
+    }
+
+    public Entity[] GetEntities()
+    {
+        return mEntities.ToArray();
+    }
+
+    public void RemoveEntity(Entity entity)
+    {
+        mEntities.Remove(entity);
     }
 
     // Organise the tile map groups into a faster to search format and resolve odds of choosing tiles/groups

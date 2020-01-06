@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1925250999737393592}
   - component: {fileID: 1925250999730293944}
   - component: {fileID: -4537713324124862065}
+  - component: {fileID: 1581440995401694421}
   m_Layer: 0
   m_Name: ChickenBrown
   m_TagString: Untagged
@@ -117,12 +118,30 @@ MonoBehaviour:
   movmentSpeed: 10
   actions: 00000000
   walkRange: 3
-  item: {fileID: 7831532365826899572, guid: cb7f9777d4d3c7043a7940a35d9d082c, type: 3}
-  maxItems: 3
-  itemSpawnTime: 60
-  Notification: {fileID: 9123286104485878635}
   minTimeBeforeAction: 3
   maxTimeBeforeAction: 6
+--- !u!114 &1581440995401694421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1925250999739662200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eab213b085019c1419592e2fc9ee705e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  environmentTile: {fileID: 0}
+  amountNeeded: 0
+  item: {fileID: 7831532365826899572, guid: cb7f9777d4d3c7043a7940a35d9d082c, type: 3}
+  actionName: Collect Eggs
+  GatherTime: 0.5
+  maxItems: 3
+  itemSpawnTime: 60
+  GatherEntity: {fileID: -4537713324124862065}
+  Notification: {fileID: 9123286104485878635}
+  ItemCount: 1
 --- !u!1001 &201286338080532214
 PrefabInstance:
   m_ObjectHideFlags: 0

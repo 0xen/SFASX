@@ -22,6 +22,8 @@ public class Game : MonoBehaviour
 
     [SerializeField] private Light DirectionalLight = null;
     [SerializeField] private float DayLength = 120;
+    [SerializeField] private NotificationHandler NotificationHandler;
+    [SerializeField] private TextMeshProUGUI TimeText;
 
 
     [SerializeField] private GameObject UiItemMenuBar;
@@ -73,6 +75,8 @@ public class Game : MonoBehaviour
             recTransform.localPosition = new Vector3(recTransform.position.x, recTransform.position.y, 0);
         }
 
+        NotificationHandler.AddNotification(ref LandmarkNotification.NewGame, "Welcome to ####, throughout your time here, you will receive tips and tricks that will appear here!");
+
         mCharacter.SetUIItemBar(mUiItemBar);
         CameraController.Character = mCharacter;
         mMouseHoldTime = 0.0f;
@@ -93,6 +97,18 @@ public class Game : MonoBehaviour
         }
 
         {
+            // Change Time
+
+            float timeFraction = mDayTime / DayLength;
+            // Ofset the hours by 8 as the sun starts at a slightly rising angle
+            int hour = (8 + (int)(24 * timeFraction)) % 24;
+            // Get the hour in 12 hour format
+            int hourTwelve = (hour % 12);
+            // If we get a 0, we need to set it to 12
+            if (hourTwelve == 0) hourTwelve = 12;
+            // Get the total amount of 10 minutes in a day as we only need to change the tens part of the minute text
+            int min = (int)((24 * 6) * timeFraction) % 6;
+            TimeText.text = hourTwelve + ":" + min + "0 " + (hour > 11 ? "pm" : "am");
 
 
 
@@ -177,6 +193,7 @@ public class Game : MonoBehaviour
             // Find out what actions are available from the current location and store them
             GatherActionList();
         }
+
         if (Input.GetMouseButtonUp(0))
         {
             ActionSelector.Select();
@@ -199,6 +216,18 @@ public class Game : MonoBehaviour
         }
     }
 
+    private void AttachTileActionsToSelector(TileAction[] actions, EnvironmentTile tile)
+    {
+        foreach (var action in actions)
+        {
+            action.environmentTile = tile;
+            if (action.Valid(mCharacter))
+            {
+                ActionSelector.actions.Add(action);
+            }
+        }
+    }
+
     void GatherActionList()
     {
         ActionSelector.actions.Clear();
@@ -214,14 +243,16 @@ public class Game : MonoBehaviour
 
             if (tile != null)
             {
-                foreach (var component in tile.GetComponents<TileAction>())
+
+                Entity[] entitiesOnTile = Environment.instance.GetEntitiesAt(tile.PositionTile);
+
+                foreach (Entity e in entitiesOnTile)
                 {
-                    component.environmentTile = tile;
-                    if (component.Valid(mCharacter))
-                    {
-                        ActionSelector.actions.Add(component);
-                    }
+                    AttachTileActionsToSelector(e.GetComponents<TileAction>(), tile);
                 }
+
+                AttachTileActionsToSelector(tile.GetComponents<TileAction>(), tile);
+
                 if (mCharacter.GetHandItem() != null)
                 {
                     Item item = mCharacter.GetHandItem();
