@@ -89,14 +89,31 @@ public class UIActionSelector : Graphic
     // Defines a click on the UI and runs the appropriate action function
     public void Select()
     {
+        TileAction action = null;
         if (actions.Count > 0 && !selectorCanvas.enabled)
         {
-            mCharacter.AddActionToQue(actions[0]);
+            action = actions[0];
+        }
+        else if (mSelection >= actions.Count || mSelection < 0)
+        {
             return;
         }
-        if (mSelection >= actions.Count || mSelection < 0) return;
+        else
+        {
+            action = actions[mSelection];
+        }
+        
 
-        mCharacter.AddActionToQue(actions[mSelection]);
+        if(Input.GetKey(KeyCode.LeftShift))
+        {
+            mCharacter.AddActionToQue(action);
+        }
+        else
+        {
+            mCharacter.ClearActionQue();
+            mCharacter.ResetAction();
+            action.Run(mCharacter);
+        }
     }
 
     // Generate Vertex data for the current segment
