@@ -22,6 +22,7 @@ public class Game : MonoBehaviour
 
     [SerializeField] private Light DirectionalLight = null;
     [SerializeField] private float DayLength = 120;
+    [SerializeField] private float DayStartTime = 0;
     [SerializeField] private NotificationHandler NotificationHandler;
     [SerializeField] private TextMeshProUGUI TimeText;
 
@@ -81,6 +82,7 @@ public class Game : MonoBehaviour
         CameraController.Character = mCharacter;
         mMouseHoldTime = 0.0f;
         mInterfaceState = 0;
+        mDayTime = DayStartTime;
         ActionSelector.SetEnabled(false);
         ActionSelector.mCharacter = mCharacter;
         Generate();
@@ -89,6 +91,7 @@ public class Game : MonoBehaviour
 
     private void Update()
     {
+
         // DayNight Cycle
         mDayTime += Time.deltaTime;
         if (mDayTime > DayLength) 

@@ -5,7 +5,7 @@ using UnityEngine;
 public class StaticMovmentLoop : MonoBehaviour
 {
 
-    [SerializeField] private float speed;
+    [SerializeField] private float speed = 0.0f;
     [SerializeField] private float flyDistance;
     [SerializeField] private Vector3 startPosition;
     [SerializeField] private Vector3 startEulerRotation;

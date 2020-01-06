@@ -2561,6 +2561,7 @@ MonoBehaviour:
   MinMenuOpenTime: 0.45
   DirectionalLight: {fileID: 705507994}
   DayLength: 600
+  DayStartTime: 100
   NotificationHandler: {fileID: 793351654}
   TimeText: {fileID: 2089420812}
   UiItemMenuBar: {fileID: 1801124923}
