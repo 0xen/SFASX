@@ -51,10 +51,11 @@ public class TileActionWalk : TileAction
         // Move through each tile in the given route
         if (route != null)
         {
-            Vector3 position = entity.CurrentPosition.Position;
+            Vector3 position = entity.transform.position;
             for (int count = 0; count < route.Count; ++count)
             {
                 Vector3 next = route[count].Position;
+                next.y = position.y;
                 yield return DoMove(entity, NodeMoveTime, position, next);
                 entity.CurrentPosition = route[count];
                 position = next;

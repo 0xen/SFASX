@@ -69,6 +69,22 @@ public class Character : Entity
 
     private void Update()
     {
+        // Update Animator random animation seed
+        mAnimationController.SetInteger("RandomSeed", Random.Range(0, 100));
+
+        float timerCurrent = mAnimationController.GetFloat("Timer");
+        timerCurrent += Time.deltaTime;
+        if(timerCurrent>1.0f)
+        {
+            timerCurrent -= 1.0f;
+            mAnimationController.SetBool("TimerTrigger", true);
+        }
+        else
+        {
+            mAnimationController.SetBool("TimerTrigger", false);
+        }
+        mAnimationController.SetFloat("Timer", timerCurrent);
+
 
         for (int i = actionQue.Count - 1; i >= 0; i--)
         {

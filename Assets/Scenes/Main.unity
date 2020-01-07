@@ -6406,6 +6406,7 @@ MonoBehaviour:
   ItemPickupUIParent: {fileID: 156133749}
   ItemPickupUIInstance: {fileID: 750368258179646081, guid: 74b7a3cd77dd2da4ab3d552d27efe4e3,
     type: 3}
+  CharacterYOffset: 3
   notificationHandler: {fileID: 793351654}
 --- !u!4 &2083344931
 Transform:

@@ -992,6 +992,7 @@ MonoBehaviour:
   TintShader: {fileID: 4800000, guid: 25c077fcd88dac346a690f368da47d6d, type: 3}
   ItemPickupUIParent: {fileID: 0}
   ItemPickupUIInstance: {fileID: 0}
+  CharacterYOffset: 3
   notificationHandler: {fileID: 0}
 --- !u!4 &1523076609
 Transform:

@@ -57,6 +57,10 @@ public class Environment : MonoBehaviour
     [SerializeField] private GameObject ItemPickupUIParent = null;
     [SerializeField] private ItemPickupUi ItemPickupUIInstance = null;
 
+
+    // Offset as the animator applies a position offset
+    [SerializeField] private float CharacterYOffset = 3.0f;
+
     public NotificationHandler notificationHandler = null;
 
 
@@ -498,7 +502,7 @@ public class Environment : MonoBehaviour
 
         mMap = new EnvironmentTile[Size.x][];
 
-        bool start = true;
+        bool hasStart = true;
 
         for ( int x = 0; x < Size.x; ++x)
         {
@@ -526,10 +530,10 @@ public class Environment : MonoBehaviour
 
 
                 // Choose the first, most south available tile that is accessible to the user to walk on
-                if (start && tile.Type == EnvironmentTile.TileType.Accessible)
+                if (hasStart && tile.Type == EnvironmentTile.TileType.Accessible)
                 {
                     Start = tile;
-                    start = false;
+                    hasStart = false;
                 }
 
 
@@ -626,7 +630,7 @@ public class Environment : MonoBehaviour
 
     private void MovePlayerToStart(Character Character)
     {
-        Character.transform.position = Start.Position;
+        Character.transform.position = Start.Position + new Vector3(0.0f, CharacterYOffset, 0.0f);
         Character.transform.rotation = Quaternion.identity;
         Character.CurrentPosition = Start;
         Character.transform.parent = this.transform;
