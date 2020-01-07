@@ -85,6 +85,7 @@ public class Character : Entity
         }
         mAnimationController.SetFloat("Timer", timerCurrent);
 
+        Debug.Log("Remaining actions:" + actionQue.Count);
 
         for (int i = actionQue.Count - 1; i >= 0; i--)
         {
@@ -158,12 +159,10 @@ public class Character : Entity
         switch (state)
         {
             case AnimationStates.Idle:
-
                 mAnimationController.SetBool("Walking", false);
                 mAnimationController.SetBool("Gathering", false);
                 break;
             case AnimationStates.Walking:
-
                 mAnimationController.SetBool("Walking", true);
                 mAnimationController.SetBool("Gathering", false);
                 break;

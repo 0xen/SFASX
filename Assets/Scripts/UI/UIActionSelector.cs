@@ -44,7 +44,7 @@ public class UIActionSelector : Graphic
 
     public void SetEnabled(bool enabled)
     {
-        if (enabled && actions.Count <= 1) return;
+        if (enabled && actions.Count == 0) return;
         selectorCanvas.enabled = enabled;
     }
 
@@ -82,8 +82,94 @@ public class UIActionSelector : Graphic
             mSelection = -1;
             ActionSelectorLable.text = "";
         }
+
         // Define that the UI element needs updated
         this.SetAllDirty();
+    }
+
+    // Defines a click on the UI and runs the appropriate action function
+    public void Select(Vector2Int start, Vector2Int end)
+    {
+        TileAction action = null;
+        if (actions.Count > 0 && !selectorCanvas.enabled)
+        {
+            action = actions[0];
+        }
+        else if (mSelection >= actions.Count || mSelection < 0)
+        {
+            return;
+        }
+        else
+        {
+            action = actions[mSelection];
+        }
+
+        Environment enviroment = Environment.instance;
+
+        int xMin = 0;
+        int xMax = 0;
+        int yMin = 0;
+        int yMax = 0;
+
+        if (start.x > end.x)
+        {
+            xMin = end.x;
+            xMax = start.x;
+        }
+        else
+        {
+            xMin = start.x;
+            xMax = end.x;
+        }
+
+        if (start.y > end.y)
+        {
+            yMin = end.y;
+            yMax = start.y;
+        }
+        else
+        {
+            yMin = start.y;
+            yMax = end.y;
+        }
+
+
+        for (int y = yMax; y >=yMin; y--)
+        {
+            for (int x = xMin; x <= xMax; x++)
+            {
+                EnvironmentTile tile = enviroment.GetTile(x, y);
+                bool found = false;
+                if(mCharacter.GetHandItem()!=null)
+                {
+                    foreach (TileAction areaItemAction in mCharacter.GetHandItem().GetComponents<TileAction>())
+                    {
+                        areaItemAction.environmentTile = tile;
+                        if (areaItemAction.GetType() == action.GetType() && areaItemAction.Valid(mCharacter))
+                        {
+                            TileAction actionInstance = TileAction.Instantiate(action);
+                            actionInstance.environmentTile = tile;
+                            mCharacter.AddActionToQue(actionInstance);
+                            found = true;
+                            continue;
+                        }
+                    }
+                    if (found) continue;
+                }
+
+
+                foreach (TileAction areaTileAction in tile.GetComponents<TileAction>())
+                {
+                    areaTileAction.environmentTile = tile;
+                    if (areaTileAction.GetType() == action.GetType() && areaTileAction.Valid(mCharacter))
+                    {
+                        mCharacter.AddActionToQue(areaTileAction);
+                    }
+                }
+                
+
+            }
+        }
     }
 
     // Defines a click on the UI and runs the appropriate action function
@@ -134,6 +220,7 @@ public class UIActionSelector : Graphic
     // Render's the UI Element
     protected override void OnPopulateMesh(Mesh toFill)
     {
+        if (actions.Count == 0) return;
         // Remove all pre existing UI data in the mesh
         toFill.Clear();
         // If we have no current actions, return
@@ -169,7 +256,7 @@ public class UIActionSelector : Graphic
             // See if the current segment is selected or not
             bool selected = mSelection >= 0 && i >= optionOffset && i <= optionOffset + segmentsPerOption;
             // Are we on the border of a segment
-            bool border = (i % segmentsPerOption) == 0;
+            bool border = (i % segmentsPerOption) == 0 && actions.Count > 1;
 
             if (selected && !border)
             {

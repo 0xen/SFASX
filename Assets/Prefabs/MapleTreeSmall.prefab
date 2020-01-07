@@ -142,7 +142,7 @@ MonoBehaviour:
   environmentTile: {fileID: 0}
   amountNeeded: 0
   item: {fileID: 0}
-  actionName: Chop
+  actionName: Gather
   GatherTime: 3
   replacmentTile:
   - {fileID: 7228575818001999334, guid: d85ca6f08a4ef8848b08ae4126b05734, type: 3}

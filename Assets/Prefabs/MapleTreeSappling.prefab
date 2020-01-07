@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7510898099256814567}
   - component: {fileID: 6004829340412161117}
   - component: {fileID: 4546697507766463848}
+  - component: {fileID: -3451994014355689752}
   m_Layer: 0
   m_Name: MapleTreeSappling
   m_TagString: Untagged
@@ -126,6 +127,26 @@ MonoBehaviour:
     type: 3}
   minTime: 60
   maxTime: 120
+--- !u!114 &-3451994014355689752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2332120408681411086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7d0e301717a5334fa4aed42e97f383c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  environmentTile: {fileID: 0}
+  amountNeeded: 0
+  item: {fileID: 0}
+  actionName: Gather
+  GatherTime: 3
+  replacmentTile:
+  - {fileID: 5225831561217036612, guid: 068b00b1b45e14e49a33d5ab4dc954a2, type: 3}
+  pickups: []
 --- !u!1001 &7187767860168145080
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -48,6 +48,7 @@ public class Game : MonoBehaviour
     private EnvironmentTile mCurrentHoveredTile = null;
 
     private EnvironmentTile mCurrentAreaStart = null;
+    private EnvironmentTile mCurrentAreaEnd = null;
 
     private RaycastHit[] mRaycastHits;
     private Character mCharacter;
@@ -98,7 +99,7 @@ public class Game : MonoBehaviour
         int yMin = 0;
         int yMax = 0;
 
-        if (start.x > mCurrentHoveredTile.PositionTile.x)
+        if (start.x > end.x)
         {
             xMin = end.x;
             xMax = start.x;
@@ -109,7 +110,7 @@ public class Game : MonoBehaviour
             xMax = end.x;
         }
 
-        if (start.y > mCurrentHoveredTile.PositionTile.y)
+        if (start.y > end.y)
         {
             yMin = end.y;
             yMax = start.y;
@@ -242,23 +243,37 @@ public class Game : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            if(Input.GetKey(KeyCode.LeftControl))
+            // Process Area Click
+            if(mCurrentAreaStart!=null && mCurrentAreaEnd!=null)
             {
-                mCurrentAreaStart = mCurrentHoveredTile;
+                ActionSelector.Select(mCurrentAreaStart.PositionTile, mCurrentAreaEnd.PositionTile);
             }
-            // Find out what actions are available from the current location and store them
-            GatherActionList();
+            else
+            {
+                if (Input.GetKey(KeyCode.LeftControl))
+                {
+                    mCurrentAreaStart = mCurrentHoveredTile;
+                }
+                // Find out what actions are available from the current location and store them
+                GatherActionList();
+            }
         }
 
         if (Input.GetMouseButtonUp(0))
         {
-            if(mCurrentAreaStart!=null)
+            if(mCurrentAreaEnd!=null)
+            {
+                // We are closing the selector from the area select
+                ToggleState(InterfaceState.ActionSelector);
+                mCurrentAreaStart = null;
+                mCurrentAreaEnd = null;
+            }
+            else if (mCurrentAreaStart!=null)
             {
                 SetAreaColor(mCurrentAreaStart.PositionTile, mCurrentHoveredTile.PositionTile, Color.white);
-
+                mCurrentAreaEnd = mCurrentHoveredTile;
+                mCurrentHoveredTile = null;
                 ToggleState(InterfaceState.ActionSelector);
-
-                mCurrentAreaStart = null;
             }
             else
             {
@@ -267,8 +282,8 @@ public class Game : MonoBehaviour
                 {
                     ToggleState(InterfaceState.ActionSelector);
                 }
-                mMouseHoldTime = 0;
             }
+            mMouseHoldTime = 0;
         }
 
         if (Input.GetMouseButton(0))

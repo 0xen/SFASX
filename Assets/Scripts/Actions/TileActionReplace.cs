@@ -18,7 +18,11 @@ public class TileActionReplace : TileAction
 
     public override void Run(Entity entity)
     {
-        if (environmentTile == null) return;
+        if (environmentTile == null || !base.Valid(entity))
+        {
+            entity.ResetAction();
+            return;
+        }
         List<EnvironmentTile> route = Environment.instance.SolveNeighbour(entity.CurrentPosition, environmentTile);
         if (route == null)
         {
@@ -44,8 +48,7 @@ public class TileActionReplace : TileAction
 
     public IEnumerator DoReplace(Entity entity, EnvironmentTile tile)
     {
-
-
+        entity.ChangeAnimation(AnimationStates.Gathering);
         entity.transform.rotation = Quaternion.LookRotation(tile.Position - entity.CurrentPosition.Position, Vector3.up);
 
         yield return new WaitForSeconds(ReplaceTime);
@@ -63,8 +66,9 @@ public class TileActionReplace : TileAction
                 }
             }
         }
-        entity.ResetAction();
 
+        entity.ChangeAnimation(AnimationStates.Idle);
+        entity.ResetAction();
     }
     public override bool Valid(Entity entity)
     {

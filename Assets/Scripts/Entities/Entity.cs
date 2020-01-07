@@ -60,7 +60,7 @@ public abstract class Entity : MonoBehaviour
             {
                 continue;
             }
-            if (inventory[i] == item && inventory[i].count >= count) 
+            if (inventory[i].itemName == item.itemName && inventory[i].count >= count) 
             {
                 return true;
             }
