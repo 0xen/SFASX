@@ -47,6 +47,8 @@ public class Game : MonoBehaviour
 
     private EnvironmentTile mCurrentHoveredTile = null;
 
+    private EnvironmentTile mCurrentAreaStart = null;
+
     private RaycastHit[] mRaycastHits;
     private Character mCharacter;
     private Environment mMap;
@@ -87,6 +89,46 @@ public class Game : MonoBehaviour
         ActionSelector.mCharacter = mCharacter;
         Generate();
         CameraController.SetFollowing(true);
+    }
+
+    private void SetAreaColor(Vector2Int start, Vector2Int end, Color color)
+    {
+        int xMin = 0;
+        int xMax = 0;
+        int yMin = 0;
+        int yMax = 0;
+
+        if (start.x > mCurrentHoveredTile.PositionTile.x)
+        {
+            xMin = end.x;
+            xMax = start.x;
+        }
+        else
+        {
+            xMin = start.x;
+            xMax = end.x;
+        }
+
+        if (start.y > mCurrentHoveredTile.PositionTile.y)
+        {
+            yMin = end.y;
+            yMax = start.y;
+        }
+        else
+        {
+            yMin = start.y;
+            yMax = end.y;
+        }
+
+
+        for (int x = xMin; x <= xMax; x++)
+        {
+            for (int y = yMin; y <= yMax; y++)
+            {
+                EnvironmentTile tile = Environment.instance.GetTile(x, y);
+                if (tile != null) tile.SetTint(color);
+            }
+        }
     }
 
     private void Update()
@@ -144,7 +186,6 @@ public class Game : MonoBehaviour
 
         }
 
-
         Ray screenClick = MainCamera.ScreenPointToRay(Input.mousePosition);
         // See what tiles are in the way of the cursor
         int hits = Physics.RaycastNonAlloc(screenClick, mRaycastHits);
@@ -176,6 +217,14 @@ public class Game : MonoBehaviour
                     mCurrentHoveredTile.SetTint(Color.white);
                 }
 
+                if (mCurrentAreaStart != null && mCurrentHoveredTile!=null)
+                {
+                    SetAreaColor(mCurrentAreaStart.PositionTile, mCurrentHoveredTile.PositionTile, Color.white);
+
+                    SetAreaColor(mCurrentAreaStart.PositionTile, tile.PositionTile, Color.black);
+
+                }
+
                 mCurrentHoveredTile = tile;
 
             }
@@ -193,28 +242,47 @@ public class Game : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
+            if(Input.GetKey(KeyCode.LeftControl))
+            {
+                mCurrentAreaStart = mCurrentHoveredTile;
+            }
             // Find out what actions are available from the current location and store them
             GatherActionList();
         }
 
         if (Input.GetMouseButtonUp(0))
         {
-            ActionSelector.Select();
-            if (HasBit(mInterfaceState, (int)InterfaceState.ActionSelector))
+            if(mCurrentAreaStart!=null)
             {
+                SetAreaColor(mCurrentAreaStart.PositionTile, mCurrentHoveredTile.PositionTile, Color.white);
+
                 ToggleState(InterfaceState.ActionSelector);
+
+                mCurrentAreaStart = null;
             }
-            mMouseHoldTime = 0;
+            else
+            {
+                ActionSelector.Select();
+                if (HasBit(mInterfaceState, (int)InterfaceState.ActionSelector))
+                {
+                    ToggleState(InterfaceState.ActionSelector);
+                }
+                mMouseHoldTime = 0;
+            }
         }
 
         if (Input.GetMouseButton(0))
         {
-            // If the button is being held, add to the mouse hold time
-            mMouseHoldTime += Time.deltaTime;
-            // If we have passed the time required for the popup menu and the flag for the menu being open is not set, open it
-            if (!HasBit(mInterfaceState, (int)InterfaceState.ActionSelector) && mMouseHoldTime > MinMenuOpenTime)
+            // Are we not in area select mode
+            if(mCurrentAreaStart==null)
             {
-                ToggleState(InterfaceState.ActionSelector);
+                // If the button is being held, add to the mouse hold time
+                mMouseHoldTime += Time.deltaTime;
+                // If we have passed the time required for the popup menu and the flag for the menu being open is not set, open it
+                if (!HasBit(mInterfaceState, (int)InterfaceState.ActionSelector) && mMouseHoldTime > MinMenuOpenTime)
+                {
+                    ToggleState(InterfaceState.ActionSelector);
+                }
             }
         }
     }
