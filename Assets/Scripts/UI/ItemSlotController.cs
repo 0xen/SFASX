@@ -13,6 +13,8 @@ public class ItemSlotController : MonoBehaviour
     public TextMeshProUGUI text;
     public Color selectedColor;
     public Color deselectedColor;
+    public Color selectedTextColor;
+    public Color deselectedTextColor;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +32,7 @@ public class ItemSlotController : MonoBehaviour
     public void SetSelectedState(bool state)
     {
         itemSlotImage.color = (state ? selectedColor : deselectedColor);
+        text.color = (state ? selectedTextColor : deselectedTextColor);
     }
 
     public void RemoveItem()

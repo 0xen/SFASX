@@ -61,7 +61,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.39607844, g: 0.39607844, b: 0.39607844, a: 0.50980395}
+  m_Color: {r: 0.62352943, g: 0.62352943, b: 0.62352943, a: 0.23529412}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -90,8 +90,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemImage: {fileID: 7978792451695286058}
   text: {fileID: 6703123990756593403}
-  selectedColor: {r: 0.18867922, g: 0.18867922, b: 0.18867922, a: 0.8235294}
-  deselectedColor: {r: 0.39607844, g: 0.39607844, b: 0.39607844, a: 0.39215687}
+  selectedColor: {r: 0.5764706, g: 0.5764706, b: 0.5764706, a: 1}
+  deselectedColor: {r: 0.6226415, g: 0.6226415, b: 0.6226415, a: 0.23529412}
+  selectedTextColor: {r: 0, g: 0, b: 0, a: 1}
+  deselectedTextColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &6706189566508743968
 GameObject:
   m_ObjectHideFlags: 0
@@ -238,7 +240,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_fontColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

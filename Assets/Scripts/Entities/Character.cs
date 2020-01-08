@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using UnityEngine.UI;
 using UnityEditor.Animations;
 
@@ -11,6 +12,8 @@ public class Character : Entity
     private int mSelectedItem;
 
     private ItemSlotController[] mUiItemBar;
+
+    private TextMeshProUGUI mUIItemMenuBarLable = null;
 
     private List<TileAction> actionQue;
 
@@ -126,9 +129,10 @@ public class Character : Entity
         }
     }
 
-    public void SetUIItemBar(ItemSlotController[] uiItemBar)
+    public void SetUIItemBar(ItemSlotController[] uiItemBar, TextMeshProUGUI UIItemMenuBarLable)
     {
         mUiItemBar = uiItemBar;
+        mUIItemMenuBarLable = UIItemMenuBarLable;
     }
     
     public override Item GetHandItem()
@@ -142,15 +146,20 @@ public class Character : Entity
         if (inventory.Length <= 0) return;
         for (int i = 0; i < mUiItemBar.Length; i++)
         {
+            bool selected = mSelectedItem == i;
             if (inventory[i] != null)
             {
+                if (selected)
+                    mUIItemMenuBarLable.text = inventory[i].itemName;
                 mUiItemBar[i].AddItem(inventory[i].itemSprite, inventory[i].count);
             }
             else
             {
+                if (selected)
+                    mUIItemMenuBarLable.text = "";
                 mUiItemBar[i].RemoveItem();
             }
-            mUiItemBar[i].SetSelectedState(mSelectedItem == i);
+            mUiItemBar[i].SetSelectedState(selected);
         }
     }
 
