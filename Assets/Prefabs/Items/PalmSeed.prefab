@@ -48,7 +48,7 @@ MonoBehaviour:
   amountNeeded: 1
   item: {fileID: 5318094462226911501}
   actionName: Plant
-  ReplaceTime: 2
+  ReplaceTime: 4
   Rotatable: 0
   replacmentTile:
   - {fileID: 7692651029497598846, guid: 74114c185bfa69341b9499b70875ab94, type: 3}
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Palm Seed
-  count: 1
+  count: 0
   itemSprite: {fileID: -4083755277516519233, guid: 9cf7cd7d33a37434099536b7f750ff41,
     type: 3}
   consumeOnUse: 1

@@ -9,6 +9,8 @@ public class TileActionReplace : TileAction
 
     public bool Rotatable = false;
 
+    public bool RotatedReletiveToPlayer = false;
+
     public EnvironmentTile[] replacmentTile;
 
     public TileActionReplace() : base()
@@ -58,11 +60,35 @@ public class TileActionReplace : TileAction
             // We make sure we can remove the item before we replace the tile to stop people accessing the shop and selling the item mid interaction
             if(entity.RemoveFromInventory(item, amountNeeded))
             {
-                GameObject newTile = Environment.instance.ReplaceEnviromentTile(tile, replacmentTile[Random.Range(0, replacmentTile.Length)]);
+                GameObject newTileObject = Environment.instance.ReplaceEnviromentTile(tile, replacmentTile[Random.Range(0, replacmentTile.Length)]);
+
+                EnvironmentTile newTile = newTileObject.GetComponent<EnvironmentTile>();
+
+                if(RotatedReletiveToPlayer)
+                {
+                    // Player is below the object
+                    if(entity.CurrentPosition.PositionTile.y < tile.PositionTile.y)
+                    {
+                        Environment.instance.SetTileRotation(ref newTile, 0);
+                    }
+                    else if (entity.CurrentPosition.PositionTile.y > tile.PositionTile.y)
+                    {
+                        Environment.instance.SetTileRotation(ref newTile, 2);
+                    }
+                    else if (entity.CurrentPosition.PositionTile.x < tile.PositionTile.x)
+                    {
+                        Environment.instance.SetTileRotation(ref newTile, 1);
+                    }
+                    else if (entity.CurrentPosition.PositionTile.x > tile.PositionTile.x)
+                    {
+                        Environment.instance.SetTileRotation(ref newTile, 3);
+                    }
+                }
+
                 // Add rotation here rather then in the prefabs so only placed items can be rotated rather then them all all the time
                 if(Rotatable)
                 {
-                    newTile.AddComponent<TileActionRotate>();
+                    newTileObject.AddComponent<TileActionRotate>();
                 }
             }
         }

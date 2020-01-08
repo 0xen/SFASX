@@ -79,7 +79,7 @@ public class Game : MonoBehaviour
             recTransform.localPosition = new Vector3(recTransform.position.x, recTransform.position.y, 0);
         }
 
-        NotificationHandler.AddNotification(ref LandmarkNotification.NewGame, "Welcome to ####, throughout your time here, you will receive tips and tricks that will appear here!");
+        NotificationHandler.AddNotification(ref LandmarkNotification.NewGame, "Welcome to Celestia, throughout your time here, you will receive tips and tricks that will appear here!");
 
         mCharacter.SetUIItemBar(mUiItemBar);
         CameraController.Character = mCharacter;

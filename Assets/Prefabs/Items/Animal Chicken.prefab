@@ -67,4 +67,4 @@ MonoBehaviour:
   actionName: Place Chicken
   entityPrefab: {fileID: -4537713324124862065, guid: 2a47adc2477d880478f2241cc16cbd24,
     type: 3}
-  spawnTime: 1
+  spawnTime: 3

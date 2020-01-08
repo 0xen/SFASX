@@ -67,5 +67,6 @@ MonoBehaviour:
   actionName: Place
   ReplaceTime: 2
   Rotatable: 1
+  RotatedReletiveToPlayer: 1
   replacmentTile:
   - {fileID: 1247906914180562762, guid: 72dd898d08a8f52459df325a1bef456d, type: 3}

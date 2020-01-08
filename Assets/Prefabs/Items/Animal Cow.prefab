@@ -67,4 +67,4 @@ MonoBehaviour:
   actionName: Place Cow
   entityPrefab: {fileID: 8368044451791982087, guid: f16bbf789f1390a44ad5354eaa2e5b3a,
     type: 3}
-  spawnTime: 1
+  spawnTime: 3

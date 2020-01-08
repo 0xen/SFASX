@@ -34,6 +34,7 @@ public class SpawnEntity : TileAction
 
     public IEnumerator DoSpawn(Entity entity, EnvironmentTile tile)
     {
+        entity.ChangeAnimation(AnimationStates.Gathering);
         // Turn towards the tile
         entity.transform.rotation = Quaternion.LookRotation(tile.Position - entity.CurrentPosition.Position, Vector3.up);
         
@@ -58,8 +59,10 @@ public class SpawnEntity : TileAction
         }
 
 
+        entity.ChangeAnimation(AnimationStates.Idle);
         entity.ResetAction();
     }
+    
 
     public override bool Valid(Entity entity)
     {

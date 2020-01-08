@@ -34,6 +34,7 @@ Transform:
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_Children:
   - {fileID: 8304556699132676432}
+  - {fileID: 8118751441747284890}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -117,8 +118,14 @@ MonoBehaviour:
   inventory:
   - {fileID: 0}
   movmentSpeed: 10
+  animalName: Cow
   actions: 00000000
   walkRange: 3
+  breedingTimer: 600
+  breedingRange: 5
+  minBreedTimerStart: 0
+  maxBreedTimerStart: 120
+  breedHeartEffect: {fileID: 1505183536412832529}
   minTimeBeforeAction: 3
   maxTimeBeforeAction: 6
 --- !u!114 &3586294941815809951
@@ -138,11 +145,11 @@ MonoBehaviour:
   item: {fileID: 769755611341318568, guid: 54df903be1ecc2e4694b4f969f597952, type: 3}
   actionName: Collect Milk
   GatherTime: 0.5
-  maxItems: 4
+  maxItems: 5
   itemSpawnTime: 60
   GatherEntity: {fileID: 8368044451791982087}
   Notification: {fileID: 3910534733907139790}
-  ItemCount: 1
+  ItemCount: 0
   KillOnGather: 0
 --- !u!114 &4866870587241047635
 MonoBehaviour:
@@ -164,6 +171,87 @@ MonoBehaviour:
   GatherEntity: {fileID: 8368044451791982087}
   EntityItem: {fileID: 6207524583372306475, guid: 7734198a543df544bb6f77c66e1af575,
     type: 3}
+--- !u!1001 &4545901713274725955
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 3196724981686723723}
+    m_Modifications:
+    - target: {fileID: 5227322656784818872, guid: 3afb5dcb96d580f418b3d25a9bec8cf2,
+        type: 3}
+      propertyPath: m_Name
+      value: HeartEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 5745978421198845401, guid: 3afb5dcb96d580f418b3d25a9bec8cf2,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5745978421198845401, guid: 3afb5dcb96d580f418b3d25a9bec8cf2,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5745978421198845401, guid: 3afb5dcb96d580f418b3d25a9bec8cf2,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5745978421198845401, guid: 3afb5dcb96d580f418b3d25a9bec8cf2,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5745978421198845401, guid: 3afb5dcb96d580f418b3d25a9bec8cf2,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5745978421198845401, guid: 3afb5dcb96d580f418b3d25a9bec8cf2,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5745978421198845401, guid: 3afb5dcb96d580f418b3d25a9bec8cf2,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5745978421198845401, guid: 3afb5dcb96d580f418b3d25a9bec8cf2,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5745978421198845401, guid: 3afb5dcb96d580f418b3d25a9bec8cf2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5745978421198845401, guid: 3afb5dcb96d580f418b3d25a9bec8cf2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5745978421198845401, guid: 3afb5dcb96d580f418b3d25a9bec8cf2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3afb5dcb96d580f418b3d25a9bec8cf2, type: 3}
+--- !u!4 &8118751441747284890 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5745978421198845401, guid: 3afb5dcb96d580f418b3d25a9bec8cf2,
+    type: 3}
+  m_PrefabInstance: {fileID: 4545901713274725955}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1505183536412832529 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3167497245653423442, guid: 3afb5dcb96d580f418b3d25a9bec8cf2,
+    type: 3}
+  m_PrefabInstance: {fileID: 4545901713274725955}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5337453970641264979
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -48,7 +48,7 @@ MonoBehaviour:
   amountNeeded: 1
   item: {fileID: 7732558789316736555}
   actionName: Plant
-  ReplaceTime: 2
+  ReplaceTime: 4
   Rotatable: 0
   replacmentTile:
   - {fileID: 6613055519326538163, guid: 0cfd86ca236ebe34db4e5e7cda47d434, type: 3}
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Apple Seed
-  count: 3
+  count: 0
   itemSprite: {fileID: -4083755277516519233, guid: 9cf7cd7d33a37434099536b7f750ff41,
     type: 3}
   consumeOnUse: 1

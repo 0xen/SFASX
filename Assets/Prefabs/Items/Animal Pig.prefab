@@ -67,4 +67,4 @@ MonoBehaviour:
   actionName: Place Pig
   entityPrefab: {fileID: 7900902538975448714, guid: 3766af5d37d12b041aa633c91db80a17,
     type: 3}
-  spawnTime: 1
+  spawnTime: 3

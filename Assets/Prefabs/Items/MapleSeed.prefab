@@ -48,7 +48,7 @@ MonoBehaviour:
   amountNeeded: 1
   item: {fileID: 1438332706513111878}
   actionName: Plant
-  ReplaceTime: 2
+  ReplaceTime: 4
   Rotatable: 0
   replacmentTile:
   - {fileID: 6004829340412161117, guid: 35b33beecb9b322478a6db70047c592d, type: 3}
