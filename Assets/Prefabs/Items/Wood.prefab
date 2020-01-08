@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Wood
-  count: 4
+  count: 8
   itemSprite: {fileID: 4126004077657876305, guid: 5fb7b6e1f37b2964083f5cfe204aaa9f,
     type: 3}
   consumeOnUse: 1
@@ -65,9 +65,12 @@ MonoBehaviour:
   environmentTile: {fileID: 0}
   amountNeeded: 1
   item: {fileID: 4736621118778930762}
+  actionImage: {fileID: 4126004077657876305, guid: 5fb7b6e1f37b2964083f5cfe204aaa9f,
+    type: 3}
   actionName: Place Small Logs
   ReplaceTime: 2
   Rotatable: 1
+  RotatedReletiveToPlayer: 0
   replacmentTile:
   - {fileID: 7228575818001999334, guid: d85ca6f08a4ef8848b08ae4126b05734, type: 3}
 --- !u!114 &-8106703588994066490
@@ -85,8 +88,11 @@ MonoBehaviour:
   environmentTile: {fileID: 0}
   amountNeeded: 2
   item: {fileID: 4736621118778930762}
+  actionImage: {fileID: 4126004077657876305, guid: 5fb7b6e1f37b2964083f5cfe204aaa9f,
+    type: 3}
   actionName: Place Large Logs
   ReplaceTime: 3
   Rotatable: 1
+  RotatedReletiveToPlayer: 0
   replacmentTile:
   - {fileID: 4499036324842488966, guid: cd048cafd4c60d14d81bdb56cdb167ef, type: 3}

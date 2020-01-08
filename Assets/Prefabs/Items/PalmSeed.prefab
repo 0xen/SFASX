@@ -47,9 +47,12 @@ MonoBehaviour:
   environmentTile: {fileID: 0}
   amountNeeded: 1
   item: {fileID: 5318094462226911501}
+  actionImage: {fileID: 8892810703104722987, guid: 5fb7b6e1f37b2964083f5cfe204aaa9f,
+    type: 3}
   actionName: Plant
   ReplaceTime: 4
   Rotatable: 0
+  RotatedReletiveToPlayer: 0
   replacmentTile:
   - {fileID: 7692651029497598846, guid: 74114c185bfa69341b9499b70875ab94, type: 3}
 --- !u!114 &5318094462226911501
@@ -65,7 +68,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Palm Seed
-  count: 0
-  itemSprite: {fileID: -4083755277516519233, guid: 9cf7cd7d33a37434099536b7f750ff41,
+  count: 1
+  itemSprite: {fileID: 8892810703104722987, guid: 5fb7b6e1f37b2964083f5cfe204aaa9f,
     type: 3}
   consumeOnUse: 1

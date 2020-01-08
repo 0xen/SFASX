@@ -143,6 +143,8 @@ MonoBehaviour:
   environmentTile: {fileID: 0}
   amountNeeded: 0
   item: {fileID: 7831532365826899572, guid: cb7f9777d4d3c7043a7940a35d9d082c, type: 3}
+  actionImage: {fileID: 7606791111815138788, guid: 9cf7cd7d33a37434099536b7f750ff41,
+    type: 3}
   actionName: Collect Eggs
   GatherTime: 0.5
   maxItems: 5
@@ -166,6 +168,8 @@ MonoBehaviour:
   environmentTile: {fileID: 0}
   amountNeeded: 0
   item: {fileID: 0}
+  actionImage: {fileID: 1784430390463598758, guid: 9cf7cd7d33a37434099536b7f750ff41,
+    type: 3}
   actionName: Pick Up
   GatherTime: 0.5
   GatherEntity: {fileID: -4537713324124862065}

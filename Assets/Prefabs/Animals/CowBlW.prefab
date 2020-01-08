@@ -143,6 +143,8 @@ MonoBehaviour:
   environmentTile: {fileID: 0}
   amountNeeded: 0
   item: {fileID: 769755611341318568, guid: 54df903be1ecc2e4694b4f969f597952, type: 3}
+  actionImage: {fileID: 7781642708770859160, guid: 9cf7cd7d33a37434099536b7f750ff41,
+    type: 3}
   actionName: Collect Milk
   GatherTime: 0.5
   maxItems: 5
@@ -166,6 +168,8 @@ MonoBehaviour:
   environmentTile: {fileID: 0}
   amountNeeded: 0
   item: {fileID: 0}
+  actionImage: {fileID: -4359568450669099851, guid: 9cf7cd7d33a37434099536b7f750ff41,
+    type: 3}
   actionName: Pick Up
   GatherTime: 1
   GatherEntity: {fileID: 8368044451791982087}

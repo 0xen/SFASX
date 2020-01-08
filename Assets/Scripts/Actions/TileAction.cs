@@ -10,6 +10,8 @@ public abstract class TileAction : MonoBehaviour
 
     public Item item;
 
+    public Sprite actionImage = null;
+
     // Made public so it is accessible by the game controller
     public string actionName;
 

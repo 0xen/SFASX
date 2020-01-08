@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Soil
-  count: 0
-  itemSprite: {fileID: 6753627641621139039, guid: 5fb7b6e1f37b2964083f5cfe204aaa9f,
+  count: 2
+  itemSprite: {fileID: 134571252661815451, guid: 5fb7b6e1f37b2964083f5cfe204aaa9f,
     type: 3}
   consumeOnUse: 1
 --- !u!114 &8768180131059341146
@@ -65,6 +65,8 @@ MonoBehaviour:
   environmentTile: {fileID: 0}
   amountNeeded: 1
   item: {fileID: 2361852989507392283}
+  actionImage: {fileID: 134571252661815451, guid: 5fb7b6e1f37b2964083f5cfe204aaa9f,
+    type: 3}
   actionName: Place Earth
   placeTime: 0.1
   replacmentTile: {fileID: 5225831561217036612, guid: 068b00b1b45e14e49a33d5ab4dc954a2,
@@ -84,9 +86,12 @@ MonoBehaviour:
   environmentTile: {fileID: 0}
   amountNeeded: 2
   item: {fileID: 2361852989507392283}
+  actionImage: {fileID: 134571252661815451, guid: 5fb7b6e1f37b2964083f5cfe204aaa9f,
+    type: 3}
   actionName: Place Dirt Mound
   ReplaceTime: 1
   Rotatable: 1
+  RotatedReletiveToPlayer: 0
   replacmentTile:
   - {fileID: 7603024997213197666, guid: 85c72f2e63f7ff349b2aa0cc58203b3d, type: 3}
   - {fileID: 6878312587856686978, guid: 2e24aaa96e0e79a46a25f9d3b9aa0679, type: 3}

@@ -121,17 +121,17 @@ public class Character : Entity
             mActiveActionSlots.Add(newSlot);
         }
 
-        // Is action slot 1 avaliable
+        // Is action slot 1 available
         if(mAction!=null)
         {
-
+            mActiveActionSlots[0].GetComponent<Image>().sprite = mAction.actionImage;
         }
 
         // Set the textures of the action slots
         for (int i = 1; i < activeActionSlots; i++)
         {
             TileAction action = actionQue[i-1];
-
+            mActiveActionSlots[i].GetComponent<Image>().sprite = action.actionImage;
         }
 
 

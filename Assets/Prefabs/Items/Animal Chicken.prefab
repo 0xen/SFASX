@@ -64,6 +64,8 @@ MonoBehaviour:
   environmentTile: {fileID: 0}
   amountNeeded: 1
   item: {fileID: 8922202913070996972}
+  actionImage: {fileID: 1784430390463598758, guid: 9cf7cd7d33a37434099536b7f750ff41,
+    type: 3}
   actionName: Place Chicken
   entityPrefab: {fileID: -4537713324124862065, guid: 2a47adc2477d880478f2241cc16cbd24,
     type: 3}

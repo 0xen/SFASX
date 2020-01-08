@@ -142,6 +142,8 @@ MonoBehaviour:
   environmentTile: {fileID: 0}
   amountNeeded: 0
   item: {fileID: 0}
+  actionImage: {fileID: 5649529287581088962, guid: 9cf7cd7d33a37434099536b7f750ff41,
+    type: 3}
   actionName: Gather
   GatherTime: 3
   replacmentTile:

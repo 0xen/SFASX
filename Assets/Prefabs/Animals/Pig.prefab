@@ -143,6 +143,8 @@ MonoBehaviour:
   environmentTile: {fileID: 0}
   amountNeeded: 0
   item: {fileID: 8296177897985916695, guid: bb46ee49b650f424981815fff4e5898c, type: 3}
+  actionImage: {fileID: -2004546666460064615, guid: 9cf7cd7d33a37434099536b7f750ff41,
+    type: 3}
   actionName: Gather Pork
   GatherTime: 0.5
   maxItems: 12
@@ -166,10 +168,12 @@ MonoBehaviour:
   environmentTile: {fileID: 0}
   amountNeeded: 0
   item: {fileID: 0}
+  actionImage: {fileID: 94607509914081392, guid: 9cf7cd7d33a37434099536b7f750ff41,
+    type: 3}
   actionName: Pick Up
   GatherTime: 0.5
   GatherEntity: {fileID: 7900902538975448714}
-  EntityItem: {fileID: 8296177897985916695, guid: bb46ee49b650f424981815fff4e5898c,
+  EntityItem: {fileID: 5505882069553148232, guid: b23826146f5af66409bf7e82eb031335,
     type: 3}
 --- !u!1001 &2391013747337177302
 PrefabInstance:

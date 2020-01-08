@@ -142,11 +142,15 @@ MonoBehaviour:
   environmentTile: {fileID: 0}
   amountNeeded: 0
   item: {fileID: 0}
+  actionImage: {fileID: 8892810703104722987, guid: 5fb7b6e1f37b2964083f5cfe204aaa9f,
+    type: 3}
   actionName: Gather
   GatherTime: 3
   replacmentTile:
   - {fileID: 5225831561217036612, guid: 068b00b1b45e14e49a33d5ab4dc954a2, type: 3}
-  pickups: []
+  pickups:
+  - item: {fileID: 5318094462226911501, guid: 0e9c298ae323a9948a3575861d17197b, type: 3}
+    count: 1
 --- !u!1001 &3829414275977304667
 PrefabInstance:
   m_ObjectHideFlags: 0

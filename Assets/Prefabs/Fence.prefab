@@ -125,6 +125,8 @@ MonoBehaviour:
   environmentTile: {fileID: 0}
   amountNeeded: 0
   item: {fileID: 0}
+  actionImage: {fileID: 6971087585004242950, guid: 9cf7cd7d33a37434099536b7f750ff41,
+    type: 3}
   actionName: Pick Up
   GatherTime: 1
   replacmentTile:

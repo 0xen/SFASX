@@ -47,9 +47,12 @@ MonoBehaviour:
   environmentTile: {fileID: 0}
   amountNeeded: 1
   item: {fileID: 1438332706513111878}
+  actionImage: {fileID: -4083755277516519233, guid: 9cf7cd7d33a37434099536b7f750ff41,
+    type: 3}
   actionName: Plant
   ReplaceTime: 4
   Rotatable: 0
+  RotatedReletiveToPlayer: 0
   replacmentTile:
   - {fileID: 6004829340412161117, guid: 35b33beecb9b322478a6db70047c592d, type: 3}
 --- !u!114 &1438332706513111878

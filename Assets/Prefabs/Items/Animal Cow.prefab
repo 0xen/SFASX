@@ -64,6 +64,8 @@ MonoBehaviour:
   environmentTile: {fileID: 0}
   amountNeeded: 1
   item: {fileID: 6207524583372306475}
+  actionImage: {fileID: -4359568450669099851, guid: 9cf7cd7d33a37434099536b7f750ff41,
+    type: 3}
   actionName: Place Cow
   entityPrefab: {fileID: 8368044451791982087, guid: f16bbf789f1390a44ad5354eaa2e5b3a,
     type: 3}

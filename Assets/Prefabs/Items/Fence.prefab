@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Fence
   count: 1
-  itemSprite: {fileID: 4126004077657876305, guid: 5fb7b6e1f37b2964083f5cfe204aaa9f,
+  itemSprite: {fileID: 6971087585004242950, guid: 9cf7cd7d33a37434099536b7f750ff41,
     type: 3}
   consumeOnUse: 1
 --- !u!114 &2227618380513688751
@@ -64,6 +64,8 @@ MonoBehaviour:
   environmentTile: {fileID: 0}
   amountNeeded: 1
   item: {fileID: 2153262866484951227}
+  actionImage: {fileID: 6971087585004242950, guid: 9cf7cd7d33a37434099536b7f750ff41,
+    type: 3}
   actionName: Place
   ReplaceTime: 2
   Rotatable: 1
