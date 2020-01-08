@@ -31,6 +31,14 @@ public class Game : MonoBehaviour
     [SerializeField] private ItemSlotController UiItemMenuBarItem = null;
     [SerializeField] private uint UiItemMenuBarItemCount = 0;
     [SerializeField] private TextMeshProUGUI UIItemMenuBarLable = null;
+
+    [SerializeField] private GameObject UIActionSlotPrefab = null;
+    [SerializeField] private GameObject UIActionBar = null;
+    [SerializeField] private int UIMaxActionStream = 0;
+    [SerializeField] private TextMeshProUGUI UIActionLable = null;
+
+
+
     private ItemSlotController[] mUiItemBar; 
     
     private float mDayTime;
@@ -83,6 +91,9 @@ public class Game : MonoBehaviour
         NotificationHandler.AddNotification(ref LandmarkNotification.NewGame, "Welcome to Celestia, throughout your time here, you will receive tips and tricks that will appear here!");
 
         mCharacter.SetUIItemBar(mUiItemBar, UIItemMenuBarLable);
+        mCharacter.SetActionBar(UIActionSlotPrefab, UIActionBar, UIMaxActionStream, UIActionLable);
+
+
         CameraController.Character = mCharacter;
         mMouseHoldTime = 0.0f;
         mInterfaceState = 0;

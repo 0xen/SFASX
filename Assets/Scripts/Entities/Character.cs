@@ -12,8 +12,15 @@ public class Character : Entity
     private int mSelectedItem;
 
     private ItemSlotController[] mUiItemBar;
-
     private TextMeshProUGUI mUIItemMenuBarLable = null;
+    
+    private GameObject mUIActionSlotPrefab = null;
+    private GameObject mUIActionBar = null;
+    private int mUIMaxActionStream = 0;
+    private TextMeshProUGUI mUIActionLable = null;
+
+    private List<GameObject> mActiveActionSlots;
+
 
     private List<TileAction> actionQue;
 
@@ -24,6 +31,7 @@ public class Character : Entity
         mUiItemBar = null;
         mSelectedItem = -1;
         actionQue = new List<TileAction>();
+        mActiveActionSlots = new List<GameObject>();
     }
 
     public void Start()
@@ -88,7 +96,45 @@ public class Character : Entity
         }
         mAnimationController.SetFloat("Timer", timerCurrent);
 
-        Debug.Log("Remaining actions:" + actionQue.Count);
+
+        int activeActionSlots = actionQue.Count;
+        // Add 1 to the action que to account for the current action being called
+        if (mAction != null) activeActionSlots++;
+
+        if (activeActionSlots > mUIMaxActionStream) activeActionSlots = mUIMaxActionStream;
+
+        // Remove un-needed slots
+        for (int i = mActiveActionSlots.Count-1; i>= activeActionSlots;i--)
+        {
+            Destroy(mActiveActionSlots[i]);
+            mActiveActionSlots.RemoveAt(i);
+        }
+        // Add any new needed lots
+        for (int i = mActiveActionSlots.Count; i < activeActionSlots; i++)
+        {
+            GameObject newSlot = GameObject.Instantiate(mUIActionSlotPrefab);
+            newSlot.transform.SetParent(mUIActionBar.transform);
+            RectTransform recTransform = newSlot.GetComponent<RectTransform>();
+            recTransform.localScale = new Vector3(1, 1, 1);
+            recTransform.localEulerAngles = new Vector3(0, 0, 0);
+            recTransform.localPosition = new Vector3(recTransform.position.x, recTransform.position.y, 0);
+            mActiveActionSlots.Add(newSlot);
+        }
+
+        // Is action slot 1 avaliable
+        if(mAction!=null)
+        {
+
+        }
+
+        // Set the textures of the action slots
+        for (int i = 1; i < activeActionSlots; i++)
+        {
+            TileAction action = actionQue[i-1];
+
+        }
+
+
 
         for (int i = actionQue.Count - 1; i >= 0; i--)
         {
@@ -102,6 +148,7 @@ public class Character : Entity
 
         if (!HasAction())
         {
+            if (mUIActionLable != null) mUIActionLable.text = "";
             if (actionQue.Count > 0)
             {
                 SetCurrentAction(actionQue[0]);
@@ -112,6 +159,7 @@ public class Character : Entity
         else
         {
             mAction.environmentTile.SetTint(new Color(0.0f, 0.75f, 0.1f));
+            mUIActionLable.text = mAction.actionName;
         }
 
         if (mUiItemBar == null) return;
@@ -134,7 +182,15 @@ public class Character : Entity
         mUiItemBar = uiItemBar;
         mUIItemMenuBarLable = UIItemMenuBarLable;
     }
-    
+
+    public void SetActionBar(GameObject UIActionSlotPrefab, GameObject UIActionBar, int UIMaxActionStream, TextMeshProUGUI UIActionLable)
+    {
+        mUIActionSlotPrefab = UIActionSlotPrefab;
+        mUIActionBar = UIActionBar;
+        mUIMaxActionStream = UIMaxActionStream;
+        mUIActionLable = UIActionLable;
+    }
+
     public override Item GetHandItem()
     {
         if (mSelectedItem<0) return null;
