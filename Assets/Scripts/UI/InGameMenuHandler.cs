@@ -6,8 +6,8 @@ using UnityEngine.EventSystems;
 public class InGameMenuHandler : MonoBehaviour
 {
 
-    [SerializeField] private Game GameInstance;
-    [SerializeField] private GameObject MenuPanel;
+    [SerializeField] private Game GameInstance = null;
+    [SerializeField] private GameObject MenuPanel = null;
 
 
     // Start is called before the first frame update

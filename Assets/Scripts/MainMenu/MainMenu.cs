@@ -14,13 +14,13 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Canvas MainMenuInterface = null;
     [SerializeField] private Environment BackgroundEnviroment = null;
 
-    [SerializeField] private float IslandStartRotation;
-    [SerializeField] private float IslandRotationSpeed;
+    [SerializeField] private float IslandStartRotation = 0.0f;
+    [SerializeField] private float IslandRotationSpeed = 0.0f;
 
-    [SerializeField] private float IslandAmplitude;
-    [SerializeField] private float IslandFrequancy;
-    [SerializeField] private float IslandWaterHeight;
-    [SerializeField] private Vector2Int IslandSize;
+    [SerializeField] private float IslandAmplitude = 0.0f;
+    [SerializeField] private float IslandFrequancy = 0.0f;
+    [SerializeField] private float IslandWaterHeight = 0.0f;
+    [SerializeField] private Vector2Int IslandSize = new Vector2Int();
 
     private GenerationPayload BackgroundGenerationPayload;
 

@@ -6,9 +6,9 @@ public class EntityActionPickup : TileAction
 {
     public float GatherTime = 0.0f;
 
-    [SerializeField] private Entity GatherEntity;
+    [SerializeField] private Entity GatherEntity = null;
 
-    [SerializeField] private Item EntityItem;
+    [SerializeField] private Item EntityItem = null;
 
     public EntityActionPickup() : base("Pick Up")
     {

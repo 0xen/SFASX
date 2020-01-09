@@ -15,26 +15,26 @@ public class ShopHandler : MonoBehaviour
         public Item item;
     }
 
-    [SerializeField] Canvas shopCanvas;
+    [SerializeField] Canvas shopCanvas = null;
 
-    [SerializeField] GameObject ItemSelector;
-    [SerializeField] ShopItem ShopItemPrefab;
+    [SerializeField] GameObject ItemSelector = null;
+    [SerializeField] ShopItem ShopItemPrefab = null;
 
-    [SerializeField] Button CatagoryButtonPlaceholder;
-    [SerializeField] GameObject CatagoryButtonParent;
-
-
-    [SerializeField] TextMeshProUGUI selectedItemTitle;
-    [SerializeField] TextMeshProUGUI selectedItemDescription;
-    [SerializeField] Image selectedItemImage;
+    [SerializeField] Button CatagoryButtonPlaceholder = null;
+    [SerializeField] GameObject CatagoryButtonParent = null;
 
 
+    [SerializeField] TextMeshProUGUI selectedItemTitle = null;
+    [SerializeField] TextMeshProUGUI selectedItemDescription = null;
+    [SerializeField] Image selectedItemImage = null;
 
-    [SerializeField] GameObject tradeBar;
-    [SerializeField] TextMeshProUGUI itemAmountText;
 
 
-    [SerializeField] TextMeshProUGUI CurrentCoinText;
+    [SerializeField] GameObject tradeBar = null;
+    [SerializeField] TextMeshProUGUI itemAmountText = null;
+
+
+    [SerializeField] TextMeshProUGUI CurrentCoinText = null;
 
     private uint mCurrency = 0;
 
@@ -50,7 +50,7 @@ public class ShopHandler : MonoBehaviour
         public string name;
         public ItemInstance[] items;
     }
-    [SerializeField] Catagory[] catagories;
+    [SerializeField] Catagory[] catagories = null;
 
     
     // Start is called before the first frame update

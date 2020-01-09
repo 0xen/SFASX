@@ -5,19 +5,19 @@ using UnityEngine;
 public class TileActionBairFruit : TileAction
 {
 
-    [SerializeField] private Renderer[] spawnLocations;
-    [SerializeField] private GameObject furitPrefab;
+    [SerializeField] private Renderer[] spawnLocations = null;
+    [SerializeField] private GameObject furitPrefab = null;
 
 
-    [SerializeField] private float bairFruitTimeMin;
-    [SerializeField] private float bairFruitTimeMax;
+    [SerializeField] private float bairFruitTimeMin = 0.0f;
+    [SerializeField] private float bairFruitTimeMax = 0.0f;
 
-    [SerializeField] private float fruitApearTime;
+    [SerializeField] private float fruitApearTime = 0.0f;
 
-    [SerializeField] private int maxFruit;
-    [SerializeField] private float collectionTime;
+    [SerializeField] private int maxFruit = 0;
+    [SerializeField] private float collectionTime = 0.0f;
 
-    [SerializeField] private ObjectNotification Notification;
+    [SerializeField] private ObjectNotification Notification = null;
 
     [System.Serializable]
     public struct Pickup
@@ -26,15 +26,15 @@ public class TileActionBairFruit : TileAction
         public uint count;
     }
 
-    public Pickup[] pickups;
+    public Pickup[] pickups = null;
 
-    private int m_nextSpawnLocation;
-    private float m_timeBeforeSpawn;
-    private List<GameObject> m_aliveFruit;
+    private int m_nextSpawnLocation = 0;
+    private float m_timeBeforeSpawn = 0.0f;
+    private List<GameObject> m_aliveFruit = null;
 
     public TileActionBairFruit() : base()
     {
-        m_aliveFruit = new List<GameObject>();
+        m_aliveFruit = new List<GameObject>(); 
     }
 
     public void Start()

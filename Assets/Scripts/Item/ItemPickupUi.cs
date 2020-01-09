@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class ItemPickupUi : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI textMesh;
-    [SerializeField] private Image image;
+    [SerializeField] private TextMeshProUGUI textMesh = null;
+    [SerializeField] private Image image = null;
 
     private void Start()
     {

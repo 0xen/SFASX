@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class ButtonClickSFX : MonoBehaviour
 {
-    [SerializeField] private string sfxName;
-    private Button button;
+    [SerializeField] private string sfxName = "";
+    private Button button = null;
     // Start is called before the first frame update
     void Start()
     {

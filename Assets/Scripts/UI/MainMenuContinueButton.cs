@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuContinueButton : MonoBehaviour
 {
-    [SerializeField] private string SavePath;
+    [SerializeField] private string SavePath = "";
 
     private Button mButton;
     // Start is called before the first frame update

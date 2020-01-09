@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -218,6 +219,7 @@ public class UIActionSelector : Graphic
     }
 
     // Render's the UI Element
+    [Obsolete]
     protected override void OnPopulateMesh(Mesh toFill)
     {
         if (actions.Count == 0) return;

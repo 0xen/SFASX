@@ -7,15 +7,15 @@ using TMPro;
 public class NotificationHandler : MonoBehaviour
 {
 
-    [SerializeField] Button notificationOpenButton;
-    [SerializeField] TextMeshProUGUI notificationText;
-    [SerializeField] TextMeshProUGUI notificationCountText;
-    [SerializeField] Button nextButton;
-    [SerializeField] Button previousButton;
-    [SerializeField] GameObject notificationPanel;
+    [SerializeField] Button notificationOpenButton = null;
+    [SerializeField] TextMeshProUGUI notificationText = null;
+    [SerializeField] TextMeshProUGUI notificationCountText = null;
+    [SerializeField] Button nextButton = null;
+    [SerializeField] Button previousButton = null;
+    [SerializeField] GameObject notificationPanel = null;
 
-    List<string> mStoredText;
-    int mCurrentPage;
+    private List<string> mStoredText = null;
+    private int mCurrentPage = 0;
 
     // Start is called before the first frame update
     void Start()

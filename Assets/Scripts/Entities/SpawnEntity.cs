@@ -5,8 +5,8 @@ using UnityEngine;
 public class SpawnEntity : TileAction
 {
 
-    [SerializeField] private Entity entityPrefab;
-    [SerializeField] private float spawnTime;
+    [SerializeField] private Entity entityPrefab = null;
+    [SerializeField] private float spawnTime = 0.0f;
 
     
     public override void Run(Entity entity)

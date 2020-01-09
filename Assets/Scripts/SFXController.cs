@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class SFXController : MonoBehaviour
 {
-    public static SFXController instance;
-    [SerializeField] private int maxChannels;
+    public static SFXController instance = null;
+    [SerializeField] private int maxChannels = 0;
 
-    [SerializeField] private AudioSource sfxChannelPrefab;
+    [SerializeField] private AudioSource sfxChannelPrefab = null;
 
     [System.Serializable]
     struct AudioPair
@@ -16,10 +16,10 @@ public class SFXController : MonoBehaviour
         public AudioClip clip;
     }
 
-    [SerializeField] private AudioPair[] audioPairs;
-    private Dictionary<string,AudioClip> audioLookup;
+    [SerializeField] private AudioPair[] audioPairs = null;
+    private Dictionary<string,AudioClip> audioLookup = null;
 
-    private AudioSource[] channels;
+    private AudioSource[] channels = null;
 
     // Start is called before the first frame update
     void Start()

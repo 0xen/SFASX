@@ -19,19 +19,19 @@ public class WorldGenerator : MonoBehaviour
     }
 
     // Define various random generation settings for the noise generator
-    [SerializeField] private Slider IslandFrequancy;
-    [SerializeField] private Slider IslandAmplitude;
-    [SerializeField] private Slider WaterHeight;
-    [SerializeField] private Slider MapSize;
+    [SerializeField] private Slider IslandFrequancy = null;
+    [SerializeField] private Slider IslandAmplitude = null;
+    [SerializeField] private Slider WaterHeight = null;
+    [SerializeField] private Slider MapSize = null;
 
-    [SerializeField] private Text MapSizeLabel;
+    [SerializeField] private Text MapSizeLabel = null;
 
-    [SerializeField] private int MapSizeScalar;
+    [SerializeField] private int MapSizeScalar = 0;
 
-    private GenerationPayload MapGenerationPayload;
-    private bool[,] mMapData;
+    private GenerationPayload MapGenerationPayload = null;
+    private bool[,] mMapData = null;
 
-    private Texture2D mMapVisulisation;
+    private Texture2D mMapVisulisation = null;
     // Start is called before the first frame update
     void Start()
     {

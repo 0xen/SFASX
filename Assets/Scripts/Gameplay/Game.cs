@@ -26,8 +26,8 @@ public class Game : MonoBehaviour
     [SerializeField] private Light DirectionalLight = null;
     [SerializeField] private float DayLength = 120;
     [SerializeField] private float DayStartTime = 0;
-    [SerializeField] private NotificationHandler NotificationHandler;
-    [SerializeField] private TextMeshProUGUI TimeText;
+    [SerializeField] private NotificationHandler NotificationHandler = null;
+    [SerializeField] private TextMeshProUGUI TimeText = null;
 
 
     [SerializeField] private GameObject UiItemMenuBar = null;
@@ -42,9 +42,9 @@ public class Game : MonoBehaviour
 
     [SerializeField] private ShopHandler shop = null;
 
-    private ItemSlotController[] mUiItemBar; 
+    private ItemSlotController[] mUiItemBar = null; 
     
-    private float mDayTime;
+    private float mDayTime = 0.0f;
 
 
     [System.Serializable]

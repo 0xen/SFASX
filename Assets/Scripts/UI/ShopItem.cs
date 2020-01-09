@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class ShopItem : MonoBehaviour
 {
 
-    [SerializeField] Image prefabImage;
-    public ShopHandler shopHandler;
+    [SerializeField] Image prefabImage = null;
+    public ShopHandler shopHandler = null;
     public ShopHandler.ItemInstance itemInstance;
 
     // Start is called before the first frame update

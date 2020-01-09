@@ -6,12 +6,12 @@ public class StaticMovmentLoop : MonoBehaviour
 {
 
     [SerializeField] private float speed = 0.0f;
-    [SerializeField] private float flyDistance;
-    [SerializeField] private Vector3 startPosition;
-    [SerializeField] private Vector3 startEulerRotation;
+    [SerializeField] private float flyDistance = 0.0f;
+    [SerializeField] private Vector3 startPosition = new Vector3();
+    [SerializeField] private Vector3 startEulerRotation = new Vector3();
 
-    private float currentFlyTime;
-    private float currentSpeed;
+    private float currentFlyTime = 0.0f;
+    private float currentSpeed = 0.0f;
 
     // Start is called before the first frame update
     void Start()

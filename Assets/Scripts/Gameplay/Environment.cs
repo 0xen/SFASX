@@ -543,9 +543,7 @@ public class Environment : MonoBehaviour
         Vector2Int Size = mMapGenerationPayload.size;
 
         mMap = new EnvironmentTile[Size.x][];
-
-        bool hasStart = true;
-
+         
         for (int x = 0; x < Size.x; ++x)
         {
             mMap[x] = new EnvironmentTile[Size.y];

@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class DestroyTimer : MonoBehaviour
 {
-    [SerializeField] private float TimeBeforeDestroy;
+    [SerializeField] private float TimeBeforeDestroy = 0.0f;
 
-    private float runningTime;
+    private float runningTime = 0.0f;
 
     // Start is called before the first frame update
     void Start()

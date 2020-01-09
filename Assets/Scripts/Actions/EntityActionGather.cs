@@ -6,17 +6,17 @@ public class EntityActionGather : TileAction
 {
     public float GatherTime = 0.0f;
     
-    [SerializeField] private uint maxItems;
-    [SerializeField] private float itemSpawnTime;
+    [SerializeField] private uint maxItems = 0;
+    [SerializeField] private float itemSpawnTime = 0.0f;
 
-    [SerializeField] private Entity GatherEntity;
+    [SerializeField] private Entity GatherEntity = null;
 
-    [SerializeField] private ObjectNotification Notification;
+    [SerializeField] private ObjectNotification Notification = null;
 
     // Do they spawn with items?
-    [SerializeField] private uint ItemCount;
+    [SerializeField] private uint ItemCount = 0;
 
-    [SerializeField] private bool KillOnGather;
+    [SerializeField] private bool KillOnGather = false;
 
     private float itemSpawnDelta;
 

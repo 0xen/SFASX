@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class ObjectNotification : MonoBehaviour
 {
-    [SerializeField] private GameObject NotificationIcon;
+    [SerializeField] private GameObject NotificationIcon = null;
 
-    [SerializeField] private float MovmentDistance;
-    [SerializeField] private float MovmentTime;
-    [SerializeField] private float MovmentRotation;
+    [SerializeField] private float MovmentDistance = 0.0f;
+    [SerializeField] private float MovmentTime = 0.0f;
+    [SerializeField] private float MovmentRotation = 0.0f;
 
-    private float m_notificationDelta;
+    private float m_notificationDelta = 0.0f;
 
     // Start is called before the first frame update
     void Start()
