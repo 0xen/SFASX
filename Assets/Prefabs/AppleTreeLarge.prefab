@@ -128,7 +128,8 @@ MonoBehaviour:
   environmentTile: {fileID: 0}
   amountNeeded: 0
   item: {fileID: 0}
-  actionImage: {fileID: 0}
+  actionImage: {fileID: -519733243297392110, guid: eed00ce05f8aeeb48bc6f48ac83a2be8,
+    type: 3}
   actionName: Collect
   spawnLocations:
   - {fileID: 5946852669704320638}
@@ -488,6 +489,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.40000024
       objectReference: {fileID: 0}
+    - target: {fileID: 2954911454000448222, guid: d5400823e95251049a492a30bf226adb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7808165238598225929, guid: d5400823e95251049a492a30bf226adb,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -502,11 +508,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2954911454000448222, guid: d5400823e95251049a492a30bf226adb,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5400823e95251049a492a30bf226adb, type: 3}

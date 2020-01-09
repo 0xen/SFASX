@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Stone
-  count: 2
+  count: 0
   itemSprite: {fileID: 317711084924465178, guid: 9cf7cd7d33a37434099536b7f750ff41,
     type: 3}
   consumeOnUse: 1
@@ -67,7 +67,7 @@ MonoBehaviour:
   actionImage: {fileID: 317711084924465178, guid: 9cf7cd7d33a37434099536b7f750ff41,
     type: 3}
   actionName: Place Rock
-  ReplaceTime: 1
+  ReplaceTime: 3
   Rotatable: 1
   RotatedReletiveToPlayer: 0
   replacmentTile:

@@ -6055,9 +6055,9 @@ RectTransform:
   m_Father: {fileID: 1983764416}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 949.7, y: 317.9}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 949.7, y: -322.23}
   m_SizeDelta: {x: 1288, y: 639}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1693509812
@@ -7070,7 +7070,6 @@ MonoBehaviour:
   Character: {fileID: 4204448009463411752, guid: 0ec771fc79c748e4694b82068b3883e1,
     type: 3}
   CharacterStart: {fileID: 561634765}
-  MainMenuInterface: {fileID: 1718640088}
   BackgroundEnviroment: {fileID: 1523076608}
   IslandStartRotation: 45
   IslandRotationSpeed: 2.5

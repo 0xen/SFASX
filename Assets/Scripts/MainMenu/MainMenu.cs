@@ -13,7 +13,6 @@ public class MainMenu : MonoBehaviour
 
     [SerializeField] private Character Character = null;
     [SerializeField] private Transform CharacterStart = null;
-    [SerializeField] private Canvas MainMenuInterface = null;
     [SerializeField] private Environment BackgroundEnviroment = null;
 
     [SerializeField] private float IslandStartRotation = 0.0f;

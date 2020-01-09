@@ -11,7 +11,12 @@ public class SpawnEntity : TileAction
     
     public override void Run(Entity entity)
     {
-        if (environmentTile == null) return;
+        // We check to see if the action is still valid
+        if (environmentTile == null || !Valid(entity))
+        {
+            entity.ResetAction();
+            return;
+        }
 
         List<EnvironmentTile> route = Environment.instance.SolveNeighbour(entity.CurrentPosition, environmentTile);
         if (route == null)
@@ -23,6 +28,10 @@ public class SpawnEntity : TileAction
         {
             entity.StopAllCoroutines();
             entity.StartCoroutine(DoWalkAndSpawn(entity, route, environmentTile));
+        }
+        else
+        {
+            entity.ResetAction();
         }
     }
 
@@ -66,7 +75,7 @@ public class SpawnEntity : TileAction
 
     public override bool Valid(Entity entity)
     {
-        return environmentTile.Type == EnvironmentTile.TileType.Accessible;
+        return environmentTile.Type == EnvironmentTile.TileType.Accessible && base.Valid(entity);
     }
 
 }

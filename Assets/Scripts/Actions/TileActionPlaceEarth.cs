@@ -43,7 +43,7 @@ public class TileActionPlaceEarth : TileAction
 
     public IEnumerator DoPlace(Entity entity, EnvironmentTile tile)
     {
-
+        entity.ChangeAnimation(AnimationStates.Gathering);
 
         entity.transform.rotation = Quaternion.LookRotation(tile.Position - entity.CurrentPosition.Position, Vector3.up);
 
@@ -110,6 +110,7 @@ public class TileActionPlaceEarth : TileAction
        // Environment.instance.notificationHandler.AddNotification(ref LandmarkNotification.ReclaimingLand, "Resources can be sold to the shop to buy more usefull items such as animals or seeds");
 
         entity.ResetAction();
+        entity.ChangeAnimation(AnimationStates.Idle);
         PostRun(entity);
     }
 

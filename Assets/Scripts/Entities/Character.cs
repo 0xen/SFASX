@@ -148,12 +148,13 @@ public class Character : Entity
         if (!HasAction())
         {
             if (mUIActionLable != null) mUIActionLable.text = "";
-            if (actionQue.Count > 0)
+            // Keep looping incase a action breaks stright out due to internal conditons not being met
+            while (actionQue.Count > 0 && !HasAction())
             {
                 SetCurrentAction(actionQue[0]);
                 actionQue.RemoveAt(0);
                 GetCurrentAction().Run(this);
-            }
+            } 
         }
         else
         {
