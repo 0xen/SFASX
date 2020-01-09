@@ -56,6 +56,7 @@ public abstract class Entity : MonoBehaviour
 
     public bool HasItem(Item item, uint count = 1)
     {
+        if (item == null) return false;
         for (int i = 0; i < inventory.Length; i++)
         {
             if (inventory[i] == null)

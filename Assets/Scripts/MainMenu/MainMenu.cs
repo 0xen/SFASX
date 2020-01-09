@@ -10,8 +10,6 @@ using static WorldGenerator;
 
 public class MainMenu : MonoBehaviour
 {
-    // Used for cross Script Communication to define if the menu should be opened or closed
-    public static bool MenuEnabled = true;
 
     [SerializeField] private Character Character = null;
     [SerializeField] private Transform CharacterStart = null;
@@ -25,6 +23,8 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private float IslandFrequancy = 0.0f;
     [SerializeField] private float IslandWaterHeight = 0.0f;
     [SerializeField] private Vector2Int IslandSize = new Vector2Int();
+
+    [SerializeField] private GameObject NewGamePanel = null;
 
     // Settings
     [SerializeField] private GameObject SettingsPanel = null;
@@ -49,7 +49,6 @@ public class MainMenu : MonoBehaviour
         mCharacter = Instantiate(Character, transform);
         mCharacter.transform.position = CharacterStart.position;
         mCharacter.transform.rotation = CharacterStart.rotation;
-        MenuEnabled = true;
         BackgroundGenerationPayload = new GenerationPayload();
         BackgroundGenerationPayload.amplitude = IslandAmplitude;
         BackgroundGenerationPayload.frequancy = IslandFrequancy;
@@ -94,19 +93,18 @@ public class MainMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MainMenuInterface.enabled = MenuEnabled;
         BackgroundEnviroment.transform.RotateAround(BackgroundEnviroment.transform.position, transform.up, Time.deltaTime * IslandRotationSpeed);
     }
 
-    public void NewGame()
+    public void ToggleNewGame()
     {
         SettingsPanel.SetActive(false);
-        SceneManager.LoadScene("WorldCreator", LoadSceneMode.Additive);
-        MenuEnabled = false;
+        NewGamePanel.SetActive(!NewGamePanel.activeSelf);
     }
 
     public void SettingsToggle()
     {
+        NewGamePanel.SetActive(false);
         SettingsPanel.SetActive(!SettingsPanel.activeSelf);
     }
 

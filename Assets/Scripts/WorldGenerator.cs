@@ -123,17 +123,11 @@ public class WorldGenerator : MonoBehaviour
         return mapData;
     }
 
-    public void ReturnHome()
-    {
-        MainMenu.MenuEnabled = true;
-        SceneManager.UnloadSceneAsync("WorldCreator");
-    }
 
     public void CreateWorld()
     {
         Game.MapGenerationPayload = MapGenerationPayload;
         SceneManager.UnloadSceneAsync("MainMenu");
-        SceneManager.UnloadSceneAsync("WorldCreator");
         SceneManager.LoadScene("Main", LoadSceneMode.Additive);
     }
 }
