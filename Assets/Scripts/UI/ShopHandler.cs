@@ -36,9 +36,9 @@ public class ShopHandler : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI CurrentCoinText;
 
-    private uint mCurrency;
+    private uint mCurrency = 0;
 
-    private uint mAmount;
+    private uint mAmount = 0;
 
 
     private ItemInstance selectedItem;
@@ -57,10 +57,19 @@ public class ShopHandler : MonoBehaviour
     void Start()
     {
         mAmount = 1;
-        mCurrency = 500;
         SetupCatagoryButtons();
         UpdateCoinText();
         AllCatagory();
+    }
+
+    public uint GetCurrency()
+    {
+        return mCurrency;
+    }
+
+    public void SetCurrency(uint currency)
+    {
+        mCurrency = currency;
     }
 
     // Update is called once per frame

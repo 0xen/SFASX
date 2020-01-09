@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b81c1a74f97fbca4a81350fa9f3bdddb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TileName: AppleTreeSappling
   Visited: 0
   Type: 2
 --- !u!65 &8155012332916133465

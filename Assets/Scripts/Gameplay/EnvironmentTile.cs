@@ -13,6 +13,7 @@ public class EnvironmentTile : MonoBehaviour
         Resource,
         Decorative
     }
+    public string TileName;
     public List<EnvironmentTile> Connections { get; set; }
     public EnvironmentTile Parent { get; set; }
     public Vector3 Position { get; set; }

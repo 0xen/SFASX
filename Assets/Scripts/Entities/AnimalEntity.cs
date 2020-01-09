@@ -11,7 +11,6 @@ public class AnimalEntity : Entity
         Breed
     }
 
-    public string animalName = "";
 
     [SerializeField] private AnimalActions[] actions = null;
 
@@ -113,7 +112,7 @@ public class AnimalEntity : Entity
         foreach(AnimalEntity entity in Environment.instance.GetEntities())
         {
             EnvironmentTile entityTile = entity.CurrentPosition;
-            if(entity != this && entity.animalName == this.animalName && 
+            if(entity != this && entity.entityName == this.entityName && 
                 entityTile.PositionTile.x >= xMin && entityTile.PositionTile.x <= xMax &&
                 entityTile.PositionTile.y >= yMin && entityTile.PositionTile.y <= yMax)
             {

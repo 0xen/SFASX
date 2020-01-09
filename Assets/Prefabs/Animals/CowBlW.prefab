@@ -115,10 +115,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81665560651d13745b049a869c67dcd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  entityName: Cow
   inventory:
   - {fileID: 0}
   movmentSpeed: 10
-  animalName: Cow
   actions: 00000000
   walkRange: 3
   breedingTimer: 600

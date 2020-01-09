@@ -14,6 +14,8 @@ public abstract class Entity : MonoBehaviour
     public EnvironmentTile CurrentPosition { get; set; }
     public int InventorySize { get; }
 
+    public string entityName = "";
+
     public Item[] inventory;
 
     public float movmentSpeed;

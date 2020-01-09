@@ -95,6 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b81c1a74f97fbca4a81350fa9f3bdddb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TileName: Water8
   Visited: 0
   Type: 1
 --- !u!114 &8676008329134945843
@@ -110,6 +111,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   environmentTile: {fileID: 0}
+  amountNeeded: 0
+  item: {fileID: 0}
+  actionImage: {fileID: 0}
   actionName: Fish
 --- !u!65 &-428478938862286851
 BoxCollider:

@@ -7,8 +7,6 @@ using TMPro;
 public class ItemSlotController : MonoBehaviour
 {
 
-    private Image itemSlotImage;
-
     public Image itemImage;
     public TextMeshProUGUI text;
     public Color selectedColor;
@@ -19,7 +17,6 @@ public class ItemSlotController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        itemSlotImage = GetComponent<Image>();
     }
 
     public void AddItem(Sprite sprite, uint amount)
@@ -31,7 +28,7 @@ public class ItemSlotController : MonoBehaviour
 
     public void SetSelectedState(bool state)
     {
-        itemSlotImage.color = (state ? selectedColor : deselectedColor);
+        GetComponent<Image>().color = (state ? selectedColor : deselectedColor);
         text.color = (state ? selectedTextColor : deselectedTextColor);
     }
 

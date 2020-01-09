@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using UnityEditor.Animations;
 
 public class Character : Entity
 {
@@ -197,7 +196,7 @@ public class Character : Entity
         return inventory[mSelectedItem];
     }
 
-    private void UpdateBar()
+    public void UpdateBar()
     {
         if (inventory.Length <= 0) return;
         for (int i = 0; i < mUiItemBar.Length; i++)

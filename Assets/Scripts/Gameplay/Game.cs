@@ -6,12 +6,15 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 using static WorldGenerator;
+using System.IO;
 
 public class Game : MonoBehaviour
 {
     public static GenerationPayload MapGenerationPayload = null;
 
 
+    // Used for the loading and unloading of game items
+    [SerializeField] private Item[] ItemInstances = null;
 
     [SerializeField] private Camera MainCamera = null;
     [SerializeField] private Character Character = null;
@@ -37,7 +40,7 @@ public class Game : MonoBehaviour
     [SerializeField] private int UIMaxActionStream = 0;
     [SerializeField] private TextMeshProUGUI UIActionLable = null;
 
-
+    [SerializeField] private ShopHandler shop = null;
 
     private ItemSlotController[] mUiItemBar; 
     
@@ -74,7 +77,6 @@ public class Game : MonoBehaviour
         mRaycastHits = new RaycastHit[NumberOfRaycastHits];
         mMap = GetComponentInChildren<Environment>();
         mCharacter = Instantiate(Character, transform);
-
         mUiItemBar = new ItemSlotController[UiItemMenuBarItemCount];
 
         for (int i = 0; i < UiItemMenuBarItemCount; i++)
@@ -88,20 +90,19 @@ public class Game : MonoBehaviour
             recTransform.localPosition = new Vector3(recTransform.position.x, recTransform.position.y, 0);
         }
 
-        NotificationHandler.AddNotification(ref LandmarkNotification.NewGame, "Welcome to Celestia, throughout your time here, you will receive tips and tricks that will appear here!");
-
         mCharacter.SetUIItemBar(mUiItemBar, UIItemMenuBarLable);
         mCharacter.SetActionBar(UIActionSlotPrefab, UIActionBar, UIMaxActionStream, UIActionLable);
-
-
         CameraController.Character = mCharacter;
         mMouseHoldTime = 0.0f;
         mInterfaceState = 0;
         mDayTime = DayStartTime;
         ActionSelector.SetEnabled(false);
         ActionSelector.mCharacter = mCharacter;
-        Generate();
         CameraController.SetFollowing(true);
+        
+        Generate();
+        if(!MapGenerationPayload.loadFromFile)
+            NotificationHandler.AddNotification(ref LandmarkNotification.NewGame, "Welcome to Celestia, throughout your time here, you will receive tips and tricks that will appear here!");
     }
 
     private void SetAreaColor(Vector2Int start, Vector2Int end, Color color)
@@ -220,7 +221,7 @@ public class Game : MonoBehaviour
 
             EnvironmentTile tile = closestHit.transform.GetComponent<EnvironmentTile>();
             // If we have not already selected the tile, change its tint
-            if (tile != mCurrentHoveredTile)
+            if (tile!=null && tile != mCurrentHoveredTile)
             {
                 tile.SetTint(new Color(1.0f, 0.75f, 0.75f));
 
@@ -234,7 +235,7 @@ public class Game : MonoBehaviour
                 {
                     SetAreaColor(mCurrentAreaStart.PositionTile, mCurrentHoveredTile.PositionTile, Color.white);
 
-                    SetAreaColor(mCurrentAreaStart.PositionTile, tile.PositionTile, Color.black);
+                    SetAreaColor(mCurrentAreaStart.PositionTile, tile.PositionTile, Color.cyan);
 
                 }
 
@@ -411,12 +412,157 @@ public class Game : MonoBehaviour
         }
     }
 
-    public void Generate()
+    [System.Serializable]
+    public struct EntitySaveData
     {
-        if(MapGenerationPayload!=null)
-        {
-            mMap.GenerateWorld(mCharacter, MapGenerationPayload);
-        }
+        // Name (Written as 'n' as it will reduce JSON file size)
+        public string N;
+        public int X;
+        public int Y;
     }
 
+    [System.Serializable]
+    public struct ItemSaveData
+    {
+        // Name (Written as 'n' as it will reduce JSON file size)
+        public string N;
+        // Count (Written as 'c' as it will reduce JSON file size)
+        public uint C;
+    }
+
+    [System.Serializable]
+    public struct TileSaveData
+    {
+        public TileSaveData(string name, int rotation) { N = name; R = rotation; }
+        // Name (Written as 'n' as it will reduce JSON file size)
+        public string N;
+        // Rotation (Written as 'r' as it will reduce JSON file size)
+        public int R;
+    }
+
+    // This will contain the save data required when loading/unloading the game
+    public struct SaveDataPacket
+    {
+        // Player Data
+        public uint Money;
+        public int PlayerX;
+        public int PlayerY;
+        public float Time;
+        public ItemSaveData[] Inventory;
+
+        // Entity Data
+        public EntitySaveData[] Entities;
+
+        // World Data
+        public int WorldWidth;
+        public int WorldHeight;
+        public bool[] WaterMap;
+        // All non water tiles
+        public TileSaveData[] TileData;
+    }
+
+    public SaveDataPacket Load()
+    {
+        SaveDataPacket packet = JsonUtility.FromJson<SaveDataPacket>(File.ReadAllText("GameSave.json"));
+
+        Environment environment = mMap;
+
+        MapGenerationPayload.size.x = packet.WorldWidth;
+        MapGenerationPayload.size.y = packet.WorldHeight;
+
+
+        return packet;
+    }
+
+    public void Save()
+    {
+        Environment environment = mMap;
+
+        SaveDataPacket packet = new SaveDataPacket();
+
+
+        // Player Data
+        packet.Money = shop.GetCurrency();
+        packet.Time = mDayTime;
+        packet.PlayerX = mCharacter.CurrentPosition.PositionTile.x;
+        packet.PlayerY = mCharacter.CurrentPosition.PositionTile.y;
+
+        packet.Inventory = new ItemSaveData[mCharacter.inventory.Length];
+        for (int i = 0; i < mCharacter.inventory.Length; i++)
+        {
+            if (mCharacter.inventory[i] != null)
+            {
+                packet.Inventory[i].N = mCharacter.inventory[i].itemName;
+                packet.Inventory[i].C = mCharacter.inventory[i].count;
+            }
+        }
+
+
+
+
+        // Entity Data
+        Entity[] entities = environment.GetEntities();
+        packet.Entities = new EntitySaveData[entities.Length];
+        for (int i = 0; i < entities.Length; i++)
+        {
+            packet.Entities[i].N = entities[i].entityName;
+            packet.Entities[i].X = entities[i].CurrentPosition.PositionTile.x;
+            packet.Entities[i].Y = entities[i].CurrentPosition.PositionTile.y;
+        }
+
+
+        // World Data
+        environment.Save(ref packet);
+
+
+
+
+        string jsonData = JsonUtility.ToJson(packet, false);
+        File.WriteAllText("GameSave.json", jsonData);
+    }
+
+    public void Generate()
+    {
+        if (MapGenerationPayload != null)
+        {
+            if(MapGenerationPayload.loadFromFile)
+            {
+                SaveDataPacket saveGame = Load();
+                // Load from file
+                mMap.GenerateWorld(mCharacter, MapGenerationPayload, saveGame);
+
+                // Load players inventory
+                {
+                    for(int i = 0; i < saveGame.Inventory.Length;i++)
+                    {
+                        foreach(Item item in ItemInstances)
+                        {
+                            if (item.itemName == saveGame.Inventory[i].N)
+                            {
+                                mCharacter.inventory[i] = Instantiate(item);
+                                mCharacter.inventory[i].count = saveGame.Inventory[i].C;
+                            }
+                        }
+                    }
+                    mCharacter.UpdateBar();
+                }
+
+                // Load players money
+                {
+                    shop.SetCurrency(saveGame.Money);
+                }
+
+                // Load Time info
+                {
+                    mDayTime = saveGame.Time;
+                }
+            }
+            else
+            {
+                // New Game
+                mMap.GenerateWorld(mCharacter, MapGenerationPayload);
+                shop.SetCurrency(500);
+            }
+        }
+    }
 }

@@ -8,8 +8,10 @@ public class WorldGenerator : MonoBehaviour
 {
     [SerializeField] private Vector2Int PreviewSize;
     [SerializeField] private RawImage Image = null;
-    public class GenerationPayload 
+    public class GenerationPayload
     {
+        [SerializeField] public bool loadFromFile;
+        [SerializeField] public string loadPath;
         [SerializeField] public Vector2Int size;
         [SerializeField] public float frequancy;
         [SerializeField] public float amplitude;

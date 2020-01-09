@@ -8,6 +8,12 @@ public class Environment : MonoBehaviour
 {
     public static Environment instance;
 
+    // Used as a reference when loading a map file, what tiles belong to what name
+    [SerializeField] private EnvironmentTile[] WorldEnviromentTiles = null;
+
+    // Used for the loading and unloading of game entities
+    [SerializeField] private Entity[] EntityInstances = null;
+
     [System.Serializable]
     public struct TileInstance
     {
@@ -232,6 +238,21 @@ public class Environment : MonoBehaviour
         mWaterMap = WorldGenerator.GenerateWaterMap(mMapGenerationPayload);
     }
 
+    private void GenerateWaterMap(Game.SaveDataPacket saveData)
+    {
+        // Generate a water map that represents what tiles of the map should be water and what ones wont be
+        mWaterMap = new bool[saveData.WorldWidth, saveData.WorldHeight];
+
+        for(int x = 0; x < saveData.WorldWidth; x++)
+        {
+            for (int y = 0; y < saveData.WorldHeight; y++)
+            {
+                mWaterMap[x, y] = saveData.WaterMap[x + (y * saveData.WorldWidth)];
+            }
+        }
+
+    }
+
     // check to see if we can find any tiles that match the current dataset and append them to the search results
     private void FindWaterTileMatch(ref List<WaterTileSearchResult> results, bool[] dataset, int currentRotation)
     {
@@ -405,6 +426,27 @@ public class Environment : MonoBehaviour
         FinalizeTile(ref tile, x, y, position);
 
     }
+
+    public void AddLandTile(Vector3 position, ref EnvironmentTile tile, Vector2Int mapSize, int x, int y, string name, int rotation)
+    {
+
+        for(int i = 0; i < WorldEnviromentTiles.Length;i++)
+        {
+            if(WorldEnviromentTiles[i].TileName==name)
+            {
+                tile = Instantiate(WorldEnviromentTiles[i], position, Quaternion.identity, transform);
+                break; ;
+            }
+        }
+
+        if (tile == null) return;
+
+        FinalizeTile(ref tile, x, y, position);
+
+        // Apply defined rotation
+        SetTileRotation(ref tile, rotation);
+    }
+
     public void AddLandTile(Vector3 position, ref EnvironmentTile tile, Vector2Int mapSize, int x, int y)
     {
 
@@ -492,6 +534,45 @@ public class Environment : MonoBehaviour
 
     }
 
+    private void Generate(Game.SaveDataPacket saveData)
+    {
+        // Setup the map of the environment tiles according to the specified width and height
+        // Generate tiles from the list of accessible and inaccessible prefabs using a random
+        // and the specified accessible percentage
+
+        Vector2Int Size = mMapGenerationPayload.size;
+
+        mMap = new EnvironmentTile[Size.x][];
+
+        bool hasStart = true;
+
+        for (int x = 0; x < Size.x; ++x)
+        {
+            mMap[x] = new EnvironmentTile[Size.y];
+            for (int y = 0; y < Size.y; ++y)
+            {
+                bool isWater = mWaterMap[x, y];
+
+                EnvironmentTile tile = null;
+
+                Vector3 position = GetRawPosition(x, y);
+
+                if (isWater)
+                {
+                    AddWaterTile(position, ref tile, mMapGenerationPayload.size, x, y);
+                }
+                else
+                {
+                    Game.TileSaveData saveInstance = saveData.TileData[x + (y * Size.x)];
+
+                    AddLandTile(position, ref tile, mMapGenerationPayload.size, x, y, saveInstance.N, saveInstance.R);
+
+
+                }
+            }
+        }
+    }
+
     private void Generate()
     {
         // Setup the map of the environment tiles according to the specified width and height
@@ -504,12 +585,12 @@ public class Environment : MonoBehaviour
 
         bool hasStart = true;
 
-        for ( int x = 0; x < Size.x; ++x)
+        for (int x = 0; x < Size.x; ++x)
         {
             mMap[x] = new EnvironmentTile[Size.y];
-            for ( int y = 0; y < Size.y; ++y)
+            for (int y = 0; y < Size.y; ++y)
             {
-                bool isWater = mWaterMap[x,y];
+                bool isWater = mWaterMap[x, y];
 
                 EnvironmentTile tile = null;
 
@@ -524,7 +605,7 @@ public class Environment : MonoBehaviour
 
                     AddLandTile(position, ref tile, mMapGenerationPayload.size, x, y);
 
-                    
+
                 }
                 if (tile == null) continue;
 
@@ -618,21 +699,87 @@ public class Environment : MonoBehaviour
         return Vector3.Distance(a.Position, b.Position);
     }
 
+    public void GenerateWorld(Character Character, GenerationPayload generationPayload, Game.SaveDataPacket saveData)
+    {
+        mMapGenerationPayload = generationPayload;
+        GenerateWaterMap(saveData);
+        Generate(saveData);
+        SetupConnections();
+
+
+        MovePlayerToStart(Character, mMap[saveData.PlayerX][saveData.PlayerY]);
+        mCharacter = Character;
+
+        // Load all entities
+        for (int i = 0; i < saveData.Entities.Length; i++)
+        {
+            foreach (Entity e in EntityInstances)
+            {
+                if (saveData.Entities[i].N == e.entityName)
+                {
+                    EnvironmentTile tile = mMap[saveData.Entities[i].X][saveData.Entities[i].Y];
+                    Entity ent = GameObject.Instantiate(e, Environment.instance.transform);
+                    RegisterEntity(ent);
+                    ent.transform.position = tile.Position;
+                    ent.transform.rotation = Quaternion.identity;
+                    ent.CurrentPosition = tile;
+                    break;
+                }
+            }
+
+        }
+    }
+
     public void GenerateWorld(Character Character, GenerationPayload generationPayload)
     {
         mMapGenerationPayload = generationPayload;
         GenerateWaterMap();
         Generate();
         SetupConnections();
-        MovePlayerToStart(Character);
+        MovePlayerToStart(Character, Start);
         mCharacter = Character;
     }
 
-    private void MovePlayerToStart(Character Character)
+    public void Save(ref Game.SaveDataPacket saveData)
     {
-        Character.transform.position = Start.Position + new Vector3(0.0f, CharacterYOffset, 0.0f);
+
+        Vector2Int mapSize = mMapGenerationPayload.size;
+        int mapTileCount = mapSize.x * mapSize.y;
+
+        // World dimensions
+        saveData.WorldWidth = mapSize.x;
+        saveData.WorldHeight = mapSize.y;
+
+        saveData.WaterMap = new bool[mapTileCount];
+        for (int x = 0; x < mapSize.x; x++)
+        {
+            for (int y = 0; y < mapSize.y; y++)
+            {
+                saveData.WaterMap[x + (y * mapSize.x)] = mWaterMap[x, y];
+            }
+        }
+        saveData.TileData = new Game.TileSaveData[mapTileCount];
+        for (int x = 0; x < mapSize.x; x++)
+        {
+            for (int y = 0; y < mapSize.y; y++)
+            {
+                if (!mWaterMap[x, y] && mMap[x][y]!=null)
+                {
+                    saveData.TileData[x + (y * mapSize.x)] = new Game.TileSaveData(mMap[x][y].TileName, mMap[x][y].Rotation);
+                }
+                else
+                {
+                    saveData.TileData[x + (y * mapSize.x)] = new Game.TileSaveData("", 0);
+                }
+            }
+        }
+    }
+
+    private void MovePlayerToStart(Character Character,EnvironmentTile tile)
+    {
+        Character.transform.position = tile.Position + new Vector3(0.0f, CharacterYOffset, 0.0f);
+        Character.CurrentPosition = tile;
         Character.transform.rotation = Quaternion.identity;
-        Character.CurrentPosition = Start;
         Character.transform.parent = this.transform;
     }
 
