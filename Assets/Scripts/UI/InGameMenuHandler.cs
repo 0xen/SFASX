@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class InGameMenuHandler : MonoBehaviour
 {
@@ -35,5 +36,11 @@ public class InGameMenuHandler : MonoBehaviour
     {
         GameInstance.Save();
         ToggleMenu();
+    }
+
+    public void BackToMainMenu()
+    {
+        SceneManager.UnloadSceneAsync("Main");
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Additive);
     }
 }
