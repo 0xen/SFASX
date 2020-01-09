@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 2226579565151964117}
   - component: {fileID: 5610059318260741932}
   - component: {fileID: 9140796303258385749}
-  - component: {fileID: 2145808251032894964}
   - component: {fileID: -7784140019023738294}
   - component: {fileID: -7959875191828998999}
   m_Layer: 0
@@ -99,23 +98,6 @@ MonoBehaviour:
   TileName: Water6
   Visited: 0
   Type: 1
---- !u!114 &2145808251032894964
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6189697644984468464}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff4924cada33025418d896c1cccdd683, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  environmentTile: {fileID: 0}
-  amountNeeded: 0
-  item: {fileID: 0}
-  actionImage: {fileID: 0}
-  actionName: Fish
 --- !u!65 &-7784140019023738294
 BoxCollider:
   m_ObjectHideFlags: 0

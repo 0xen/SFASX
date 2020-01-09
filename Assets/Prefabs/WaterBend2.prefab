@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2966457789608277032}
   - component: {fileID: 7842607630946242566}
   - component: {fileID: 4957738710570390342}
-  - component: {fileID: 1663164319424427102}
   m_Layer: 0
   m_Name: WaterBend2
   m_TagString: Untagged
@@ -111,20 +110,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 2.5, z: 10}
   m_Center: {x: 5, y: 1.25, z: 5}
---- !u!114 &1663164319424427102
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3537066956808552692}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff4924cada33025418d896c1cccdd683, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  environmentTile: {fileID: 0}
-  amountNeeded: 0
-  item: {fileID: 0}
-  actionImage: {fileID: 0}
-  actionName: Fish

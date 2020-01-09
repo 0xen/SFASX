@@ -5,6 +5,7 @@ using UnityEngine;
 public class TileActionGather : TileAction
 {
     public float GatherTime = 0.0f;
+    
 
     public EnvironmentTile[] replacmentTile;
 

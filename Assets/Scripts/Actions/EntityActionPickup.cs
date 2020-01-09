@@ -44,6 +44,7 @@ public class EntityActionPickup : TileAction
 
     public IEnumerator DoPickup(Entity entity, EnvironmentTile tile)
     {
+        entity.ChangeAnimation(AnimationStates.Gathering);
         // Turn towards the tile
         entity.transform.rotation = Quaternion.LookRotation(tile.Position - entity.CurrentPosition.Position, Vector3.up);
 
@@ -59,6 +60,7 @@ public class EntityActionPickup : TileAction
         Environment.instance.RemoveEntity(GatherEntity);
         Destroy(GatherEntity.gameObject);
 
+        entity.ChangeAnimation(AnimationStates.Idle);
         entity.ResetAction();
     }
 

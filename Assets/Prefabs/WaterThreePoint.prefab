@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3648829233255454704}
   - component: {fileID: 5762417733430914502}
   - component: {fileID: 2072976405075087679}
-  - component: {fileID: 4068122705752970404}
   - component: {fileID: 2466288146943059409}
   - component: {fileID: 3397903609584162912}
   m_Layer: 0
@@ -83,23 +82,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &4068122705752970404
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 358149429097031139}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff4924cada33025418d896c1cccdd683, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  environmentTile: {fileID: 0}
-  amountNeeded: 0
-  item: {fileID: 0}
-  actionImage: {fileID: 0}
-  actionName: Fish
 --- !u!114 &2466288146943059409
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -17,6 +17,7 @@ public class EntityActionGather : TileAction
     [SerializeField] private uint ItemCount = 0;
 
     [SerializeField] private bool KillOnGather = false;
+    [SerializeField] private bool GatherAllAtOnce = false;
 
     private float itemSpawnDelta;
 
@@ -45,16 +46,16 @@ public class EntityActionGather : TileAction
     {
         if (entity.CurrentPosition == null) return;
 
-        List<EnvironmentTile> route = Environment.instance.SolveNeighbour(entity.CurrentPosition, GatherEntity.CurrentPosition);
+        List<EnvironmentTile> route = Environment.instance.SolveNeighbour(entity.CurrentPosition, environmentTile);
         if (route == null)
         {
             entity.StopAllCoroutines();
-            entity.StartCoroutine(DoGather(entity, GatherEntity.CurrentPosition));
+            entity.StartCoroutine(DoGather(entity, environmentTile));
         }
         else if (route.Count > 0)
         {
             entity.StopAllCoroutines();
-            entity.StartCoroutine(DoWalkAndGather(entity, route, GatherEntity.CurrentPosition));
+            entity.StartCoroutine(DoWalkAndGather(entity, route, environmentTile));
         }
         else
         {
@@ -71,18 +72,29 @@ public class EntityActionGather : TileAction
     public IEnumerator DoGather(Entity entity, EnvironmentTile tile)
     {
         // Turn towards the tile
-        entity.transform.rotation = Quaternion.LookRotation(GatherEntity.CurrentPosition.Position - entity.CurrentPosition.Position, Vector3.up);
+        entity.transform.rotation = Quaternion.LookRotation(environmentTile.Position - entity.CurrentPosition.Position, Vector3.up);
 
+        entity.ChangeAnimation(AnimationStates.Gathering);
 
-        
-        for(int i = 0; i < ItemCount; i++)
+        if (GatherAllAtOnce)
         {
-            if (!entity.AddToInventory(item, 1))
+            yield return new WaitForSeconds(GatherTime);
+            if (!entity.AddToInventory(item, ItemCount))
             {
                 // Drop item on ground
             }
-            Notification.DisplayNotification(false);
-            yield return new WaitForSeconds(GatherTime);
+        }
+        else
+        {
+            for (int i = 0; i < ItemCount; i++)
+            {
+                if (!entity.AddToInventory(item, 1))
+                {
+                    // Drop item on ground
+                }
+                Notification.DisplayNotification(false);
+                yield return new WaitForSeconds(GatherTime);
+            }
         }
 
         ItemCount = 0;
@@ -96,7 +108,8 @@ public class EntityActionGather : TileAction
         {
             Environment.instance.notificationHandler.AddNotification(ref LandmarkNotification.FirstAnimalGather, "Animals are a great renewable resource, make sure to keep a eye on them and don't let them wander too far");
         }
-        
+
+        entity.ChangeAnimation(AnimationStates.Idle);
         entity.ResetAction();
     }
 

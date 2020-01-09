@@ -907,6 +907,8 @@ public class Environment : MonoBehaviour
                     }
                     result.Add(routeNode);
                     result.Reverse();
+                    // Remove the start node as we are already there
+                    result.RemoveAt(0);
 
                     Debug.LogFormat("Path Found: {0} steps {1} long", result.Count, destination.Local);
                 }
@@ -914,7 +916,7 @@ public class Environment : MonoBehaviour
             else
             {
                 result = new List<EnvironmentTile>();
-                result.Add(begin);
+                //result.Add(begin);
                 result.Add(destination);
                 Debug.LogFormat("Direct Connection: {0} <-> {1} {2} long", begin, destination, TileSize);
             }
