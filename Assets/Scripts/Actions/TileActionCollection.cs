@@ -4,6 +4,35 @@ using UnityEngine;
 
 public class TileActionCollection : TileAction
 {
+    [System.Serializable]
+    protected enum ItemMode
+    {
+        Give, // Gives the player the item
+        Take, // If the item is set to be consumed on use, use it
+        HandItem // Should the entity be holding this item
+    }
+
+    [System.Serializable]
+    protected struct ItemInstance
+    {
+        public ItemMode mode;
+        public Item item;
+        public uint count;
+        public float chance; // What are the odds from 0-1 of the item being used
+    }
+    
+    [SerializeField] protected AnimationStates AnimationState;
+
+    [SerializeField] protected ItemInstance[] Items;
+
+    // After the action is complete, what tile should be in the place of the current one
+    // If no tile is present, do not replace
+    [SerializeField] protected EnvironmentTile[] ReplacmentTiles;
+
+    [SerializeField] protected float ActionTime;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,9 +45,120 @@ public class TileActionCollection : TileAction
         
     }
 
+    public override bool Valid(Entity entity)
+    {
+        if (environmentTile == null) return false;
+
+        foreach (ItemInstance itemInstance in Items)
+        {
+            if(itemInstance.mode == ItemMode.Take && !entity.HasItem(itemInstance.item, itemInstance.count))
+            {
+                return false;
+            }
+            else if(itemInstance.mode == ItemMode.HandItem && entity.GetHandItem().itemName != itemInstance.item.itemName)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
 
     public override void Run(Entity entity)
     {
+        entity.StopAllCoroutines();
+        // We check to see if the action is still valid
+        if (!Valid(entity))
+        {
+            entity.StartCoroutine(PostRun(entity));
+            return;
+        }
 
+        List<EnvironmentTile> route = Environment.instance.SolveNeighbour(entity.CurrentPosition, environmentTile);
+        if (route == null)
+        {
+            entity.StartCoroutine(DoCollectionWithDelay(entity, environmentTile));
+        }
+        else if (route.Count > 0)
+        {
+            entity.StartCoroutine(DoWalkAndCollection(entity, route, environmentTile));
+        }
+        else
+        {
+            entity.StartCoroutine(PostRun(entity));
+        }
+    }
+
+    // Preform the walk animation and move onto 'DoCollectionWithDelay'
+    private IEnumerator DoWalkAndCollection(Entity entity, List<EnvironmentTile> route, EnvironmentTile tile)
+    {
+        yield return TileActionWalk.DoGoTo(entity, entity.GetMovmentSpeed(), route);
+        yield return DoCollectionWithDelay(entity, tile);
+    }
+
+    // Wait for x seconds and finish be completing the task
+    private IEnumerator DoCollectionWithDelay(Entity entity, EnvironmentTile tile)
+    {
+        // Turn towards the tile
+        entity.transform.rotation = Quaternion.LookRotation(tile.Position - entity.CurrentPosition.Position, Vector3.up);
+        entity.ChangeAnimation(AnimationState);
+        yield return new WaitForSeconds(ActionTime);
+        yield return DoCollection(entity, tile);
+    }
+
+    public IEnumerator DoCollection(Entity entity, EnvironmentTile tile)
+    {
+
+
+        // Handle all item removals first as we may be in a case where a item gets removed onle for just ebough space to be made
+        // for the newly inserted items
+        foreach (ItemInstance itemInstance in Items)
+        {
+            switch (itemInstance.mode)
+            {
+                case ItemMode.Take:
+                case ItemMode.HandItem:
+                    // If the item is marked to not be consumed on use, continue
+                    if (!itemInstance.item.consumeOnUse) continue;
+
+                    float chanceRandom = Random.Range(0.0f, 1.0f);
+                    // Check to see if the random chance of the item being used comes true
+                    // Set to less then or equals as the random.range is set to min inclusive and it could be 0.0f
+                    if (chanceRandom <= itemInstance.chance)
+                    {
+                        entity.RemoveFromInventory(itemInstance.item, itemInstance.count);
+                    }
+
+                    break;
+            }
+        }
+        // Now preform all item insertions
+        foreach (ItemInstance itemInstance in Items)
+        {
+            switch (itemInstance.mode)
+            {
+                case ItemMode.Give:
+
+                    float chanceRandom = Random.Range(0.0f, 1.0f);
+                    // Check to see if the random chance of the item being dropped comes true
+                    // Set to less then or equals as the random.range is set to min inclusive and it could be 0.0f
+                    if (chanceRandom <= itemInstance.chance)
+                    {
+                        if (!entity.AddToInventory(itemInstance.item, itemInstance.count))
+                        {
+                            // Drop on the floor?
+                        }
+                    }
+                    break;
+            }
+        }
+
+        // Do we have a tile to replace the current one with?
+        if (ReplacmentTiles.Length > 0)
+        {
+            // Replace the tile, choosing a random new tile to go in its place
+            Environment.instance.ReplaceEnviromentTile(environmentTile, ReplacmentTiles[Random.Range(0, ReplacmentTiles.Length)]);
+        }
+
+        yield return PostRun(entity);
     }
 }

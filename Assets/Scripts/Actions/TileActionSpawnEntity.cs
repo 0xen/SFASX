@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnEntity : TileAction
+public class TileActionSpawnEntity : TileAction
 {
 
     [SerializeField] private Entity entityPrefab = null;
@@ -43,14 +43,13 @@ public class SpawnEntity : TileAction
 
     public IEnumerator DoSpawn(Entity entity, EnvironmentTile tile)
     {
-        entity.ChangeAnimation(AnimationStates.Gathering);
         // Turn towards the tile
         entity.transform.rotation = Quaternion.LookRotation(tile.Position - entity.CurrentPosition.Position, Vector3.up);
         
         yield return new WaitForSeconds(spawnTime);
 
 
-
+        /*
         if (item != null)
         {
             // We make sure we can remove the item before we replace the tile to stop people accessing the shop and selling the item mid interaction
@@ -65,7 +64,7 @@ public class SpawnEntity : TileAction
                 ent.transform.rotation = Quaternion.identity;
                 ent.CurrentPosition = tile;
             }
-        }
+        }*/
 
 
         entity.ChangeAnimation(AnimationStates.Idle);
@@ -75,7 +74,7 @@ public class SpawnEntity : TileAction
 
     public override bool Valid(Entity entity)
     {
-        return environmentTile.Type == EnvironmentTile.TileType.Accessible && base.Valid(entity);
+        return environmentTile.Type == EnvironmentTile.TileType.Accessible;
     }
 
 }

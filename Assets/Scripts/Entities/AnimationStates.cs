@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum AnimationStates
 { 
-    Idle,
-    Walking,
-    Gathering,
+    Idle = 0,
+    Walking = 1,
+    AxeSwing = 2,
 }

@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6903664157049590855}
   - component: {fileID: 932865874711439550}
   - component: {fileID: 8522373763716547169}
-  - component: {fileID: 2335607436558053689}
   - component: {fileID: -2878905638578892713}
   m_Layer: 0
   m_Name: Rock3
@@ -98,30 +97,6 @@ MonoBehaviour:
   TileName: Rock3
   Visited: 0
   Type: 2
---- !u!114 &2335607436558053689
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1499384897294326882}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7d0e301717a5334fa4aed42e97f383c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  environmentTile: {fileID: 0}
-  amountNeeded: 0
-  item: {fileID: 0}
-  actionImage: {fileID: -7738911330425415099, guid: 5fb7b6e1f37b2964083f5cfe204aaa9f,
-    type: 3}
-  actionName: Gather
-  GatherTime: 2
-  replacmentTile:
-  - {fileID: 5225831561217036612, guid: 068b00b1b45e14e49a33d5ab4dc954a2, type: 3}
-  pickups:
-  - item: {fileID: 2361852989507392283, guid: a94cf1252f13fc84bad08b642f5d9cb0, type: 3}
-    count: 2
 --- !u!65 &-2878905638578892713
 BoxCollider:
   m_ObjectHideFlags: 0

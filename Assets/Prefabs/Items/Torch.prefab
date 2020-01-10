@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3133565920461037425}
-  - component: {fileID: 1114609964256987997}
   - component: {fileID: 1589002361256282029}
   m_Layer: 0
   m_Name: Torch
@@ -32,29 +31,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1114609964256987997
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3415700395858677157}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e55c72c3d5b06bf4bad76ff0a65f7584, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  environmentTile: {fileID: 0}
-  amountNeeded: 1
-  item: {fileID: 1589002361256282029}
-  actionImage: {fileID: -7912115213301040636, guid: 9cf7cd7d33a37434099536b7f750ff41,
-    type: 3}
-  actionName: Place
-  ReplaceTime: 0.5
-  Rotatable: 1
-  RotatedReletiveToPlayer: 0
-  replacmentTile:
-  - {fileID: 8968664797230672486, guid: 3ce27b7f5ac2c744b9d92ceb5b3e6b87, type: 3}
 --- !u!114 &1589002361256282029
 MonoBehaviour:
   m_ObjectHideFlags: 0

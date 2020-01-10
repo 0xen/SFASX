@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2346377104795787367}
   - component: {fileID: 2153262866484951227}
-  - component: {fileID: 2227618380513688751}
   m_Layer: 0
   m_Name: Fence
   m_TagString: Untagged
@@ -50,26 +49,3 @@ MonoBehaviour:
   itemSprite: {fileID: 6971087585004242950, guid: 9cf7cd7d33a37434099536b7f750ff41,
     type: 3}
   consumeOnUse: 1
---- !u!114 &2227618380513688751
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2633384740316426931}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e55c72c3d5b06bf4bad76ff0a65f7584, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  environmentTile: {fileID: 0}
-  amountNeeded: 1
-  item: {fileID: 2153262866484951227}
-  actionImage: {fileID: 6971087585004242950, guid: 9cf7cd7d33a37434099536b7f750ff41,
-    type: 3}
-  actionName: Place
-  ReplaceTime: 2
-  Rotatable: 1
-  RotatedReletiveToPlayer: 1
-  replacmentTile:
-  - {fileID: 1247906914180562762, guid: 72dd898d08a8f52459df325a1bef456d, type: 3}

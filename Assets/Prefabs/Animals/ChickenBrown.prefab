@@ -13,8 +13,6 @@ GameObject:
   - component: {fileID: 1925250999737393592}
   - component: {fileID: 1925250999730293944}
   - component: {fileID: -4537713324124862065}
-  - component: {fileID: 1581440995401694421}
-  - component: {fileID: 5527223494586757016}
   m_Layer: 0
   m_Name: ChickenBrown
   m_TagString: Untagged
@@ -128,53 +126,6 @@ MonoBehaviour:
   breedHeartEffect: {fileID: 7935240217729611073}
   minTimeBeforeAction: 3
   maxTimeBeforeAction: 6
---- !u!114 &1581440995401694421
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1925250999739662200}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eab213b085019c1419592e2fc9ee705e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  environmentTile: {fileID: 0}
-  amountNeeded: 0
-  item: {fileID: 7831532365826899572, guid: cb7f9777d4d3c7043a7940a35d9d082c, type: 3}
-  actionImage: {fileID: 7606791111815138788, guid: 9cf7cd7d33a37434099536b7f750ff41,
-    type: 3}
-  actionName: Collect Eggs
-  GatherTime: 0.5
-  maxItems: 5
-  itemSpawnTime: 60
-  GatherEntity: {fileID: -4537713324124862065}
-  Notification: {fileID: 9123286104485878635}
-  ItemCount: 0
-  KillOnGather: 0
---- !u!114 &5527223494586757016
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1925250999739662200}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06613980bd7f8b04abfc74c8f9f2e196, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  environmentTile: {fileID: 0}
-  amountNeeded: 0
-  item: {fileID: 0}
-  actionImage: {fileID: 1784430390463598758, guid: 9cf7cd7d33a37434099536b7f750ff41,
-    type: 3}
-  actionName: Pick Up
-  GatherTime: 0.5
-  GatherEntity: {fileID: -4537713324124862065}
-  EntityItem: {fileID: 8922202913070996972, guid: 84f596a21ae0b844bad010ffb4d27db1,
-    type: 3}
 --- !u!1001 &201286338080532214
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -182,16 +133,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1925250999739818840}
     m_Modifications:
-    - target: {fileID: 1114251208721177104, guid: d5400823e95251049a492a30bf226adb,
-        type: 3}
-      propertyPath: m_Name
-      value: Object Notification
-      objectReference: {fileID: 0}
-    - target: {fileID: 1114251208721177104, guid: d5400823e95251049a492a30bf226adb,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4120165060279986179, guid: d5400823e95251049a492a30bf226adb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -252,6 +193,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1114251208721177104, guid: d5400823e95251049a492a30bf226adb,
+        type: 3}
+      propertyPath: m_Name
+      value: Object Notification
+      objectReference: {fileID: 0}
+    - target: {fileID: 1114251208721177104, guid: d5400823e95251049a492a30bf226adb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5400823e95251049a492a30bf226adb, type: 3}
 --- !u!4 &4316375411616059125 stripped
@@ -260,18 +211,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 201286338080532214}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &9123286104485878635 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8959753697346108829, guid: d5400823e95251049a492a30bf226adb,
-    type: 3}
-  m_PrefabInstance: {fileID: 201286338080532214}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48121d760dbbf3840951f7328ad56db6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &5038005266983542803
 PrefabInstance:
   m_ObjectHideFlags: 0

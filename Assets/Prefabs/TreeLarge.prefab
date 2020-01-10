@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4213043149412993566}
   - component: {fileID: 4665734947335233729}
   - component: {fileID: 3116652121298626816}
-  - component: {fileID: 5986182521547788391}
+  - component: {fileID: -1562816682004857186}
   m_Layer: 0
   m_Name: TreeLarge
   m_TagString: Untagged
@@ -111,7 +111,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 2.5, z: 10}
   m_Center: {x: 5, y: 1.25, z: 5}
---- !u!114 &5986182521547788391
+--- !u!114 &-1562816682004857186
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -120,23 +120,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 2471185783469752002}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7d0e301717a5334fa4aed42e97f383c, type: 3}
+  m_Script: {fileID: 11500000, guid: 90b9097d51a73c54aa0ce86257480f08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   environmentTile: {fileID: 0}
-  amountNeeded: 0
-  item: {fileID: 0}
-  actionImage: {fileID: 5649529287581088962, guid: 9cf7cd7d33a37434099536b7f750ff41,
-    type: 3}
-  actionName: Gather
-  GatherTime: 3
-  replacmentTile:
-  - {fileID: 4499036324842488966, guid: cd048cafd4c60d14d81bdb56cdb167ef, type: 3}
-  pickups:
-  - item: {fileID: 5318094462226911501, guid: 0e9c298ae323a9948a3575861d17197b, type: 3}
+  actionImage: {fileID: 0}
+  actionName: Chop Tree
+  AnimationState: 2
+  Items:
+  - mode: 2
+    item: {fileID: 7490623637331424458, guid: 7bd890be72c5cb74480f6776f3ee2d78, type: 3}
     count: 1
-  - item: {fileID: 4736621118778930762, guid: 395ee2ddd0392f34a84501dc3e6a5d6b, type: 3}
-    count: 6
+    chance: 0
+  - mode: 0
+    item: {fileID: 4736621118778930762, guid: 395ee2ddd0392f34a84501dc3e6a5d6b, type: 3}
+    count: 2
+    chance: 1
+  - mode: 0
+    item: {fileID: 5318094462226911501, guid: 0e9c298ae323a9948a3575861d17197b, type: 3}
+    count: 1
+    chance: 0.5
+  ReplacmentTiles:
+  - {fileID: 4499036324842488966, guid: cd048cafd4c60d14d81bdb56cdb167ef, type: 3}
+  ActionTime: 3.5
 --- !u!1001 &6925956467986050535
 PrefabInstance:
   m_ObjectHideFlags: 0

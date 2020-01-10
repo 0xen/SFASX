@@ -13,8 +13,6 @@ GameObject:
   - component: {fileID: 2538583578525269707}
   - component: {fileID: 6452924936302236692}
   - component: {fileID: 8315689441944294398}
-  - component: {fileID: 4253098289344367126}
-  - component: {fileID: -7273505734190343518}
   m_Layer: 0
   m_Name: AppleTreeLarge
   m_TagString: Untagged
@@ -113,64 +111,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 2.5, z: 10}
   m_Center: {x: 5, y: 1.25, z: 5}
---- !u!114 &4253098289344367126
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4253098289344367127}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d681a312f241254dbcc5560c20838d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  environmentTile: {fileID: 0}
-  amountNeeded: 0
-  item: {fileID: 0}
-  actionImage: {fileID: -519733243297392110, guid: eed00ce05f8aeeb48bc6f48ac83a2be8,
-    type: 3}
-  actionName: Collect
-  spawnLocations:
-  - {fileID: 5946852669704320638}
-  - {fileID: 5946852669857380741}
-  furitPrefab: {fileID: 3678343745416959256, guid: acf8660ad63dbf246a8d2ca641210359,
-    type: 3}
-  bairFruitTimeMin: 60
-  bairFruitTimeMax: 120
-  fruitApearTime: 30
-  maxFruit: 4
-  collectionTime: 0.25
-  Notification: {fileID: 554487086873609866}
-  pickups:
-  - item: {fileID: 4904522745645400517, guid: 7009bf493f7df5e4aa31e9999c7b433c, type: 3}
-    count: 1
---- !u!114 &-7273505734190343518
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4253098289344367127}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7d0e301717a5334fa4aed42e97f383c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  environmentTile: {fileID: 6452924936302236692}
-  amountNeeded: 0
-  item: {fileID: 0}
-  actionImage: {fileID: 5649529287581088962, guid: 9cf7cd7d33a37434099536b7f750ff41,
-    type: 3}
-  actionName: Gather
-  GatherTime: 2
-  replacmentTile:
-  - {fileID: 4499036324842488966, guid: cd048cafd4c60d14d81bdb56cdb167ef, type: 3}
-  pickups:
-  - item: {fileID: 4736621118778930762, guid: 395ee2ddd0392f34a84501dc3e6a5d6b, type: 3}
-    count: 2
-  - item: {fileID: 7732558789316736555, guid: 587862a1403d6a2449fc6923180976e0, type: 3}
-    count: 1
 --- !u!1 &5946852668497507596
 GameObject:
   m_ObjectHideFlags: 0
@@ -414,11 +354,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 963017725295704068}
     m_Modifications:
-    - target: {fileID: 1114251208721177104, guid: d5400823e95251049a492a30bf226adb,
-        type: 3}
-      propertyPath: m_Name
-      value: Object Notification
-      objectReference: {fileID: 0}
     - target: {fileID: 4120165060279986179, guid: d5400823e95251049a492a30bf226adb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -489,11 +424,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.40000024
       objectReference: {fileID: 0}
-    - target: {fileID: 2954911454000448222, guid: d5400823e95251049a492a30bf226adb,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7808165238598225929, guid: d5400823e95251049a492a30bf226adb,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -509,6 +439,16 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2954911454000448222, guid: d5400823e95251049a492a30bf226adb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1114251208721177104, guid: d5400823e95251049a492a30bf226adb,
+        type: 3}
+      propertyPath: m_Name
+      value: Object Notification
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5400823e95251049a492a30bf226adb, type: 3}
 --- !u!4 &4813041644156539668 stripped
@@ -517,15 +457,3 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8927998773622881047}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &554487086873609866 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8959753697346108829, guid: d5400823e95251049a492a30bf226adb,
-    type: 3}
-  m_PrefabInstance: {fileID: 8927998773622881047}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48121d760dbbf3840951f7328ad56db6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

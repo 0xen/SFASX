@@ -10,8 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8992060557704556182}
   - component: {fileID: 4736621118778930762}
-  - component: {fileID: -4417993878350089634}
-  - component: {fileID: -8106703588994066490}
   m_Layer: 0
   m_Name: Wood
   m_TagString: Untagged
@@ -52,49 +50,3 @@ MonoBehaviour:
   itemSprite: {fileID: 4126004077657876305, guid: 5fb7b6e1f37b2964083f5cfe204aaa9f,
     type: 3}
   consumeOnUse: 1
---- !u!114 &-4417993878350089634
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8705915051070929986}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e55c72c3d5b06bf4bad76ff0a65f7584, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  environmentTile: {fileID: 0}
-  amountNeeded: 1
-  item: {fileID: 4736621118778930762}
-  actionImage: {fileID: 4126004077657876305, guid: 5fb7b6e1f37b2964083f5cfe204aaa9f,
-    type: 3}
-  actionName: Place Small Logs
-  ReplaceTime: 2
-  Rotatable: 1
-  RotatedReletiveToPlayer: 0
-  replacmentTile:
-  - {fileID: 7228575818001999334, guid: d85ca6f08a4ef8848b08ae4126b05734, type: 3}
---- !u!114 &-8106703588994066490
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8705915051070929986}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e55c72c3d5b06bf4bad76ff0a65f7584, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  environmentTile: {fileID: 0}
-  amountNeeded: 2
-  item: {fileID: 4736621118778930762}
-  actionImage: {fileID: 4126004077657876305, guid: 5fb7b6e1f37b2964083f5cfe204aaa9f,
-    type: 3}
-  actionName: Place Large Logs
-  ReplaceTime: 3
-  Rotatable: 1
-  RotatedReletiveToPlayer: 0
-  replacmentTile:
-  - {fileID: 4499036324842488966, guid: cd048cafd4c60d14d81bdb56cdb167ef, type: 3}

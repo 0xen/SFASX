@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 7510898099256814567}
   - component: {fileID: 6004829340412161117}
   - component: {fileID: 4546697507766463848}
-  - component: {fileID: -3451994014355689752}
   m_Layer: 0
   m_Name: MapleTreeSappling
   m_TagString: Untagged
@@ -128,30 +127,6 @@ MonoBehaviour:
     type: 3}
   minTime: 60
   maxTime: 120
---- !u!114 &-3451994014355689752
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2332120408681411086}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7d0e301717a5334fa4aed42e97f383c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  environmentTile: {fileID: 0}
-  amountNeeded: 0
-  item: {fileID: 0}
-  actionImage: {fileID: 3924701242920675444, guid: 9cf7cd7d33a37434099536b7f750ff41,
-    type: 3}
-  actionName: Gather
-  GatherTime: 3
-  replacmentTile:
-  - {fileID: 5225831561217036612, guid: 068b00b1b45e14e49a33d5ab4dc954a2, type: 3}
-  pickups:
-  - item: {fileID: 1438332706513111878, guid: 181c3b3bf4cea574e99e59544ff4d399, type: 3}
-    count: 1
 --- !u!1001 &7187767860168145080
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -159,10 +134,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1586959213931921437}
     m_Modifications:
-    - target: {fileID: 1051648788624220, guid: 6b14d45548d47914088fc51496a20a8e, type: 3}
-      propertyPath: m_Name
-      value: SNature_Sapling
-      objectReference: {fileID: 0}
     - target: {fileID: 4411094677487402, guid: 6b14d45548d47914088fc51496a20a8e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5
@@ -218,6 +189,10 @@ PrefabInstance:
     - target: {fileID: 4411094677487402, guid: 6b14d45548d47914088fc51496a20a8e, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1051648788624220, guid: 6b14d45548d47914088fc51496a20a8e, type: 3}
+      propertyPath: m_Name
+      value: SNature_Sapling
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b14d45548d47914088fc51496a20a8e, type: 3}

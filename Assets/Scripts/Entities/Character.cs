@@ -221,23 +221,7 @@ public class Character : Entity
 
     public override void ChangeAnimation(AnimationStates state)
     {
-        switch (state)
-        {
-            case AnimationStates.Idle:
-                mAnimationController.SetBool("Walking", false);
-                mAnimationController.SetBool("Gathering", false);
-                break;
-            case AnimationStates.Walking:
-                mAnimationController.SetBool("Walking", true);
-                mAnimationController.SetBool("Gathering", false);
-                break;
-            case AnimationStates.Gathering:
-                mAnimationController.SetBool("Walking", false);
-                mAnimationController.SetBool("Gathering", true);
-                break;
-
-        }
-
+        mAnimationController.SetInteger("Animation", (int)state);
     }
 
     public override void InventoryChange(Item item, uint count, InventoryChangeEvent eve)

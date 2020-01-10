@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 6613055519326538163}
   - component: {fileID: 8155012332916133465}
   - component: {fileID: 4943719642300162572}
-  - component: {fileID: 3116428737624883418}
   m_Layer: 0
   m_Name: AppleTreeSappling
   m_TagString: Untagged
@@ -128,30 +127,6 @@ MonoBehaviour:
     type: 3}
   minTime: 60
   maxTime: 120
---- !u!114 &3116428737624883418
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4128997817271867312}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7d0e301717a5334fa4aed42e97f383c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  environmentTile: {fileID: 0}
-  amountNeeded: 0
-  item: {fileID: 0}
-  actionImage: {fileID: 9139043026036404088, guid: 9cf7cd7d33a37434099536b7f750ff41,
-    type: 3}
-  actionName: Gather
-  GatherTime: 3
-  replacmentTile:
-  - {fileID: 5225831561217036612, guid: 068b00b1b45e14e49a33d5ab4dc954a2, type: 3}
-  pickups:
-  - item: {fileID: 7732558789316736555, guid: 587862a1403d6a2449fc6923180976e0, type: 3}
-    count: 1
 --- !u!1001 &1388138837819245240
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -159,10 +134,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1087193230451975587}
     m_Modifications:
-    - target: {fileID: 182038, guid: 87475ce363e4bcf40b5791256be68f7d, type: 3}
-      propertyPath: m_Name
-      value: TreeType1_07
-      objectReference: {fileID: 0}
     - target: {fileID: 477202, guid: 87475ce363e4bcf40b5791256be68f7d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5
@@ -218,6 +189,10 @@ PrefabInstance:
     - target: {fileID: 477202, guid: 87475ce363e4bcf40b5791256be68f7d, type: 3}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 182038, guid: 87475ce363e4bcf40b5791256be68f7d, type: 3}
+      propertyPath: m_Name
+      value: TreeType1_07
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87475ce363e4bcf40b5791256be68f7d, type: 3}

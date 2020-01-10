@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 7692651029497598846}
   - component: {fileID: 4624052423093064852}
   - component: {fileID: 4018459592518287480}
-  - component: {fileID: 440220049320621939}
   m_Layer: 0
   m_Name: palmSeedStart
   m_TagString: Untagged
@@ -128,30 +127,6 @@ MonoBehaviour:
     type: 3}
   minTime: 120
   maxTime: 160
---- !u!114 &440220049320621939
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 597472475336412541}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7d0e301717a5334fa4aed42e97f383c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  environmentTile: {fileID: 0}
-  amountNeeded: 0
-  item: {fileID: 0}
-  actionImage: {fileID: 8892810703104722987, guid: 5fb7b6e1f37b2964083f5cfe204aaa9f,
-    type: 3}
-  actionName: Gather
-  GatherTime: 3
-  replacmentTile:
-  - {fileID: 5225831561217036612, guid: 068b00b1b45e14e49a33d5ab4dc954a2, type: 3}
-  pickups:
-  - item: {fileID: 5318094462226911501, guid: 0e9c298ae323a9948a3575861d17197b, type: 3}
-    count: 1
 --- !u!1001 &3829414275977304667
 PrefabInstance:
   m_ObjectHideFlags: 0

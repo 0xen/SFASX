@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6214542939975446263}
-  - component: {fileID: 8229545062700841691}
   - component: {fileID: 7732558789316736555}
   m_Layer: 0
   m_Name: AppleSeed
@@ -32,29 +31,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8229545062700841691
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5919371563797134371}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e55c72c3d5b06bf4bad76ff0a65f7584, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  environmentTile: {fileID: 0}
-  amountNeeded: 1
-  item: {fileID: 7732558789316736555}
-  actionImage: {fileID: 6837931478763432522, guid: 9cf7cd7d33a37434099536b7f750ff41,
-    type: 3}
-  actionName: Plant
-  ReplaceTime: 4
-  Rotatable: 0
-  RotatedReletiveToPlayer: 0
-  replacmentTile:
-  - {fileID: 6613055519326538163, guid: 0cfd86ca236ebe34db4e5e7cda47d434, type: 3}
 --- !u!114 &7732558789316736555
 MonoBehaviour:
   m_ObjectHideFlags: 0
