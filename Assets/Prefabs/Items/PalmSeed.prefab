@@ -68,7 +68,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Palm Seed
-  count: 1
+  description: The palm tree is a fast growing tree that can grow up to meny meaters
+    tall and several mellon widths. They are perfect for a quick harvest.
+  count: 0
   itemSprite: {fileID: 8892810703104722987, guid: 5fb7b6e1f37b2964083f5cfe204aaa9f,
     type: 3}
   consumeOnUse: 1

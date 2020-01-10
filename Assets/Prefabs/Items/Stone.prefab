@@ -45,7 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Stone
-  count: 0
+  description: Smooth, heavy and hard, stone normally just gets in your way around
+    the land, but can be sold for a small profit.
+  count: 4
   itemSprite: {fileID: 317711084924465178, guid: 9cf7cd7d33a37434099536b7f750ff41,
     type: 3}
   consumeOnUse: 1

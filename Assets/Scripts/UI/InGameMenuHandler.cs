@@ -40,7 +40,6 @@ public class InGameMenuHandler : MonoBehaviour
 
     public void BackToMainMenu()
     {
-        SceneManager.UnloadSceneAsync("Main");
-        SceneManager.LoadScene("MainMenu", LoadSceneMode.Additive);
+        SceneManager.LoadScene("MainMenu");
     }
 }

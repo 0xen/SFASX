@@ -46,7 +46,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Wood
-  count: 8
+  description: 'Wood is an abundant resource found within trees; gather it and sell
+    it for a tidy profit. '
+  count: 4
   itemSprite: {fileID: 4126004077657876305, guid: 5fb7b6e1f37b2964083f5cfe204aaa9f,
     type: 3}
   consumeOnUse: 1

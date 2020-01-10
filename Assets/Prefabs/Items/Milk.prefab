@@ -44,6 +44,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Milk
+  description: You can't start your morning without a glass of fresh milk, best served
+    cold, avoid drinking from the source.
   count: 0
   itemSprite: {fileID: 7781642708770859160, guid: 9cf7cd7d33a37434099536b7f750ff41,
     type: 3}

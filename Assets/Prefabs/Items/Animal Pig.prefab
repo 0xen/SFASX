@@ -45,6 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Pig
+  description: Pigs are lovely creatures, they breed like crazy and are perfect for
+    there meat products.
   count: 0
   itemSprite: {fileID: 94607509914081392, guid: 9cf7cd7d33a37434099536b7f750ff41,
     type: 3}

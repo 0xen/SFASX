@@ -5,6 +5,7 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     public string itemName;
+    public string description;
     public uint count;
     public Sprite itemSprite;
     public bool consumeOnUse;

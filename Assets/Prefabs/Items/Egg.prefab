@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Egg
+  description: Fried, scrambled or poached, eggs are amazing in all forms of meals.
   count: 0
   itemSprite: {fileID: 7606791111815138788, guid: 9cf7cd7d33a37434099536b7f750ff41,
     type: 3}

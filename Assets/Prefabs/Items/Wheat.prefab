@@ -44,6 +44,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Wheat
+  description: Made in the Windmill, this is a vital tool for creating delicious baked
+    goods.
   count: 2
   itemSprite: {fileID: -3694741824605994313, guid: 9cf7cd7d33a37434099536b7f750ff41,
     type: 3}

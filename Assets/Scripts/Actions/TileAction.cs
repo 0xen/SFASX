@@ -38,5 +38,8 @@ public abstract class TileAction : MonoBehaviour
         {
             entity.RemoveFromInventory(item, amountNeeded);
         }
+
+        entity.ChangeAnimation(AnimationStates.Idle);
+        entity.ResetAction();
     }
 }

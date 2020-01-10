@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Fence
+  description: Perfect for keeping your wandering animals at bay.
   count: 1
   itemSprite: {fileID: 6971087585004242950, guid: 9cf7cd7d33a37434099536b7f750ff41,
     type: 3}

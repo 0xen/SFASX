@@ -163,7 +163,7 @@ public class ShopHandler : MonoBehaviour
 
         selectedItemTitle.text = item.item.itemName;
 
-        selectedItemDescription.text = "Buy: " + item.buyPrice + " Sell:" + item.sellPrice;
+        selectedItemDescription.text = "Buy: " + item.buyPrice + " Sell:" + item.sellPrice + "\n\n" + item.item.description;
 
         selectedItemImage.sprite = item.item.itemSprite;
         selectedItemImage.color = Color.white;

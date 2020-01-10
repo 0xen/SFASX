@@ -45,6 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Cow
+  description: Dariy cows are large lumbering beasts, but are friendly enough. Overtime
+    the animal can produce you a wide veriaty of products from Milk to... milk...
+    its a dariy cow.
   count: 0
   itemSprite: {fileID: -4359568450669099851, guid: 9cf7cd7d33a37434099536b7f750ff41,
     type: 3}

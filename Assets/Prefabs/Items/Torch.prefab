@@ -68,6 +68,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Torch
+  description: On those dark nights, this basic tool can help you find your way, simply
+    place it on the ground!
   count: 1
   itemSprite: {fileID: -7912115213301040636, guid: 9cf7cd7d33a37434099536b7f750ff41,
     type: 3}

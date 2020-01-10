@@ -45,6 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Windmill
+  description: Windmills are a great money makers, churning out Wheat at a steady
+    rate, just sit back and watch the money roll in.
   count: 0
   itemSprite: {fileID: -3852078903928304002, guid: 9cf7cd7d33a37434099536b7f750ff41,
     type: 3}

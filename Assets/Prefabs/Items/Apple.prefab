@@ -44,6 +44,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Apple
+  description: These little red gems are the by product of a Apple Tree. Buyers from
+    the western isles buy them up like crazy!
   count: 0
   itemSprite: {fileID: -519733243297392110, guid: eed00ce05f8aeeb48bc6f48ac83a2be8,
     type: 3}

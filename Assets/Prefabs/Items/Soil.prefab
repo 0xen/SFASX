@@ -46,6 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Soil
+  description: Soil can be used to reclaim land from the sea! Beyond that... it's
+    just fancy dirt...
   count: 0
   itemSprite: {fileID: 134571252661815451, guid: 5fb7b6e1f37b2964083f5cfe204aaa9f,
     type: 3}

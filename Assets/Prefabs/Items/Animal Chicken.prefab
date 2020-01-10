@@ -45,6 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Chicken
+  description: A standard household chicken that can lay eggs for you and your family,
+    simply give it space and enough time.
   count: 0
   itemSprite: {fileID: 1784430390463598758, guid: 9cf7cd7d33a37434099536b7f750ff41,
     type: 3}

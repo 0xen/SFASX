@@ -68,6 +68,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Maple Seed
+  description: Maple Seeds are used to create the mighty Maple Tree, a slow growing
+    but provide a large quantaty of wood when felled.
   count: 3
   itemSprite: {fileID: -4083755277516519233, guid: 9cf7cd7d33a37434099536b7f750ff41,
     type: 3}

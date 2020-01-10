@@ -44,6 +44,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Pork
+  description: Pork is a staple of most diets, but avoided by the more health concious,
+    either way it will bring a pretty penny at the market.
   count: 0
   itemSprite: {fileID: -2004546666460064615, guid: 9cf7cd7d33a37434099536b7f750ff41,
     type: 3}

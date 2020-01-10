@@ -68,7 +68,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Apple Seed
-  count: 1
+  description: From this seed a tree can be produced that after anough time will prvide
+    fresh Apples to its caretaker.
+  count: 0
   itemSprite: {fileID: 6837931478763432522, guid: 9cf7cd7d33a37434099536b7f750ff41,
     type: 3}
   consumeOnUse: 1
