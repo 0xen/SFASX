@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 9171041265190082378}
   - component: {fileID: 428312736237616533}
   - component: {fileID: -1749308653127198124}
+  - component: {fileID: 7755045458163186481}
   m_Layer: 0
   m_Name: Stone6
   m_TagString: Untagged
@@ -110,6 +111,38 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 2.5, z: 10}
   m_Center: {x: 5, y: 1.25, z: 5}
+--- !u!114 &7755045458163186481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7456487072380527510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90b9097d51a73c54aa0ce86257480f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  environmentTile: {fileID: 0}
+  actionImage: {fileID: 0}
+  actionName: Mine
+  AnimationState: 7
+  ItemGroups:
+  - Items:
+    - mode: 2
+      item: {fileID: 7490623637331424458, guid: 7bd890be72c5cb74480f6776f3ee2d78,
+        type: 3}
+      count: 1
+      chance: 0
+    - mode: 0
+      item: {fileID: 3987617966587672014, guid: 355d1f2fdd464404c872e0f576dc5f91,
+        type: 3}
+      count: 1
+      chance: 1
+  ReplacmentTiles:
+  - {fileID: 5225831561217036612, guid: 068b00b1b45e14e49a33d5ab4dc954a2, type: 3}
+  ActionTime: 5.5
+  Recursive: 0
 --- !u!1001 &7438152161128381642
 PrefabInstance:
   m_ObjectHideFlags: 0

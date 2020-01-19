@@ -70,7 +70,7 @@ public class Character : Entity
 
     public override void ResetAction()
     {
-        if (mAction != null)
+        if (mAction != null && mAction.environmentTile != null)
         {
             mAction.environmentTile.SetTint(Color.white);
         }
@@ -158,8 +158,11 @@ public class Character : Entity
         }
         else
         {
-            mAction.environmentTile.SetTint(new Color(0.0f, 0.75f, 0.1f));
-            mUIActionLable.text = mAction.actionName;
+            if(mAction!=null && mAction.environmentTile!=null)
+            {
+                mAction.environmentTile.SetTint(new Color(0.0f, 0.75f, 0.1f));
+                mUIActionLable.text = mAction.actionName;
+            }
         }
 
         if (mUiItemBar == null) return;

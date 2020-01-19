@@ -127,22 +127,27 @@ MonoBehaviour:
   actionImage: {fileID: 0}
   actionName: Chop Tree
   AnimationState: 2
-  Items:
-  - mode: 2
-    item: {fileID: 7490623637331424458, guid: 7bd890be72c5cb74480f6776f3ee2d78, type: 3}
-    count: 1
-    chance: 0
-  - mode: 0
-    item: {fileID: 4736621118778930762, guid: 395ee2ddd0392f34a84501dc3e6a5d6b, type: 3}
-    count: 2
-    chance: 1
-  - mode: 0
-    item: {fileID: 5318094462226911501, guid: 0e9c298ae323a9948a3575861d17197b, type: 3}
-    count: 1
-    chance: 0.5
+  ItemGroups:
+  - Items:
+    - mode: 2
+      item: {fileID: 7490623637331424458, guid: 7bd890be72c5cb74480f6776f3ee2d78,
+        type: 3}
+      count: 1
+      chance: 0
+    - mode: 0
+      item: {fileID: 4736621118778930762, guid: 395ee2ddd0392f34a84501dc3e6a5d6b,
+        type: 3}
+      count: 2
+      chance: 1
+    - mode: 0
+      item: {fileID: 5318094462226911501, guid: 0e9c298ae323a9948a3575861d17197b,
+        type: 3}
+      count: 1
+      chance: 0.5
   ReplacmentTiles:
   - {fileID: 4499036324842488966, guid: cd048cafd4c60d14d81bdb56cdb167ef, type: 3}
-  ActionTime: 3.5
+  ActionTime: 5.5
+  Recursive: 1
 --- !u!1001 &6925956467986050535
 PrefabInstance:
   m_ObjectHideFlags: 0

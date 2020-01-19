@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1383985698568388541}
   - component: {fileID: 7603024997213197666}
   - component: {fileID: -7540290328053021430}
+  - component: {fileID: -2979591750406264389}
   m_Layer: 0
   m_Name: Rock1
   m_TagString: Untagged
@@ -110,6 +111,38 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 2.5, z: 10}
   m_Center: {x: 5, y: 1.25, z: 5}
+--- !u!114 &-2979591750406264389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 794939922005986145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90b9097d51a73c54aa0ce86257480f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  environmentTile: {fileID: 0}
+  actionImage: {fileID: 0}
+  actionName: Dig
+  AnimationState: 6
+  ItemGroups:
+  - Items:
+    - mode: 2
+      item: {fileID: 7490623637331424458, guid: 7bd890be72c5cb74480f6776f3ee2d78,
+        type: 3}
+      count: 1
+      chance: 0
+    - mode: 0
+      item: {fileID: 2361852989507392283, guid: a94cf1252f13fc84bad08b642f5d9cb0,
+        type: 3}
+      count: 1
+      chance: 1
+  ReplacmentTiles:
+  - {fileID: 5225831561217036612, guid: 068b00b1b45e14e49a33d5ab4dc954a2, type: 3}
+  ActionTime: 5.5
+  Recursive: 0
 --- !u!1001 &6203607242142563172
 PrefabInstance:
   m_ObjectHideFlags: 0

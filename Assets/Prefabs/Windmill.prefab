@@ -13,8 +13,6 @@ GameObject:
   - component: {fileID: 691378427451182734}
   - component: {fileID: 8300130121435964497}
   - component: {fileID: 6468816313622307771}
-  - component: {fileID: 2055770906062851466}
-  - component: {fileID: -6870738465737257760}
   m_Layer: 0
   m_Name: Windmill
   m_TagString: Untagged
@@ -113,56 +111,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 2.5, z: 10}
   m_Center: {x: 5, y: 1.25, z: 5}
---- !u!114 &2055770906062851466
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1271302661421578834}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eab213b085019c1419592e2fc9ee705e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  environmentTile: {fileID: 0}
-  amountNeeded: 0
-  item: {fileID: 6412259517409841901, guid: d2be9229674954548884c178de204264, type: 3}
-  actionImage: {fileID: -3694741824605994313, guid: 9cf7cd7d33a37434099536b7f750ff41,
-    type: 3}
-  actionName: Collect Wheat
-  GatherTime: 3.5
-  maxItems: 100
-  itemSpawnTime: 5
-  GatherEntity: {fileID: 0}
-  Notification: {fileID: 4942563038321623467}
-  ItemCount: 0
-  KillOnGather: 0
-  GatherAllAtOnce: 1
---- !u!114 &-6870738465737257760
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1271302661421578834}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7d0e301717a5334fa4aed42e97f383c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  environmentTile: {fileID: 0}
-  amountNeeded: 0
-  item: {fileID: 0}
-  actionImage: {fileID: -3852078903928304002, guid: 9cf7cd7d33a37434099536b7f750ff41,
-    type: 3}
-  actionName: Pick Up
-  GatherTime: 3.5
-  replacmentTile:
-  - {fileID: 5225831561217036612, guid: 068b00b1b45e14e49a33d5ab4dc954a2, type: 3}
-  pickups:
-  - item: {fileID: 1523733555751052237, guid: 1aa0c743bf5718740908a47f1a912a41, type: 3}
-    count: 1
 --- !u!114 &4299282058058118067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -271,18 +219,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4089534963675593782}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4942563038321623467 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8959753697346108829, guid: d5400823e95251049a492a30bf226adb,
-    type: 3}
-  m_PrefabInstance: {fileID: 4089534963675593782}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48121d760dbbf3840951f7328ad56db6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &4299282058058118065
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class TileChange : MonoBehaviour
 {
-
+    // The tile that should be replaced after x time
     public EnvironmentTile replacmentTile;
 
+    // Min and max time before the tile will change
     public float minTime;
     public float maxTime;
 
+    // Chosen change time
     private float timeTillChange;
-    private EnvironmentTile currentTile;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +23,7 @@ public class TileChange : MonoBehaviour
     // Update is called once per frame
     void Update() 
     {
+        // When the timeTillChange gets below 0, switch out the tile
         timeTillChange -= Time.deltaTime;
         if(timeTillChange<0)
         {

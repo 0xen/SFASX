@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 357084077915067432}
   - component: {fileID: 6100408536255068445}
   - component: {fileID: 5086360143483392845}
+  - component: {fileID: -7037576675344916082}
   m_Layer: 0
   m_Name: MapleTreeLarge
   m_TagString: Untagged
@@ -110,6 +111,43 @@ MonoBehaviour:
   TileName: MapleTreeLarge
   Visited: 0
   Type: 2
+--- !u!114 &-7037576675344916082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2073986926494441716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90b9097d51a73c54aa0ce86257480f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  environmentTile: {fileID: 0}
+  actionImage: {fileID: 0}
+  actionName: Chop Tree
+  AnimationState: 2
+  ItemGroups:
+  - Items:
+    - mode: 2
+      item: {fileID: 7490623637331424458, guid: 7bd890be72c5cb74480f6776f3ee2d78,
+        type: 3}
+      count: 1
+      chance: 0
+    - mode: 0
+      item: {fileID: 4736621118778930762, guid: 395ee2ddd0392f34a84501dc3e6a5d6b,
+        type: 3}
+      count: 2
+      chance: 1
+    - mode: 0
+      item: {fileID: 1438332706513111878, guid: 181c3b3bf4cea574e99e59544ff4d399,
+        type: 3}
+      count: 1
+      chance: 0.5
+  ReplacmentTiles:
+  - {fileID: 4499036324842488966, guid: cd048cafd4c60d14d81bdb56cdb167ef, type: 3}
+  ActionTime: 5.5
+  Recursive: 1
 --- !u!1001 &106231519346832365
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -117,6 +155,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3067815321476240103}
     m_Modifications:
+    - target: {fileID: 1095773145228200, guid: fac5acd5ad489214781636c608a0c628, type: 3}
+      propertyPath: m_Name
+      value: SNature_Tree
+      objectReference: {fileID: 0}
     - target: {fileID: 4227784882853702, guid: fac5acd5ad489214781636c608a0c628, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5
@@ -160,10 +202,6 @@ PrefabInstance:
     - target: {fileID: 4227784882853702, guid: fac5acd5ad489214781636c608a0c628, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1095773145228200, guid: fac5acd5ad489214781636c608a0c628, type: 3}
-      propertyPath: m_Name
-      value: SNature_Tree
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fac5acd5ad489214781636c608a0c628, type: 3}

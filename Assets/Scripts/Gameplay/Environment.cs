@@ -909,8 +909,6 @@ public class Environment : MonoBehaviour
                     result.Reverse();
                     // Remove the start node as we are already there
                     result.RemoveAt(0);
-
-                    Debug.LogFormat("Path Found: {0} steps {1} long", result.Count, destination.Local);
                 }
             }
             else
@@ -918,12 +916,7 @@ public class Environment : MonoBehaviour
                 result = new List<EnvironmentTile>();
                 //result.Add(begin);
                 result.Add(destination);
-                Debug.LogFormat("Direct Connection: {0} <-> {1} {2} long", begin, destination, TileSize);
             }
-        }
-        else
-        {
-            Debug.LogWarning("Cannot find path for invalid nodes");
         }
 
         mLastSolution = result;
@@ -931,12 +924,12 @@ public class Environment : MonoBehaviour
         return result;
     }
 
-    public GameObject ReplaceEnviromentTile(EnvironmentTile current, EnvironmentTile replacment)
+    public EnvironmentTile ReplaceEnviromentTile(EnvironmentTile current, EnvironmentTile replacment)
     {
         Vector3 newPosition = GetRawPosition(current.PositionTile.x,current.PositionTile.y);
 
-        GameObject newObject = Instantiate(replacment.gameObject, new Vector3(), Quaternion.identity, transform);
-        EnvironmentTile tile = newObject.GetComponent<EnvironmentTile>();
+
+        EnvironmentTile tile = Instantiate(replacment, new Vector3(), Quaternion.identity, transform);
         
 
         tile.Position = current.Position;
@@ -977,6 +970,6 @@ public class Environment : MonoBehaviour
 
         Destroy(current.gameObject);
 
-        return newObject;
+        return tile;
     }
 }
