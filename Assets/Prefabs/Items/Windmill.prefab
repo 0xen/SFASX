@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2906105131085593361}
   - component: {fileID: 1523733555751052237}
+  - component: {fileID: -3993312212414400165}
   m_Layer: 0
   m_Name: Windmill
   m_TagString: Untagged
@@ -46,7 +47,33 @@ MonoBehaviour:
   itemName: Windmill
   description: Windmills are a great money makers, churning out Wheat at a steady
     rate, just sit back and watch the money roll in.
-  count: 0
+  count: 1
   itemSprite: {fileID: -3852078903928304002, guid: 9cf7cd7d33a37434099536b7f750ff41,
     type: 3}
   consumeOnUse: 1
+--- !u!114 &-3993312212414400165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3192814416634784197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90b9097d51a73c54aa0ce86257480f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  environmentTile: {fileID: 0}
+  actionImage: {fileID: 0}
+  actionName: Place
+  AnimationState: 3
+  ItemGroups:
+  - Items:
+    - mode: 1
+      item: {fileID: 1523733555751052237}
+      count: 1
+      chance: 1
+  ReplacmentTiles:
+  - {fileID: 8300130121435964497, guid: adb72c4d39a5aef4fbd137fa63919141, type: 3}
+  ActionTime: 4
+  Recursive: 0

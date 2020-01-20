@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 3196724981688493675}
   - component: {fileID: 3196724981695974251}
   - component: {fileID: 8368044451791982087}
+  - component: {fileID: 3409114240755755006}
+  - component: {fileID: 6373018381464991630}
   m_Layer: 0
   m_Name: CowBlW
   m_TagString: Untagged
@@ -126,6 +128,61 @@ MonoBehaviour:
   breedHeartEffect: {fileID: 1505183536412832529}
   minTimeBeforeAction: 3
   maxTimeBeforeAction: 6
+--- !u!114 &3409114240755755006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3196724981686499499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38e1b7e49246a584fb05d7850700f551, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  environmentTile: {fileID: 0}
+  actionImage: {fileID: 0}
+  actionName: Pick up
+  AnimationState: 4
+  ItemGroups:
+  - Items:
+    - mode: 0
+      item: {fileID: 6207524583372306475, guid: 7734198a543df544bb6f77c66e1af575,
+        type: 3}
+      count: 1
+      chance: 1
+  ReplacmentTiles: []
+  ActionTime: 3.5
+  Recursive: 0
+  GatherEntity: {fileID: 8368044451791982087}
+--- !u!114 &6373018381464991630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3196724981686499499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4370724a93746114a9ce901ffc9be7ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  environmentTile: {fileID: 0}
+  actionImage: {fileID: 0}
+  actionName: Milk
+  AnimationState: 4
+  ItemGroups:
+  - Items:
+    - mode: 0
+      item: {fileID: 769755611341318568, guid: 54df903be1ecc2e4694b4f969f597952, type: 3}
+      count: 0
+      chance: 1
+  ReplacmentTiles: []
+  ActionTime: 4
+  Recursive: 0
+  maxItems: 10
+  itemSpawnRate: 15
+  Notification: {fileID: 3910534733907139790}
 --- !u!1001 &4545901713274725955
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -214,6 +271,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3196724981686723723}
     m_Modifications:
+    - target: {fileID: 1114251208721177104, guid: d5400823e95251049a492a30bf226adb,
+        type: 3}
+      propertyPath: m_Name
+      value: Object Notification
+      objectReference: {fileID: 0}
     - target: {fileID: 4120165060279986179, guid: d5400823e95251049a492a30bf226adb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -274,11 +336,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1114251208721177104, guid: d5400823e95251049a492a30bf226adb,
-        type: 3}
-      propertyPath: m_Name
-      value: Object Notification
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5400823e95251049a492a30bf226adb, type: 3}
 --- !u!4 &8304556699132676432 stripped
@@ -287,3 +344,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5337453970641264979}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3910534733907139790 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8959753697346108829, guid: d5400823e95251049a492a30bf226adb,
+    type: 3}
+  m_PrefabInstance: {fileID: 5337453970641264979}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48121d760dbbf3840951f7328ad56db6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 809708797200775601}
   - component: {fileID: 809708797191443633}
   - component: {fileID: 7900902538975448714}
+  - component: {fileID: 762876651119654698}
+  - component: {fileID: 2062569168391875958}
   m_Layer: 0
   m_Name: Pig
   m_TagString: Untagged
@@ -126,6 +128,62 @@ MonoBehaviour:
   breedHeartEffect: {fileID: 710520273941448108}
   minTimeBeforeAction: 3
   maxTimeBeforeAction: 6
+--- !u!114 &762876651119654698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 809708797198837617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38e1b7e49246a584fb05d7850700f551, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  environmentTile: {fileID: 0}
+  actionImage: {fileID: 0}
+  actionName: Pick Up
+  AnimationState: 4
+  ItemGroups:
+  - Items:
+    - mode: 0
+      item: {fileID: 5505882069553148232, guid: b23826146f5af66409bf7e82eb031335,
+        type: 3}
+      count: 1
+      chance: 1
+  ReplacmentTiles: []
+  ActionTime: 3.5
+  Recursive: 0
+  GatherEntity: {fileID: 7900902538975448714}
+--- !u!114 &2062569168391875958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 809708797198837617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4370724a93746114a9ce901ffc9be7ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  environmentTile: {fileID: 0}
+  actionImage: {fileID: 0}
+  actionName: Collect Truffles
+  AnimationState: 4
+  ItemGroups:
+  - Items:
+    - mode: 0
+      item: {fileID: 6165115304816445807, guid: 319c9fe1a58f0f747aba4aab9931b931,
+        type: 3}
+      count: 0
+      chance: 1
+  ReplacmentTiles: []
+  ActionTime: 4
+  Recursive: 0
+  maxItems: 5
+  itemSpawnRate: 30
+  Notification: {fileID: 6735668505486890315}
 --- !u!1001 &2391013747337177302
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -133,6 +191,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 809708797198875473}
     m_Modifications:
+    - target: {fileID: 1114251208721177104, guid: d5400823e95251049a492a30bf226adb,
+        type: 3}
+      propertyPath: m_Name
+      value: Object Notification
+      objectReference: {fileID: 0}
     - target: {fileID: 4120165060279986179, guid: d5400823e95251049a492a30bf226adb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -193,11 +256,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1114251208721177104, guid: d5400823e95251049a492a30bf226adb,
-        type: 3}
-      propertyPath: m_Name
-      value: Object Notification
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5400823e95251049a492a30bf226adb, type: 3}
 --- !u!4 &1730316975859384533 stripped
@@ -206,6 +264,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2391013747337177302}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6735668505486890315 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8959753697346108829, guid: d5400823e95251049a492a30bf226adb,
+    type: 3}
+  m_PrefabInstance: {fileID: 2391013747337177302}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48121d760dbbf3840951f7328ad56db6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2461625780083167486
 PrefabInstance:
   m_ObjectHideFlags: 0

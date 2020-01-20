@@ -564,8 +564,6 @@ public class Environment : MonoBehaviour
                     Game.TileSaveData saveInstance = saveData.TileData[x + (y * Size.x)];
 
                     AddLandTile(position, ref tile, mMapGenerationPayload.size, x, y, saveInstance.N, saveInstance.R);
-
-
                 }
             }
         }

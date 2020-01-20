@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 7775128172354409877}
   - component: {fileID: 1247906914180562762}
   - component: {fileID: 4304124910973499552}
+  - component: {fileID: 6498516349951379042}
+  - component: {fileID: 4212773526597661532}
   m_Layer: 0
   m_Name: Fence
   m_TagString: Untagged
@@ -110,6 +112,54 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 2.5, z: 10}
   m_Center: {x: 5, y: 1.25, z: 5}
+--- !u!114 &6498516349951379042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8348015561485263177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90b9097d51a73c54aa0ce86257480f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  environmentTile: {fileID: 0}
+  actionImage: {fileID: 0}
+  actionName: Pick Up
+  AnimationState: 3
+  ItemGroups:
+  - Items:
+    - mode: 0
+      item: {fileID: 2153262866484951227, guid: 0200a3b1b19e5364d9d10fc799cda6c6,
+        type: 3}
+      count: 1
+      chance: 1
+  ReplacmentTiles:
+  - {fileID: 5225831561217036612, guid: 068b00b1b45e14e49a33d5ab4dc954a2, type: 3}
+  ActionTime: 0
+  Recursive: 0
+--- !u!114 &4212773526597661532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8348015561485263177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bf4aabda6037ef449dd63bf9fe21cf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  environmentTile: {fileID: 0}
+  actionImage: {fileID: 0}
+  actionName: Rotate
+  AnimationState: 3
+  ItemGroups: []
+  ReplacmentTiles: []
+  ActionTime: 2
+  Recursive: 0
+  entityPrefab: {fileID: 0}
 --- !u!1001 &6109043721872560279
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -117,6 +167,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5008357053972206426}
     m_Modifications:
+    - target: {fileID: 178996, guid: 4cc487e002327cb43995ca1871bd142e, type: 3}
+      propertyPath: m_Name
+      value: Fence Type1 01
+      objectReference: {fileID: 0}
     - target: {fileID: 408904, guid: 4cc487e002327cb43995ca1871bd142e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 9.55
@@ -172,10 +226,6 @@ PrefabInstance:
     - target: {fileID: 408904, guid: 4cc487e002327cb43995ca1871bd142e, type: 3}
       propertyPath: m_LocalScale.z
       value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 178996, guid: 4cc487e002327cb43995ca1871bd142e, type: 3}
-      propertyPath: m_Name
-      value: Fence Type1 01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4cc487e002327cb43995ca1871bd142e, type: 3}

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Character : Entity
 {
-    const int CharacterInventorySize = 9 * 4;
+    const int CharacterInventorySize = 9;
 
     private int mSelectedItem;
 

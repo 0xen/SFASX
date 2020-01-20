@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7603024997213197666}
   - component: {fileID: -7540290328053021430}
   - component: {fileID: -2979591750406264389}
+  - component: {fileID: -5723360363270428342}
   m_Layer: 0
   m_Name: Rock1
   m_TagString: Untagged
@@ -143,6 +144,27 @@ MonoBehaviour:
   - {fileID: 5225831561217036612, guid: 068b00b1b45e14e49a33d5ab4dc954a2, type: 3}
   ActionTime: 5.5
   Recursive: 0
+--- !u!114 &-5723360363270428342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 794939922005986145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bf4aabda6037ef449dd63bf9fe21cf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  environmentTile: {fileID: 0}
+  actionImage: {fileID: 0}
+  actionName: Rotate
+  AnimationState: 3
+  ItemGroups: []
+  ReplacmentTiles: []
+  ActionTime: 2
+  Recursive: 0
+  entityPrefab: {fileID: 0}
 --- !u!1001 &6203607242142563172
 PrefabInstance:
   m_ObjectHideFlags: 0

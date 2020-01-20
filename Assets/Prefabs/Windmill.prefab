@@ -13,6 +13,9 @@ GameObject:
   - component: {fileID: 691378427451182734}
   - component: {fileID: 8300130121435964497}
   - component: {fileID: 6468816313622307771}
+  - component: {fileID: -1635243171951295257}
+  - component: {fileID: 8442132839466891967}
+  - component: {fileID: 468553625649728834}
   m_Layer: 0
   m_Name: Windmill
   m_TagString: Untagged
@@ -111,6 +114,82 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 2.5, z: 10}
   m_Center: {x: 5, y: 1.25, z: 5}
+--- !u!114 &-1635243171951295257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1271302661421578834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90b9097d51a73c54aa0ce86257480f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  environmentTile: {fileID: 0}
+  actionImage: {fileID: 0}
+  actionName: Pick Up
+  AnimationState: 3
+  ItemGroups:
+  - Items:
+    - mode: 0
+      item: {fileID: 1523733555751052237, guid: 1aa0c743bf5718740908a47f1a912a41,
+        type: 3}
+      count: 1
+      chance: 1
+  ReplacmentTiles:
+  - {fileID: 5225831561217036612, guid: 068b00b1b45e14e49a33d5ab4dc954a2, type: 3}
+  ActionTime: 3
+  Recursive: 0
+--- !u!114 &8442132839466891967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1271302661421578834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4370724a93746114a9ce901ffc9be7ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  environmentTile: {fileID: 0}
+  actionImage: {fileID: 0}
+  actionName: Gather Wheat
+  AnimationState: 3
+  ItemGroups:
+  - Items:
+    - mode: 0
+      item: {fileID: 6412259517409841901, guid: d2be9229674954548884c178de204264,
+        type: 3}
+      count: 0
+      chance: 1
+  ReplacmentTiles: []
+  ActionTime: 4
+  Recursive: 0
+  maxItems: 30
+  itemSpawnRate: 5
+  Notification: {fileID: 4942563038321623467}
+--- !u!114 &468553625649728834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1271302661421578834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bf4aabda6037ef449dd63bf9fe21cf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  environmentTile: {fileID: 0}
+  actionImage: {fileID: 0}
+  actionName: Rotate
+  AnimationState: 3
+  ItemGroups: []
+  ReplacmentTiles: []
+  ActionTime: 2
+  Recursive: 0
 --- !u!114 &4299282058058118067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,6 +210,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2882245281772750913}
     m_Modifications:
+    - target: {fileID: 1114251208721177104, guid: d5400823e95251049a492a30bf226adb,
+        type: 3}
+      propertyPath: m_Name
+      value: Object Notification
+      objectReference: {fileID: 0}
+    - target: {fileID: 1114251208721177104, guid: d5400823e95251049a492a30bf226adb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4120165060279986179, guid: d5400823e95251049a492a30bf226adb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -201,16 +290,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1114251208721177104, guid: d5400823e95251049a492a30bf226adb,
-        type: 3}
-      propertyPath: m_Name
-      value: Object Notification
-      objectReference: {fileID: 0}
-    - target: {fileID: 1114251208721177104, guid: d5400823e95251049a492a30bf226adb,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5400823e95251049a492a30bf226adb, type: 3}
 --- !u!4 &138826722494288949 stripped
@@ -219,6 +298,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4089534963675593782}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4942563038321623467 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8959753697346108829, guid: d5400823e95251049a492a30bf226adb,
+    type: 3}
+  m_PrefabInstance: {fileID: 4089534963675593782}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48121d760dbbf3840951f7328ad56db6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4299282058058118065
 PrefabInstance:
   m_ObjectHideFlags: 0

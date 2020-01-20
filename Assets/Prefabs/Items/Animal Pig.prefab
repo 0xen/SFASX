@@ -64,11 +64,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   environmentTile: {fileID: 0}
-  amountNeeded: 1
-  item: {fileID: 5505882069553148232}
   actionImage: {fileID: 94607509914081392, guid: 9cf7cd7d33a37434099536b7f750ff41,
     type: 3}
   actionName: Place Pig
+  AnimationState: 3
+  ItemGroups:
+  - Items:
+    - mode: 1
+      item: {fileID: 5505882069553148232}
+      count: 1
+      chance: 1
+  ReplacmentTiles: []
+  ActionTime: 4
+  Recursive: 0
   entityPrefab: {fileID: 7900902538975448714, guid: 3766af5d37d12b041aa633c91db80a17,
     type: 3}
-  spawnTime: 3

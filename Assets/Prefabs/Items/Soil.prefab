@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2141198184484031431}
   - component: {fileID: 2361852989507392283}
+  - component: {fileID: -1085603921104850329}
   m_Layer: 0
   m_Name: Soil
   m_TagString: Untagged
@@ -46,7 +47,34 @@ MonoBehaviour:
   itemName: Soil
   description: Soil can be used to reclaim land from the sea! Beyond that... it's
     just fancy dirt...
-  count: 0
+  count: 40
   itemSprite: {fileID: 134571252661815451, guid: 5fb7b6e1f37b2964083f5cfe204aaa9f,
     type: 3}
   consumeOnUse: 1
+--- !u!114 &-1085603921104850329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1850056496913127699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c33cc29a5988b79439f82bd2a8e216b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  environmentTile: {fileID: 0}
+  actionImage: {fileID: 0}
+  actionName: Place Earth
+  AnimationState: 6
+  ItemGroups:
+  - Items:
+    - mode: 1
+      item: {fileID: 2361852989507392283}
+      count: 10
+      chance: 1
+  ReplacmentTiles:
+  - {fileID: 5225831561217036612, guid: 068b00b1b45e14e49a33d5ab4dc954a2, type: 3}
+  ActionTime: 4
+  Recursive: 0
+  PlaceEarth: 1

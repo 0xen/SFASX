@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6522872670661454870}
   - component: {fileID: 7490623637331424458}
+  - component: {fileID: 1182350527609624604}
   m_Layer: 0
   m_Name: Broken Multitool
   m_TagString: Untagged
@@ -49,3 +50,30 @@ MonoBehaviour:
   itemSprite: {fileID: 8543347228161355572, guid: eed00ce05f8aeeb48bc6f48ac83a2be8,
     type: 3}
   consumeOnUse: 0
+--- !u!114 &1182350527609624604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6817973549247626946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c33cc29a5988b79439f82bd2a8e216b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  environmentTile: {fileID: 0}
+  actionImage: {fileID: 0}
+  actionName: Dig Earth
+  AnimationState: 6
+  ItemGroups:
+  - Items:
+    - mode: 0
+      item: {fileID: 2361852989507392283, guid: a94cf1252f13fc84bad08b642f5d9cb0,
+        type: 3}
+      count: 10
+      chance: 1
+  ReplacmentTiles: []
+  ActionTime: 3
+  Recursive: 0
+  PlaceEarth: 0

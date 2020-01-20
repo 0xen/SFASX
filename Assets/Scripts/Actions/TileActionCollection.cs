@@ -103,7 +103,7 @@ public class TileActionCollection : TileAction
         List<EnvironmentTile> route = Environment.instance.SolveNeighbour(entity.CurrentPosition, environmentTile);
         if (route == null)
         {
-            entity.StartCoroutine(DoCollection(entity, environmentTile));
+            entity.StartCoroutine(DoAction(entity, environmentTile));
         }
         else if (route.Count > 0)
         {
@@ -119,10 +119,17 @@ public class TileActionCollection : TileAction
     private IEnumerator DoWalkAndCollection(Entity entity, List<EnvironmentTile> route, EnvironmentTile tile)
     {
         yield return TileActionWalk.DoGoTo(entity, entity.GetMovmentSpeed(), route);
-        yield return DoCollection(entity, tile);
+        yield return DoAction(entity, tile);
     }
 
-    public IEnumerator DoCollection(Entity entity, EnvironmentTile tile)
+
+    public IEnumerator DoAction(Entity entity, EnvironmentTile tile)
+    {
+        yield return DoCollection(entity, tile);
+        yield return PostRun(entity);
+    }
+
+    public virtual IEnumerator DoCollection(Entity entity, EnvironmentTile tile)
     {
         // Turn towards the tile
         entity.transform.rotation = Quaternion.LookRotation(tile.Position - entity.CurrentPosition.Position, Vector3.up);
@@ -133,46 +140,49 @@ public class TileActionCollection : TileAction
 
         ItemInstance[] items = FindValidItemGroup(entity);
 
-        // Handle all item removals first as we may be in a case where a item gets removed only for just enough space to be made
-        // for the newly inserted items
-        foreach (ItemInstance itemInstance in items)
+        if(items!=null)
         {
-            switch (itemInstance.mode)
+            // Handle all item removals first as we may be in a case where a item gets removed only for just enough space to be made
+            // for the newly inserted items
+            foreach (ItemInstance itemInstance in items)
             {
-                case ItemMode.Take:
-                case ItemMode.HandItem:
-                    // If the item is marked to not be consumed on use, continue
-                    if (!itemInstance.item.consumeOnUse) continue;
+                switch (itemInstance.mode)
+                {
+                    case ItemMode.Take:
+                    case ItemMode.HandItem:
+                        // If the item is marked to not be consumed on use, continue
+                        if (!itemInstance.item.consumeOnUse) continue;
 
-                    float chanceRandom = Random.Range(0.0f, 1.0f);
-                    // Check to see if the random chance of the item being used comes true
-                    // Set to less then or equals as the random.range is set to min inclusive and it could be 0.0f
-                    if (chanceRandom <= itemInstance.chance)
-                    {
-                        entity.RemoveFromInventory(itemInstance.item, itemInstance.count);
-                    }
-
-                    break;
-            }
-        }
-        // Now preform all item insertions
-        foreach (ItemInstance itemInstance in items)
-        {
-            switch (itemInstance.mode)
-            {
-                case ItemMode.Give:
-
-                    float chanceRandom = Random.Range(0.0f, 1.0f);
-                    // Check to see if the random chance of the item being dropped comes true
-                    // Set to less then or equals as the random.range is set to min inclusive and it could be 0.0f
-                    if (chanceRandom <= itemInstance.chance)
-                    {
-                        if (!entity.AddToInventory(itemInstance.item, itemInstance.count))
+                        float chanceRandom = Random.Range(0.0f, 1.0f);
+                        // Check to see if the random chance of the item being used comes true
+                        // Set to less then or equals as the random.range is set to min inclusive and it could be 0.0f
+                        if (chanceRandom <= itemInstance.chance)
                         {
-                            // Drop on the floor?
+                            entity.RemoveFromInventory(itemInstance.item, itemInstance.count);
                         }
-                    }
-                    break;
+
+                        break;
+                }
+            }
+            // Now preform all item insertions
+            foreach (ItemInstance itemInstance in items)
+            {
+                switch (itemInstance.mode)
+                {
+                    case ItemMode.Give:
+
+                        float chanceRandom = Random.Range(0.0f, 1.0f);
+                        // Check to see if the random chance of the item being dropped comes true
+                        // Set to less then or equals as the random.range is set to min inclusive and it could be 0.0f
+                        if (chanceRandom <= itemInstance.chance)
+                        {
+                            if (!entity.AddToInventory(itemInstance.item, itemInstance.count))
+                            {
+                                // Drop on the floor?
+                            }
+                        }
+                        break;
+                }
             }
         }
 
@@ -197,7 +207,5 @@ public class TileActionCollection : TileAction
                 }
             }
         }
-        yield return PostRun(entity);
-
     }
 }

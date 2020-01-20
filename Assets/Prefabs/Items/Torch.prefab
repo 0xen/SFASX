@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3133565920461037425}
   - component: {fileID: 1589002361256282029}
+  - component: {fileID: -2993089445566614818}
   m_Layer: 0
   m_Name: Torch
   m_TagString: Untagged
@@ -50,3 +51,29 @@ MonoBehaviour:
   itemSprite: {fileID: -7912115213301040636, guid: 9cf7cd7d33a37434099536b7f750ff41,
     type: 3}
   consumeOnUse: 1
+--- !u!114 &-2993089445566614818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3415700395858677157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90b9097d51a73c54aa0ce86257480f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  environmentTile: {fileID: 0}
+  actionImage: {fileID: 0}
+  actionName: Place
+  AnimationState: 3
+  ItemGroups:
+  - Items:
+    - mode: 1
+      item: {fileID: 1589002361256282029}
+      count: 1
+      chance: 1
+  ReplacmentTiles:
+  - {fileID: 8968664797230672486, guid: 3ce27b7f5ac2c744b9d92ceb5b3e6b87, type: 3}
+  ActionTime: 3
+  Recursive: 0

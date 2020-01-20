@@ -6890,6 +6890,10 @@ MonoBehaviour:
       sellPrice: 1
       item: {fileID: 6412259517409841901, guid: d2be9229674954548884c178de204264,
         type: 3}
+    - buyPrice: 10
+      sellPrice: 5
+      item: {fileID: 6165115304816445807, guid: 319c9fe1a58f0f747aba4aab9931b931,
+        type: 3}
   - name: Building
     items:
     - buyPrice: 10
