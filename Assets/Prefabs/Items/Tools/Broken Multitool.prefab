@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Broken Multitool
   description: Not a very usefull tool, but it will get the job done in a pinch
-  count: 1
+  count: 10
   itemSprite: {fileID: 8543347228161355572, guid: eed00ce05f8aeeb48bc6f48ac83a2be8,
     type: 3}
   consumeOnUse: 0
@@ -63,7 +63,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   environmentTile: {fileID: 0}
-  actionImage: {fileID: 0}
+  actionImage: {fileID: 8543347228161355572, guid: eed00ce05f8aeeb48bc6f48ac83a2be8,
+    type: 3}
   actionName: Dig Earth
   AnimationState: 6
   ItemGroups:
@@ -71,9 +72,9 @@ MonoBehaviour:
     - mode: 0
       item: {fileID: 2361852989507392283, guid: a94cf1252f13fc84bad08b642f5d9cb0,
         type: 3}
-      count: 10
+      count: 2
       chance: 1
   ReplacmentTiles: []
-  ActionTime: 3
+  ActionTime: 12
   Recursive: 0
   PlaceEarth: 0

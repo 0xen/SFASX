@@ -48,8 +48,7 @@ MonoBehaviour:
   description: On those dark nights, this basic tool can help you find your way, simply
     place it on the ground!
   count: 1
-  itemSprite: {fileID: -7912115213301040636, guid: 9cf7cd7d33a37434099536b7f750ff41,
-    type: 3}
+  itemSprite: {fileID: 21300000, guid: dc6ce74a053acad439405c895ab884a3, type: 3}
   consumeOnUse: 1
 --- !u!114 &-2993089445566614818
 MonoBehaviour:
@@ -64,7 +63,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   environmentTile: {fileID: 0}
-  actionImage: {fileID: 0}
+  actionImage: {fileID: 21300000, guid: dc6ce74a053acad439405c895ab884a3, type: 3}
   actionName: Place
   AnimationState: 3
   ItemGroups:

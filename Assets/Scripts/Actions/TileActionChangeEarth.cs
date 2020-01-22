@@ -136,6 +136,7 @@ public class TileActionChangeEarth : TileActionCollection
         EnvironmentTile tile = environmentTile;
         // Is the current tile water
         if (PlaceEarth != Environment.instance.mWaterMap[tile.PositionTile.x, tile.PositionTile.y] || !base.Valid(entity)) return false;
+        if (!PlaceEarth && tile.Type != EnvironmentTile.TileType.Accessible) return false;
 
         int xMin = (tile.PositionTile.x - 1 < 0) ? 0 : tile.PositionTile.x - 1;
         int yMin = (tile.PositionTile.y - 1 < 0) ? 0 : tile.PositionTile.y - 1;

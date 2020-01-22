@@ -6942,6 +6942,65 @@ MonoBehaviour:
       sellPrice: 0
       item: {fileID: 7490623637331424458, guid: 7bd890be72c5cb74480f6776f3ee2d78,
         type: 3}
+    - buyPrice: 300
+      sellPrice: 150
+      item: {fileID: 3965971958448306430, guid: 19f37cc60b0f92b408902e28867e1615,
+        type: 3}
+    - buyPrice: 600
+      sellPrice: 300
+      item: {fileID: 3994780959520260294, guid: 641ff5aa5994adf449e9090f7dc607bb,
+        type: 3}
+    - buyPrice: 900
+      sellPrice: 450
+      item: {fileID: 7311258472177598381, guid: 305e91694b3513b4e8c1709be6304dd2,
+        type: 3}
+    - buyPrice: 1200
+      sellPrice: 600
+      item: {fileID: 6344549872102095599, guid: f69012a838fc4174dbe1d7bdd5ea9eb1,
+        type: 3}
+    - buyPrice: 1500
+      sellPrice: 750
+      item: {fileID: 4023452590618082392, guid: d445683b26056a949a51897b86cd7f41,
+        type: 3}
+    - buyPrice: 300
+      sellPrice: 150
+      item: {fileID: 7426943667479377088, guid: 120e8c1a780f6764c8882e10af9cd332,
+        type: 3}
+    - buyPrice: 600
+      sellPrice: 300
+      item: {fileID: 5439058194196821905, guid: 0d29ea2fd745b444387551da4c007282,
+        type: 3}
+    - buyPrice: 900
+      sellPrice: 450
+      item: {fileID: 5604821020489777457, guid: 006f75f2417da384782620905f5e9ef0,
+        type: 3}
+    - buyPrice: 1200
+      sellPrice: 600
+      item: {fileID: 1380051079414847427, guid: ccf9279db67624842959408dd91bdb82,
+        type: 3}
+    - buyPrice: 1500
+      sellPrice: 750
+      item: {fileID: 8689553590126776756, guid: ca67c8fc1762d524da706f826d65e344,
+        type: 3}
+    - buyPrice: 300
+      sellPrice: 150
+      item: {fileID: 6464333318082941992, guid: a2d5f19bf5799494c85de6c006ecec5e,
+        type: 3}
+    - buyPrice: 600
+      sellPrice: 300
+      item: {fileID: 8009924251365573428, guid: fb27345fee8ca4d4e86591e80bc12a9f,
+        type: 3}
+    - buyPrice: 900
+      sellPrice: 450
+      item: {fileID: 983764227564317687, guid: ed6efb72e4ef0174691780fb2b0b1956, type: 3}
+    - buyPrice: 1200
+      sellPrice: 600
+      item: {fileID: 1340415661341773099, guid: 085f62ce6b6323443a405c479f1f52dc,
+        type: 3}
+    - buyPrice: 1500
+      sellPrice: 750
+      item: {fileID: 1763031040941634371, guid: a5f2e83174257634c8feaf92eb23215e,
+        type: 3}
 --- !u!1 &2083344929
 GameObject:
   m_ObjectHideFlags: 0

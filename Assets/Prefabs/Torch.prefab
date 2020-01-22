@@ -4967,14 +4967,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   environmentTile: {fileID: 0}
-  actionImage: {fileID: 0}
+  actionImage: {fileID: 21300000, guid: dc6ce74a053acad439405c895ab884a3, type: 3}
   actionName: Rotate
   AnimationState: 3
   ItemGroups: []
   ReplacmentTiles: []
   ActionTime: 2
   Recursive: 0
-  entityPrefab: {fileID: 0}
 --- !u!1001 &8968664797240890214
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -47,7 +47,7 @@ MonoBehaviour:
   itemName: Soil
   description: Soil can be used to reclaim land from the sea! Beyond that... it's
     just fancy dirt...
-  count: 40
+  count: 20
   itemSprite: {fileID: 134571252661815451, guid: 5fb7b6e1f37b2964083f5cfe204aaa9f,
     type: 3}
   consumeOnUse: 1
@@ -64,14 +64,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   environmentTile: {fileID: 0}
-  actionImage: {fileID: 0}
+  actionImage: {fileID: 134571252661815451, guid: 5fb7b6e1f37b2964083f5cfe204aaa9f,
+    type: 3}
   actionName: Place Earth
   AnimationState: 6
   ItemGroups:
   - Items:
     - mode: 1
       item: {fileID: 2361852989507392283}
-      count: 10
+      count: 20
       chance: 1
   ReplacmentTiles:
   - {fileID: 5225831561217036612, guid: 068b00b1b45e14e49a33d5ab4dc954a2, type: 3}

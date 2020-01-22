@@ -1,0 +1,78 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6808186690458402504
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6512241666149608476}
+  - component: {fileID: 7426943667479377088}
+  - component: {fileID: 1192691815100422166}
+  m_Layer: 0
+  m_Name: Wood Spade
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6512241666149608476
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6808186690458402504}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7426943667479377088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6808186690458402504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8082f9426317404c93d1f3e41be8007, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemName: Wood Spade
+  description: More of a spoon, this will help you make small holes
+  count: 10
+  itemSprite: {fileID: 21300000, guid: dbdf328160e39cc41bba59cf1e0fd03d, type: 3}
+  consumeOnUse: 0
+--- !u!114 &1192691815100422166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6808186690458402504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c33cc29a5988b79439f82bd2a8e216b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  environmentTile: {fileID: 0}
+  actionImage: {fileID: 21300000, guid: dbdf328160e39cc41bba59cf1e0fd03d, type: 3}
+  actionName: Dig Earth
+  AnimationState: 6
+  ItemGroups:
+  - Items:
+    - mode: 0
+      item: {fileID: 2361852989507392283, guid: a94cf1252f13fc84bad08b642f5d9cb0,
+        type: 3}
+      count: 4
+      chance: 1
+  ReplacmentTiles: []
+  ActionTime: 10
+  Recursive: 0
+  PlaceEarth: 0

@@ -47,8 +47,7 @@ MonoBehaviour:
   itemName: Fence
   description: Perfect for keeping your wandering animals at bay.
   count: 10
-  itemSprite: {fileID: 6971087585004242950, guid: 9cf7cd7d33a37434099536b7f750ff41,
-    type: 3}
+  itemSprite: {fileID: 21300000, guid: eb825d6d0b34c6d4c932658bf5f075a0, type: 3}
   consumeOnUse: 1
 --- !u!114 &3191550756776589844
 MonoBehaviour:
@@ -63,7 +62,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   environmentTile: {fileID: 0}
-  actionImage: {fileID: 0}
+  actionImage: {fileID: 21300000, guid: eb825d6d0b34c6d4c932658bf5f075a0, type: 3}
   actionName: Place
   AnimationState: 3
   ItemGroups:
