@@ -12,7 +12,6 @@ public class TileActionChangeEarth : TileActionCollection
     {
         yield return base.DoCollection(entity, tile);
 
-        //Environment.instance.ReplaceEnviromentTile(tile, replacmentTile);
         Environment.instance.mWaterMap[tile.PositionTile.x, tile.PositionTile.y] = !PlaceEarth;
 
 
@@ -71,63 +70,6 @@ public class TileActionChangeEarth : TileActionCollection
                 }
             }
         }
-
-        /*
-        {
-            int xPadding = 1;
-            int yPadding = 1;
-            int xMin = (tile.PositionTile.x - xPadding < 0) ? 0 : tile.PositionTile.x - xPadding;
-            int yMin = (tile.PositionTile.y - yPadding < 0) ? 0 : tile.PositionTile.y - yPadding;
-            int xMax = (tile.PositionTile.x + xPadding < Environment.instance.mMapGenerationPayload.size.x) ? (tile.PositionTile.x + xPadding) : (Environment.instance.mMapGenerationPayload.size.x - 1);
-            int yMax = (tile.PositionTile.y + yPadding < Environment.instance.mMapGenerationPayload.size.y) ? (tile.PositionTile.y + yPadding) : (Environment.instance.mMapGenerationPayload.size.x - 1);
-
-            for (int x = xMin; x <= xMax; x++)
-            {
-                for (int y = yMin; y <= yMax; y++)
-                {
-                    if (Environment.instance.mWaterMap[x, y])
-                    {
-                        Vector3 position = Environment.instance.GetRawPosition(x, y);
-                        EnvironmentTile newTile = null;
-                        Environment.instance.AddWaterTile(position, ref newTile, Environment.instance.mMapGenerationPayload.size, x, y);
-                        Environment.instance.SetupConnections(x, y);
-                    }
-                }
-            }
-            for (int x = xMin; x < xMax; x++)
-            {
-                for (int y = yMin; y < yMax; y++)
-                {
-                    Environment.instance.SetupConnections(x, y);
-                }
-            }
-        }
-
-        {
-            int xPadding = Environment.instance.seaDeapth;
-            int yPadding = Environment.instance.seaDeapth;
-            int xMin = (tile.PositionTile.x - xPadding < 0) ? 0 : tile.PositionTile.x - xPadding;
-            int yMin = (tile.PositionTile.y - yPadding < 0) ? 0 : tile.PositionTile.y - yPadding;
-            int xMax = (tile.PositionTile.x + xPadding < Environment.instance.mMapGenerationPayload.size.x) ? (tile.PositionTile.x + xPadding) : (Environment.instance.mMapGenerationPayload.size.x - 1);
-            int yMax = (tile.PositionTile.y + yPadding < Environment.instance.mMapGenerationPayload.size.y) ? (tile.PositionTile.y + yPadding) : (Environment.instance.mMapGenerationPayload.size.x - 1);
-
-            for (int x = xMin; x < xMax; x++)
-            {
-                for (int y = yMin; y < yMax; y++)
-                {
-
-                    if (Environment.instance.mWaterMap[x, y] && Environment.instance.mMap[x][y] == null)
-                    {
-                        Vector3 position = Environment.instance.GetRawPosition(x, y);
-                        EnvironmentTile newTile = null;
-                        Environment.instance.AddWaterTile(position, ref newTile, Environment.instance.mMapGenerationPayload.size, x, y);
-                    }
-
-                }
-            }
-        }
-        */
-
     }
 
     // Make sure that at least one of the touching tiles is land
