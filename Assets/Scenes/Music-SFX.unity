@@ -319,7 +319,7 @@ PrefabInstance:
     - target: {fileID: 6451573540947702983, guid: 29f102b68157bdd4ab795239f82ec987,
         type: 3}
       propertyPath: audioPairs.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6451573540947702983, guid: 29f102b68157bdd4ab795239f82ec987,
         type: 3}
@@ -341,5 +341,25 @@ PrefabInstance:
       propertyPath: audioPairs.Array.data[2].clip
       value: 
       objectReference: {fileID: 8300000, guid: cdc13b819a7740e47b734563f82155cd, type: 3}
+    - target: {fileID: 6451573540947702983, guid: 29f102b68157bdd4ab795239f82ec987,
+        type: 3}
+      propertyPath: audioPairs.Array.data[3].name
+      value: ActionSelect
+      objectReference: {fileID: 0}
+    - target: {fileID: 6451573540947702983, guid: 29f102b68157bdd4ab795239f82ec987,
+        type: 3}
+      propertyPath: audioPairs.Array.data[3].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 02b842cc448e5b947ad29cda67396f9b, type: 3}
+    - target: {fileID: 6451573540947702983, guid: 29f102b68157bdd4ab795239f82ec987,
+        type: 3}
+      propertyPath: audioPairs.Array.data[4].name
+      value: ActionSelectorOpen
+      objectReference: {fileID: 0}
+    - target: {fileID: 6451573540947702983, guid: 29f102b68157bdd4ab795239f82ec987,
+        type: 3}
+      propertyPath: audioPairs.Array.data[4].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 02b842cc448e5b947ad29cda67396f9b, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29f102b68157bdd4ab795239f82ec987, type: 3}

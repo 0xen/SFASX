@@ -47,12 +47,16 @@ public class UIActionSelector : Graphic
     {
         if (enabled && actions.Count == 0) return;
         selectorCanvas.enabled = enabled;
+        if(enabled)
+        {
+            SFXController.instance.PlaySFX("ActionSelector");
+        }
     }
 
     public void Update()
     {
         // Since Unity trys to run UI elements in the editor mode before it has called start, we need to add this as a error check
-        if (actions == null) return;
+        if (actions == null || actions.Count==0) return;
 
         // Update the bounce speed & distance
         mBounceOffset = hoverBounceDistance * Mathf.Sin(Time.time * hoverBounceSpeedModifier);
@@ -74,7 +78,11 @@ public class UIActionSelector : Graphic
 
             if (mSelection < actions.Count)
             {
-                ActionSelectorLable.text = actions[mSelection].actionName;
+                if(ActionSelectorLable.text != actions[mSelection].actionName)
+                {
+                    ActionSelectorLable.text = actions[mSelection].actionName;
+                    SFXController.instance.PlaySFX("ActionSelect");
+                }
             }
 
         }
@@ -183,15 +191,17 @@ public class UIActionSelector : Graphic
         }
         else if (mSelection >= actions.Count || mSelection < 0)
         {
+            SFXController.instance.PlaySFX("Fail");
             return;
         }
         else
         {
             action = actions[mSelection];
         }
-        
 
-        if(Input.GetKey(KeyCode.LeftShift))
+        SFXController.instance.PlaySFX("ActionSelect");
+
+        if (Input.GetKey(KeyCode.LeftShift))
         {
             mCharacter.AddActionToQue(action);
         }

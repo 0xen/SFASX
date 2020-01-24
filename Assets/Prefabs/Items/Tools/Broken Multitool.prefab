@@ -44,9 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8082f9426317404c93d1f3e41be8007, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: Broken Multitool
-  description: Not a very usefull tool, but it will get the job done in a pinch
-  count: 10
+  itemName: Broken Tool
+  description: Not a very usefull multitool, but it will get the job done in a pinch
+  count: 1
   itemSprite: {fileID: 8543347228161355572, guid: eed00ce05f8aeeb48bc6f48ac83a2be8,
     type: 3}
   consumeOnUse: 0

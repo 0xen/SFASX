@@ -16,6 +16,8 @@ public class Game : MonoBehaviour
 
     // Used for the loading and unloading of game items
     [SerializeField] private Item[] ItemInstances = null;
+    // All items the player can start with
+    [SerializeField] private Item[] PlayerStartingItems = null;
 
     // Main scene camera
     [SerializeField] private Camera MainCamera = null;
@@ -591,6 +593,12 @@ public class Game : MonoBehaviour
                 // New Game
                 mMap.GenerateWorld(mCharacter, MapGenerationPayload);
                 shop.SetCurrency(500);
+
+                // Give the player there starting items
+                foreach(Item i in PlayerStartingItems)
+                {
+                    mCharacter.AddToInventory(i, 1);
+                }
             }
         }
     }

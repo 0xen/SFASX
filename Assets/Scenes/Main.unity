@@ -3041,6 +3041,9 @@ MonoBehaviour:
   - {fileID: 1523733555751052237, guid: 1aa0c743bf5718740908a47f1a912a41, type: 3}
   - {fileID: 6412259517409841901, guid: d2be9229674954548884c178de204264, type: 3}
   - {fileID: 7490623637331424458, guid: 7bd890be72c5cb74480f6776f3ee2d78, type: 3}
+  PlayerStartingItems:
+  - {fileID: 7490623637331424458, guid: 7bd890be72c5cb74480f6776f3ee2d78, type: 3}
+  - {fileID: 1589002361256282029, guid: 6deed9a5c2c31614c89a2fce37154e20, type: 3}
   MainCamera: {fileID: 963194227}
   Character: {fileID: 4204448009463411752, guid: 0ec771fc79c748e4694b82068b3883e1,
     type: 3}
@@ -5705,7 +5708,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -2954.0237}
+  m_AnchoredPosition: {x: 0, y: -5018.2646}
   m_SizeDelta: {x: 450, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1545244235
