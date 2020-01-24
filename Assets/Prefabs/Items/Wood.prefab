@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8992060557704556182}
   - component: {fileID: 4736621118778930762}
+  - component: {fileID: 3131830794564864783}
+  - component: {fileID: 8064760777323866892}
   m_Layer: 0
   m_Name: Wood
   m_TagString: Untagged
@@ -46,6 +48,58 @@ MonoBehaviour:
   itemName: Wood
   description: 'Wood is an abundant resource found within trees; gather it and sell
     it for a tidy profit. '
-  count: 4
+  count: 23
   itemSprite: {fileID: 21300000, guid: 5ae8f6a883ab5064e9bd20317ed03cde, type: 3}
   consumeOnUse: 1
+--- !u!114 &3131830794564864783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8705915051070929986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90b9097d51a73c54aa0ce86257480f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  environmentTile: {fileID: 0}
+  actionImage: {fileID: 21300000, guid: 5ae8f6a883ab5064e9bd20317ed03cde, type: 3}
+  actionName: Place Small Logs
+  AnimationState: 3
+  ItemGroups:
+  - Items:
+    - mode: 1
+      item: {fileID: 4736621118778930762}
+      count: 5
+      chance: 1
+  ReplacmentTiles:
+  - {fileID: 7228575818001999334, guid: d85ca6f08a4ef8848b08ae4126b05734, type: 3}
+  ActionTime: 3
+  Recursive: 0
+--- !u!114 &8064760777323866892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8705915051070929986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90b9097d51a73c54aa0ce86257480f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  environmentTile: {fileID: 0}
+  actionImage: {fileID: 21300000, guid: 5ae8f6a883ab5064e9bd20317ed03cde, type: 3}
+  actionName: Place Large Logs
+  AnimationState: 3
+  ItemGroups:
+  - Items:
+    - mode: 1
+      item: {fileID: 4736621118778930762}
+      count: 10
+      chance: 1
+  ReplacmentTiles:
+  - {fileID: 4499036324842488966, guid: cd048cafd4c60d14d81bdb56cdb167ef, type: 3}
+  ActionTime: 3
+  Recursive: 0
