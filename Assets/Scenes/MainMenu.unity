@@ -96,6 +96,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
+    m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -842,11 +843,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 462174891}
     m_Modifications:
-    - target: {fileID: 2410667569596041529, guid: c09eba8354c090b499379fd73e148349,
-        type: 3}
-      propertyPath: m_Name
-      value: singleBird (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 2405658024210730211, guid: c09eba8354c090b499379fd73e148349,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -916,6 +912,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2410667569596041529, guid: c09eba8354c090b499379fd73e148349,
+        type: 3}
+      propertyPath: m_Name
+      value: singleBird (1)
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2410240253156430179, guid: c09eba8354c090b499379fd73e148349, type: 3}
@@ -2313,8 +2314,9 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
   m_Enabled: 1
-  serializedVersion: 9
+  serializedVersion: 10
   m_Type: 1
+  m_Shape: 0
   m_Color: {r: 0.8509804, g: 1, b: 1, a: 1}
   m_Intensity: 0.8
   m_Range: 10
@@ -2495,11 +2497,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 462174891}
     m_Modifications:
-    - target: {fileID: 2410667569596041529, guid: c09eba8354c090b499379fd73e148349,
-        type: 3}
-      propertyPath: m_Name
-      value: singleBird (2)
-      objectReference: {fileID: 0}
     - target: {fileID: 2405658024210730211, guid: c09eba8354c090b499379fd73e148349,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2569,6 +2566,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2410667569596041529, guid: c09eba8354c090b499379fd73e148349,
+        type: 3}
+      propertyPath: m_Name
+      value: singleBird (2)
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2410240253156430179, guid: c09eba8354c090b499379fd73e148349, type: 3}
@@ -7704,11 +7706,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 462174891}
     m_Modifications:
-    - target: {fileID: 2410667569596041529, guid: c09eba8354c090b499379fd73e148349,
-        type: 3}
-      propertyPath: m_Name
-      value: singleBird
-      objectReference: {fileID: 0}
     - target: {fileID: 2405658024210730211, guid: c09eba8354c090b499379fd73e148349,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7778,6 +7775,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2410667569596041529, guid: c09eba8354c090b499379fd73e148349,
+        type: 3}
+      propertyPath: m_Name
+      value: singleBird
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2410240253156430179, guid: c09eba8354c090b499379fd73e148349, type: 3}

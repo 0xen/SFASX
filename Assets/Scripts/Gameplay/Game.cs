@@ -116,6 +116,7 @@ public class Game : MonoBehaviour
         CameraController.Character = mCharacter;
 
 
+
         mMouseHoldTime = 0.0f;
         mInterfaceState = 0;
         mDayTime = DayStartTime;
