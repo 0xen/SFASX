@@ -6,7 +6,7 @@ using TMPro;
 
 public class ShopHandler : MonoBehaviour
 {
-
+    // Struct to store item, buy and sell price
     [System.Serializable]
     public struct ItemInstance
     {
@@ -15,32 +15,43 @@ public class ShopHandler : MonoBehaviour
         public Item item;
     }
 
+    // Canvas that the shop UI is attached to
     [SerializeField] Canvas shopCanvas = null;
 
+    // Items grid
     [SerializeField] GameObject ItemSelector = null;
+    // Prefab used to show item image
     [SerializeField] ShopItem ShopItemPrefab = null;
 
+    // Placeholder for category buttons
     [SerializeField] Button CatagoryButtonPlaceholder = null;
+    // Parent to attach category buttons to
     [SerializeField] GameObject CatagoryButtonParent = null;
 
 
+    // What is the title of the currently selected item
     [SerializeField] TextMeshProUGUI selectedItemTitle = null;
+    // Description field for the items
     [SerializeField] TextMeshProUGUI selectedItemDescription = null;
+    // Image for the selected item
     [SerializeField] Image selectedItemImage = null;
 
 
-
+    // Bar that contains the buy and sell buttons
     [SerializeField] GameObject tradeBar = null;
+    // Text used to show how many items you are buying / selling
     [SerializeField] TextMeshProUGUI itemAmountText = null;
 
-
+    // Label for the players current currency
     [SerializeField] TextMeshProUGUI CurrentCoinText = null;
 
+    // Players total currency
     private uint mCurrency = 0;
 
+    // Amount of items that the player has selected to buy/sell
     private uint mAmount = 0;
 
-
+    // What item is currently selected
     private ItemInstance selectedItem;
 
 
@@ -50,6 +61,7 @@ public class ShopHandler : MonoBehaviour
         public string name;
         public ItemInstance[] items;
     }
+    // Category name and all items in the category
     [SerializeField] Catagory[] catagories = null;
 
     
@@ -62,11 +74,13 @@ public class ShopHandler : MonoBehaviour
         AllCatagory();
     }
 
+    // Get the current players currency
     public uint GetCurrency()
     {
         return mCurrency;
     }
 
+    // Set the players current currency
     public void SetCurrency(uint currency)
     {
         mCurrency = currency;
@@ -77,6 +91,7 @@ public class ShopHandler : MonoBehaviour
     {
     }
 
+    // Instantiate all the category buttons
     private void SetupCatagoryButtons()
     {
         //CatagoryButtonParent
@@ -110,10 +125,11 @@ public class ShopHandler : MonoBehaviour
         }
     }
 
+    // Buy the currently selected item
     public void Buy()
     {
         uint buyCost = mAmount * selectedItem.buyPrice;
-        if(buyCost> mCurrency)
+        if(buyCost > mCurrency)
         {
             // Fail sound
 
@@ -124,6 +140,7 @@ public class ShopHandler : MonoBehaviour
         Environment.instance.GetCharacter().AddToInventory(selectedItem.item, mAmount);
     }
 
+    // Sell from the players inventory
     public void Sell()
     {
         for(int i = 0; i < mAmount; i++)
@@ -138,11 +155,13 @@ public class ShopHandler : MonoBehaviour
 
     }
 
+    // Update the ui text with the players current cash
     public void UpdateCoinText()
     {
         CurrentCoinText.text = mCurrency.ToString();
     }
 
+    // Add 1 to the buy/sell
     public void IncreaseAmount()
     {
         if (mAmount < 99) mAmount++;
@@ -150,6 +169,7 @@ public class ShopHandler : MonoBehaviour
         itemAmountText.text = mAmount.ToString();
     }
 
+    // Remove 1 from the buy/sell
     public void DecreaseAmount()
     {
         if (mAmount > 1) mAmount--;
@@ -157,6 +177,7 @@ public class ShopHandler : MonoBehaviour
         itemAmountText.text = mAmount.ToString();
     }
 
+    // Open the items page
     public void OpenItem(ItemInstance item)
     {
         selectedItem = item;
@@ -171,6 +192,7 @@ public class ShopHandler : MonoBehaviour
         tradeBar.SetActive(true);
     }
 
+    // Remove all items from the selection page
     public void ClearCatagory()
     {
         foreach (Transform child in ItemSelector.transform)
@@ -179,6 +201,7 @@ public class ShopHandler : MonoBehaviour
         }
     }
 
+    // Open the all item page
     public void AllCatagory()
     {
         for(int i = 0; i < catagories.Length; i++)
@@ -187,8 +210,10 @@ public class ShopHandler : MonoBehaviour
         }
     }
 
+    // Open X category
     public void OpenCatagory(ItemInstance[] items)
     {
+        // Loop through all items and add them to the UI
         for(int i = 0; i < items.Length; i++)
         {
             ShopItem item = GameObject.Instantiate(ShopItemPrefab);
@@ -204,6 +229,7 @@ public class ShopHandler : MonoBehaviour
         } 
     }
 
+    // Open X Category
     public void OpenCatagory(string name)
     {
         for (int i = 0; i < catagories.Length; i++)
@@ -216,7 +242,7 @@ public class ShopHandler : MonoBehaviour
         }
     }
 
-
+    // Toggle open or close the shop
     public void ToggleShop()
     {
         if(shopCanvas.enabled)

@@ -6,15 +6,22 @@ using TMPro;
 
 public class NotificationHandler : MonoBehaviour
 {
-
+    // Button used to open the notification panel
     [SerializeField] Button notificationOpenButton = null;
+    // Text that makes up the notification box
     [SerializeField] TextMeshProUGUI notificationText = null;
+    // How many notification messages are left
     [SerializeField] TextMeshProUGUI notificationCountText = null;
+    // Next notification button
     [SerializeField] Button nextButton = null;
+    // Previous notification button
     [SerializeField] Button previousButton = null;
+    // The notification panel thats visibility is toggled
     [SerializeField] GameObject notificationPanel = null;
 
+    // Stored notifications
     private List<string> mStoredText = null;
+    // What page we are currently on
     private int mCurrentPage = 0;
 
     // Start is called before the first frame update
@@ -51,12 +58,14 @@ public class NotificationHandler : MonoBehaviour
         }
     }
 
+    // Toggle the notification panel open and closed
     public void ToggleNotification()
     {
         if(notificationPanel.activeSelf)
         {
             notificationPanel.SetActive(false);
             notificationOpenButton.gameObject.SetActive(false);
+            // When we close the panel, clear all notifications
             mStoredText.Clear();
         }
         else
@@ -66,11 +75,13 @@ public class NotificationHandler : MonoBehaviour
         }
     }
 
+    // Add a new notification to the notification panel
     public void AddNotification(string text)
     {
         mStoredText.Add(text);
     }
 
+    // Add several notification pages
     public void AddNotification(string[] text)
     {
         foreach(string s in text)
@@ -79,6 +90,7 @@ public class NotificationHandler : MonoBehaviour
         }
     }
 
+    // If the notification has never been displayed before, display it
     public void AddNotification(ref bool notAlreadySeen, string text)
     {
         if (!notAlreadySeen)
@@ -88,6 +100,7 @@ public class NotificationHandler : MonoBehaviour
         }
     }
 
+    // If the notification has never been displayed before, display it
     public void AddNotification(ref bool notAlreadySeen, string[] text)
     {
         if (!notAlreadySeen)
@@ -97,11 +110,13 @@ public class NotificationHandler : MonoBehaviour
         }
     }
 
+    // Go back one page
     public void Back()
     {
         if (mCurrentPage > 0) mCurrentPage--;
     }
 
+    // Go forward one page
     public void Next()
     {
         if (mCurrentPage < mStoredText.Count - 1) mCurrentPage++;

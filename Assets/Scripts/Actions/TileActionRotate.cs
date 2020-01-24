@@ -7,6 +7,8 @@ using UnityEngine;
 public class TileActionRotate : TileActionCollection
 {
 
+    // Override the "TileActionCollection" DoCollection function
+    // Pause and rotate the tile
     public override IEnumerator DoCollection(Entity entity, EnvironmentTile tile)
     {
         yield return base.DoCollection(entity, tile);
@@ -15,69 +17,9 @@ public class TileActionRotate : TileActionCollection
         Environment.instance.SetTileRotation(ref tile, (tile.Rotation + 1) % 4);
     }
 
+    // If this is on a tile, it can be rotated
     public override bool Valid(Entity entity)
     {
         return true;
     }
 }
-
-/*
-public class TileActionRotate : TileAction
-{
-
-    public float rotateTime = 0.0f;
-
-    public TileActionRotate() : base()
-    {
-        actionName = "Rotate";
-    }
-
-    public override void Run(Entity entity)
-    {
-        if (environmentTile == null) return;
-        List<EnvironmentTile> route = Environment.instance.SolveNeighbour(entity.CurrentPosition, environmentTile);
-        // We are at the location
-        if (route == null)
-        {
-            entity.StopAllCoroutines();
-            entity.StartCoroutine(DoReplace(entity, environmentTile));
-        }
-        else if (route.Count > 0) // We need to path to the location
-        {
-            entity.StopAllCoroutines();
-            entity.StartCoroutine(DoWalkAndReplace(entity, route, environmentTile));
-        }
-        else
-        {
-            entity.ResetAction();
-        }
-    }
-
-    private IEnumerator DoWalkAndReplace(Entity entity, List<EnvironmentTile> route, EnvironmentTile tile)
-    {
-        yield return TileActionWalk.DoGoTo(entity, entity.GetMovmentSpeed(), route);
-        yield return DoReplace(entity, tile);
-    }
-
-    public IEnumerator DoReplace(Entity entity, EnvironmentTile tile)
-    {
-
-        // Turn the player towards the object
-        entity.transform.rotation = Quaternion.LookRotation(tile.Position - entity.CurrentPosition.Position, Vector3.up);
-
-        yield return new WaitForSeconds(rotateTime);
-
-        // Rotate the tile 90 degrees clockwise
-        Environment.instance.SetTileRotation(ref tile, (tile.Rotation + 1) % 4);
-        
-        entity.ResetAction();
-    }
-
-    public override bool Valid(Entity entity)
-    {
-        return true;
-    }
-
-
-}
-*/

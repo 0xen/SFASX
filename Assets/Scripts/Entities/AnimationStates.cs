@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Various animation states
 public enum AnimationStates
 { 
     Idle = 0,

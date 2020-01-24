@@ -23,6 +23,7 @@ public class MainMenuContinueButton : MonoBehaviour
         
     }
 
+    // Open the game save file
     public void Continue()
     {
         WorldGenerator.GenerationPayload MapGenerationPayload = new WorldGenerator.GenerationPayload();

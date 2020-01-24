@@ -6,6 +6,7 @@ using static WorldGenerator;
 
 public class Environment : MonoBehaviour
 {
+    // Current environment that is globally accessible to all scripts
     public static Environment instance;
 
     // Used as a reference when loading a map file, what tiles belong to what name
@@ -14,6 +15,7 @@ public class Environment : MonoBehaviour
     // Used for the loading and unloading of game entities
     [SerializeField] private Entity[] EntityInstances = null;
 
+    // Define the odds of the tile spawning
     [System.Serializable]
     public struct TileInstance
     {
@@ -22,6 +24,8 @@ public class Environment : MonoBehaviour
         public float spawnChance;
         public EnvironmentTile tile;
     }
+    
+    // Define the chance of a world tile being chosen
     [System.Serializable]
     public struct WorldTiles
     {
@@ -30,11 +34,15 @@ public class Environment : MonoBehaviour
         public float spawnChance;
         public List<TileInstance> tiles;
     }
+
+    // Groups of world tiles
     [Header("World Tiles")]
     [SerializeField] private WorldTiles[] WorldTileGroups = null;
 
+    // List of all tiles in there various groups
     private Dictionary<EnvironmentTile.TileType, WorldTiles> mTiles; 
 
+    // Structure storing a water tile prefab as well as 8 bools, each bool represents a side that could touch water, starting from N->NE->E, etc
     [System.Serializable]
     public struct WaterTile
     {
@@ -47,6 +55,7 @@ public class Environment : MonoBehaviour
     [Header("Water Tile Configuration")]
     [SerializeField] private List<WaterTile> WaterTiles = null;
 
+    // What water tile did we find and what was its rotation
     public struct WaterTileSearchResult
     {
         public EnvironmentTile tile;
@@ -54,12 +63,15 @@ public class Environment : MonoBehaviour
     }
 
     [Header("Sea Settings")]
+    // How far from the coast dose the water spawn
     [SerializeField] public int seaDeapth;
 
     [Header("Shading")]
+    // Shader used for tinting the tiles
     [SerializeField] private Shader TintShader = null;
 
     [Header("UI")]
+    // GameObject that we parent the item pickup stream too
     [SerializeField] private GameObject ItemPickupUIParent = null;
     [SerializeField] private ItemPickupUi ItemPickupUIInstance = null;
 
@@ -67,29 +79,39 @@ public class Environment : MonoBehaviour
     // Offset as the animator applies a position offset
     [SerializeField] private float CharacterYOffset = 3.0f;
 
+    // Instance to the notification handler, use this to send notification updates to the user via the UI
     public NotificationHandler notificationHandler = null;
 
-
+    // 2D array of all world environment tiles
     public EnvironmentTile[][] mMap;
+    // 2D array representing if a tile at that coordinate is water or not
     public bool[,] mWaterMap;
 
+    // List of all environment tiles
     private List<EnvironmentTile> mAll;
+    // Tiles that should be tested when path finding
     private List<EnvironmentTile> mToBeTested;
+    // What was the last path finding solution
     private List<EnvironmentTile> mLastSolution;
 
+    // List of all alive entities
     private List<Entity> mEntities;
 
+    // How big we should draw the tile gizmo
     private readonly Vector3 NodeSize = Vector3.one * 9.0f; 
     private const float TileSize = 10.0f;
     private const float TileHeight = 2.5f;
 
+    // Instantiated version of the character
     private Character mCharacter;
 
+    // Used generation payload for this map
     public GenerationPayload mMapGenerationPayload;
 
-
+    // Start position for the character
     public EnvironmentTile Start { get; private set; }
 
+    // Add a new item to the item pickup stream
     public void AddItemToPickupUI(string name, uint count, Sprite sprite)
     {
         ItemPickupUi ui = GameObject.Instantiate(ItemPickupUIInstance);
@@ -113,16 +135,19 @@ public class Environment : MonoBehaviour
         SetupTileGroups();
     }
 
+    // Get the current character
     public Character GetCharacter()
     {
         return mCharacter;
     }
 
+    // Add a new entity to the enviroment
     public void RegisterEntity(Entity entity)
     {
         mEntities.Add(entity);
     }
 
+    // Get all entities that are at the tile location x
     public Entity[] GetEntitiesAt(Vector2Int position)
     {
         List<Entity> entities = new List<Entity>();
@@ -133,15 +158,16 @@ public class Environment : MonoBehaviour
                 entities.Add(e);
             }
         }
-
         return entities.ToArray();
     }
 
+    // Return all entities
     public Entity[] GetEntities()
     {
         return mEntities.ToArray();
     }
 
+    // Remove a entity from the environment
     public void RemoveEntity(Entity entity)
     {
         mEntities.Remove(entity);
@@ -350,14 +376,7 @@ public class Environment : MonoBehaviour
         return true;
     }
 
-
-
-    public void GenerateWaterTile()
-    {
-
-        
-    }
-
+    // Get the raw world position for a tile at x,z
     public Vector3 GetRawPosition(int x, int z)
     {
         int halfWidth = mMapGenerationPayload.size.x / 2;
@@ -368,11 +387,13 @@ public class Environment : MonoBehaviour
         return position;
     }
 
-
+    // Add a water tile to the map at position x,y
     public void AddWaterTile(Vector3 position,ref EnvironmentTile tile, Vector2Int mapSize, int x, int y)
     {
 
         bool foundLand = false;
+        // Loop through for every tile that is around 'x','y' in a range of 'seaDepth', if we find a land tile, this water
+        // tile must be in range and should be generated
         for (int xa = x - seaDeapth; !foundLand && xa < x + seaDeapth + 1; xa++)
         {
             if (xa < 0)
@@ -386,7 +407,7 @@ public class Environment : MonoBehaviour
                     continue;
                 if (ya > mapSize.y - 1)
                     break;
-
+                // Did we find a land tile
                 if (!mWaterMap[xa, ya])
                 {
                     foundLand = true;
@@ -394,14 +415,13 @@ public class Environment : MonoBehaviour
                 }
             }
         }
+        // If we did not find a land tile, we must be trying to create a water tile too far away from the shoreline
         if (!foundLand)
         {
             position.z += TileSize;
             return;
         }
-
-
-
+        
         int rotation = 0;
         EnvironmentTile prefab = null;
         // Return what water tile fits within the provided world requirment
@@ -420,22 +440,22 @@ public class Environment : MonoBehaviour
         else // Output a error if we cant find the required tile
         {
             Debug.LogError("Could not find water tile to fit senario");
+            position.z += TileSize;
+            return;
         }
-
-
         FinalizeTile(ref tile, x, y, position);
-
     }
 
+    // Add a land tile of 'n' name at position x, y
     public void AddLandTile(Vector3 position, ref EnvironmentTile tile, Vector2Int mapSize, int x, int y, string name, int rotation)
     {
-
+        // Loop through and find the land tile
         for(int i = 0; i < WorldEnviromentTiles.Length;i++)
         {
             if(WorldEnviromentTiles[i].TileName==name)
             {
                 tile = Instantiate(WorldEnviromentTiles[i], position, Quaternion.identity, transform);
-                break; ;
+                break;
             }
         }
 
@@ -447,6 +467,7 @@ public class Environment : MonoBehaviour
         SetTileRotation(ref tile, rotation);
     }
 
+    // Add a new land tile at x, y
     public void AddLandTile(Vector3 position, ref EnvironmentTile tile, Vector2Int mapSize, int x, int y)
     {
 
@@ -493,6 +514,7 @@ public class Environment : MonoBehaviour
         SetTileRotation(ref tile, rotationRand);
     }
 
+    // Set a new tile rotation
     public void SetTileRotation(ref EnvironmentTile tile, int newRotation)
     {
 
@@ -512,6 +534,7 @@ public class Environment : MonoBehaviour
         tile.Rotation = newRotation;
     }
 
+    // Finish off a tile and initialize the environment tile
     private void FinalizeTile(ref EnvironmentTile tile, int x, int y, Vector3 position)
     {
         // Attach the tint shader to all the tile blocks
@@ -534,16 +557,14 @@ public class Environment : MonoBehaviour
 
     }
 
+    // Generate the world using the save data
     private void Generate(Game.SaveDataPacket saveData)
     {
-        // Setup the map of the environment tiles according to the specified width and height
-        // Generate tiles from the list of accessible and inaccessible prefabs using a random
-        // and the specified accessible percentage
-
         Vector2Int Size = mMapGenerationPayload.size;
 
         mMap = new EnvironmentTile[Size.x][];
          
+        // Loop through for each tile coordinate
         for (int x = 0; x < Size.x; ++x)
         {
             mMap[x] = new EnvironmentTile[Size.y];
@@ -555,6 +576,7 @@ public class Environment : MonoBehaviour
 
                 Vector3 position = GetRawPosition(x, y);
 
+                // Check to see if the tile should be a water tile or not
                 if (isWater)
                 {
                     AddWaterTile(position, ref tile, mMapGenerationPayload.size, x, y);
@@ -569,6 +591,7 @@ public class Environment : MonoBehaviour
         }
     }
 
+    // Generate a brand new tile
     private void Generate()
     {
         // Setup the map of the environment tiles according to the specified width and height
@@ -581,6 +604,7 @@ public class Environment : MonoBehaviour
 
         bool hasStart = true;
 
+        // Loop through for each tile coordinate
         for (int x = 0; x < Size.x; ++x)
         {
             mMap[x] = new EnvironmentTile[Size.y];
@@ -592,6 +616,7 @@ public class Environment : MonoBehaviour
 
                 Vector3 position = GetRawPosition(x, y);
 
+                // Check to see if the tile should be a water tile or not
                 if (isWater)
                 {
                     AddWaterTile(position, ref tile, mMapGenerationPayload.size, x, y);
@@ -618,6 +643,7 @@ public class Environment : MonoBehaviour
         }
     }
 
+    // Setup tile pathing between all world tiles
     private void SetupConnections()
     {
         // Currently we are only setting up connections between adjacnt nodes
@@ -630,6 +656,7 @@ public class Environment : MonoBehaviour
         }
     }
 
+    // Setup tile connections for 'x' tile
     public void SetupConnections(int x, int y)
     {
         if (mMap[x][y] == null) return;
@@ -674,6 +701,7 @@ public class Environment : MonoBehaviour
         }
     }
 
+    // How many tiles distance between two tiles
     private float Distance(EnvironmentTile a, EnvironmentTile b)
     {
         // Use the length of the connection between these two nodes to find the distance, this 
@@ -686,7 +714,7 @@ public class Environment : MonoBehaviour
         }
         return result;
     }
-
+    // Line of sight distance between two tiles
     private float Heuristic(EnvironmentTile a, EnvironmentTile b)
     {
         // Use the locations of the node to estimate how close they are by line of sight
@@ -695,14 +723,16 @@ public class Environment : MonoBehaviour
         return Vector3.Distance(a.Position, b.Position);
     }
 
+    // Generate a new world using the save data
     public void GenerateWorld(Character Character, GenerationPayload generationPayload, Game.SaveDataPacket saveData)
     {
         mMapGenerationPayload = generationPayload;
+        // Load the world save data
         GenerateWaterMap(saveData);
         Generate(saveData);
         SetupConnections();
 
-
+        // Move the player to there last position
         MovePlayerToStart(Character, mMap[saveData.PlayerX][saveData.PlayerY]);
         mCharacter = Character;
 
@@ -726,16 +756,21 @@ public class Environment : MonoBehaviour
         }
     }
 
+    // Generate a new world using the generation payload
     public void GenerateWorld(Character Character, GenerationPayload generationPayload)
     {
+        // Define the generation payload
         mMapGenerationPayload = generationPayload;
+        // Generate the worlds maps and load all tiles
         GenerateWaterMap();
         Generate();
         SetupConnections();
+        // Move the player to the start of the map
         MovePlayerToStart(Character, Start);
         mCharacter = Character;
     }
 
+    // Save the game and world data
     public void Save(ref Game.SaveDataPacket saveData)
     {
 
@@ -747,6 +782,7 @@ public class Environment : MonoBehaviour
         saveData.WorldHeight = mapSize.y;
 
         saveData.WaterMap = new bool[mapTileCount];
+        // Loop through and save the water map
         for (int x = 0; x < mapSize.x; x++)
         {
             for (int y = 0; y < mapSize.y; y++)
@@ -755,6 +791,7 @@ public class Environment : MonoBehaviour
             }
         }
         saveData.TileData = new Game.TileSaveData[mapTileCount];
+        // Loop and save the tile data
         for (int x = 0; x < mapSize.x; x++)
         {
             for (int y = 0; y < mapSize.y; y++)
@@ -771,6 +808,7 @@ public class Environment : MonoBehaviour
         }
     }
 
+    // Move the player to x tile on the map
     private void MovePlayerToStart(Character Character,EnvironmentTile tile)
     {
         Character.transform.position = tile.Position + new Vector3(0.0f, CharacterYOffset, 0.0f);
@@ -779,6 +817,7 @@ public class Environment : MonoBehaviour
         Character.transform.parent = this.transform;
     }
 
+    // Remove all tiles from the world
     public void CleanUpWorld()
     {
         if (mMap != null)
@@ -793,11 +832,13 @@ public class Environment : MonoBehaviour
         }
     }
 
+    // Get a environment tile and x,y
     public EnvironmentTile GetTile(int x, int y)
     {
         return mMap[x][y];
     }
 
+    // Find a path to a tile that is next to the destination tile
     public List<EnvironmentTile> SolveNeighbour(EnvironmentTile begin, EnvironmentTile destination)
     {
         foreach (EnvironmentTile childTile in destination.Connections)
@@ -822,6 +863,7 @@ public class Environment : MonoBehaviour
         }
         return new List<EnvironmentTile>();
     }
+    // Find a path to the destination tile
     public List<EnvironmentTile> Solve(EnvironmentTile begin, EnvironmentTile destination)
     {
         List<EnvironmentTile> result = null;
@@ -922,6 +964,7 @@ public class Environment : MonoBehaviour
         return result;
     }
 
+    // Replace world tile with a new one
     public EnvironmentTile ReplaceEnviromentTile(EnvironmentTile current, EnvironmentTile replacment)
     {
         Vector3 newPosition = GetRawPosition(current.PositionTile.x,current.PositionTile.y);

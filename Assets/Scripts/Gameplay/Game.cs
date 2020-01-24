@@ -10,43 +10,61 @@ using System.IO;
 
 public class Game : MonoBehaviour
 {
+    // Payload used to generate the environment
     public static GenerationPayload MapGenerationPayload = null;
 
 
     // Used for the loading and unloading of game items
     [SerializeField] private Item[] ItemInstances = null;
 
+    // Main scene camera
     [SerializeField] private Camera MainCamera = null;
+    // Character prefab
     [SerializeField] private Character Character = null;
+    // Action selection menu
     [SerializeField] private UIActionSelector ActionSelector = null;
+    // Camera controller
     [SerializeField] private CameraController CameraController = null;
     // How long a mouse button needs to be held before a click menu should open
     [SerializeField] private float MinMenuOpenTime = 0.6f;
 
+    // Main directional light
     [SerializeField] private Light DirectionalLight = null;
+    // Length of a in game day in seconds
     [SerializeField] private float DayLength = 120;
+    // What time dose the new game start at
     [SerializeField] private float DayStartTime = 0;
+    // Notification handler instance
     [SerializeField] private NotificationHandler NotificationHandler = null;
+    // UI Text for the time
     [SerializeField] private TextMeshProUGUI TimeText = null;
 
 
+    // Item UI menu bar
     [SerializeField] private GameObject UiItemMenuBar = null;
+    // Prefab for UI menu bar items
     [SerializeField] private ItemSlotController UiItemMenuBarItem = null;
+    // How many items can be seen on the ui menu bar
     [SerializeField] private uint UiItemMenuBarItemCount = 0;
+    // Current selected item name on the ui
     [SerializeField] private TextMeshProUGUI UIItemMenuBarLable = null;
 
+    // Prefab for the current action stream
     [SerializeField] private GameObject UIActionSlotPrefab = null;
+    // Parent for current action items
     [SerializeField] private GameObject UIActionBar = null;
+    // How many queued actions can we see at once
     [SerializeField] private int UIMaxActionStream = 0;
+    // Label of what action is currently selected
     [SerializeField] private TextMeshProUGUI UIActionLable = null;
-
+    // Instance of the shop
     [SerializeField] private ShopHandler shop = null;
-
+    // UI slot controllers
     private ItemSlotController[] mUiItemBar = null; 
     
     private float mDayTime = 0.0f;
 
-
+    // Structure storing what color and brightness the light should be at a point of the day
     [System.Serializable]
     public struct DayColor
     {
@@ -54,11 +72,13 @@ public class Game : MonoBehaviour
         public Color color;
     }
 
+    // The various points of the day, what light color/brightness should it be
     public DayColor[] DaylightScheduler;
 
-
+    // What tile are we currently hovered over
     private EnvironmentTile mCurrentHoveredTile = null;
 
+    // What is the start and end selection area for area selects
     private EnvironmentTile mCurrentAreaStart = null;
     private EnvironmentTile mCurrentAreaEnd = null;
 
@@ -79,6 +99,7 @@ public class Game : MonoBehaviour
         mCharacter = Instantiate(Character, transform);
         mUiItemBar = new ItemSlotController[UiItemMenuBarItemCount];
 
+        // Add all item slot images
         for (int i = 0; i < UiItemMenuBarItemCount; i++)
         {
             mUiItemBar[i] = GameObject.Instantiate(UiItemMenuBarItem);
@@ -89,13 +110,17 @@ public class Game : MonoBehaviour
             recTransform.localEulerAngles = new Vector3(0, 0, 0);
             recTransform.localPosition = new Vector3(recTransform.position.x, recTransform.position.y, 0);
         }
-
+        // Init the character
         mCharacter.SetUIItemBar(mUiItemBar, UIItemMenuBarLable);
         mCharacter.SetActionBar(UIActionSlotPrefab, UIActionBar, UIMaxActionStream, UIActionLable);
         CameraController.Character = mCharacter;
+
+
         mMouseHoldTime = 0.0f;
         mInterfaceState = 0;
         mDayTime = DayStartTime;
+
+        // Init the action selector
         ActionSelector.SetEnabled(false);
         ActionSelector.mCharacter = mCharacter;
         CameraController.SetFollowing(true);
@@ -105,6 +130,7 @@ public class Game : MonoBehaviour
             NotificationHandler.AddNotification(ref LandmarkNotification.NewGame, "Welcome to Celestia, throughout your time here, you will receive tips and tricks that will appear here!");
     }
 
+    // Set a area selection color
     private void SetAreaColor(Vector2Int start, Vector2Int end, Color color)
     {
         int xMin = 0;
@@ -112,6 +138,7 @@ public class Game : MonoBehaviour
         int yMin = 0;
         int yMax = 0;
 
+        // Calculate the min/max area of the selection
         if (start.x > end.x)
         {
             xMin = end.x;
@@ -134,7 +161,7 @@ public class Game : MonoBehaviour
             yMax = end.y;
         }
 
-
+        // Loop through all the area and color it
         for (int x = xMin; x <= xMax; x++)
         {
             for (int y = yMin; y <= yMax; y++)
@@ -374,21 +401,25 @@ public class Game : MonoBehaviour
         }
     }
 
+    // Check to see if a bit is set
     bool HasBit(int data, int bit)
     {
         return ((data >> bit) & 1) != 0;
     }
 
+    // Clear a bit in the data set
     void ClearBit(ref int data, int bit)
     {
         data &= ~(1 << bit);
     }
 
+    // set a bit in the set
     void SetBit(ref int data, int bit)
     {
         data |= 0x1 << bit;
     }
 
+    // Toggle a bit in the set
     void ToggleBit(ref int data, int bit)
     {
         data ^= (1 << bit);
@@ -461,6 +492,7 @@ public class Game : MonoBehaviour
         public TileSaveData[] TileData;
     }
 
+    // Load the game from a save file
     public SaveDataPacket Load()
     {
         SaveDataPacket packet = JsonUtility.FromJson<SaveDataPacket>(File.ReadAllText("GameSave.json"));
@@ -469,11 +501,11 @@ public class Game : MonoBehaviour
 
         MapGenerationPayload.size.x = packet.WorldWidth;
         MapGenerationPayload.size.y = packet.WorldHeight;
-
-
+        
         return packet;
     }
 
+    // Save the current game to a file
     public void Save()
     {
         Environment environment = mMap;
@@ -496,10 +528,7 @@ public class Game : MonoBehaviour
                 packet.Inventory[i].C = mCharacter.inventory[i].count;
             }
         }
-
-
-
-
+        
         // Entity Data
         Entity[] entities = environment.GetEntities();
         packet.Entities = new EntitySaveData[entities.Length];
@@ -509,18 +538,17 @@ public class Game : MonoBehaviour
             packet.Entities[i].X = entities[i].CurrentPosition.PositionTile.x;
             packet.Entities[i].Y = entities[i].CurrentPosition.PositionTile.y;
         }
-
-
+        
         // World Data
         environment.Save(ref packet);
-
-
-
-
+        
+        // Save to the JSON file
         string jsonData = JsonUtility.ToJson(packet, false);
         File.WriteAllText("GameSave.json", jsonData);
     }
 
+    // Generate the world
+    // If the world is from a file, load it
     public void Generate()
     {
         if (MapGenerationPayload != null)

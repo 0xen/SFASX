@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Notifications that are used throughout the game.
+// If a notification has been displayed toggle that we have seen it here
 public class LandmarkNotification
 {
     public static bool NewGame = false;

@@ -4,8 +4,10 @@ using UnityEngine;
 
 public abstract class TileAction : MonoBehaviour
 {
+    // The tile the action is attached to
     public EnvironmentTile environmentTile;
 
+    // The image that represents the action
     public Sprite actionImage = null;
 
     // Made public so it is accessible by the game controller

@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class ObjectNotification : MonoBehaviour
 {
+    // Object that is sued to define when a notification is ready
     [SerializeField] private GameObject NotificationIcon = null;
 
+    // How far the item moves up and down
     [SerializeField] private float MovmentDistance = 0.0f;
+    // How fast the item moves up and down
     [SerializeField] private float MovmentTime = 0.0f;
+    // How fast the item rotates
     [SerializeField] private float MovmentRotation = 0.0f;
 
+    // Current timer for the notification moving
     private float m_notificationDelta = 0.0f;
 
     // Start is called before the first frame update
@@ -27,6 +32,7 @@ public class ObjectNotification : MonoBehaviour
         NotificationIcon.transform.Rotate(Vector3.up, MovmentRotation * Time.deltaTime);
     }
 
+    // Make the notification icon active
     public void DisplayNotification(bool active)
     {
         NotificationIcon.SetActive(active);

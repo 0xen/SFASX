@@ -6,25 +6,36 @@ using UnityEngine.UI;
 
 public class Character : Entity
 {
+    // How big is the players inventory
     const int CharacterInventorySize = 9;
 
+    // What inventory item is currently selected
     private int mSelectedItem;
 
+    // Ui Inventory slots
     private ItemSlotController[] mUiItemBar;
+    // Label that shows the current items name
     private TextMeshProUGUI mUIItemMenuBarLable = null;
     
+    // Prefab for the action icons
     private GameObject mUIActionSlotPrefab = null;
+    // Parent for the action slot prefabs
     private GameObject mUIActionBar = null;
+    // Max items that can be shown on the prefab
     private int mUIMaxActionStream = 0;
+    // Label for showing what action is currently being used
     private TextMeshProUGUI mUIActionLable = null;
 
+    // Action slots that are currently being displayed
     private List<GameObject> mActiveActionSlots;
 
-
+    // Que of actions
     private List<TileAction> actionQue;
 
+    // Characters animation controller
     private Animator mAnimationController;
 
+    // Init the client and tell the Entity base class how big we want our inventory
     public Character() : base(CharacterInventorySize)
     {
         mUiItemBar = null;
@@ -38,10 +49,11 @@ public class Character : Entity
         mAnimationController = GetComponent<Animator>();
     }
 
+    // Push a new action to the action que
     public void AddActionToQue(TileAction action)
     {
         TileActionWalk walkAction = action as TileActionWalk;
-        // If the new task is a walk task, calcel all previous tasks
+        // If the new task is a walk task, cancel all previous tasks
         if (walkAction != null)
         {
             ClearActionQue();
@@ -50,6 +62,7 @@ public class Character : Entity
         actionQue.Add(action);
     }
 
+    // Remove all actions from the action que
     public void ClearActionQue()
     {
         foreach (TileAction action in actionQue)
@@ -59,6 +72,7 @@ public class Character : Entity
         actionQue.Clear();
     }
 
+    // Set the current action and clear the color of the current tile action
     public override void SetCurrentAction(TileAction action)
     {
         if (mAction != null)
@@ -68,6 +82,7 @@ public class Character : Entity
         base.SetCurrentAction(action);
     }
 
+    // Reset the current action
     public override void ResetAction()
     {
         if (mAction != null && mAction.environmentTile != null)
@@ -179,13 +194,15 @@ public class Character : Entity
             }
         }
     }
-
+    
+    // Update the characters ui item bar
     public void SetUIItemBar(ItemSlotController[] uiItemBar, TextMeshProUGUI UIItemMenuBarLable)
     {
         mUiItemBar = uiItemBar;
         mUIItemMenuBarLable = UIItemMenuBarLable;
     }
 
+    // Set the current action bar
     public void SetActionBar(GameObject UIActionSlotPrefab, GameObject UIActionBar, int UIMaxActionStream, TextMeshProUGUI UIActionLable)
     {
         mUIActionSlotPrefab = UIActionSlotPrefab;
@@ -194,12 +211,14 @@ public class Character : Entity
         mUIActionLable = UIActionLable;
     }
 
+    // Get the item in the players hand
     public override Item GetHandItem()
     {
         if (mSelectedItem<0) return null;
         return inventory[mSelectedItem];
     }
 
+    // Update the item bar, set selected items, etc
     public void UpdateBar()
     {
         if (inventory.Length <= 0) return;
@@ -222,11 +241,13 @@ public class Character : Entity
         }
     }
 
+    // Change the entities current animation
     public override void ChangeAnimation(AnimationStates state)
     {
         mAnimationController.SetInteger("Animation", (int)state);
     }
 
+    // Called on a inventory change, count represents the amount of items inserted or removed
     public override void InventoryChange(Item item, uint count, InventoryChangeEvent eve)
     {
         if(eve== InventoryChangeEvent.Add)  Environment.instance.AddItemToPickupUI(item.itemName, count, item.itemSprite);

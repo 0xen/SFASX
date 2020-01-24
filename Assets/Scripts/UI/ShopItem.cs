@@ -5,9 +5,11 @@ using UnityEngine.UI;
 
 public class ShopItem : MonoBehaviour
 {
-
+    // Item image
     [SerializeField] Image prefabImage = null;
+    // Open the items description page
     public ShopHandler shopHandler = null;
+    // How much you buy and sell the item for
     public ShopHandler.ItemInstance itemInstance;
 
     // Start is called before the first frame update

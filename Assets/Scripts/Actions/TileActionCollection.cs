@@ -57,24 +57,30 @@ public class TileActionCollection : TileAction
         
     }
 
+    // Check to see if there is a valid Item group combination
     private ItemInstance[] FindValidItemGroup(Entity entity)
     {
+        // Loop through all the item groups
         foreach (ItemGroup group in ItemGroups)
         {
             bool valid = true;
+            // // Loop through all items in the group
             foreach (ItemInstance itemInstance in group.Items)
             {
+                // If we do not have the item in the inventory, this is a invalid group
                 if (itemInstance.mode == ItemMode.Take && !entity.HasItem(itemInstance.item, itemInstance.count))
                 {
                     valid = false;
                     continue;
                 }
+                // If we do not have the item in our hand, it is a invalid group
                 else if (itemInstance.mode == ItemMode.HandItem && (entity.GetHandItem() == null || entity.GetHandItem().itemName != itemInstance.item.itemName))
                 {
                     valid = false;
                     continue;
                 }
             }
+            // If the group was found to be valid, return it
             if (valid && group.Items.Length>0)
             {
                 return group.Items;
@@ -83,6 +89,7 @@ public class TileActionCollection : TileAction
         return null;
     }
 
+    // If we could find a valid group return true
     public override bool Valid(Entity entity)
     {
         if (environmentTile == null) return false;
@@ -90,6 +97,7 @@ public class TileActionCollection : TileAction
         return items != null;
     }
 
+    // Preform the action
     public override void Run(Entity entity)
     {
         entity.StopAllCoroutines();
@@ -100,16 +108,18 @@ public class TileActionCollection : TileAction
             return;
         }
 
+        // Generate the route to the tile
         List<EnvironmentTile> route = Environment.instance.SolveNeighbour(entity.CurrentPosition, environmentTile);
+        // If we are null, we must be by the tile
         if (route == null)
         {
             entity.StartCoroutine(DoAction(entity, environmentTile));
         }
-        else if (route.Count > 0)
+        else if (route.Count > 0) // we must be able to path to the tile, walk to the tile
         {
             entity.StartCoroutine(DoWalkAndCollection(entity, route, environmentTile));
         }
-        else
+        else // We can no path to the tile, so post run
         {
             entity.StartCoroutine(PostRun(entity));
         }
@@ -122,13 +132,14 @@ public class TileActionCollection : TileAction
         yield return DoAction(entity, tile);
     }
 
-
+    // Preform the action and alsoclean up the action
     public IEnumerator DoAction(Entity entity, EnvironmentTile tile)
     {
         yield return DoCollection(entity, tile);
         yield return PostRun(entity);
     }
 
+    // Preform the pause, inventory manipulation and tile change
     public virtual IEnumerator DoCollection(Entity entity, EnvironmentTile tile)
     {
         // Turn towards the tile

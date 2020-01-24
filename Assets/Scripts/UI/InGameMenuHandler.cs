@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class InGameMenuHandler : MonoBehaviour
 {
-
+    // The current game instance
     [SerializeField] private Game GameInstance = null;
     [SerializeField] private GameObject MenuPanel = null;
 
@@ -27,17 +27,20 @@ public class InGameMenuHandler : MonoBehaviour
         }
     }
 
+    // Toggle the in-game menu open and closed
     public void ToggleMenu()
     {
         MenuPanel.SetActive(!MenuPanel.activeSelf);
     }
 
+    // Save button. Save the game and close the menu
     public void Save()
     {
         GameInstance.Save();
         ToggleMenu();
     }
 
+    // Close the game and return to the main menu
     public void BackToMainMenu()
     {
         SceneManager.LoadScene("MainMenu");

@@ -4,38 +4,50 @@ using UnityEngine;
 
 public class AnimalEntity : Entity
 {
-    
+    // Actions the animal can do
     public enum AnimalActions
     {
         Walk,
         Breed
     }
 
-
+    // A list of actions the current animal can do
     [SerializeField] private AnimalActions[] actions = null;
 
+    // How many tiles the animal can walk each update
     [SerializeField] private int walkRange = 0;
     
+    // How long before the animal could breed
     [SerializeField] private float breedingTimer = 0.0f;
 
+    // How far will the animal look to breed
     [SerializeField] private int breedingRange = 0;
 
+    // When the animal is spawned, whats the minimum value the breeding time starts at
     [SerializeField] private float minBreedTimerStart = 0.0f;
 
+    // When the animal is spawned, whats the max value the breeding time starts at
     [SerializeField] private float maxBreedTimerStart = 0.0f;
 
+    // Instance of the animals breeding heart effect
     public ParticleSystem breedHeartEffect = null;
 
+    // Minimum time before a action can be taken
     [SerializeField] private float minTimeBeforeAction = 0.0f;
 
+    // Max time before a action can be taken
     [SerializeField] private float maxTimeBeforeAction = 0.0f;
 
+    // How long until the next action can be taken
     private float actionDelta;
 
+    // How long until the animal could breed
     private float m_breedingTimerDelta;
 
+    // Is the animal currently preforming a action
     private bool mPreformingAction;
 
+    // How big is the animals inventory
     const int AnimalInventorySize = 1;
 
 
@@ -51,6 +63,7 @@ public class AnimalEntity : Entity
         breedHeartEffect.Stop();
     }
 
+    
     public void ResetBreedingTimer()
     {
         m_breedingTimerDelta = 0;
@@ -59,16 +72,22 @@ public class AnimalEntity : Entity
     private void Update()
     {
         m_breedingTimerDelta += Time.deltaTime;
+        // If the timer for actions has elapsed
         if (CanPreformAction())
         {
+            // Make sure the animal has a action
             if (actions.Length > 0)
             {
+                // Chose a action randomly
                 switch (actions[Random.Range(0, actions.Length)])
                 {
+                    // Make the action walk x distance
                     case AnimalActions.Walk:
                         Walk(walkRange);
                         break;
+                    // Attempt to breed with another animal
                     case AnimalActions.Breed:
+                        // If the breeding timer has elapsed, breed
                         if (m_breedingTimerDelta > breedingTimer) 
                         {
                             Breed(breedingRange);
@@ -83,21 +102,26 @@ public class AnimalEntity : Entity
             }
         }
     }
-    
+
+    // Get the item in the players hand
     public override Item GetHandItem()
     {
         return inventory[0];
     }
 
+    // Called on a inventory change, count represents the amount of items inserted or removed
     public override void InventoryChange(Item item, uint count, InventoryChangeEvent eve)
     {
 
     }
+
+    // Change the entities current animation
     public override void ChangeAnimation(AnimationStates state)
     {
 
     }
 
+    // Try and find a another animal of the same breed in x range and make ....love.... i guess xD
     public void Breed(int range)
     {
         Vector2Int mapSize = Environment.instance.mMapGenerationPayload.size;
@@ -148,6 +172,7 @@ public class AnimalEntity : Entity
         mPreformingAction = false;
     }
 
+    // Walk x range from its current location to a random free tile if available
     public void Walk(int range)
     {
         Vector2Int mapSize = Environment.instance.mMapGenerationPayload.size;
@@ -184,12 +209,14 @@ public class AnimalEntity : Entity
 
     }
 
+    // Preform the walk action
     private IEnumerator DoWalk(List<EnvironmentTile> route, EnvironmentTile tile)
     {
         yield return TileActionWalk.DoGoTo(this, GetMovmentSpeed(), route);
         mPreformingAction = false;
     }
 
+    // Walk to the partners tile and breform the breed action
     private IEnumerator DoWalkAndBreed(List<EnvironmentTile> route, EnvironmentTile tile, AnimalEntity partner)
     {
         yield return TileActionWalk.DoGoTo(this, GetMovmentSpeed(), route);
@@ -214,6 +241,7 @@ public class AnimalEntity : Entity
         mPreformingAction = false;
     }
 
+    // Check to see if we can preform a action
     public bool CanPreformAction()
     {
         if (mPreformingAction) return false;
