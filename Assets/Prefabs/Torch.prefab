@@ -4707,6 +4707,7 @@ ParticleSystemRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4763,8 +4764,9 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8968664796089491606}
   m_Enabled: 1
-  serializedVersion: 9
+  serializedVersion: 10
   m_Type: 2
+  m_Shape: 0
   m_Color: {r: 1, g: 0.9780886, b: 0.6650944, a: 1}
   m_Intensity: 0.4
   m_Range: 120
@@ -4874,6 +4876,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4967,7 +4970,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   environmentTile: {fileID: 0}
-  actionImage: {fileID: 21300000, guid: dc6ce74a053acad439405c895ab884a3, type: 3}
+  actionImage: {fileID: 21300000, guid: c9be084f39016284d851d126dea9d0d7, type: 3}
   actionName: Rotate
   AnimationState: 3
   ItemGroups: []
@@ -4981,16 +4984,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8968664796089491605}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 622107dd3c4416a4d9fcc501f396d549,
-        type: 3}
-      propertyPath: m_Name
-      value: torche
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 622107dd3c4416a4d9fcc501f396d549,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 622107dd3c4416a4d9fcc501f396d549,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5075,6 +5068,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_CastShadows
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 622107dd3c4416a4d9fcc501f396d549,
+        type: 3}
+      propertyPath: m_Name
+      value: torche
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 622107dd3c4416a4d9fcc501f396d549,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 622107dd3c4416a4d9fcc501f396d549, type: 3}

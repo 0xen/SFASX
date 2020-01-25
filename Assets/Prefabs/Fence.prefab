@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   environmentTile: {fileID: 0}
-  actionImage: {fileID: 21300000, guid: eb825d6d0b34c6d4c932658bf5f075a0, type: 3}
+  actionImage: {fileID: 21300000, guid: c9be084f39016284d851d126dea9d0d7, type: 3}
   actionName: Rotate
   AnimationState: 3
   ItemGroups: []
@@ -174,8 +174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   environmentTile: {fileID: 0}
-  actionImage: {fileID: 6971087585004242950, guid: 9cf7cd7d33a37434099536b7f750ff41,
-    type: 3}
+  actionImage: {fileID: 21300000, guid: 9f20a86e8c220aa42be7d74cea97cb91, type: 3}
   actionName: Climb Fence
   AnimationState: 4
   ItemGroups: []

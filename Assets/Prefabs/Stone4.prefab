@@ -59,6 +59,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -211,7 +212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   environmentTile: {fileID: 0}
-  actionImage: {fileID: 0}
+  actionImage: {fileID: 21300000, guid: c9be084f39016284d851d126dea9d0d7, type: 3}
   actionName: Rotate
   AnimationState: 3
   ItemGroups: []
@@ -225,11 +226,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6121467541351086983}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 50364cf639ed6b0409490cf1c6bd3f53,
-        type: 3}
-      propertyPath: m_Name
-      value: stone_large4
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 50364cf639ed6b0409490cf1c6bd3f53,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -284,6 +280,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 50364cf639ed6b0409490cf1c6bd3f53,
+        type: 3}
+      propertyPath: m_Name
+      value: stone_large4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50364cf639ed6b0409490cf1c6bd3f53, type: 3}

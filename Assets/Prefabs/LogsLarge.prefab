@@ -59,6 +59,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -125,7 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   environmentTile: {fileID: 0}
-  actionImage: {fileID: 0}
+  actionImage: {fileID: 21300000, guid: 5ae8f6a883ab5064e9bd20317ed03cde, type: 3}
   actionName: Gather Wood
   AnimationState: 3
   ItemGroups:
@@ -152,14 +153,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   environmentTile: {fileID: 0}
-  actionImage: {fileID: 0}
+  actionImage: {fileID: 21300000, guid: c9be084f39016284d851d126dea9d0d7, type: 3}
   actionName: Rotate
   AnimationState: 3
   ItemGroups: []
   ReplacmentTiles: []
   ActionTime: 2
   Recursive: 0
-  entityPrefab: {fileID: 0}
 --- !u!1001 &2161860736337687057
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -167,11 +167,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7692147329787848854}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: dd7d8a30413e7834c8b3b89fedf7e2a7,
-        type: 3}
-      propertyPath: m_Name
-      value: logs_stackLarge
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: dd7d8a30413e7834c8b3b89fedf7e2a7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -226,6 +221,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: dd7d8a30413e7834c8b3b89fedf7e2a7,
+        type: 3}
+      propertyPath: m_Name
+      value: logs_stackLarge
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dd7d8a30413e7834c8b3b89fedf7e2a7, type: 3}

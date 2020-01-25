@@ -37,7 +37,7 @@ public class TileActionChangeEarth : TileActionCollection
                 for (int y = yMin; y <= yMax; y++)
                 {
                     // Check to see if the tile that is changes is a water tile as only the costline will change
-                    if (Environment.instance.mWaterMap[x, y])
+                    if (entity.CurrentPosition.PositionTile!=new Vector2Int(x,y) && Environment.instance.mWaterMap[x, y])
                     {
                         Vector3 position = Environment.instance.GetRawPosition(x, y);
                         EnvironmentTile newTile = null;
@@ -101,11 +101,11 @@ public class TileActionChangeEarth : TileActionCollection
         int xMax = (tile.PositionTile.x + 1 < Environment.instance.mMapGenerationPayload.size.x) ? (tile.PositionTile.x + 1) : (Environment.instance.mMapGenerationPayload.size.x - 1);
         int yMax = (tile.PositionTile.y + 1 < Environment.instance.mMapGenerationPayload.size.y) ? (tile.PositionTile.y + 1) : (Environment.instance.mMapGenerationPayload.size.x - 1);
 
-        // Check the 4 edges of the water tile for land
-        if (PlaceEarth == Environment.instance.mWaterMap[xMin, tile.PositionTile.y] ||
-            PlaceEarth == Environment.instance.mWaterMap[xMax, tile.PositionTile.y] ||
-            PlaceEarth == Environment.instance.mWaterMap[tile.PositionTile.x, yMin] ||
-            PlaceEarth == Environment.instance.mWaterMap[tile.PositionTile.x, yMax])
+        // Check the 4 edges of the water tile for land to see if its remotely possible to path to it later on
+        if (!Environment.instance.mWaterMap[xMin, tile.PositionTile.y] ||
+            !Environment.instance.mWaterMap[xMax, tile.PositionTile.y] ||
+            !Environment.instance.mWaterMap[tile.PositionTile.x, yMin] ||
+            !Environment.instance.mWaterMap[tile.PositionTile.x, yMax])
         {
             return true;
         }

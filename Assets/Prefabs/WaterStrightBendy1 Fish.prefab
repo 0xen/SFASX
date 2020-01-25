@@ -194,7 +194,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   environmentTile: {fileID: 0}
-  actionImage: {fileID: 0}
+  actionImage: {fileID: 21300000, guid: 9f20a86e8c220aa42be7d74cea97cb91, type: 3}
   actionName: Jump Water
   AnimationState: 4
   ItemGroups: []
