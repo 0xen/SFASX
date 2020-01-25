@@ -27,7 +27,10 @@ public class TileChange : MonoBehaviour
         timeTillChange -= Time.deltaTime;
         if(timeTillChange<0)
         {
-            Environment.instance.ReplaceEnviromentTile(GetComponent<EnvironmentTile>(), replacmentTile);
+            int rot = GetComponent<EnvironmentTile>().Rotation;
+            EnvironmentTile tile = Environment.instance.ReplaceEnviromentTile(GetComponent<EnvironmentTile>(), replacmentTile);
+            int rot2 = tile.Rotation;
+            Debug.Log(rot + " " + rot2);
         }
     }
 }

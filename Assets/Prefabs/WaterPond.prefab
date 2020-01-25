@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 697888225307843886}
   - component: {fileID: 2224245384864377562}
   - component: {fileID: 5893038429426689861}
+  - component: {fileID: 5375634197460196137}
   m_Layer: 0
   m_Name: WaterPond
   m_TagString: Untagged
@@ -56,6 +57,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -110,3 +112,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 2.5, z: 10}
   m_Center: {x: 5, y: 1.25, z: 5}
+--- !u!114 &5375634197460196137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1266553454490610162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da2a3c82691d7f948b96c5c31be363f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  replacmentTile: {fileID: 7452069657888680685, guid: 8955e2587e76f8543af7bcd005afdbfa,
+    type: 3}
+  minTime: 30
+  maxTime: 120

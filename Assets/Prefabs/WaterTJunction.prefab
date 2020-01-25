@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 559893079349740554}
   - component: {fileID: 8589128322820517455}
   - component: {fileID: 3122050709096314077}
+  - component: {fileID: 7718525973287371236}
   m_Layer: 0
   m_Name: WaterTJunction
   m_TagString: Untagged
@@ -56,6 +57,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -110,3 +112,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 2.5, z: 10}
   m_Center: {x: 5, y: 1.25, z: 5}
+--- !u!114 &7718525973287371236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2304142918338048214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da2a3c82691d7f948b96c5c31be363f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  replacmentTile: {fileID: 4126057318693947710, guid: 44adfb598a5f41f468efc1b0115cae01,
+    type: 3}
+  minTime: 30
+  maxTime: 120

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6530361188615618020}
   - component: {fileID: 730942481994215935}
   - component: {fileID: 5852241621442841719}
+  - component: {fileID: 4962881597740741645}
   m_Layer: 0
   m_Name: WaterRiverEnd
   m_TagString: Untagged
@@ -56,6 +57,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -110,3 +112,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 2.5, z: 10}
   m_Center: {x: 5, y: 1.25, z: 5}
+--- !u!114 &4962881597740741645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4799806867569920312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da2a3c82691d7f948b96c5c31be363f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  replacmentTile: {fileID: 8139296412758434097, guid: e2266997e253f0040874dde91fe7905a,
+    type: 3}
+  minTime: 30
+  maxTime: 120

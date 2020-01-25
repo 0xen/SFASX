@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2214816355934562032}
   - component: {fileID: 6133284071746411624}
   - component: {fileID: -8859288992303648365}
-  - component: {fileID: -1211249386988114333}
+  - component: {fileID: -7531571238707242388}
   m_Layer: 0
   m_Name: WaterStright3
   m_TagString: Untagged
@@ -112,7 +112,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 2.5, z: 10}
   m_Center: {x: 5, y: 1.25, z: 5}
---- !u!114 &-1211249386988114333
+--- !u!114 &-7531571238707242388
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -126,5 +126,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   replacmentTile: {fileID: 8461715778613757439, guid: 741e9293a576ba046bd9a3bafdc29cdb,
     type: 3}
-  minTime: 0
-  maxTime: 180
+  minTime: 30
+  maxTime: 120

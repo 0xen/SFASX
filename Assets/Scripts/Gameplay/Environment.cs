@@ -436,6 +436,7 @@ public class Environment : MonoBehaviour
 
             tile = Instantiate(prefab, position + positionOffset, q, transform);
             tile.Type = EnvironmentTile.TileType.Inaccessible;
+            tile.Rotation = rotation;
         }
         else // Output a error if we cant find the required tile
         {

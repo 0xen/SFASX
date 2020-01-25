@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6503973221635280482}
   - component: {fileID: 6138711201056351777}
   - component: {fileID: 8105299237844369264}
+  - component: {fileID: -4506954687671567278}
   m_Layer: 0
   m_Name: WaterStrightBend3
   m_TagString: Untagged
@@ -56,6 +57,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -111,3 +113,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 2.961099, z: 10}
   m_Center: {x: 5, y: 1.4805495, z: 5}
+--- !u!114 &-4506954687671567278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4791292493560511166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da2a3c82691d7f948b96c5c31be363f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  replacmentTile: {fileID: 6082215669902340082, guid: 316044f3470e47c4c8a3188f99a9667b,
+    type: 3}
+  minTime: 30
+  maxTime: 120

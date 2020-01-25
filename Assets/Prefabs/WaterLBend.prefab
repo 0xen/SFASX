@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 9140796303258385749}
   - component: {fileID: -7784140019023738294}
   - component: {fileID: -7959875191828998999}
+  - component: {fileID: 2212151186975639732}
   m_Layer: 0
   m_Name: WaterLBend
   m_TagString: Untagged
@@ -57,6 +58,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -124,3 +126,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.099999994, y: 0.024999999, z: 0.099999994}
   m_Center: {x: 0.049999997, y: 0.012499999, z: 0.049999997}
+--- !u!114 &2212151186975639732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6189697644984468464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da2a3c82691d7f948b96c5c31be363f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  replacmentTile: {fileID: 2751952162842886768, guid: 8185dfcf289caea4d86e1618e8a2e2ee,
+    type: 3}
+  minTime: 30
+  maxTime: 120
