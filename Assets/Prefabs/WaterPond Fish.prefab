@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2917573349993047922}
   - component: {fileID: 9084246944810940978}
   - component: {fileID: -1081967695064904523}
+  - component: {fileID: 4331181248369872982}
   m_Layer: 0
   m_Name: WaterPond Fish
   m_TagString: Untagged
@@ -180,6 +181,26 @@ MonoBehaviour:
   - {fileID: 7452069657888680685}
   ActionTime: 4
   Recursive: 1
+--- !u!114 &4331181248369872982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7504889317668137413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3427dcf21853664980a53a619bf59dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  environmentTile: {fileID: 0}
+  actionImage: {fileID: 0}
+  actionName: Jump Water
+  AnimationState: 4
+  ItemGroups: []
+  ReplacmentTiles: []
+  ActionTime: 1.5
+  Recursive: 0
 --- !u!1001 &4762158132085134154
 PrefabInstance:
   m_ObjectHideFlags: 0

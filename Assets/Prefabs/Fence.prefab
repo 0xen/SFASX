@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4304124910973499552}
   - component: {fileID: 6498516349951379042}
   - component: {fileID: 4212773526597661532}
+  - component: {fileID: 1756303164018374146}
   m_Layer: 0
   m_Name: Fence
   m_TagString: Untagged
@@ -59,6 +60,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -155,6 +157,27 @@ MonoBehaviour:
   actionImage: {fileID: 21300000, guid: eb825d6d0b34c6d4c932658bf5f075a0, type: 3}
   actionName: Rotate
   AnimationState: 3
+  ItemGroups: []
+  ReplacmentTiles: []
+  ActionTime: 2
+  Recursive: 0
+--- !u!114 &1756303164018374146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8348015561485263177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3427dcf21853664980a53a619bf59dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  environmentTile: {fileID: 0}
+  actionImage: {fileID: 6971087585004242950, guid: 9cf7cd7d33a37434099536b7f750ff41,
+    type: 3}
+  actionName: Climb Fence
+  AnimationState: 4
   ItemGroups: []
   ReplacmentTiles: []
   ActionTime: 2

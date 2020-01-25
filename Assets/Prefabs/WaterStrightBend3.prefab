@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6138711201056351777}
   - component: {fileID: 8105299237844369264}
   - component: {fileID: -4506954687671567278}
+  - component: {fileID: 6030625259279146126}
   m_Layer: 0
   m_Name: WaterStrightBend3
   m_TagString: Untagged
@@ -129,3 +130,23 @@ MonoBehaviour:
     type: 3}
   minTime: 20
   maxTime: 600
+--- !u!114 &6030625259279146126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4791292493560511166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3427dcf21853664980a53a619bf59dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  environmentTile: {fileID: 0}
+  actionImage: {fileID: 0}
+  actionName: Jump Water
+  AnimationState: 4
+  ItemGroups: []
+  ReplacmentTiles: []
+  ActionTime: 1.5
+  Recursive: 0

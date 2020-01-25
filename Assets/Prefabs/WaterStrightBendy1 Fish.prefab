@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6313120920982253550}
   - component: {fileID: 661036870678269190}
   - component: {fileID: 280396584777180673}
+  - component: {fileID: 626087117286384926}
   m_Layer: 0
   m_Name: WaterStrightBendy1 Fish
   m_TagString: Untagged
@@ -180,6 +181,26 @@ MonoBehaviour:
   - {fileID: 859534559446257997}
   ActionTime: 4
   Recursive: 1
+--- !u!114 &626087117286384926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4027501082799090047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3427dcf21853664980a53a619bf59dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  environmentTile: {fileID: 0}
+  actionImage: {fileID: 0}
+  actionName: Jump Water
+  AnimationState: 4
+  ItemGroups: []
+  ReplacmentTiles: []
+  ActionTime: 1.5
+  Recursive: 0
 --- !u!1001 &5896582066155074767
 PrefabInstance:
   m_ObjectHideFlags: 0
