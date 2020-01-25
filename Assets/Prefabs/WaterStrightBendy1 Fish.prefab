@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 859534559446257997}
   - component: {fileID: 6313120920982253550}
   - component: {fileID: 661036870678269190}
+  - component: {fileID: 280396584777180673}
   m_Layer: 0
   m_Name: WaterStrightBendy1 Fish
   m_TagString: Untagged
@@ -127,8 +128,58 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   replacmentTile: {fileID: 814809362170723094, guid: 8ffd1398f8889994880046e6688ed649,
     type: 3}
-  minTime: 30
-  maxTime: 120
+  minTime: 20
+  maxTime: 600
+--- !u!114 &280396584777180673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4027501082799090047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90b9097d51a73c54aa0ce86257480f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  environmentTile: {fileID: 0}
+  actionImage: {fileID: -3202136107536500834, guid: eed00ce05f8aeeb48bc6f48ac83a2be8,
+    type: 3}
+  actionName: Fish
+  AnimationState: 3
+  ItemGroups:
+  - Items:
+    - mode: 0
+      item: {fileID: 6712174872247203541, guid: 2767b6e4a5c627f47981cb189f79273b,
+        type: 3}
+      count: 1
+      chance: 0.7
+    - mode: 0
+      item: {fileID: 7457268424457113818, guid: 4d3ba116ef74f6746984e9dad1055e2d,
+        type: 3}
+      count: 1
+      chance: 0.7
+    - mode: 2
+      item: {fileID: 6240598813036010409, guid: d022b9e0d89fe1a4e842fe0757a3bd75,
+        type: 3}
+      count: 1
+      chance: 0
+  - Items:
+    - mode: 0
+      item: {fileID: 6712174872247203541, guid: 2767b6e4a5c627f47981cb189f79273b,
+        type: 3}
+      count: 1
+      chance: 0.1
+    - mode: 0
+      item: {fileID: 7457268424457113818, guid: 4d3ba116ef74f6746984e9dad1055e2d,
+        type: 3}
+      count: 1
+      chance: 0.1
+  ReplacmentTiles:
+  - {fileID: 814809362170723094, guid: 8ffd1398f8889994880046e6688ed649, type: 3}
+  - {fileID: 859534559446257997}
+  ActionTime: 4
+  Recursive: 1
 --- !u!1001 &5896582066155074767
 PrefabInstance:
   m_ObjectHideFlags: 0

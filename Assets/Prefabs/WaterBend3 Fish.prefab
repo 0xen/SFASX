@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2608601999219001273}
   - component: {fileID: 3569070498264943454}
   - component: {fileID: 2216793534090974379}
+  - component: {fileID: 906389662891476664}
   m_Layer: 0
   m_Name: WaterBend3 Fish
   m_TagString: Untagged
@@ -127,8 +128,58 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   replacmentTile: {fileID: 4246960745192002325, guid: 3192fa8bac1d9c74db53930d60b5f4f4,
     type: 3}
-  minTime: 30
-  maxTime: 120
+  minTime: 20
+  maxTime: 600
+--- !u!114 &906389662891476664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5653178214938007354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90b9097d51a73c54aa0ce86257480f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  environmentTile: {fileID: 0}
+  actionImage: {fileID: -3202136107536500834, guid: eed00ce05f8aeeb48bc6f48ac83a2be8,
+    type: 3}
+  actionName: Fish
+  AnimationState: 3
+  ItemGroups:
+  - Items:
+    - mode: 0
+      item: {fileID: 6712174872247203541, guid: 2767b6e4a5c627f47981cb189f79273b,
+        type: 3}
+      count: 1
+      chance: 0.7
+    - mode: 0
+      item: {fileID: 7457268424457113818, guid: 4d3ba116ef74f6746984e9dad1055e2d,
+        type: 3}
+      count: 1
+      chance: 0.7
+    - mode: 2
+      item: {fileID: 6240598813036010409, guid: d022b9e0d89fe1a4e842fe0757a3bd75,
+        type: 3}
+      count: 1
+      chance: 0
+  - Items:
+    - mode: 0
+      item: {fileID: 6712174872247203541, guid: 2767b6e4a5c627f47981cb189f79273b,
+        type: 3}
+      count: 1
+      chance: 0.1
+    - mode: 0
+      item: {fileID: 7457268424457113818, guid: 4d3ba116ef74f6746984e9dad1055e2d,
+        type: 3}
+      count: 1
+      chance: 0.1
+  ReplacmentTiles:
+  - {fileID: 4246960745192002325, guid: 3192fa8bac1d9c74db53930d60b5f4f4, type: 3}
+  - {fileID: 2608601999219001273}
+  ActionTime: 4
+  Recursive: 1
 --- !u!1001 &2216793532770983135
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -204,7 +204,7 @@ public class TileActionCollection : TileAction
             EnvironmentTile newTile = Environment.instance.ReplaceEnviromentTile(tile, ReplacmentTiles[Random.Range(0, ReplacmentTiles.Length)]);
 
             // If the tile is set to be recursive then call the tile action collection on the new instance
-            if (Recursive)
+            if (Recursive && newTile.GetComponent<TileActionCollection>()!=null)
             {
                 TileActionCollection newAction = newTile.GetComponent<TileActionCollection>();
                 newAction.environmentTile = newTile;

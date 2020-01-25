@@ -5639,7 +5639,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -128282.586}
+  m_AnchoredPosition: {x: 0, y: -136244.64}
   m_SizeDelta: {x: 450, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1545244235
@@ -7053,9 +7053,9 @@ MonoBehaviour:
     - buyPrice: 2
       sellPrice: 1
       item: {fileID: 769755611341318568, guid: 54df903be1ecc2e4694b4f969f597952, type: 3}
-    - buyPrice: 2
-      sellPrice: 1
-      item: {fileID: 8296177897985916695, guid: bb46ee49b650f424981815fff4e5898c,
+    - buyPrice: 10
+      sellPrice: 5
+      item: {fileID: 6165115304816445807, guid: 319c9fe1a58f0f747aba4aab9931b931,
         type: 3}
     - buyPrice: 2
       sellPrice: 1
@@ -7063,7 +7063,11 @@ MonoBehaviour:
         type: 3}
     - buyPrice: 10
       sellPrice: 5
-      item: {fileID: 6165115304816445807, guid: 319c9fe1a58f0f747aba4aab9931b931,
+      item: {fileID: 7457268424457113818, guid: 4d3ba116ef74f6746984e9dad1055e2d,
+        type: 3}
+    - buyPrice: 10
+      sellPrice: 5
+      item: {fileID: 6712174872247203541, guid: 2767b6e4a5c627f47981cb189f79273b,
         type: 3}
   - name: Building
     items:
@@ -7171,6 +7175,10 @@ MonoBehaviour:
     - buyPrice: 1500
       sellPrice: 750
       item: {fileID: 1763031040941634371, guid: a5f2e83174257634c8feaf92eb23215e,
+        type: 3}
+    - buyPrice: 400
+      sellPrice: 150
+      item: {fileID: 6240598813036010409, guid: d022b9e0d89fe1a4e842fe0757a3bd75,
         type: 3}
 --- !u!1 &2083344929
 GameObject:
