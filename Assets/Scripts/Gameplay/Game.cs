@@ -40,7 +40,8 @@ public class Game : MonoBehaviour
     [SerializeField] private NotificationHandler NotificationHandler = null;
     // UI Text for the time
     [SerializeField] private TextMeshProUGUI TimeText = null;
-
+    // Mini map Image
+    [SerializeField] private RawImage MinimapImage = null;
 
     // Item UI menu bar
     [SerializeField] private GameObject UiItemMenuBar = null;
@@ -65,6 +66,8 @@ public class Game : MonoBehaviour
     private ItemSlotController[] mUiItemBar = null; 
     
     private float mDayTime = 0.0f;
+    // Local map texture instance
+    private Texture2D mMinimapVisulization = null;
 
     // Structure storing what color and brightness the light should be at a point of the day
     [System.Serializable]
@@ -127,10 +130,87 @@ public class Game : MonoBehaviour
         ActionSelector.SetEnabled(false);
         ActionSelector.mCharacter = mCharacter;
         CameraController.SetFollowing(true);
+
+        // Init the mini map
+        mMinimapVisulization = new Texture2D(200, 200);
+        MinimapImage.texture = mMinimapVisulization;
         
         Generate();
         if(!MapGenerationPayload.loadFromFile)
             NotificationHandler.AddNotification(ref LandmarkNotification.NewGame, "Welcome to Celestia, throughout your time here, you will receive tips and tricks that will appear here!");
+    }
+
+    // Update the minimap with the new player position
+    void UpdateMinimap()
+    {
+        Vector2Int playerPosition = mCharacter.CurrentPosition.PositionTile;
+        Vector2Int tempPosition = new Vector2Int();
+        
+        // Needs extracting out and made global
+        int pixelSize = 8;
+
+        int startX = playerPosition.x - ((mMinimapVisulization.width / 2) / pixelSize);
+        int startY = playerPosition.y - ((mMinimapVisulization.height / 2) / pixelSize);
+
+        // Loop through the length of the texture and increment in units of the "pixel" size
+        for (int i = 0, tileX = startX; i < mMinimapVisulization.width; i+= pixelSize, tileX++)
+        {
+
+            // Loop for the length of a pixel on the x axis
+            for (int x = i; x < i + pixelSize && x < mMinimapVisulization.width; x++)
+            {
+
+                // Loop through the length of the texture and increment in units of the "pixel" size
+                for (int j = 0, tileY = startY; j < mMinimapVisulization.height; j+= pixelSize, tileY++)
+                {
+                    tempPosition.x = tileX;
+                    tempPosition.y = tileY;
+
+                    bool currentlyPlayerPosition = playerPosition == tempPosition;
+
+                    // Loop for the length of a pixel on the y axis
+                    for (int y = j; y < j + pixelSize && y < mMinimapVisulization.height; y++)
+                    {
+                        // If the tile coordinate is out of range or is not initialized, then clear the pixel
+                        if (tileX < 0 || tileY < 0 || tileX >= Environment.instance.mMapGenerationPayload.size.x || tileY >= Environment.instance.mMapGenerationPayload.size.y
+                            || Environment.instance.mMap[tileX][tileY] == null) // Dose the tile exist
+                        {
+                            mMinimapVisulization.SetPixel(x, y, Color.clear);
+                        }
+                        else if(currentlyPlayerPosition) // Draw the pixel color
+                        {
+                            mMinimapVisulization.SetPixel(x, y, Color.yellow);
+                        }
+                        else
+                        {
+                            EnvironmentTile tile = Environment.instance.mMap[tileX][tileY];
+                            // Color the tiles based on what type of tile it is
+                            switch (tile.Type)
+                            {
+                                case EnvironmentTile.TileType.Accessible:
+                                    mMinimapVisulization.SetPixel(x, y, new Color(0.521f, 0.780f, 0.807f));
+                                    break;
+                                case EnvironmentTile.TileType.Resource:
+                                    mMinimapVisulization.SetPixel(x, y, Color.gray);
+                                    break;
+                                case EnvironmentTile.TileType.Inaccessible:
+                                    // Are we displaying a water tile or something else
+                                    mMinimapVisulization.SetPixel(x, y, Environment.instance.mWaterMap[tileX, tileY] ? Color.cyan : new Color(0.305f, 0.627f, 0.592f));
+                                    break;
+                                case EnvironmentTile.TileType.Decorative:
+                                    mMinimapVisulization.SetPixel(x, y, new Color(0.290f, 0.290f, 0.592f));
+                                    break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        // Apply the new image texture
+        mMinimapVisulization.Apply();
+
+        MinimapImage.texture = mMinimapVisulization;
     }
 
     // Set a area selection color
@@ -177,6 +257,8 @@ public class Game : MonoBehaviour
 
     private void Update()
     {
+
+        UpdateMinimap();
 
         // DayNight Cycle
         mDayTime += Time.deltaTime;

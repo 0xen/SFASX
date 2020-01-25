@@ -45,7 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Broken Tool
-  description: Not a very usefull multitool, but it will get the job done in a pinch
+  description: Not a very usefull multitool, but it will get the job done in a pinch.
+    Will preform all basic tasks such as woodcutting, digging, etc
   count: 1
   itemSprite: {fileID: 8543347228161355572, guid: eed00ce05f8aeeb48bc6f48ac83a2be8,
     type: 3}
