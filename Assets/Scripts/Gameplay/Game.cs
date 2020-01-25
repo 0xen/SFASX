@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 
 using static WorldGenerator;
 using System.IO;
+using UnityEngine.Audio;
 
 public class Game : MonoBehaviour
 {
@@ -63,8 +64,10 @@ public class Game : MonoBehaviour
     // Instance of the shop
     [SerializeField] private ShopHandler shop = null;
     // UI slot controllers
-    private ItemSlotController[] mUiItemBar = null; 
-    
+    private ItemSlotController[] mUiItemBar = null;
+    // Used to lerp between day/night time music
+    [SerializeField] private AudioMixer MusicMixer = null;
+
     private float mDayTime = 0.0f;
     // Local map texture instance
     private Texture2D mMinimapVisulization = null;
@@ -270,8 +273,9 @@ public class Game : MonoBehaviour
         {
             // Change Time
 
+            // Calculate the time of day in a range of 0-1
             float timeFraction = mDayTime / DayLength;
-            // Ofset the hours by 8 as the sun starts at a slightly rising angle
+            // Offset the hours by 8 as the sun starts at a slightly rising angle
             int hour = (8 + (int)(24 * timeFraction)) % 24;
             // Get the hour in 12 hour format
             int hourTwelve = (hour % 12);
@@ -281,11 +285,8 @@ public class Game : MonoBehaviour
             int min = (int)((24 * 6) * timeFraction) % 6;
             TimeText.text = hourTwelve + ":" + min + "0 " + (hour > 11 ? "pm" : "am");
 
-
-
-            // Calculate the time of day in a range of 0-1
-            float timeRed = mDayTime / DayLength;
-            float lightDelta = Mathf.Lerp(0, 360.0f, timeRed);
+            
+            float lightDelta = Mathf.Lerp(0, 360.0f, timeFraction);
             // Rotate the light from 0-360
             DirectionalLight.transform.eulerAngles = new Vector3(lightDelta, 90.0f, 0.0f);
 
@@ -302,15 +303,53 @@ public class Game : MonoBehaviour
             end = DaylightScheduler[(startIndex + 1) % DaylightScheduler.Length];
 
 
-            float temp = (timeRed - (dayColorFrackRange * startIndex)) / dayColorFrackRange;
+            float temp = (timeFraction - (dayColorFrackRange * startIndex)) / dayColorFrackRange;
 
             Color lightColor = Color.Lerp(start.color, end.color, temp);
             DirectionalLight.color = lightColor;
             Camera.main.backgroundColor = lightColor;
             DirectionalLight.intensity = Mathf.Lerp(start.brightness, end.brightness, temp);
 
+            // Update audio based on time
+            {
+                float maxMusic = 0.0f;
+                float minMusic = -80.0f;
+
+                int dayTimeMusic = 6;
+                int nightTimeMusic = 19;
+
+                // If we are in day time hours
+                if (hour > dayTimeMusic && hour < nightTimeMusic)
+                {
+                    MusicMixer.SetFloat("MusicVol", maxMusic);
+                    MusicMixer.SetFloat("NightTimeMusicVol", minMusic);
+                }
+                // Are we in night time hours
+                else if(hour > nightTimeMusic || hour < dayTimeMusic)
+                {
+                    MusicMixer.SetFloat("MusicVol", minMusic);
+                    MusicMixer.SetFloat("NightTimeMusicVol", maxMusic);
+                }
+                else
+                {
+                    float musicLerpFactor = (1.0f / 60) * (((24 * 60) * timeFraction) % 60);
+                    if (hour == dayTimeMusic) // Transitioning to day time
+                    {
+                        MusicMixer.SetFloat("MusicVol", Mathf.Lerp(minMusic, maxMusic, musicLerpFactor));
+                        MusicMixer.SetFloat("NightTimeMusicVol", Mathf.Lerp(maxMusic, minMusic, musicLerpFactor));
+                    }
+                    else if (hour == nightTimeMusic) // Transitioning to night time
+                    {
+                        MusicMixer.SetFloat("MusicVol", Mathf.Lerp(maxMusic, minMusic, musicLerpFactor));
+                        MusicMixer.SetFloat("NightTimeMusicVol", Mathf.Lerp(minMusic, maxMusic, musicLerpFactor));
+                    }
+                }
+                
+                
+            }
 
         }
+
 
         Ray screenClick = MainCamera.ScreenPointToRay(Input.mousePosition);
         // See what tiles are in the way of the cursor

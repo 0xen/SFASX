@@ -52,6 +52,18 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene("Music-SFX", LoadSceneMode.Additive);
 
+        // Init the music levels
+        {
+            MainMusicSlider.value = PlayerPrefs.GetFloat("MainVol", -20);
+            MusicMixer.SetFloat("MainVol", MainMusicSlider.value);
+
+            UISlider.value = PlayerPrefs.GetFloat("UIVol", -20);
+            UIMixer.SetFloat("UIVol", UISlider.value);
+
+            MusicMixer.SetFloat("NightTimeMusicVol", -80);
+            MusicMixer.SetFloat("MusicVol", 0);
+        }
+
         // Generate a example game scene
         {
             mCharacter = Instantiate(Character, transform);
@@ -89,13 +101,15 @@ public class MainMenu : MonoBehaviour
     // Call on music slider change
     public void MusicSettingSliderchanged()
     {
-        MusicMixer.SetFloat("MusicVol", MainMusicSlider.value);
+        MusicMixer.SetFloat("MainVol", MainMusicSlider.value);
+        PlayerPrefs.SetFloat("MainVol", MainMusicSlider.value);
     }
 
     // Call on ui vol slider change
     public void UISettingSliderchanged()
     {
         UIMixer.SetFloat("UIVol", UISlider.value);
+        PlayerPrefs.SetFloat("UIVol", UISlider.value);
     }
 
     // Call on graphics quality change
