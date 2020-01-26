@@ -128,8 +128,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   replacmentTile: {fileID: 6082215669902340082, guid: 316044f3470e47c4c8a3188f99a9667b,
     type: 3}
-  minTime: 20
-  maxTime: 600
+  minTime: 30
+  maxTime: 6000
 --- !u!114 &6030625259279146126
 MonoBehaviour:
   m_ObjectHideFlags: 0

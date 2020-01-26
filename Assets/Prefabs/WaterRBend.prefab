@@ -126,5 +126,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   replacmentTile: {fileID: 1186284460695457381, guid: f2c7a048a2578bd4e968aa20567ba6e5,
     type: 3}
-  minTime: 20
-  maxTime: 600
+  minTime: 30
+  maxTime: 6000

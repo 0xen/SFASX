@@ -988,6 +988,7 @@ public class Environment : MonoBehaviour
         foreach (Material m in tile.GetComponent<MeshRenderer>().materials)
         {
             m.shader = TintShader;
+            m.enableInstancing = true;
         }
 
         // Add the tile to the global map
@@ -997,11 +998,11 @@ public class Environment : MonoBehaviour
         SetupConnections(current.PositionTile.x, current.PositionTile.y);
         if (current.PositionTile.x > 0)
             SetupConnections(current.PositionTile.x - 1, current.PositionTile.y);
-        if (current.PositionTile.x < mMapGenerationPayload.size.x)
+        if (current.PositionTile.x < mMapGenerationPayload.size.x - 1)
             SetupConnections(current.PositionTile.x + 1, current.PositionTile.y);
         if (current.PositionTile.y > 0)
             SetupConnections(current.PositionTile.x, current.PositionTile.y - 1);
-        if (current.PositionTile.y < mMapGenerationPayload.size.y)
+        if (current.PositionTile.y < mMapGenerationPayload.size.y - 1)
             SetupConnections(current.PositionTile.x, current.PositionTile.y + 1);
 
 

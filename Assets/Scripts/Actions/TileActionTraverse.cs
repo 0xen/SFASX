@@ -27,16 +27,30 @@ public class TileActionTraverse : TileActionCollection
     public override bool Valid(Entity entity)
     {
         Vector2Int targetPosition = environmentTile.PositionTile;
-        EnvironmentTile tile1 = Environment.instance.GetTile(targetPosition.x, targetPosition.y + 1);
-        EnvironmentTile tile2 = Environment.instance.GetTile(targetPosition.x + 1, targetPosition.y);
-        EnvironmentTile tile3 = Environment.instance.GetTile(targetPosition.x, targetPosition.y - 1);
-        EnvironmentTile tile4 = Environment.instance.GetTile(targetPosition.x - 1, targetPosition.y);
 
-        if((tile1!=null && tile3!= null && tile1.Type == EnvironmentTile.TileType.Accessible && tile3.Type == EnvironmentTile.TileType.Accessible) ||
-            (tile2 != null && tile4 != null && tile2.Type == EnvironmentTile.TileType.Accessible && tile4.Type == EnvironmentTile.TileType.Accessible))
+
+        int xMin = (targetPosition.x - 1 < 0) ? 0 : targetPosition.x - 1;
+        int yMin = (targetPosition.y - 1 < 0) ? 0 : targetPosition.y - 1;
+        int xMax = (targetPosition.x + 1 < Environment.instance.mMapGenerationPayload.size.x) ? (targetPosition.x + 1) : (Environment.instance.mMapGenerationPayload.size.x - 1);
+        int yMax = (targetPosition.y + 1 < Environment.instance.mMapGenerationPayload.size.y) ? (targetPosition.y + 1) : (Environment.instance.mMapGenerationPayload.size.x - 1);
+
+
+        // Make sure we are not going out of the map bounds
+        if (xMin != targetPosition.x && xMax != targetPosition.x)
         {
-            return true;
+            EnvironmentTile tile2 = Environment.instance.GetTile(targetPosition.x + 1, targetPosition.y);
+            EnvironmentTile tile4 = Environment.instance.GetTile(targetPosition.x - 1, targetPosition.y);
+            if (tile2 != null && tile2.Type == EnvironmentTile.TileType.Accessible && tile4 != null && tile4.Type == EnvironmentTile.TileType.Accessible)
+                return true;
         }
+        else if (xMin != targetPosition.x && xMax != targetPosition.x)// Make sure we are not going out of the map bounds
+        {
+            EnvironmentTile tile1 = Environment.instance.GetTile(targetPosition.x, targetPosition.y + 1);
+            EnvironmentTile tile3 = Environment.instance.GetTile(targetPosition.x, targetPosition.y - 1);
+            if (tile1 != null && tile1.Type == EnvironmentTile.TileType.Accessible && tile3 != null && tile3.Type == EnvironmentTile.TileType.Accessible)
+                return true;
+        }
+
         return false;
     }
 
