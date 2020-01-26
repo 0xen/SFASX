@@ -3087,6 +3087,11 @@ MonoBehaviour:
   UIActionLable: {fileID: 751055670}
   shop: {fileID: 2044548096}
   MusicMixer: {fileID: 24100000, guid: f167bf2485ba9224d86d77739824b29a, type: 2}
+  dayTextColor: {r: 0, g: 0, b: 0, a: 1}
+  nightTextColor: {r: 1, g: 1, b: 1, a: 1}
+  TextToDynamiclyColor:
+  - {fileID: 751055670}
+  - {fileID: 556923300}
   DaylightScheduler:
   - brightness: 0.1
     color: {r: 0.6132076, g: 0.5087309, b: 0.18801177, a: 0}
@@ -5659,7 +5664,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -186670.94}
+  m_AnchoredPosition: {x: 0, y: -210557.08}
   m_SizeDelta: {x: 450, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1545244235
@@ -5814,7 +5819,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1572163956
 GameObject:
@@ -7103,6 +7108,10 @@ MonoBehaviour:
       sellPrice: 5
       item: {fileID: 2153262866484951227, guid: 0200a3b1b19e5364d9d10fc799cda6c6,
         type: 3}
+    - buyPrice: 20
+      sellPrice: 5
+      item: {fileID: 3300708389721299153, guid: a955f0df020dc9748ac559df55b13439,
+        type: 3}
   - name: Plants
     items:
     - buyPrice: 15
@@ -7257,6 +7266,8 @@ MonoBehaviour:
   - {fileID: 7228575818001999334, guid: d85ca6f08a4ef8848b08ae4126b05734, type: 3}
   - {fileID: 8968664797230672486, guid: 3ce27b7f5ac2c744b9d92ceb5b3e6b87, type: 3}
   - {fileID: 8300130121435964497, guid: adb72c4d39a5aef4fbd137fa63919141, type: 3}
+  - {fileID: 3364199256112343284, guid: 9b8fce6852d5147498738e9e91836f07, type: 3}
+  - {fileID: 806337361772232510, guid: f7ff2b119a24046448ec29f2320d695e, type: 3}
   EntityInstances:
   - {fileID: -4537713324124862065, guid: 2a47adc2477d880478f2241cc16cbd24, type: 3}
   - {fileID: 8368044451791982087, guid: f16bbf789f1390a44ad5354eaa2e5b3a, type: 3}
@@ -7268,6 +7279,8 @@ MonoBehaviour:
     - spawnChance: 1
       tile: {fileID: 5225831561217036612, guid: 068b00b1b45e14e49a33d5ab4dc954a2,
         type: 3}
+    - spawnChance: 1.5
+      tile: {fileID: 806337361772232510, guid: f7ff2b119a24046448ec29f2320d695e, type: 3}
   - type: 1
     spawnChance: 5
     tiles:

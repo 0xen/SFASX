@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8411675290625395153}
   - component: {fileID: 5318094462226911501}
+  - component: {fileID: -4776604631613917315}
   m_Layer: 0
   m_Name: PalmSeed
   m_TagString: Untagged
@@ -46,7 +47,34 @@ MonoBehaviour:
   itemName: Palm Seed
   description: The palm tree is a fast growing tree that can grow up to meny meaters
     tall and several mellon widths. They are perfect for a quick harvest.
-  count: 0
+  count: 24
   itemSprite: {fileID: 8892810703104722987, guid: 5fb7b6e1f37b2964083f5cfe204aaa9f,
     type: 3}
   consumeOnUse: 1
+--- !u!114 &-4776604631613917315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8117719566250973957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90b9097d51a73c54aa0ce86257480f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  environmentTile: {fileID: 0}
+  actionImage: {fileID: 8892810703104722987, guid: 5fb7b6e1f37b2964083f5cfe204aaa9f,
+    type: 3}
+  actionName: Plant
+  AnimationState: 3
+  ItemGroups:
+  - Items:
+    - mode: 1
+      item: {fileID: 5318094462226911501}
+      count: 1
+      chance: 1
+  ReplacmentTiles:
+  - {fileID: 7692651029497598846, guid: 74114c185bfa69341b9499b70875ab94, type: 3}
+  ActionTime: 3
+  Recursive: 0

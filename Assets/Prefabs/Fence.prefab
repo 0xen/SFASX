@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 7775128172354409877}
   - component: {fileID: 1247906914180562762}
   - component: {fileID: 4304124910973499552}
+  - component: {fileID: 1756303164018374146}
   - component: {fileID: 6498516349951379042}
   - component: {fileID: 4212773526597661532}
-  - component: {fileID: 1756303164018374146}
   m_Layer: 0
   m_Name: Fence
   m_TagString: Untagged
@@ -114,6 +114,26 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 2.5, z: 10}
   m_Center: {x: 5, y: 1.25, z: 5}
+--- !u!114 &1756303164018374146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8348015561485263177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3427dcf21853664980a53a619bf59dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  environmentTile: {fileID: 0}
+  actionImage: {fileID: 21300000, guid: 9f20a86e8c220aa42be7d74cea97cb91, type: 3}
+  actionName: Climb Fence
+  AnimationState: 4
+  ItemGroups: []
+  ReplacmentTiles: []
+  ActionTime: 2
+  Recursive: 0
 --- !u!114 &6498516349951379042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,26 +177,6 @@ MonoBehaviour:
   actionImage: {fileID: 21300000, guid: c9be084f39016284d851d126dea9d0d7, type: 3}
   actionName: Rotate
   AnimationState: 3
-  ItemGroups: []
-  ReplacmentTiles: []
-  ActionTime: 2
-  Recursive: 0
---- !u!114 &1756303164018374146
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8348015561485263177}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3427dcf21853664980a53a619bf59dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  environmentTile: {fileID: 0}
-  actionImage: {fileID: 21300000, guid: 9f20a86e8c220aa42be7d74cea97cb91, type: 3}
-  actionName: Climb Fence
-  AnimationState: 4
   ItemGroups: []
   ReplacmentTiles: []
   ActionTime: 2

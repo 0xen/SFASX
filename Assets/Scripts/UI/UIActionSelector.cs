@@ -76,7 +76,7 @@ public class UIActionSelector : Graphic
             // Calculate the selection
             mSelection = ((int)(degrees / segmentsPerOption));
 
-            if (mSelection < actions.Count)
+            if (selectorCanvas.enabled)
             {
                 if(ActionSelectorLable.text != actions[mSelection].actionName)
                 {

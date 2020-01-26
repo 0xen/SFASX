@@ -142,6 +142,61 @@ MonoBehaviour:
         type: 3}
       count: 1
       chance: 1
+  - Items:
+    - mode: 2
+      item: {fileID: 7426943667479377088, guid: 120e8c1a780f6764c8882e10af9cd332,
+        type: 3}
+      count: 1
+      chance: 0
+    - mode: 0
+      item: {fileID: 2361852989507392283, guid: a94cf1252f13fc84bad08b642f5d9cb0,
+        type: 3}
+      count: 2
+      chance: 1
+  - Items:
+    - mode: 2
+      item: {fileID: 5439058194196821905, guid: 0d29ea2fd745b444387551da4c007282,
+        type: 3}
+      count: 1
+      chance: 0
+    - mode: 0
+      item: {fileID: 2361852989507392283, guid: a94cf1252f13fc84bad08b642f5d9cb0,
+        type: 3}
+      count: 4
+      chance: 1
+  - Items:
+    - mode: 2
+      item: {fileID: 5604821020489777457, guid: 006f75f2417da384782620905f5e9ef0,
+        type: 3}
+      count: 1
+      chance: 0
+    - mode: 0
+      item: {fileID: 2361852989507392283, guid: a94cf1252f13fc84bad08b642f5d9cb0,
+        type: 3}
+      count: 6
+      chance: 1
+  - Items:
+    - mode: 2
+      item: {fileID: 1380051079414847427, guid: ccf9279db67624842959408dd91bdb82,
+        type: 3}
+      count: 1
+      chance: 0
+    - mode: 0
+      item: {fileID: 2361852989507392283, guid: a94cf1252f13fc84bad08b642f5d9cb0,
+        type: 3}
+      count: 10
+      chance: 1
+  - Items:
+    - mode: 2
+      item: {fileID: 8689553590126776756, guid: ca67c8fc1762d524da706f826d65e344,
+        type: 3}
+      count: 1
+      chance: 0
+    - mode: 0
+      item: {fileID: 2361852989507392283, guid: a94cf1252f13fc84bad08b642f5d9cb0,
+        type: 3}
+      count: 14
+      chance: 1
   ReplacmentTiles:
   - {fileID: 5225831561217036612, guid: 068b00b1b45e14e49a33d5ab4dc954a2, type: 3}
   ActionTime: 5.5

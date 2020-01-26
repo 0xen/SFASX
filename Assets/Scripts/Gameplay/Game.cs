@@ -68,6 +68,12 @@ public class Game : MonoBehaviour
     // Used to lerp between day/night time music
     [SerializeField] private AudioMixer MusicMixer = null;
 
+    // Colors that are used on the list of text's that get dynamically colored
+    [SerializeField] private Color dayTextColor;
+    [SerializeField] private Color nightTextColor;
+    // Text that should be colored based on day/night time
+    [SerializeField] private List<TextMeshProUGUI> TextToDynamiclyColor = null;
+     
     private float mDayTime = 0.0f;
     // Local map texture instance
     private Texture2D mMinimapVisulization = null;
@@ -150,7 +156,7 @@ public class Game : MonoBehaviour
         Vector2Int tempPosition = new Vector2Int();
         
         // Needs extracting out and made global
-        int pixelSize = 8;
+        int pixelSize = 7;
 
         int startX = playerPosition.x - ((mMinimapVisulization.width / 2) / pixelSize);
         int startY = playerPosition.y - ((mMinimapVisulization.height / 2) / pixelSize);
@@ -310,25 +316,33 @@ public class Game : MonoBehaviour
             Camera.main.backgroundColor = lightColor;
             DirectionalLight.intensity = Mathf.Lerp(start.brightness, end.brightness, temp);
 
+            int dayTimeMusic = 6;
+            int nightTimeMusic = 19;
+            
+
             // Update audio based on time
             {
                 float maxMusic = 0.0f;
                 float minMusic = -80.0f;
 
-                int dayTimeMusic = 6;
-                int nightTimeMusic = 19;
 
                 // If we are in day time hours
                 if (hour > dayTimeMusic && hour < nightTimeMusic)
                 {
                     MusicMixer.SetFloat("MusicVol", maxMusic);
                     MusicMixer.SetFloat("NightTimeMusicVol", minMusic);
+
+                    foreach (TextMeshProUGUI text in TextToDynamiclyColor)
+                        text.color = dayTextColor;
                 }
                 // Are we in night time hours
                 else if(hour > nightTimeMusic || hour < dayTimeMusic)
                 {
                     MusicMixer.SetFloat("MusicVol", minMusic);
                     MusicMixer.SetFloat("NightTimeMusicVol", maxMusic);
+
+                    foreach (TextMeshProUGUI text in TextToDynamiclyColor)
+                        text.color = nightTextColor;
                 }
                 else
                 {
@@ -337,11 +351,21 @@ public class Game : MonoBehaviour
                     {
                         MusicMixer.SetFloat("MusicVol", Mathf.Lerp(minMusic, maxMusic, musicLerpFactor));
                         MusicMixer.SetFloat("NightTimeMusicVol", Mathf.Lerp(maxMusic, minMusic, musicLerpFactor));
+
+                        foreach (TextMeshProUGUI text in TextToDynamiclyColor)
+                        {
+                            text.color = Color.Lerp(nightTextColor, dayTextColor, musicLerpFactor);
+                        }
                     }
                     else if (hour == nightTimeMusic) // Transitioning to night time
                     {
                         MusicMixer.SetFloat("MusicVol", Mathf.Lerp(maxMusic, minMusic, musicLerpFactor));
                         MusicMixer.SetFloat("NightTimeMusicVol", Mathf.Lerp(minMusic, maxMusic, musicLerpFactor));
+
+                        foreach (TextMeshProUGUI text in TextToDynamiclyColor)
+                        {
+                            text.color = Color.Lerp(dayTextColor, nightTextColor, musicLerpFactor);
+                        }
                     }
                 }
                 

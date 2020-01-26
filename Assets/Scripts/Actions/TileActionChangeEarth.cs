@@ -43,14 +43,14 @@ public class TileActionChangeEarth : TileActionCollection
                         EnvironmentTile newTile = null;
                         // Update the tile with the its new tile
                         Environment.instance.AddWaterTile(position, ref newTile, Environment.instance.mMapGenerationPayload.size, x, y);
-                        Environment.instance.SetupConnections(x, y);
                     }
+                    //Environment.instance.SetupConnections(x, y);
                 }
             }
             // Finish up by rebuilding the connections between the affected tiles
-            for (int x = xMin; x < xMax; x++)
+            for (int x = xMin; x <= xMax; x++)
             {
-                for (int y = yMin; y < yMax; y++)
+                for (int y = yMin; y <= yMax; y++)
                 {
                     Environment.instance.SetupConnections(x, y);
                 }

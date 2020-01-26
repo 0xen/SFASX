@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6214542939975446263}
   - component: {fileID: 7732558789316736555}
+  - component: {fileID: 7914371554807467513}
   m_Layer: 0
   m_Name: AppleSeed
   m_TagString: Untagged
@@ -44,9 +45,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Apple Seed
-  description: From this seed a tree can be produced that after anough time will prvide
-    fresh Apples to its caretaker.
+  description: From this seed a tree can be produced that after anough time will
+    prvide fresh Apples to its caretaker.
   count: 0
   itemSprite: {fileID: 6837931478763432522, guid: 9cf7cd7d33a37434099536b7f750ff41,
     type: 3}
   consumeOnUse: 1
+--- !u!114 &7914371554807467513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5919371563797134371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90b9097d51a73c54aa0ce86257480f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  environmentTile: {fileID: 0}
+  actionImage: {fileID: 6837931478763432522, guid: 9cf7cd7d33a37434099536b7f750ff41,
+    type: 3}
+  actionName: Plant
+  AnimationState: 3
+  ItemGroups:
+  - Items:
+    - mode: 1
+      item: {fileID: 7732558789316736555}
+      count: 1
+      chance: 1
+  ReplacmentTiles:
+  - {fileID: 6613055519326538163, guid: 0cfd86ca236ebe34db4e5e7cda47d434, type: 3}
+  ActionTime: 3
+  Recursive: 0

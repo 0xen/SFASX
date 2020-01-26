@@ -57,11 +57,12 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
   - {fileID: -2551240767032753910, guid: dd796bed3f8c8094c93ddab860643608, type: 3}
-  - {fileID: -2959283651340661505, guid: dd796bed3f8c8094c93ddab860643608, type: 3}
+  - {fileID: -2959283651340661505, guid: 84c9344486b944c439f47e6656a8a8f7, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -123,8 +124,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   environmentTile: {fileID: 5225831561217036612}
-  amountNeeded: 0
-  item: {fileID: 0}
   actionImage: {fileID: 7751314552887380848, guid: 5fb7b6e1f37b2964083f5cfe204aaa9f,
     type: 3}
   actionName: Walk
