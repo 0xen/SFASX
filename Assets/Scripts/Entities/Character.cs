@@ -6,9 +6,6 @@ using UnityEngine.UI;
 
 public class Character : Entity
 {
-    // How big is the players inventory
-    const int CharacterInventorySize = 9;
-
     // What inventory item is currently selected
     private int mSelectedItem;
 
@@ -36,7 +33,7 @@ public class Character : Entity
     private Animator mAnimationController;
 
     // Init the client and tell the Entity base class how big we want our inventory
-    public Character() : base(CharacterInventorySize)
+    public Character() : base(9)
     {
         mUiItemBar = null;
         mSelectedItem = -1;

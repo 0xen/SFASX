@@ -129,7 +129,7 @@ public class ShopHandler : MonoBehaviour
     public void Buy()
     {
         uint buyCost = mAmount * selectedItem.buyPrice;
-        if(buyCost > mCurrency)
+        if(buyCost > mCurrency || !Environment.instance.GetCharacter().AddToInventory(selectedItem.item, mAmount))
         {
             // Fail sound
             SFXController.instance.PlaySFX("Fail");
@@ -138,7 +138,6 @@ public class ShopHandler : MonoBehaviour
         SFXController.instance.PlaySFX("BuySell");
         mCurrency -= buyCost;
         UpdateCoinText();
-        Environment.instance.GetCharacter().AddToInventory(selectedItem.item, mAmount);
     }
 
     // Sell from the players inventory

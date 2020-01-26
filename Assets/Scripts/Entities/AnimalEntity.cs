@@ -47,11 +47,8 @@ public class AnimalEntity : Entity
     // Is the animal currently preforming a action
     private bool mPreformingAction;
 
-    // How big is the animals inventory
-    const int AnimalInventorySize = 1;
 
-
-    public AnimalEntity() : base(AnimalInventorySize)
+    public AnimalEntity() : base(1)
     {
         mPreformingAction = false;
     } 

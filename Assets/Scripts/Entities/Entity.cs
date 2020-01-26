@@ -85,16 +85,14 @@ public abstract class Entity : MonoBehaviour
     // Add a item to the entities inventory, if there is no space, a failed bool will be returned
     public bool AddToInventory(Item item, uint count)
     {
-        bool hasEmptySpace = false;
-        int emptySpaceID = -1;
         for (int i = 0; i < inventory.Length; i++)
         {
             if(inventory[i]==null)
             {
-                if(!hasEmptySpace)
-                    emptySpaceID = i;
-                hasEmptySpace = true;
-                continue;
+                item.count = count;
+                inventory[i] = item;
+                InventoryChange(item, count, InventoryChangeEvent.Add);
+                return true;
             }
             if(inventory[i].itemName == item.itemName)
             {
@@ -103,12 +101,7 @@ public abstract class Entity : MonoBehaviour
                 return true;
             }
         }
-        if (!hasEmptySpace) return false;
-
-        item.count = count;
-        inventory[emptySpaceID] = item;
-        InventoryChange(item, count, InventoryChangeEvent.Add);
-        return true;
+        return false;
     }
 
     // Remove x of y item from the inventory

@@ -146,7 +146,15 @@ public class Game : MonoBehaviour
         
         Generate();
         if(!MapGenerationPayload.loadFromFile)
-            NotificationHandler.AddNotification(ref LandmarkNotification.NewGame, "Welcome to Celestia, throughout your time here, you will receive tips and tricks that will appear here!");
+        {
+            NotificationHandler.AddNotification(ref LandmarkNotification.NewGame,new[] {
+                "Welcome to Celestia, throughout your time here, you will receive tips and tricks that will appear here!",
+                "To select a tool, you can use numbers 1-9 on your keyboard. Try pressing 1 and cut down a tree by selecting one with the mouse left click",
+                "You can queue up actions for your character by holding shift and clicking a action. Give it a try by selecting multiple trees.",
+                "You can also preform a area select by pressing Left-CTRL and clicking on a object you want to interact with, then drag over the area and choose the action"
+            }
+            );
+        }
     }
 
     // Update the minimap with the new player position
